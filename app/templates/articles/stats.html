@@ -1,0 +1,133 @@
+{% extends "base.html" %}
+
+{% block title %}Article Statistics - Global Narratives{% endblock %}
+
+{% block content %}
+<div class="container">
+    <!-- Page Header -->
+    <div class="flex items-center justify-between mb-lg">
+        <h1>Article Collection Statistics</h1>
+        <a href="{{ url_for('articles.dashboard') }}" class="btn btn-secondary">Back to Dashboard</a>
+    </div>
+
+    <!-- Overview Metrics -->
+    <div class="grid grid-cols-4 mb-lg">
+        <div class="card">
+            <div class="card-body">
+                <div class="metric">
+                    <span class="metric-label">Total Articles</span>
+                    <span class="metric-value">{{ stats.total }}</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-body">
+                <div class="metric">
+                    <span class="metric-label">Unprocessed</span>
+                    <span class="metric-value" style="color: var(--color-accent-tertiary);">{{ stats.unprocessed }}</span>
+                    <span class="metric-change">
+                        {% if stats.total > 0 %}
+                            {{ "%.1f"|format((stats.unprocessed / stats.total * 100)) }}%
+                        {% else %}
+                            0%
+                        {% endif %}
+                    </span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-body">
+                <div class="metric">
+                    <span class="metric-label">Processed</span>
+                    <span class="metric-value" style="color: var(--color-accent-secondary);">{{ stats.processed }}</span>
+                    <span class="metric-change positive">
+                        {% if stats.total > 0 %}
+                            {{ "%.1f"|format((stats.processed / stats.total * 100)) }}%
+                        {% else %}
+                            0%
+                        {% endif %}
+                    </span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-body">
+                <div class="metric">
+                    <span class="metric-label">Junk</span>
+                    <span class="metric-value" style="color: var(--color-text-dim);">{{ stats.junk }}</span>
+                    <span class="metric-change">
+                        {{ stats.junk_ratio }}%
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recent Activity -->
+    <div class="card mb-lg">
+        <div class="card-header">
+            <h2 class="card-title">Recent Activity</h2>
+        </div>
+        <div class="card-body">
+            <div class="metric">
+                <span class="metric-label">Articles Collected (Last 7 Days)</span>
+                <span class="metric-value">{{ stats.recent_week }}</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Collection Health -->
+    <div class="card">
+        <div class="card-header">
+            <h2 class="card-title">Collection Health</h2>
+        </div>
+        <div class="card-body">
+            <div class="mb-lg">
+                <div class="metric-label">Junk Ratio</div>
+                <p class="text-secondary">
+                    {{ stats.junk_ratio }}% of collected articles are marked as junk.
+                    {% if stats.junk_ratio > 30 %}
+                        <span class="badge badge-critical" style="margin-left: var(--space-sm);">High</span>
+                    {% elif stats.junk_ratio > 15 %}
+                        <span class="badge badge-pending" style="margin-left: var(--space-sm);">Moderate</span>
+                    {% else %}
+                        <span class="badge badge-active" style="margin-left: var(--space-sm);">Good</span>
+                    {% endif %}
+                </p>
+            </div>
+            
+            <div class="mb-lg">
+                <div class="metric-label">Processing Rate</div>
+                <p class="text-secondary">
+                    {% if stats.total > 0 %}
+                        {{ "%.1f"|format((stats.processed / stats.total * 100)) }}% of articles have been processed.
+                    {% else %}
+                        No articles to process yet.
+                    {% endif %}
+                </p>
+            </div>
+            
+            <div>
+                <div class="metric-label">Recommendations</div>
+                <ul style="list-style: none; padding: 0; margin: 0;">
+                    {% if stats.unprocessed > 50 %}
+                        <li class="text-secondary mb-sm">• High backlog of unprocessed articles ({{ stats.unprocessed }}). Consider reviewing more frequently.</li>
+                    {% endif %}
+                    {% if stats.junk_ratio > 30 %}
+                        <li class="text-secondary mb-sm">• High junk ratio suggests collection filters may need adjustment.</li>
+                    {% endif %}
+                    {% if stats.recent_week == 0 %}
+                        <li class="text-secondary mb-sm">• No articles collected in the last 7 days. Check collector configuration.</li>
+                    {% endif %}
+                    {% if stats.unprocessed < 10 and stats.processed > 0 %}
+                        <li class="text-secondary mb-sm" style="color: var(--color-accent-secondary);">• Processing is up to date. Good work!</li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

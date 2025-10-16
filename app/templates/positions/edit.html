@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block title %}Edit Position - Global Narratives{% endblock %}
+
+{% block content %}
+<div class="container">
+    <!-- Page Header -->
+    <div class="flex items-center justify-between mb-lg">
+        <h1>Edit Position</h1>
+        <a href="{{ url_for('positions.detail', position_code=position.position_code) }}" class="btn btn-secondary">Back to Position</a>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <h2 class="card-title">{{ position.position_title }}</h2>
+            <span class="badge badge-pending">{{ position.position_code }}</span>
+        </div>
+        <div class="card-body">
+            <form method="POST" action="{{ url_for('positions.edit', position_code=position.position_code) }}">
+                {{ form.hidden_tag() }}
+                
+                <!-- Position Code (readonly) -->
+                <div class="form-group">
+                    <label class="form-label" for="position_code">Position Code</label>
+                    <input type="text" class="form-input" id="position_code" value="{{ position.position_code }}" readonly>
+                    <small class="text-dim">Cannot be changed after creation</small>
+                </div>
+                
+                <!-- Position Title -->
+                <div class="form-group">
+                    <label class="form-label" for="position_title">Position Title</label>
+                    {{ form.position_title(class="form-input", id="position_title") }}
+                    {% if form.position_title.errors %}
+                        <div class="text-warning">{{ form.position_title.errors[0] }}</div>
+                    {% endif %}
+                </div>
+                
+                <!-- Institution -->
+                <div class="form-group">
+                    <label class="form-label" for="institution_code">Institution</label>
+                    {{ form.institution_code(class="form-select", id="institution_code") }}
+                    {% if form.institution_code.errors %}
+                        <div class="text-warning">{{ form.institution_code.errors[0] }}</div>
+                    {% endif %}
+                </div>
+                
+                <!-- Hierarchy Level -->
+                <div class="form-group">
+                    <label class="form-label" for="hierarchy_level">Hierarchy Level (Optional)</label>
+                    {{ form.hierarchy_level(class="form-input", id="hierarchy_level") }}
+                </div>
+                
+                <!-- Description -->
+                <div class="form-group">
+                    <label class="form-label" for="description">Description (Optional)</label>
+                    {{ form.description(class="form-textarea", id="description", rows="4") }}
+                </div>
+                
+                <!-- Form Actions -->
+                <div class="flex gap-md mt-lg">
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                    <a href="{{ url_for('positions.detail', position_code=position.position_code) }}" class="btn btn-secondary">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

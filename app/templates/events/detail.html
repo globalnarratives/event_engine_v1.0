@@ -1,0 +1,161 @@
+{% extends "base.html" %}
+
+{% block title %}Event {{ event.event_code }} - Global Narratives{% endblock %}
+
+{% block content %}
+<div class="container">
+    <!-- Page Header -->
+    <div class="flex items-center justify-between mb-lg">
+        <h1>Event Details</h1>
+        <div class="flex gap-md">
+            <a href="{{ url_for('events.edit', event_code=event.event_code) }}" class="btn btn-secondary">Edit Event</a>
+            <form method="POST" action="{{ url_for('events.delete', event_code=event.event_code) }}" style="display: inline;" onsubmit="return confirm('Are you sure you want to delete this event?');">
+                <button type="submit" class="btn btn-warning">Delete</button>
+            </form>
+            <a href="{{ url_for('events.index') }}" class="btn btn-secondary">Back to Events</a>
+        </div>
+    </div>
+
+    <!-- Event Code Card -->
+    <div class="card mb-lg">
+        <div class="card-header">
+            <h2 class="card-title">{{ event.event_code }}</h2>
+            <span class="badge badge-active">{{ event.region.upper() }}</span>
+        </div>
+        <div class="card-body">
+            <div class="grid grid-cols-4 mb-lg">
+                <div class="metric">
+                    <span class="metric-label">Event Date</span>
+                    <span class="metric-value" style="font-size: 1.25rem;">{{ event.event_date.strftime('%Y-%m-%d') }}</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-label">Region</span>
+                    <span class="metric-value" style="font-size: 1.25rem;">{{ event.region.upper() }}</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-label">Ordinal</span>
+                    <span class="metric-value" style="font-size: 1.25rem;">{{ '%04d'|format(event.ordinal) }}</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-label">Core Action</span>
+                    <span class="metric-value" style="font-size: 1.25rem;">{{ event.core_action }}</span>
+                </div>
+            </div>
+            
+            <div class="mb-lg">
+                <div class="metric-label">CIE Description</div>
+                <pre class="text-accent" style="font-size: 1rem; margin-top: var(--space-sm); font-family: var(--font-body); white-space: pre-wrap; margin: 0;">{{ event.cie_description }}</pre>
+            </div>
+            
+            <div class="mb-lg">
+                <div class="metric-label">Natural Summary</div>
+                <p class="text-secondary" style="font-size: 1rem; margin-top: var(--space-sm);">{{ event.natural_summary }}</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Actors Card -->
+    <div class="card mb-lg">
+        <div class="card-header">
+            <h2 class="card-title">Event Actors</h2>
+        </div>
+        <div class="card-body">
+            <div class="grid grid-cols-2">
+                <!-- Subjects -->
+                <div>
+                    <h3 class="text-accent mb-md">Subjects</h3>
+                    {% if subjects %}
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Code</th>
+                                    <th>Type</th>
+                                    <th>Display</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for subject in subjects %}
+                                <tr>
+                                    <td class="text-accent">{{ subject.code }}</td>
+                                    <td><span class="badge {% if subject.type == 'position' %}badge-active{% else %}badge-pending{% endif %}">{{ subject.type }}</span></td>
+                                    <td class="text-secondary">{{ subject.display }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    {% else %}
+                        <p class="text-dim">No subjects</p>
+                    {% endif %}
+                </div>
+                
+                <!-- Objects -->
+                <div>
+                    <h3 class="text-accent mb-md">Objects</h3>
+                    {% if objects %}
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Code</th>
+                                    <th>Type</th>
+                                    <th>Display</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for object in objects %}
+                                <tr>
+                                    <td class="text-accent">{{ object.code }}</td>
+                                    <td><span class="badge {% if object.type == 'position' %}badge-active{% else %}badge-pending{% endif %}">{{ object.type }}</span></td>
+                                    <td class="text-secondary">{{ object.display }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    {% else %}
+                        <p class="text-dim">No objects</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Source Article Card -->
+    <div class="card mb-lg">
+        <div class="card-header">
+            <h2 class="card-title">Source Article</h2>
+        </div>
+        <div class="card-body">
+            {% if event.article_url %}
+                <div class="mb-md">
+                    <div class="metric-label">Headline</div>
+                    <p class="text-primary">{{ event.article_headline or 'No headline' }}</p>
+                </div>
+                <div>
+                    <div class="metric-label">URL</div>
+                    <a href="{{ event.article_url }}" target="_blank" class="text-accent" style="word-break: break-all;">{{ event.article_url }}</a>
+                </div>
+            {% else %}
+                <p class="text-dim">No source article</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Metadata Card -->
+    <div class="card">
+        <div class="card-header">
+            <h2 class="card-title">Metadata</h2>
+        </div>
+        <div class="card-body">
+            <div class="grid grid-cols-2">
+                <div class="metric">
+                    <span class="metric-label">Recorded At</span>
+                    <span class="text-secondary">{{ event.recorded_timestamp.strftime('%Y-%m-%d %H:%M:%S UTC') }}</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-label">Created By</span>
+                    <span class="text-secondary">{{ event.created_by or 'Unknown' }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

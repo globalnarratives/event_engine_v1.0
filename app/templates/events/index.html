@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+
+{% block title %}Events - Global Narratives{% endblock %}
+
+{% block content %}
+<div class="container">
+    <!-- Page Header -->
+    <div class="flex items-center justify-between mb-lg">
+        <h1>Events</h1>
+        <a href="{{ url_for('events.create') }}" class="btn btn-primary">Create Event</a>
+    </div>
+
+    <!-- Search/Filter Card -->
+    <div class="card mb-lg">
+        <div class="card-header">
+            <h3 class="card-title">Filter Events</h3>
+        </div>
+        <div class="card-body">
+            <form method="GET" action="{{ url_for('events.index') }}">
+                <div class="grid grid-cols-4">
+                    <div class="form-group">
+                        <label class="form-label" for="date_from">Date From</label>
+                        <input type="date" id="date_from" name="date_from" class="form-input" value="{{ request.args.get('date_from', '') }}">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="date_to">Date To</label>
+                        <input type="date" id="date_to" name="date_to" class="form-input" value="{{ request.args.get('date_to', '') }}">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="region">Region</label>
+                        <select id="region" name="region" class="form-select">
+                            <option value="">All Regions</option>
+                            <option value="weu" {% if request.args.get('region') == 'weu' %}selected{% endif %}>Western Europe</option>
+                            <option value="eeu" {% if request.args.get('region') == 'eeu' %}selected{% endif %}>Eastern Europe</option>
+                            <option value="nam" {% if request.args.get('region') == 'nam' %}selected{% endif %}>North America</option>
+                            <option value="sam" {% if request.args.get('region') == 'sam' %}selected{% endif %}>South America</option>
+                            <option value="nea" {% if request.args.get('region') == 'nea' %}selected{% endif %}>Northeast Asia</option>
+                            <option value="sea" {% if request.args.get('region') == 'sea' %}selected{% endif %}>Southeast Asia</option>
+                            <option value="sas" {% if request.args.get('region') == 'sas' %}selected{% endif %}>South & Central Asia</option>
+                            <option value="mea" {% if request.args.get('region') == 'mea' %}selected{% endif %}>Middle East & North Africa</option>
+                            <option value="ssa" {% if request.args.get('region') == 'ssa' %}selected{% endif %}>Sub-Saharan Africa</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="core_action">Core Action</label>
+                        <input type="text" id="core_action" name="core_action" class="form-input" placeholder="e.g., [s-tr]" value="{{ request.args.get('core_action', '') }}">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="search_text">Search Text</label>
+                    <input type="text" id="search_text" name="search_text" class="form-input" placeholder="Search in CIE description or natural summary" value="{{ request.args.get('search_text', '') }}">
+                </div>
+                <div class="flex gap-md">
+                    <button type="submit" class="btn btn-primary">Apply Filters</button>
+                    <a href="{{ url_for('events.index') }}" class="btn btn-secondary">Clear</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Events Table -->
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Events ({{ events.total }})</h3>
+            <span class="text-secondary">Page {{ events.page }} of {{ events.pages }}</span>
+        </div>
+        <div class="card-body">
+            {% if events.items %}
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Event Code</th>
+                            <th>Date</th>
+                            <th>Region</th>
+                            <th>Core Action</th>
+                            <th>Natural Summary</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for event in events.items %}
+                        <tr>
+                            <td>
+                                <a href="{{ url_for('events.detail', event_code=event.event_code) }}" class="text-accent">
+                                    {{ event.event_code }}
+                                </a>
+                            </td>
+                            <td class="text-secondary">{{ event.event_date.strftime('%Y-%m-%d') }}</td>
+                            <td><span class="badge badge-active">{{ event.region.upper() }}</span></td>
+                            <td class="text-accent">{{ event.core_action }}</td>
+                            <td class="text-secondary">{{ event.natural_summary[:80] }}{% if event.natural_summary|length > 80 %}...{% endif %}</td>
+                            <td>
+                                <div class="flex gap-sm">
+                                    <a href="{{ url_for('events.detail', event_code=event.event_code) }}" class="btn btn-secondary" style="font-size: 0.75rem; padding: 0.25rem 0.75rem;">View</a>
+                                    <a href="{{ url_for('events.edit', event_code=event.event_code) }}" class="btn btn-secondary" style="font-size: 0.75rem; padding: 0.25rem 0.75rem;">Edit</a>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+                <!-- Pagination -->
+                {% if events.pages > 1 %}
+                <div class="flex items-center justify-between mt-lg border-top" style="padding-top: var(--space-md);">
+                    <div class="text-secondary">
+                        Showing {{ ((events.page - 1) * events.per_page) + 1 }} to {{ min(events.page * events.per_page, events.total) }} of {{ events.total }}
+                    </div>
+                    <div class="flex gap-sm">
+                        {% if events.has_prev %}
+                            <a href="{{ url_for('events.index', page=events.prev_num, **request.args) }}" class="btn btn-secondary">Previous</a>
+                        {% endif %}
+                        {% if events.has_next %}
+                            <a href="{{ url_for('events.index', page=events.next_num, **request.args) }}" class="btn btn-secondary">Next</a>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endif %}
+            {% else %}
+                <p class="text-secondary">No events found matching your criteria.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

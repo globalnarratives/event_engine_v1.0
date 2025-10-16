@@ -1,0 +1,218 @@
+{% extends "base.html" %}
+
+{% block title %}Create Event - Global Narratives{% endblock %}
+
+{% block extra_css %}
+<style>
+.split-view {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-xl);
+    height: calc(100vh - 120px);
+    padding: var(--space-xl);
+    overflow: hidden;
+}
+
+.split-panel {
+    overflow-y: auto;
+    padding-right: var(--space-md);
+}
+
+.split-panel::-webkit-scrollbar {
+    width: 8px;
+}
+
+.split-panel::-webkit-scrollbar-track {
+    background: var(--color-bg-primary);
+}
+
+.split-panel::-webkit-scrollbar-thumb {
+    background: var(--color-border);
+    border-radius: 4px;
+}
+
+.split-panel::-webkit-scrollbar-thumb:hover {
+    background: var(--color-border-hover);
+}
+
+.char-counter {
+    font-size: 0.75rem;
+    color: var(--color-text-dim);
+    text-align: right;
+    margin-top: var(--space-xs);
+}
+
+.char-counter.warning {
+    color: var(--color-accent-warning);
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="split-view">
+    <!-- Left Panel: Source Article -->
+    <div class="split-panel">
+        <div class="card">
+            <div class="card-header">
+                <h2 class="card-title">Source Article</h2>
+            </div>
+            <div class="card-body">
+                {% if article %}
+                    <div class="mb-lg">
+                        <div class="metric-label">Headline</div>
+                        <h3 class="text-primary mb-md">{{ article.headline }}</h3>
+                    </div>
+                    
+                    <div class="grid grid-cols-2 mb-lg">
+                        <div class="metric">
+                            <span class="metric-label">Source</span>
+                            <span class="metric-value" style="font-size: 1rem;">{{ article.source_name }}</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-label">Published</span>
+                            <span class="metric-value" style="font-size: 1rem;">{{ article.published_date.strftime('%Y-%m-%d') }}</span>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-lg">
+                        <div class="metric-label">URL</div>
+                        <a href="{{ article.url }}" target="_blank" class="text-accent" style="word-break: break-all;">{{ article.url }}</a>
+                    </div>
+                    
+                    <div class="mb-lg">
+                        <div class="metric-label">Summary</div>
+                        <p class="text-secondary">{{ article.summary }}</p>
+                    </div>
+                {% else %}
+                    <p class="text-secondary">No source article selected. Creating standalone event.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Right Panel: Event Creation Form -->
+    <div class="split-panel">
+        <div class="card">
+            <div class="card-header">
+                <h2 class="card-title">Create Event</h2>
+            </div>
+            <div class="card-body">
+                <form method="POST" action="{{ url_for('events.create', article_id=article.article_id if article else None) }}" id="eventForm">
+                    {{ form.hidden_tag() }}
+                    
+                    <!-- Event Date & Region -->
+                    <div class="grid grid-cols-2">
+                        <div class="form-group">
+                            <label class="form-label" for="event_date">Event Date</label>
+                            {{ form.event_date(class="form-input", id="event_date") }}
+                            {% if form.event_date.errors %}
+                                <span class="text-warning">{{ form.event_date.errors[0] }}</span>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label" for="region">Region</label>
+                            {{ form.region(class="form-select", id="region") }}
+                            {% if form.region.errors %}
+                                <span class="text-warning">{{ form.region.errors[0] }}</span>
+                            {% endif %}
+                        </div>
+                    </div>
+                    
+                    <!-- Event Code Preview -->
+                    <div class="form-group">
+                        <label class="form-label">Event Code (Auto-Generated)</label>
+                        <div class="form-input" id="eventCodePreview" style="background-color: var(--color-bg-elevated); color: var(--color-accent-primary);">
+                            Will be generated on save
+                        </div>
+                    </div>
+                    
+                    <!-- Core Action -->
+                    <div class="form-group">
+                        <label class="form-label" for="core_action">Core Action</label>
+                        {{ form.core_action(class="form-input", id="core_action", placeholder="e.g., [s-tr], [sn]") }}
+                        {% if form.core_action.errors %}
+                            <span class="text-warning">{{ form.core_action.errors[0] }}</span>
+                        {% endif %}
+                    </div>
+                    
+                    <!-- CIE Description -->
+                    <div class="form-group">
+                        <label class="form-label" for="cie_description">CIE Description</label>
+                        {{ form.cie_description(class="form-textarea", id="cie_description", maxlength="250") }}
+                        <div class="char-counter" id="cieCounter">0 / 250</div>
+                        {% if form.cie_description.errors %}
+                            <span class="text-warning">{{ form.cie_description.errors[0] }}</span>
+                        {% endif %}
+                    </div>
+                    
+                    <!-- Natural Summary -->
+                    <div class="form-group">
+                        <label class="form-label" for="natural_summary">Natural Summary</label>
+                        {{ form.natural_summary(class="form-textarea", id="natural_summary", maxlength="250") }}
+                        <div class="char-counter" id="summaryCounter">0 / 250</div>
+                        {% if form.natural_summary.errors %}
+                            <span class="text-warning">{{ form.natural_summary.errors[0] }}</span>
+                        {% endif %}
+                    </div>
+                    
+                    <!-- Subject Actors -->
+                    <div class="form-group">
+                        <label class="form-label" for="subject_codes">Subject Actors/Positions</label>
+                        {{ form.subject_codes(class="form-select", id="subject_codes", multiple=True, size=5) }}
+                        <small class="text-dim">Hold Ctrl/Cmd to select multiple</small>
+                    </div>
+                    
+                    <!-- Object Actors -->
+                    <div class="form-group">
+                        <label class="form-label" for="object_codes">Object Actors/Positions</label>
+                        {{ form.object_codes(class="form-select", id="object_codes", multiple=True, size=5) }}
+                        <small class="text-dim">Hold Ctrl/Cmd to select multiple</small>
+                    </div>
+                    
+                    <!-- Created By -->
+                    <div class="form-group">
+                        <label class="form-label" for="created_by">Created By (Optional)</label>
+                        {{ form.created_by(class="form-input", id="created_by", placeholder="Analyst name") }}
+                    </div>
+                    
+                    <!-- Form Actions -->
+                    <div class="flex gap-md mt-lg">
+                        <button type="submit" class="btn btn-primary">Save Event</button>
+                        <a href="{{ url_for('articles.dashboard') }}" class="btn btn-secondary">Cancel</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+// Character counters
+function updateCounter(textareaId, counterId) {
+    const textarea = document.getElementById(textareaId);
+    const counter = document.getElementById(counterId);
+    const length = textarea.value.length;
+    counter.textContent = `${length} / 250`;
+    if (length > 225) {
+        counter.classList.add('warning');
+    } else {
+        counter.classList.remove('warning');
+    }
+}
+
+document.getElementById('cie_description').addEventListener('input', function() {
+    updateCounter('cie_description', 'cieCounter');
+});
+
+document.getElementById('natural_summary').addEventListener('input', function() {
+    updateCounter('natural_summary', 'summaryCounter');
+});
+
+// Initialize counters
+updateCounter('cie_description', 'cieCounter');
+updateCounter('natural_summary', 'summaryCounter');
+</script>
+{% endblock %}

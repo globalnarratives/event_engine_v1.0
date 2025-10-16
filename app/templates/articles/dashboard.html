@@ -1,0 +1,228 @@
+{% extends "base.html" %}
+
+{% block title %}Article Dashboard - Global Narratives{% endblock %}
+
+{% block content %}
+<div class="container">
+    <!-- Page Header -->
+    <div class="flex items-center justify-between mb-lg">
+    <h1>Article Review Dashboard</h1>
+    <div class="flex gap-md">
+        <form method="POST" action="{{ url_for('articles.collect_now') }}" style="display: inline;">
+            <button type="submit" class="btn btn-primary">Collect Articles Now</button>
+        </form>
+        <a href="{{ url_for('articles.stats') }}" class="btn btn-secondary">View Stats</a>
+    </div>
+</div>
+
+    <!-- Search/Filter Card -->
+    <div class="card mb-lg">
+        <div class="card-header">
+            <h3 class="card-title">Filter Articles</h3>
+        </div>
+        <div class="card-body">
+            <form method="GET" action="{{ url_for('articles.dashboard') }}">
+                <div class="grid grid-cols-4">
+                    <div class="form-group">
+                        <label class="form-label" for="date_from">Published From</label>
+                        <input type="date" id="date_from" name="date_from" class="form-input" value="{{ request.args.get('date_from', '') }}">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="date_to">Published To</label>
+                        <input type="date" id="date_to" name="date_to" class="form-input" value="{{ request.args.get('date_to', '') }}">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="source">Source</label>
+                        <input type="text" id="source" name="source" class="form-input" placeholder="Filter by source" value="{{ request.args.get('source', '') }}">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="status">Status</label>
+                        <select id="status" name="status" class="form-select">
+                            <option value="">All Articles</option>
+                            <option value="unprocessed" {% if request.args.get('status') == 'unprocessed' %}selected{% endif %}>Unprocessed</option>
+                            <option value="processed" {% if request.args.get('status') == 'processed' %}selected{% endif %}>Processed</option>
+                            <option value="junk" {% if request.args.get('status') == 'junk' %}selected{% endif %}>Junk</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="search_text">Search Text</label>
+                    <input type="text" id="search_text" name="search_text" class="form-input" placeholder="Search in headline or summary" value="{{ request.args.get('search_text', '') }}">
+                </div>
+                <div class="flex gap-md">
+                    <button type="submit" class="btn btn-primary">Apply Filters</button>
+                    <a href="{{ url_for('articles.dashboard') }}" class="btn btn-secondary">Clear</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Articles Table -->
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Articles ({{ articles.total }})</h3>
+            <span class="text-secondary">Page {{ articles.page }} of {{ articles.pages }}</span>
+        </div>
+        <div class="card-body">
+            {% if articles.items %}
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Headline</th>
+                            <th>Source</th>
+                            <th>Published</th>
+                            <th>Collected</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for article in articles.items %}
+                        <tr>
+                            <td>
+                                <a href="{{ article.url }}" target="_blank" class="text-accent">
+                                    {{ article.headline }}
+                                </a>
+                            </td>
+                            <td class="text-secondary">{{ article.source_name }}</td>
+                            <td class="text-secondary">{{ article.published_date.strftime('%Y-%m-%d') }}</td>
+                            <td class="text-dim">{{ article.collected_date.strftime('%Y-%m-%d %H:%M') }}</td>
+                            <td>
+                                <div class="flex gap-sm">
+                                    <a href="{{ url_for('events.create', article_id=article.article_id) }}" class="btn btn-primary" style="font-size: 0.75rem; padding: 0.25rem 0.75rem;">Create Event</a>
+                                    <form method="POST" action="{{ url_for('articles.mark_processed', article_id=article.article_id) }}" style="display: inline;">
+                                        <button type="submit" class="btn btn-secondary" style="font-size: 0.75rem; padding: 0.25rem 0.75rem;">Mark Processed</button>
+                                    </form>
+                                    <form method="POST" action="{{ url_for('articles.mark_junk', article_id=article.article_id) }}" style="display: inline;">
+                                        <button type="submit" class="btn btn-warning" style="font-size: 0.75rem; padding: 0.25rem 0.75rem;">Mark Junk</button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+                <!-- Pagination -->
+                {% if articles.pages > 1 %}
+                <div class="flex items-center justify-between mt-lg border-top" style="padding-top: var(--space-md);">
+                    <div class="text-secondary">
+                        Showing {{ ((articles.page - 1) * articles.per_page) + 1 }} to {{ min(articles.page * articles.per_page, articles.total) }} of {{ articles.total }}
+                    </div>
+                    <div class="flex gap-sm">
+                        {% if articles.has_prev %}
+                            <a href="{{ url_for('articles.dashboard', page=articles.prev_num, **request.args) }}" class="btn btn-secondary">Previous</a>
+                        {% endif %}
+                        {% if articles.has_next %}
+                            <a href="{{ url_for('articles.dashboard', page=articles.next_num, **request.args) }}" class="btn btn-secondary">Next</a>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endif %}
+            {% else %}
+                <p class="text-secondary">No articles found matching your criteria.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+// Handle Mark Junk buttons with AJAX
+document.addEventListener('DOMContentLoaded', function() {
+    const junkForms = document.querySelectorAll('form[action*="mark_junk"]');
+    
+    junkForms.forEach(form => {
+        form.addEventListener('submit', function(e) {
+            e.preventDefault(); // Stop normal form submission
+            
+            const row = this.closest('tr');
+            const url = this.action;
+            
+            // Make AJAX request
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    // Fade out and remove the row
+                    row.style.transition = 'opacity 0.3s ease';
+                    row.style.opacity = '0';
+                    setTimeout(() => row.remove(), 300);
+                    
+                    // Show success message (optional - creates a temporary message)
+                    showMessage('Article marked as junk', 'success');
+                } else {
+                    showMessage('Failed to mark article as junk', 'error');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                showMessage('Error marking article as junk', 'error');
+            });
+        });
+    });
+    
+    // Do the same for Mark Processed buttons
+    const processedForms = document.querySelectorAll('form[action*="mark_processed"]');
+    
+    processedForms.forEach(form => {
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const row = this.closest('tr');
+            const url = this.action;
+            
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    row.style.transition = 'opacity 0.3s ease';
+                    row.style.opacity = '0';
+                    setTimeout(() => row.remove(), 300);
+                    showMessage('Article marked as processed', 'success');
+                } else {
+                    showMessage('Failed to mark article as processed', 'error');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                showMessage('Error marking article as processed', 'error');
+            });
+        });
+    });
+    
+    // Helper function to show temporary messages
+    function showMessage(text, type) {
+        const container = document.querySelector('.container');
+        const message = document.createElement('div');
+        message.className = 'card';
+        message.style.cssText = `
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            z-index: 9999;
+            padding: var(--space-md);
+            border-color: ${type === 'success' ? 'var(--color-accent-secondary)' : 'var(--color-accent-critical)'};
+            animation: slideIn 0.3s ease;
+        `;
+        message.innerHTML = `<div class="card-body">${text}</div>`;
+        
+        document.body.appendChild(message);
+        
+        setTimeout(() => {
+            message.style.opacity = '0';
+            message.style.transition = 'opacity 0.3s ease';
+            setTimeout(() => message.remove(), 300);
+        }, 2000);
+    }
+});
+</script>
+{% endblock %}

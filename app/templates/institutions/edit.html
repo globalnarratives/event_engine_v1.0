@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block title %}Edit Institution - Global Narratives{% endblock %}
+
+{% block content %}
+<div class="container">
+    <!-- Page Header -->
+    <div class="flex items-center justify-between mb-lg">
+        <h1>Edit Institution</h1>
+        <a href="{{ url_for('institutions.detail', institution_code=institution.institution_code) }}" class="btn btn-secondary">Back to Institution</a>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <h2 class="card-title">{{ institution.institution_name }}</h2>
+            <span class="badge badge-pending">{{ institution.institution_code }}</span>
+        </div>
+        <div class="card-body">
+            <form method="POST" action="{{ url_for('institutions.edit', institution_code=institution.institution_code) }}">
+                {{ form.hidden_tag() }}
+                
+                <!-- Institution Code (readonly) -->
+                <div class="form-group">
+                    <label class="form-label" for="institution_code">Institution Code</label>
+                    <input type="text" class="form-input" id="institution_code" value="{{ institution.institution_code }}" readonly>
+                    <small class="text-dim">Cannot be changed after creation</small>
+                </div>
+                
+                <!-- Institution Name -->
+                <div class="form-group">
+                    <label class="form-label" for="institution_name">Institution Name</label>
+                    {{ form.institution_name(class="form-input", id="institution_name") }}
+                    {% if form.institution_name.errors %}
+                        <div class="text-warning">{{ form.institution_name.errors[0] }}</div>
+                    {% endif %}
+                </div>
+                
+                <!-- Institution Type & Country -->
+                <div class="grid grid-cols-2">
+                    <div class="form-group">
+                        <label class="form-label" for="institution_type">Institution Type (Optional)</label>
+                        {{ form.institution_type(class="form-input", id="institution_type") }}
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="country_code">Country Code (Optional)</label>
+                        {{ form.country_code(class="form-input", id="country_code") }}
+                    </div>
+                </div>
+                
+                <!-- Description -->
+                <div class="form-group">
+                    <label class="form-label" for="description">Description (Optional)</label>
+                    {{ form.description(class="form-textarea", id="description", rows="4") }}
+                </div>
+                
+                <!-- Form Actions -->
+                <div class="flex gap-md mt-lg">
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                    <a href="{{ url_for('institutions.detail', institution_code=institution.institution_code) }}" class="btn btn-secondary">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

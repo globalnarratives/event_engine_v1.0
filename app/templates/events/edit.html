@@ -1,0 +1,153 @@
+{% extends "base.html" %}
+
+{% block title %}Edit Event {{ event.event_code }} - Global Narratives{% endblock %}
+
+{% block extra_css %}
+<style>
+.char-counter {
+    font-size: 0.75rem;
+    color: var(--color-text-dim);
+    text-align: right;
+    margin-top: var(--space-xs);
+}
+
+.char-counter.warning {
+    color: var(--color-accent-warning);
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <!-- Page Header -->
+    <div class="flex items-center justify-between mb-lg">
+        <h1>Edit Event</h1>
+        <div class="flex gap-md">
+            <a href="{{ url_for('events.detail', event_code=event.event_code) }}" class="btn btn-secondary">Back to Event</a>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <h2 class="card-title">{{ event.event_code }}</h2>
+            <span class="badge badge-pending">Editing</span>
+        </div>
+        <div class="card-body">
+            <form method="POST" action="{{ url_for('events.edit', event_code=event.event_code) }}" id="eventForm">
+                {{ form.hidden_tag() }}
+                
+                <!-- Event Code (readonly) -->
+                <div class="form-group">
+                    <label class="form-label" for="event_code">Event Code</label>
+                    {{ form.event_code(class="form-input", id="event_code") }}
+                    <small class="text-dim">Cannot be changed after creation</small>
+                </div>
+                
+                <!-- Event Date & Region -->
+                <div class="grid grid-cols-2">
+                    <div class="form-group">
+                        <label class="form-label" for="event_date">Event Date</label>
+                        {{ form.event_date(class="form-input", id="event_date") }}
+                        {% if form.event_date.errors %}
+                            <span class="text-warning">{{ form.event_date.errors[0] }}</span>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="region">Region</label>
+                        {{ form.region(class="form-select", id="region") }}
+                        <small class="text-dim">Cannot be changed (embedded in event code)</small>
+                        {% if form.region.errors %}
+                            <span class="text-warning">{{ form.region.errors[0] }}</span>
+                        {% endif %}
+                    </div>
+                </div>
+                
+                <!-- Core Action -->
+                <div class="form-group">
+                    <label class="form-label" for="core_action">Core Action</label>
+                    {{ form.core_action(class="form-input", id="core_action") }}
+                    {% if form.core_action.errors %}
+                        <span class="text-warning">{{ form.core_action.errors[0] }}</span>
+                    {% endif %}
+                </div>
+                
+                <!-- CIE Description -->
+                <div class="form-group">
+                    <label class="form-label" for="cie_description">CIE Description</label>
+                    {{ form.cie_description(class="form-textarea", id="cie_description", maxlength="250") }}
+                    <div class="char-counter" id="cieCounter">0 / 250</div>
+                    {% if form.cie_description.errors %}
+                        <span class="text-warning">{{ form.cie_description.errors[0] }}</span>
+                    {% endif %}
+                </div>
+                
+                <!-- Natural Summary -->
+                <div class="form-group">
+                    <label class="form-label" for="natural_summary">Natural Summary</label>
+                    {{ form.natural_summary(class="form-textarea", id="natural_summary", maxlength="250") }}
+                    <div class="char-counter" id="summaryCounter">0 / 250</div>
+                    {% if form.natural_summary.errors %}
+                        <span class="text-warning">{{ form.natural_summary.errors[0] }}</span>
+                    {% endif %}
+                </div>
+                
+                <!-- Subject Actors -->
+                <div class="form-group">
+                    <label class="form-label" for="subject_codes">Subject Actors/Positions</label>
+                    {{ form.subject_codes(class="form-select", id="subject_codes", multiple=True, size=5) }}
+                    <small class="text-dim">Hold Ctrl/Cmd to select multiple</small>
+                </div>
+                
+                <!-- Object Actors -->
+                <div class="form-group">
+                    <label class="form-label" for="object_codes">Object Actors/Positions</label>
+                    {{ form.object_codes(class="form-select", id="object_codes", multiple=True, size=5) }}
+                    <small class="text-dim">Hold Ctrl/Cmd to select multiple</small>
+                </div>
+                
+                <!-- Created By -->
+                <div class="form-group">
+                    <label class="form-label" for="created_by">Created By (Optional)</label>
+                    {{ form.created_by(class="form-input", id="created_by") }}
+                </div>
+                
+                <!-- Form Actions -->
+                <div class="flex gap-md mt-lg">
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                    <a href="{{ url_for('events.detail', event_code=event.event_code) }}" class="btn btn-secondary">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+// Character counters
+function updateCounter(textareaId, counterId) {
+    const textarea = document.getElementById(textareaId);
+    const counter = document.getElementById(counterId);
+    const length = textarea.value.length;
+    counter.textContent = `${length} / 250`;
+    if (length > 225) {
+        counter.classList.add('warning');
+    } else {
+        counter.classList.remove('warning');
+    }
+}
+
+document.getElementById('cie_description').addEventListener('input', function() {
+    updateCounter('cie_description', 'cieCounter');
+});
+
+document.getElementById('natural_summary').addEventListener('input', function() {
+    updateCounter('natural_summary', 'summaryCounter');
+});
+
+// Initialize counters
+updateCounter('cie_description', 'cieCounter');
+updateCounter('natural_summary', 'summaryCounter');
+</script>
+{% endblock %}

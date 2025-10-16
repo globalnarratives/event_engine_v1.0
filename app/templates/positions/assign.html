@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block title %}Assign Tenure - Global Narratives{% endblock %}
+
+{% block content %}
+<div class="container">
+    <!-- Page Header -->
+    <div class="flex items-center justify-between mb-lg">
+        <h1>Assign Tenure</h1>
+        <a href="{{ url_for('positions.detail', position_code=position.position_code) }}" class="btn btn-secondary">Back to Position</a>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <h2 class="card-title">{{ position.position_title }}</h2>
+            <span class="badge badge-active">{{ position.position_code }}</span>
+        </div>
+        <div class="card-body">
+            <form method="POST" action="{{ url_for('positions.assign_tenure', position_code=position.position_code) }}">
+                {{ form.hidden_tag() }}
+                
+                <!-- Position (readonly) -->
+                <div class="form-group">
+                    <label class="form-label" for="position_code">Position</label>
+                    {{ form.position_code(class="form-select", id="position_code", disabled=True) }}
+                    <small class="text-dim">Assigning tenure to this position</small>
+                </div>
+                
+                <!-- Actor Selection -->
+                <div class="form-group">
+                    <label class="form-label" for="actor_id">Actor</label>
+                    {{ form.actor_id(class="form-select", id="actor_id", size=10) }}
+                    <small class="text-dim">Select the person to hold this position</small>
+                    {% if form.actor_id.errors %}
+                        <div class="text-warning">{{ form.actor_id.errors[0] }}</div>
+                    {% endif %}
+                </div>
+                
+                <!-- Tenure Dates -->
+                <div class="grid grid-cols-2">
+                    <div class="form-group">
+                        <label class="form-label" for="tenure_start">Start Date</label>
+                        {{ form.tenure_start(class="form-input", id="tenure_start") }}
+                        {% if form.tenure_start.errors %}
+                            <div class="text-warning">{{ form.tenure_start.errors[0] }}</div>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="tenure_end">End Date (Optional)</label>
+                        {{ form.tenure_end(class="form-input", id="tenure_end") }}
+                        <small class="text-dim">Leave blank if currently held</small>
+                        {% if form.tenure_end.errors %}
+                            <div class="text-warning">{{ form.tenure_end.errors[0] }}</div>
+                        {% endif %}
+                    </div>
+                </div>
+                
+                <!-- Form Actions -->
+                <div class="flex gap-md mt-lg">
+                    <button type="submit" class="btn btn-primary">Assign Tenure</button>
+                    <a href="{{ url_for('positions.detail', position_code=position.position_code) }}" class="btn btn-secondary">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

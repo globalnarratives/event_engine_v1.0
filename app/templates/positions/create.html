@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+
+{% block title %}Create Position - Global Narratives{% endblock %}
+
+{% block content %}
+<div class="container">
+    <!-- Page Header -->
+    <div class="flex items-center justify-between mb-lg">
+        <h1>Create Position</h1>
+        <a href="{{ url_for('positions.index') }}" class="btn btn-secondary">Back to Positions</a>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <h2 class="card-title">Position Information</h2>
+        </div>
+        <div class="card-body">
+            <form method="POST" action="{{ url_for('positions.create') }}">
+                {{ form.hidden_tag() }}
+                
+                <!-- Position Code -->
+                <div class="form-group">
+                    <label class="form-label" for="position_code">Position Code</label>
+                    {{ form.position_code(class="form-input", id="position_code", placeholder="e.g., usa.hos, jpn.com.mde.002.exc.002") }}
+                    <small class="text-dim">CIE hierarchical code</small>
+                    {% if form.position_code.errors %}
+                        <div class="text-warning">{{ form.position_code.errors[0] }}</div>
+                    {% endif %}
+                </div>
+                
+                <!-- Position Title -->
+                <div class="form-group">
+                    <label class="form-label" for="position_title">Position Title</label>
+                    {{ form.position_title(class="form-input", id="position_title", placeholder="e.g., President of the United States") }}
+                    <small class="text-dim">Official title in natural language</small>
+                    {% if form.position_title.errors %}
+                        <div class="text-warning">{{ form.position_title.errors[0] }}</div>
+                    {% endif %}
+                </div>
+                
+                <!-- Institution -->
+                <div class="form-group">
+                    <label class="form-label" for="institution_code">Institution</label>
+                    {{ form.institution_code(class="form-select", id="institution_code") }}
+                    <small class="text-dim">Parent institution for this position</small>
+                    {% if form.institution_code.errors %}
+                        <div class="text-warning">{{ form.institution_code.errors[0] }}</div>
+                    {% endif %}
+                </div>
+                
+                <!-- Hierarchy Level -->
+                <div class="form-group">
+                    <label class="form-label" for="hierarchy_level">Hierarchy Level (Optional)</label>
+                    {{ form.hierarchy_level(class="form-input", id="hierarchy_level", placeholder="e.g., hos, hog, min, exc") }}
+                    <small class="text-dim">Encoded in position code but extracted for display</small>
+                </div>
+                
+                <!-- Description -->
+                <div class="form-group">
+                    <label class="form-label" for="description">Description (Optional)</label>
+                    {{ form.description(class="form-textarea", id="description", rows="4", placeholder="Additional context about this position") }}
+                </div>
+                
+                <!-- Form Actions -->
+                <div class="flex gap-md mt-lg">
+                    <button type="submit" class="btn btn-primary">Create Position</button>
+                    <a href="{{ url_for('positions.index') }}" class="btn btn-secondary">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+// Auto-compose position code from institution + user input
+const institutionSelect = document.getElementById('institution_code');
+const positionCodeInput = document.getElementById('position_code');
+
+let userInput = '';
+
+// Listen for institution changes
+institutionSelect.addEventListener('change', function() {
+    updatePositionCode();
+});
+
+// Listen for manual input in position code field
+positionCodeInput.addEventListener('input', function() {
+    // Extract just the part after the institution code
+    const fullValue = this.value;
+    const institutionCode = institutionSelect.value;
+    
+    if (fullValue.startsWith(institutionCode + '.')) {
+        userInput = fullValue.substring(institutionCode.length + 1);
+    } else {
+        userInput = fullValue;
+    }
+    
+    updatePositionCode();
+});
+
+function updatePositionCode() {
+    const institutionCode = institutionSelect.value;
+    if (institutionCode && userInput) {
+        positionCodeInput.value = institutionCode + '.' + userInput;
+    } else if (userInput) {
+        positionCodeInput.value = userInput;
+    }
+}
+</script>
+{% endblock %}

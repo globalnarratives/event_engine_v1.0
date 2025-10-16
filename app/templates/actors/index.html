@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+
+{% block title %}Actors - Global Narratives{% endblock %}
+
+{% block content %}
+<div class="container">
+    <!-- Page Header -->
+    <div class="flex items-center justify-between mb-lg">
+        <h1>Actors</h1>
+        <a href="{{ url_for('actors.create') }}" class="btn btn-primary">Create Actor</a>
+    </div>
+
+    <!-- Search Card -->
+    <div class="card mb-lg">
+        <div class="card-header">
+            <h3 class="card-title">Search Actors</h3>
+        </div>
+        <div class="card-body">
+            <form method="GET" action="{{ url_for('actors.index') }}">
+                <div class="form-group">
+                    <label class="form-label" for="search">Search</label>
+                    <input type="text" id="search" name="search" class="form-input" placeholder="Search by name or actor ID" value="{{ search }}">
+                </div>
+                <div class="flex gap-md">
+                    <button type="submit" class="btn btn-primary">Search</button>
+                    <a href="{{ url_for('actors.index') }}" class="btn btn-secondary">Clear</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Actors Table -->
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Actors ({{ actors.total }})</h3>
+            <span class="text-secondary">Page {{ actors.page }} of {{ actors.pages }}</span>
+        </div>
+        <div class="card-body">
+            {% if actors.items %}
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Actor ID</th>
+                            <th>Name</th>
+                            <th>Country</th>
+                            <th>Birth Year</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for actor in actors.items %}
+                        <tr>
+                            <td class="text-accent">{{ actor.actor_id }}</td>
+                            <td>
+                                <a href="{{ url_for('actors.detail', actor_id=actor.actor_id) }}" class="text-primary">
+                                    {{ actor.get_display_name() }}
+                                </a>
+                            </td>
+                            <td class="text-secondary">{{ actor.actor_id.split('.')[0].upper() }}</td>
+                            <td class="text-secondary">{{ actor.actor_id.split('.')[1] }}</td>
+                            <td>
+                                <div class="flex gap-sm">
+                                    <a href="{{ url_for('actors.detail', actor_id=actor.actor_id) }}" class="btn btn-secondary" style="font-size: 0.75rem; padding: 0.25rem 0.75rem;">View</a>
+                                    <a href="{{ url_for('actors.edit', actor_id=actor.actor_id) }}" class="btn btn-secondary" style="font-size: 0.75rem; padding: 0.25rem 0.75rem;">Edit</a>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+                <!-- Pagination -->
+                {% if actors.pages > 1 %}
+                <div class="flex items-center justify-between mt-lg border-top" style="padding-top: var(--space-md);">
+                    <div class="text-secondary">
+                        Showing {{ ((actors.page - 1) * actors.per_page) + 1 }} to {{ min(actors.page * actors.per_page, actors.total) }} of {{ actors.total }}
+                    </div>
+                    <div class="flex gap-sm">
+                        {% if actors.has_prev %}
+                            <a href="{{ url_for('actors.index', page=actors.prev_num, search=search) }}" class="btn btn-secondary">Previous</a>
+                        {% endif %}
+                        {% if actors.has_next %}
+                            <a href="{{ url_for('actors.index', page=actors.next_num, search=search) }}" class="btn btn-secondary">Next</a>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endif %}
+            {% else %}
+                <p class="text-secondary">No actors found.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block title %}Create Institution - Global Narratives{% endblock %}
+
+{% block content %}
+<div class="container">
+    <!-- Page Header -->
+    <div class="flex items-center justify-between mb-lg">
+        <h1>Create Institution</h1>
+        <a href="{{ url_for('institutions.index') }}" class="btn btn-secondary">Back to Institutions</a>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <h2 class="card-title">Institution Information</h2>
+        </div>
+        <div class="card-body">
+            <form method="POST" action="{{ url_for('institutions.create') }}">
+                {{ form.hidden_tag() }}
+                
+                <!-- Institution Code -->
+                <div class="form-group">
+                    <label class="form-label" for="institution_code">Institution Code</label>
+                    {{ form.institution_code(class="form-input", id="institution_code", placeholder="e.g., vie.cbk, jpn.com.mde.002") }}
+                    <small class="text-dim">CIE hierarchical code</small>
+                    {% if form.institution_code.errors %}
+                        <div class="text-warning">{{ form.institution_code.errors[0] }}</div>
+                    {% endif %}
+                </div>
+                
+                <!-- Institution Name -->
+                <div class="form-group">
+                    <label class="form-label" for="institution_name">Institution Name</label>
+                    {{ form.institution_name(class="form-input", id="institution_name", placeholder="e.g., Central Bank of Vietnam") }}
+                    <small class="text-dim">Full name in natural language</small>
+                    {% if form.institution_name.errors %}
+                        <div class="text-warning">{{ form.institution_name.errors[0] }}</div>
+                    {% endif %}
+                </div>
+                
+                <!-- Institution Type & Country -->
+                <div class="grid grid-cols-2">
+                    <div class="form-group">
+                        <label class="form-label" for="institution_type">Institution Type (Optional)</label>
+                        {{ form.institution_type(class="form-input", id="institution_type", placeholder="e.g., Government, Corporate, NGO") }}
+                        <small class="text-dim">Encoded in CIE code but extracted for display</small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="country_code">Country Code (Optional)</label>
+                        {{ form.country_code(class="form-input", id="country_code", placeholder="e.g., vie, jpn, usa") }}
+                        <small class="text-dim">ISO 3-letter code</small>
+                    </div>
+                </div>
+                
+                <!-- Description -->
+                <div class="form-group">
+                    <label class="form-label" for="description">Description (Optional)</label>
+                    {{ form.description(class="form-textarea", id="description", rows="4", placeholder="Additional context about this institution") }}
+                </div>
+                
+                <!-- Form Actions -->
+                <div class="flex gap-md mt-lg">
+                    <button type="submit" class="btn btn-primary">Create Institution</button>
+                    <a href="{{ url_for('institutions.index') }}" class="btn btn-secondary">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

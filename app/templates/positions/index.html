@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+
+{% block title %}Positions - Global Narratives{% endblock %}
+
+{% block content %}
+<div class="container">
+    <!-- Page Header -->
+    <div class="flex items-center justify-between mb-lg">
+        <h1>Positions</h1>
+        <a href="{{ url_for('positions.create') }}" class="btn btn-primary">Create Position</a>
+    </div>
+
+    <!-- Search Card -->
+    <div class="card mb-lg">
+        <div class="card-header">
+            <h3 class="card-title">Search Positions</h3>
+        </div>
+        <div class="card-body">
+            <form method="GET" action="{{ url_for('positions.index') }}">
+                <div class="form-group">
+                    <label class="form-label" for="search">Search</label>
+                    <input type="text" id="search" name="search" class="form-input" placeholder="Search by position code or title" value="{{ search }}">
+                </div>
+                <div class="flex gap-md">
+                    <button type="submit" class="btn btn-primary">Search</button>
+                    <a href="{{ url_for('positions.index') }}" class="btn btn-secondary">Clear</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Positions Table -->
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Positions ({{ positions.total }})</h3>
+            <span class="text-secondary">Page {{ positions.page }} of {{ positions.pages }}</span>
+        </div>
+        <div class="card-body">
+            {% if positions.items %}
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Position Code</th>
+                            <th>Title</th>
+                            <th>Institution</th>
+                            <th>Current Holder</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for position in positions.items %}
+                        <tr>
+                            <td class="text-accent">{{ position.position_code }}</td>
+                            <td>
+                                <a href="{{ url_for('positions.detail', position_code=position.position_code) }}" class="text-primary">
+                                    {{ position.position_title }}
+                                </a>
+                            </td>
+                            <td class="text-secondary">{{ position.institution.institution_name }}</td>
+                            <td>
+                                {% set holder = position.get_current_holder() %}
+                                {% if holder %}
+                                    <a href="{{ url_for('actors.detail', actor_id=holder.actor_id) }}" class="text-accent">
+                                        {{ holder.get_display_name() }}
+                                    </a>
+                                {% else %}
+                                    <span class="badge badge-resolved">Vacant</span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                <div class="flex gap-sm">
+                                    <a href="{{ url_for('positions.detail', position_code=position.position_code) }}" class="btn btn-secondary" style="font-size: 0.75rem; padding: 0.25rem 0.75rem;">View</a>
+                                    <a href="{{ url_for('positions.assign_tenure', position_code=position.position_code) }}" class="btn btn-primary" style="font-size: 0.75rem; padding: 0.25rem 0.75rem;">Assign</a>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+                <!-- Pagination -->
+                {% if positions.pages > 1 %}
+                <div class="flex items-center justify-between mt-lg border-top" style="padding-top: var(--space-md);">
+                    <div class="text-secondary">
+                        Showing {{ ((positions.page - 1) * positions.per_page) + 1 }} to {{ min(positions.page * positions.per_page, positions.total) }} of {{ positions.total }}
+                    </div>
+                    <div class="flex gap-sm">
+                        {% if positions.has_prev %}
+                            <a href="{{ url_for('positions.index', page=positions.prev_num, search=search) }}" class="btn btn-secondary">Previous</a>
+                        {% endif %}
+                        {% if positions.has_next %}
+                            <a href="{{ url_for('positions.index', page=positions.next_num, search=search) }}" class="btn btn-secondary">Next</a>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endif %}
+            {% else %}
+                <p class="text-secondary">No positions found.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

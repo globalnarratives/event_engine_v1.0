@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+
+{% block title %}Create Actor - Global Narratives{% endblock %}
+
+{% block content %}
+<div class="container">
+    <!-- Page Header -->
+    <div class="flex items-center justify-between mb-lg">
+        <h1>Create Actor</h1>
+        <a href="{{ url_for('actors.index') }}" class="btn btn-secondary">Back to Actors</a>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <h2 class="card-title">Actor Information</h2>
+        </div>
+        <div class="card-body">
+            <form method="POST" action="{{ url_for('actors.create') }}">
+                {{ form.hidden_tag() }}
+                
+                <!-- Actor ID Components -->
+                <div class="grid grid-cols-2">
+                    <div class="form-group">
+                        <label class="form-label" for="country_code">Country Code</label>
+                        {{ form.country_code(class="form-input", id="country_code", placeholder="e.g., usa, gbr, jpn") }}
+                        <small class="text-dim">ISO 3-letter code, lowercase</small>
+                        {% if form.country_code.errors %}
+                            <div class="text-warning">{{ form.country_code.errors[0] }}</div>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="birth_year">Birth Year</label>
+                        {{ form.birth_year(class="form-input", id="birth_year", placeholder="e.g., 1942") }}
+                        <small class="text-dim">4-digit year</small>
+                        {% if form.birth_year.errors %}
+                            <div class="text-warning">{{ form.birth_year.errors[0] }}</div>
+                        {% endif %}
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <div class="metric-label">Actor ID (Auto-Generated)</div>
+                    <p class="text-dim">Format: country.year.ordinal (e.g., usa.1942.0217)</p>
+                    <p class="text-secondary">The ordinal will be automatically assigned based on existing actors.</p>
+                </div>
+                
+                <hr style="border: 0; border-top: 1px solid var(--color-border); margin: var(--space-lg) 0;">
+                
+                <!-- Name Fields -->
+                <div class="form-group">
+                    <label class="form-label" for="surname">Surname</label>
+                    {{ form.surname(class="form-input", id="surname", placeholder="Family/last name") }}
+                    <small class="text-dim">Will be displayed in UPPERCASE</small>
+                    {% if form.surname.errors %}
+                        <div class="text-warning">{{ form.surname.errors[0] }}</div>
+                    {% endif %}
+                </div>
+                
+                <div class="grid grid-cols-2">
+                    <div class="form-group">
+                        <label class="form-label" for="given_name">Given Name</label>
+                        {{ form.given_name(class="form-input", id="given_name", placeholder="First/given name") }}
+                        {% if form.given_name.errors %}
+                            <div class="text-warning">{{ form.given_name.errors[0] }}</div>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="middle_name">Middle Name (Optional)</label>
+                        {{ form.middle_name(class="form-input", id="middle_name", placeholder="Middle name(s)") }}
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <div class="metric-label">Display Format Preview</div>
+                    <p class="text-accent" id="namePreview">SURNAME, Given Middle</p>
+                </div>
+                
+                <!-- Biographical Info -->
+                <div class="form-group">
+                    <label class="form-label" for="biographical_info">Biographical Info (Optional)</label>
+                    {{ form.biographical_info(class="form-textarea", id="biographical_info", rows="4", placeholder="Additional context about this person") }}
+                </div>
+                
+                <!-- Form Actions -->
+                <div class="flex gap-md mt-lg">
+                    <button type="submit" class="btn btn-primary">Create Actor</button>
+                    <a href="{{ url_for('actors.index') }}" class="btn btn-secondary">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+// Live preview of display name
+function updateNamePreview() {
+    const surname = document.getElementById('surname').value.toUpperCase() || 'SURNAME';
+    const given = document.getElementById('given_name').value || 'Given';
+    const middle = document.getElementById('middle_name').value;
+    
+    let preview = `${surname}, ${given}`;
+    if (middle) {
+        preview += ` ${middle}`;
+    }
+    
+    document.getElementById('namePreview').textContent = preview;
+}
+
+document.getElementById('surname').addEventListener('input', updateNamePreview);
+document.getElementById('given_name').addEventListener('input', updateNamePreview);
+document.getElementById('middle_name').addEventListener('input', updateNamePreview);
+</script>
+{% endblock %}

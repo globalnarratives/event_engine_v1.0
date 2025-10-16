@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block title %}Edit Actor - Global Narratives{% endblock %}
+
+{% block content %}
+<div class="container">
+    <!-- Page Header -->
+    <div class="flex items-center justify-between mb-lg">
+        <h1>Edit Actor</h1>
+        <a href="{{ url_for('actors.detail', actor_id=actor.actor_id) }}" class="btn btn-secondary">Back to Actor</a>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <h2 class="card-title">{{ actor.get_display_name() }}</h2>
+            <span class="badge badge-pending">{{ actor.actor_id }}</span>
+        </div>
+        <div class="card-body">
+            <form method="POST" action="{{ url_for('actors.edit', actor_id=actor.actor_id) }}">
+                {{ form.hidden_tag() }}
+                
+                <!-- Actor ID (readonly) -->
+                <div class="form-group">
+                    <label class="form-label" for="actor_id">Actor ID</label>
+                    {{ form.actor_id(class="form-input", id="actor_id", readonly=True) }}
+                    <small class="text-dim">Cannot be changed after creation</small>
+                </div>
+                
+                <!-- Name Fields -->
+                <div class="form-group">
+                    <label class="form-label" for="surname">Surname</label>
+                    {{ form.surname(class="form-input", id="surname") }}
+                    {% if form.surname.errors %}
+                        <div class="text-warning">{{ form.surname.errors[0] }}</div>
+                    {% endif %}
+                </div>
+                
+                <div class="grid grid-cols-2">
+                    <div class="form-group">
+                        <label class="form-label" for="given_name">Given Name</label>
+                        {{ form.given_name(class="form-input", id="given_name") }}
+                        {% if form.given_name.errors %}
+                            <div class="text-warning">{{ form.given_name.errors[0] }}</div>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="middle_name">Middle Name (Optional)</label>
+                        {{ form.middle_name(class="form-input", id="middle_name") }}
+                    </div>
+                </div>
+                
+                <!-- Biographical Info -->
+                <div class="form-group">
+                    <label class="form-label" for="biographical_info">Biographical Info (Optional)</label>
+                    {{ form.biographical_info(class="form-textarea", id="biographical_info", rows="4") }}
+                </div>
+                
+                <!-- Form Actions -->
+                <div class="flex gap-md mt-lg">
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                    <a href="{{ url_for('actors.detail', actor_id=actor.actor_id) }}" class="btn btn-secondary">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

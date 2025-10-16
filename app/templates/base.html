@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Global Narratives System{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <!-- Site Header -->
+    <header class="site-header">
+        <div class="flex items-center justify-between">
+            <h1 class="site-title">Global Narratives v1.0</h1>
+            <nav class="nav-primary">
+                <a href="{{ url_for('articles.dashboard') }}" class="nav-link {% if request.endpoint and 'articles' in request.endpoint %}active{% endif %}">Articles</a>
+                <a href="{{ url_for('events.index') }}" class="nav-link {% if request.endpoint and 'events' in request.endpoint %}active{% endif %}">Events</a>
+                <a href="{{ url_for('actors.index') }}" class="nav-link {% if request.endpoint and 'actors' in request.endpoint %}active{% endif %}">Actors</a>
+                <a href="{{ url_for('positions.index') }}" class="nav-link {% if request.endpoint and 'positions' in request.endpoint %}active{% endif %}">Positions</a>
+                <a href="{{ url_for('institutions.index') }}" class="nav-link {% if request.endpoint and 'institutions' in request.endpoint %}active{% endif %}">Institutions</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="container">
+                {% for category, message in messages %}
+                    {% if category == 'success' %}
+                        <div class="card" style="border-color: var(--color-accent-secondary);">
+                            <div class="card-body">{{ message }}</div>
+                        </div>
+                    {% elif category == 'error' %}
+                        <div class="card" style="border-color: var(--color-accent-critical);">
+                            <div class="card-body">{{ message }}</div>
+                        </div>
+                    {% else %}
+                        <div class="card" style="border-color: var(--color-accent-tertiary);">
+                            <div class="card-body">{{ message }}</div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <!-- Main Content -->
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    {% block extra_js %}{% endblock %}
+</body>
+</html>
