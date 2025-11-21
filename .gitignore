@@ -60,5 +60,8 @@ logs/
 *.bak
 Thumbs.db
 
+#Sensitive
+config.py
+
 # Migrations (optional - uncomment if you want to regenerate)
 # migrations/
