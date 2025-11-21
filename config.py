@@ -16,7 +16,7 @@ class Config:
     
     # Database
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or \
-        'postgresql://localhost/global_narratives'
+    'postgresql://postgres:88DataBase@localhost/global_narratives'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SQLALCHEMY_ECHO = False
     
