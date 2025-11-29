@@ -27,7 +27,7 @@ class Institution(db.Model):
     institution_code = db.Column(db.String(100), primary_key=True)
     institution_name = db.Column(db.String(300), nullable=False)
     institution_type = db.Column(db.String(50))
-    institution_layer = db.Column(db.String(2))  # e.g., "01", "02", etc.
+    institution_layer = db.Column(db.String(6))  # e.g., "01", "02", etc.
     institution_subtype_01 = db.Column(db.String(50))  # Optional subtype categorization
     country_code = db.Column(db.String(3))
     description = db.Column(db.Text)
@@ -48,7 +48,7 @@ class Position(db.Model):
     position_code = db.Column(db.String(100), primary_key=True)
     position_title = db.Column(db.String(300), nullable=False)
     institution_code = db.Column(db.String(100), db.ForeignKey('institutions.institution_code'), nullable=False)
-    hierarchy_level = db.Column(db.String(2))
+    hierarchy_level = db.Column(db.String(8))
     description = db.Column(db.Text)
     
     # Relationships
@@ -86,7 +86,7 @@ class Actor(db.Model):
     middle_name = db.Column(db.String(150))
     birth_year = db.Column(db.Integer)
     position_code = db.Column(db.String(100))
-    position_title = db.Column(db.String(300), nullable=False)                          
+    position_title = db.Column(db.String(300))                          
     biographical_info = db.Column(db.Text)
     
     # Relationships
@@ -173,7 +173,7 @@ class Tenure(db.Model):
     position_code = db.Column(db.String(100), db.ForeignKey('positions.position_code'), nullable=False)
     tenure_start = db.Column(db.Date, nullable=False)
     tenure_end = db.Column(db.Date)
-    notes = db.Column(db.String(20))
+    notes = db.Column(db.String(100))
     
     # Relationships
     actor = db.relationship('Actor', back_populates='tenures')

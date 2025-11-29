@@ -1,219 +1,242 @@
 ﻿country_code,institution_name,institution_code,institution_layer,institution_type,institution_subtype_01
-usa,Department of State,min.forn,01,Foreign Relations,
-usa,Department of the Treasury,min.fisc,01,Fiscal Management,
-usa,Department of Defense,min.dfns,01,Defense,
-usa,Department of Justice,min.jstc,01,Justice,
-usa,Department of the Interior,min.resr,01,Resources,
-usa,Department of Agriculture,min.agrc,01,Agriculture,
-usa,Department of Commerce,min.comc,01,Commercial & Industrial,
-usa,Department of Labor,min.labr,01,Labor & Workforce,
-usa,Department of Health and Human Services,min.hlth,01,Health & Society,
-usa,Department of Housing and Urban Development,min.hous,01,Housing,
-usa,Department of Transportation,min.infr,01,Infrastructure,
-usa,Department of Energy,min.scnc,01,Science,
-usa,Department of Education,min.educ,01,Education,
-usa,Department of Veterans Affairs,min.dfns.vet,01,Defense,Veterans Affairs
-usa,Department of Homeland Security,min.gndm,01,Gendarme,
-usa,Environmental Protection Agency (Cabinet-Rank),min.resr.env,01,Resources,Environment
-usa,Office of Management and Budget (Cabinet-Rank),hos.fisc,01,Presidency,Fiscal
-usa,U.S. Trade Representative (Cabinet-Rank),hos.trde,01,Presidency,Trade
-usa,Directorate of National Intelligence (Cabinet-Rank),hos.intl,01,Presidency,Intelligence
-usa,Central Intelligence Agency (Cabinet-Rank),min.intl,01,Intelligence,
-usa,UN Ambassador (Cabinet-Rank),amb.igo.001,01,Ambassador,IGO
-usa,Office of the President of the United States,hos,00,Presidency,
-fra,Office of the Prime Minister of the Republic,hog,01,Premiership,
-fra,Office of the President of the Republic,hos,00,Presidency,
-fra,Ministry of Europe and Foreign Affairs,min.forn,01,Foreign Relations,
-fra,Ministry of the Interior,min.gndm,01,Gendarme,
-fra,Ministry of the Armed Forces,min.dfns,01,Defense,
-fra,Ministry of Economy and Finance,min.fisc,01,Fiscal Management,
-fra,Ministry of Justice,min.jstc,01,Justice,
-fra,Ministry of National Education,min.educ,01,Education,
-fra,Ministry of Culture,min.cltr,01,Cultural Affairs,
-fra,Ministry of Health,min.hlth,01,Health & Society,
-fra,Ministry of Labor,min.labr,01,Labor & Workforce,
-fra,Ministry of Ecological Transition and Energy,min.resr,01,Resources,
-fra,Ministry of Agriculture,min.agrc,01,Agriculture,
-fra,Ministry of Housing,min.hous,01,Housing,
-fra,Ministry of Transport,min.infr,01,Infrastructure,
-fra,Ministry of Higher Education and Research,min.educ.trt,01,Education,Tertiary
-fra,Ministry of Overseas Territories,min.spec.ext,01,Special,External
-fra,Ministry of Solidarity and Family,min.hlth.soc,01,Health & Society,Society
-fra,Ministry of Sports,min.cltr.ath,01,Cultural Affairs,Athletics
-gbr,Office of the Prime Minister of the United Kingdom of Great Britain and Northern Ireland,hog,01,Premiership,
-gbr,"Foreign, Commonwealth and Development Office",min.forn,01,Foreign Relations,
-gbr,Home Office,min.gndm,01,Gendarme ,
-gbr,HM Treasury,min.fisc,01,Fiscal Management,
-gbr,Ministry of Defence,min.dfns,01,Defense,
-gbr,Ministry of Justice,min.jstc,01,Justice,
-gbr,Department of Health and Social Care,min.hlth,01,Health & Society,
-gbr,Department for Education,min.educ,01,Education,
-gbr,Department for Business and Trade,min.comc,01,Commercial & Industrial,
-gbr,Department for Energy Security and Net Zero,min.resr,01,Resources,
-gbr,"Department for Science, Innovation and Technology",min.scnc,01,Science,
-gbr,"Department for Environment, Food and Rural Affairs",min.agrc,01,Agriculture,
-gbr,Department for Transport,min.infr,01,Infrastructure,
-gbr,Department for Work and Pensions,min.labr,01,Labor & Workforce,
-gbr,"Department for Housing, Communities and Local Government",min.hous,01,Housing,
-gbr,"Department for Culture, Media and Sport",min.cltr,01,Cultural Affairs,
-gbr,Northern Ireland Office,min.spec.int.01,01,Special,Interior
-gbr,Scotland Office,min.spec.int.02,01,Special,Interior
-gbr,Wales Office,min.spec.int.03,01,Special,Interior
-gbr,Cabinet Office,hog.ops,01,Head of Government Office,Operations
-gbr,Attorney General's Office,min.jst.exc.01,01,Justice,
-gbr,Lord President of the Council / Leader of the House of Commons,hog.lh.exc.01,01,Head of Government Office,Legislative Relations
-gbr,Lord Privy Seal / Leader of the House of Lords,hog.uh.exc.01,01,Head of Government Office,Legislative Relations
-can,Office of the Prime Minister of Canada,hog,01,Premiership,
-can,Minister of Foreign Affairs,min.forn,01,Foreign Relations,
-can,Minister of Finance and National Revenue,min.fisc,01,Fiscal Management,
-can,Minister of National Defence,min.dfns,01,Defense,
-can,Minister of Justice and Attorney General of Canada,min.jstc,01,Justice,
-can,Minister of Public Safety,min.gndm,01,Gendarme ,
-can,Minister of Health,min.hlth,01,Health & Society,
-can,Minister of Indigenous Services,min.spec.int.01,01,Special,Interior
-can,Minister of Crown-Indigenous Relations,min.spec.int.02,01,Special,Interior
-can,Minister of Industry,min.comc,01,Commercial & Industrial,
-can,Minister of Agriculture and Agri-Food,min.agrc,01,Agriculture,
-can,Minister of Transport and Internal Trade,min.infr,01,Infrastructure,
-can,Minister of Energy and Natural Resources,min.resr.eng,01,Resources,Energy
-can,Minister of Environment and Climate Change,min.resr.env,01,Resources,Environment & Climate
-can,Minister of Jobs and Families,min.labr,01,Labor & Workforce,
-can,"Minister of Immigration, Refugees and Citizenship",min.jstc.img,01,Justice,Migration
-can,Minister of Housing and Infrastructure,min.hous,01,Housing,
-can,Minister of Veterans Affairs,min.dfns.vet,01,Defense,Veterans Affairs
-can,Minister of Fisheries,min.agrc.pec,01,Agriculture,Fisheries
-can,Minister of International Trade,min.trde,01,Trade,
-can,Minister of Canadian Identity and Culture,min.cltr,01,Cultural Affairs,
-can,Minister of Women and Gender Equality,min.labr.soc,01,Labor & Workforce,Society
-can,Minister of Northern and Arctic Affairs,min.resr.int,01,Resources,Interior
-can,Minister of Artificial Intelligence and Digital Innovation,min.comc.dig,01,Commercial & Industrial,Digital
-can,Minister of Emergency Management and Community Resilience,min.gndm.ops,01,Gendarme ,Operations
-can,"Minister of Government Transformation, Public Works and Procurement",min.spec.ops,01,Special,Operations
-aus,Office of the Prime Minister of Australia,hog,01,Premiership,
-aus,Minister for Foreign Affairs (Cabinet),min.forn,01,Foreign Relations,
-aus,Treasurer (Cabinet),min.fisc,01,Fiscal Management,
-aus,Minister for Defence and Deputy Prime Minister (Cabinet),min.dfns,01,Defense,
-aus,Attorney-General (Cabinet),min.jstc,01,Justice,
-aus,Minister for Finance (Cabinet),min.fisc.ops,01,Fiscal Management,Operations
-aus,Minister for Health and Ageing (Cabinet),min.hlth,01,Health & Society,
-aus,Minister for Disability and NDIS (Cabinet),min.hlth.soc,01,Health & Society,Society
-aus,Minister for Home Affairs (Cabinet),min.gndm,01,Gendarme ,
-aus,Minister for Immigration and Citizenship (Cabinet),min.jstc.img,01,Justice,Migration
-aus,Minister for Cyber Security (Cabinet),min.gndm.dig,01,Defense,Digital
-aus,Minister for the Arts (Cabinet),min.cltr.kns,01,Cultural Affairs,Arts
-aus,Minister for Climate Change and Energy (Cabinet),min.resr.eng,01,Resources,Energy
-aus,Minister for Education (Cabinet),min.educ,01,Education,
-aus,"Minister for Infrastructure, Transport, Regional Development and Local Government (Cabinet)",min.infr,01,Infrastructure,
-aus,Minister for Communications and Sport (Cabinet),min.cltr.ath,01,Cultural Affairs,Athletics
-aus,Minister for Environment and Water (Cabinet),min.resr.env,01,Resources,Environment & Climate
-aus,Minister for Social Services (Cabinet),min.labr.psn,01,Labor & Workforce,Pensions
-aus,Minister for Employment and Workplace Relations (Cabinet),min.labr,01,Labor & Workforce,
-aus,Minister for Indigenous Australians (Cabinet),min.spec.int,01,Special,Interior
-aus,"Minister for Housing, Homelessness and Cities (Cabinet)",min.hous,01,Housing,
-aus,"Minister for Agriculture, Fisheries and Forestry (Cabinet)",min.agrc,01,Agriculture,
-aus,Minister for Industry and Innovation (Cabinet),min.comc,01,Commercial & Industrial,
-aus,Minister for Science (Cabinet),min.scnc,01,Science,
-aus,Minister for Trade and Tourism (Cabinet),min.trde,01,Trade,
-jpn,Office of the Prime Minister of Japan,hog,01,Premiership,
-jpn,Minister for Foreign Affairs,min.forn,01,Foreign Relations,
-jpn,Minister of Finance,min.fisc,01,Fiscal Management,
-jpn,Minister of Defense,min.dfns,01,Defense,
-jpn,Minister of Justice,min.jstc,01,Justice,
-jpn,Minister of Internal Affairs and Communications,min.spec.int.ops,01,Special,Interior
-jpn,"Minister of Economy, Trade and Industry",min.comc,01,Commercial & Industrial,
-jpn,"Minister of Health, Labour and Welfare",min.hlth,01,Health & Society,
-jpn,Minister of Education,min.educ,01,Education,
-jpn,"Minister of Agriculture, Forestry and Fisheries",min.agrc,01,Agriculture,
-jpn,"Minister of Land, Infrastructure, Transport and Tourism",min.infr,01,Infrastructure,
-jpn,Minister of the Environment,min.resr.env,01,Resources,Environment & Climate
-jpn,Minister for Reconstruction,min.spec.int.exi.01,01,Special,Interior
-jpn,Chief Cabinet Secretary,min.hog.ops,01,Head of Government Office,Operations
-jpn,Minister for Digital Transformation,min.comc.dig,01,Commercial & Industrial,Digital
-jpn,Minister of State for Economic and Fiscal Policy,min.hog.fisc.chm,01,Head of Government Office,Fiscal
-jpn,Minister of State for Policies Related to Children,hog.hlth.enf.chm,01,Head of Government Office,Health
-jpn,Minister of State for Economic Security,hog.dfns.eco.chm,01,Head of Government Office,Defense
-jpn,Minister of State for Disaster Management,hog.gndm.env.chm,01,Head of Government Office,Gendarme
-jpn,"Minister of State for Cool Japan Strategy, Intellectual Property, Science and Technology, Space Policy, AI Strategy",hog.cltr.eco.chm,01,Head of Government Office,Cultural Affairs
-jpn,"Minister of State for Okinawa and Northern Territories Affairs, Consumer Affairs, Regional Revitalization, Ainu Policies, World Expo 2025",hog.int.chm,01,Head of Government Office,Interior
-deu,Office of the Federal Chancellor,hog,01,Premiership,
-deu,Federal Foreign Office,min.forn,01,Foreign Relations,
-deu,Federal Ministry of the Interior and Sport,min.gndm,01,Gendarme ,
-deu,Federal Ministry of Justice,min.jstc,01,Justice,
-deu,Federal Ministry of Finance,min.fisc,01,Fiscal Management,
-deu,Federal Ministry for Economy and Climate Protection,min.comc,01,Commercial & Industrial,
-deu,Federal Ministry of Labor and Social Affairs,min.labr,01,Labor & Workforce,
-deu,Federal Ministry of Defense,min.dfns,01,Defense,
-deu,Federal Ministry of Food and Agriculture,min.agrc,01,Agriculture,
-deu,Federal Ministry of Health,min.hlth,01,Health & Society,
-deu,Federal Ministry of Transport,min.infr,01,Infrastructure,
-deu,"Federal Ministry of Environment, Climate Action, Nature Conservation and Nuclear Safety",min.resr,01,Resources,
-deu,"Federal Ministry of Education, Family Affairs, Senior Citizens, Women and Youth",min.labr.soc,01,Labor & Workforce,Society
-deu,"Federal Ministry of Housing, Urban Development and Building",min.hous,01,Housing,
-deu,Federal Ministry of Economic Cooperation and Development,min.forn.dev,01,Foreign Relations,Development
-deu,"Federal Ministry of Research, Technology and Space",min.scnc,01,Science,
-deu,Federal Ministry of Digital and State Modernisation,min.spec.int.dig,01,Special,Interior
-deu,Head of Federal Chancellery (Cabinet-Rank),min.hog.ops,01,Head of Government Office,Operations
-rus,Office of the President of the Russian Federation,hos,00,Presidency,
-rus,Office of the Prime Minister of the Russian Federation,hog,01,Premiership,
-rus,Ministry of Foreign Affairs,min.forn,01,Foreign Relations,
-rus,Ministry of Defense,min.dfns,01,Defense,
-rus,Ministry of Internal Affairs,min.gndm,01,Gendarme ,
-rus,Ministry of Justice,min.jstc,01,Justice,
-rus,"Ministry of Civil Defense, Emergencies and Disaster Relief",min.gndm.env,01,Gendarme ,Environment & Climate
-rus,Ministry of Finance,min.fisc,01,Fiscal Management,
-rus,Ministry of Economic Development,min.comc,01,Commercial & Industrial,
-rus,Ministry of Industry and Trade,min.trde,01,Trade,
-rus,Ministry of Energy,min.resr.eng,01,Resources,Energy
-rus,Ministry of Science and Higher Education,min.scnc,01,Science,
-rus,Ministry of Education,min.educ,01,Education,
-rus,Ministry of Healthcare,min.hlth,01,Health & Society,
-rus,Ministry of Labour and Social Protection,min.labr,01,Labor & Workforce,
-rus,Ministry of Agriculture,min.agrc,01,Agriculture,
-rus,Ministry of Natural Resources and Environment,min.resr,01,Resources,
-rus,Ministry of Transport,min.infr,01,Infrastructure,
-rus,"Ministry of Construction, Housing and Utilities",min.hous,01,Housing,
-rus,Ministry of Culture,min.cltr,01,Cultural Affairs,
-rus,Ministry of Sport,min.cltr.ath,01,Cultural Affairs,Athletics
-rus,"Ministry of Digital Development, Communications and Mass Media",min.jstc.dig,01,Justice,Digital
-rus,Ministry for the Development of the Russian Far East and Arctic,min.spec.int,01,Special,Interior
-esp,Office of the President of the Government of Spain,hog,01,Premiership,
-esp,"Ministry of Foreign Affairs, European Union and Cooperation",min.forn,01,Foreign Relations,
-esp,"Ministry of the Presidency, Justice and Parliamentary Relations",min.spec.ops,01,Special,Operations
-esp,Ministry of Defense,min.dfns,01,Defense,
-esp,Ministry of Home Affairs,min.gndm,01,Gendarme ,
-esp,Ministry of Treasury,min.fisc,01,Fiscal Management,
-esp,Ministry of Transport and Sustainable Mobility,min.infr,01,Infrastructure,
-esp,"Ministry of Education, Vocational Training and Sports",min.educ,01,Education,
-esp,Ministry of Work and Social Economy,min.labr,01,Labor & Workforce,
-esp,Ministry of Industry and Tourism,min.comc,01,Commercial & Industrial,
-esp,"Ministry of Agriculture, Fisheries and Food",min.agrc,01,Agriculture,
-esp,Ministry of Territorial Policy and Democratic Memory,min.spec.int,01,Special,Interior
-esp,Ministry of Ecological Transition and Demographic Challenge,min.resr.env,01,Resources,Environment & Climate
-esp,Ministry of Housing and Urban Agenda,min.hous,01,Housing,
-esp,Ministry of Culture,min.cltr,01,Cultural Affairs,
-esp,"Ministry of Economy, Trade and Business",min.trde,01,Trade,
-esp,Ministry of Health,min.hlth,01,Health & Society,
-esp,"Ministry of Social Rights, Consumer Affairs and 2030 Agenda",min.labr.soc.01,01,Labor & Workforce,Society
-esp,"Ministry of Science, Innovation and Universities",min.scnc,01,Science,
-esp,Ministry of Equality,min.labr.soc.02,01,Labor & Workforce,Society
-esp,"Ministry of Inclusion, Social Security and Migration",min.labr.psn,01,Labor & Workforce,Pensions
-esp,Ministry of Digital Transformation and Public Function,min.spec.dig,01,Special,Digital
-esp,Ministry of Youth and Children,min.hlth.enf,01,Health & Society,Children
-tur,Office of the President of the Republic of Turkiye,hos,00,Presidency,
-tur,Ministry of Justice,min.jstc,01,Justice,
-tur,Ministry of Trade,min.trde,01,Trade,
-tur,Ministry of Transport and Infrastructure,min.infr,01,Infrastructure,
-tur,Ministry of Family and Social Services,min.labr.soc,01,Labor & Workforce,Society
-tur,Ministry of Labor and Social Security,min.labr,01,Labor & Workforce,
-tur,"Ministry of Environment, Urbanization and Climate Change",min.hous.env,01,Housing,Environment & Climate
-tur,Ministry of Foreign Affairs,min.forn,01,Foreign Relations,
-tur,Ministry of Energy and Natural Resources,min.resr,01,Resources,
-tur,Ministry of Youth and Sports,min.cltr.ath,01,Cultural Affairs,Athletics
-tur,Ministry of Treasury and Finance,min.fisc,01,Fiscal Management,
-tur,Ministry of Interior,min.gndm,01,Gendarme ,
-tur,Ministry of Culture and Tourism,min.cltr,01,Cultural Affairs,
-tur,Ministry of National Education,min.educ,01,Education,
-tur,Ministry of National Defense,min.dfns ,01,Defense,
-tur,Ministry of Health,min.hlth,01,Health,
-tur,Ministry of Industry and Technology,min.comc,01,Commercial & Industrial,
-tur,Ministry of Agriculture and Forestry,min.agrc,01,Agriculture,
+usa,Department of State,min.forn,02-01,Foreign Relations,
+usa,Department of the Treasury,min.fisc,02-01,Fiscal Management,
+usa,Department of Defense,min.dfns,02-01,Defense,
+usa,Department of Justice,min.jstc,02-01,Justice,
+usa,Department of the Interior,min.resr,02-01,Resources,
+usa,Department of Agriculture,min.agrc,02-01,Agriculture,
+usa,Department of Commerce,min.comc,02-01,Commercial & Industrial,
+usa,Department of Labor,min.labr,02-01,Labor & Workforce,
+usa,Department of Health and Human Services,min.hlth,02-01,Health & Society,
+usa,Department of Housing and Urban Development,min.hous,02-01,Housing,
+usa,Department of Transportation,min.infr,02-01,Infrastructure,
+usa,Department of Energy,min.scnc,02-01,Science,
+usa,Department of Education,min.educ,02-01,Education,
+usa,Department of Veterans Affairs,min.dfns.vet,02-01,Defense,Veterans Affairs
+usa,Department of Homeland Security,min.gndm,02-01,Gendarme,
+usa,Environmental Protection Agency (Cabinet-Rank),min.resr.env,02-01,Resources,Environment
+usa,Office of Management and Budget (Cabinet-Rank),hos.fisc,00-02,Presidency,Fiscal
+usa,U.S. Trade Representative (Cabinet-Rank),hos.trde,00-02,Presidency,Trade
+usa,Directorate of National Intelligence (Cabinet-Rank),hos.intl,00-02,Presidency,Intelligence
+usa,Central Intelligence Agency (Cabinet-Rank),min.intl,02-01,Intelligence,
+usa,UN Ambassador (Cabinet-Rank),amb.igo.001,00-01,Ambassador,IGO
+usa,Office of the President of the United States,hos,00-01,Presidency,
+fra,Office of the Prime Minister of the Republic,hog,01-01,Premiership,
+fra,Office of the President of the Republic,hos,00-01,Presidency,
+fra,Ministry of Europe and Foreign Affairs,min.forn,02-01,Foreign Relations,
+fra,Ministry of the Interior,min.gndm,02-01,Gendarme,
+fra,Ministry of the Armed Forces,min.dfns,02-01,Defense,
+fra,Ministry of Economy and Finance,min.fisc,02-01,Fiscal Management,
+fra,Ministry of Justice,min.jstc,02-01,Justice,
+fra,Ministry of National Education,min.educ,02-01,Education,
+fra,Ministry of Culture,min.cltr,02-01,Cultural Affairs,
+fra,Ministry of Health,min.hlth,02-01,Health & Society,
+fra,Ministry of Labor,min.labr,02-01,Labor & Workforce,
+fra,Ministry of Ecological Transition and Energy,min.resr,02-01,Resources,
+fra,Ministry of Agriculture,min.agrc,02-01,Agriculture,
+fra,Ministry of Housing,min.hous,02-01,Housing,
+fra,Ministry of Transport,min.infr,02-01,Infrastructure,
+fra,Ministry of Higher Education and Research,min.educ.trt,02-01,Education,Tertiary
+fra,Ministry of Overseas Territories,min.spec.ext,02-01,Special,External
+fra,Ministry of Solidarity and Family,min.hlth.soc,02-01,Health & Society,Society
+fra,Ministry of Sports,min.cltr.ath,02-02,Cultural Affairs,Athletics
+gbr,Office of the Prime Minister of the United Kingdom of Great Britain and Northern Ireland,hog,01-01,Premiership,
+gbr,"Foreign, Commonwealth and Development Office",min.forn,02-01,Foreign Relations,
+gbr,Home Office,min.gndm,02-01,Gendarme ,
+gbr,HM Treasury,min.fisc,02-01,Fiscal Management,
+gbr,Ministry of Defence,min.dfns,02-01,Defense,
+gbr,Ministry of Justice,min.jstc,02-01,Justice,
+gbr,Department of Health and Social Care,min.hlth,02-01,Health & Society,
+gbr,Department for Education,min.educ,02-01,Education,
+gbr,Department for Business and Trade,min.comc,02-01,Commercial & Industrial,
+gbr,Department for Energy Security and Net Zero,min.resr,02-01,Resources,
+gbr,"Department for Science, Innovation and Technology",min.scnc,02-01,Science,
+gbr,"Department for Environment, Food and Rural Affairs",min.agrc,02-01,Agriculture,
+gbr,Department for Transport,min.infr,02-01,Infrastructure,
+gbr,Department for Work and Pensions,min.labr,02-01,Labor & Workforce,
+gbr,"Department for Housing, Communities and Local Government",min.hous,02-01,Housing,
+gbr,"Department for Culture, Media and Sport",min.cltr,02-01,Cultural Affairs,
+gbr,Northern Ireland Office,min.spec.int.01,02-01,Special,Interior
+gbr,Scotland Office,min.spec.int.02,02-01,Special,Interior
+gbr,Wales Office,min.spec.int.03,02-01,Special,Interior
+gbr,Cabinet Office,hog.ops,01-02,Head of Government Office,Operations
+gbr,Attorney General's Office,min.jst.exc.01,02-01,Justice,
+gbr,Lord President of the Council / Leader of the House of Commons,hog.lh.exc.01,01-02,Head of Government Office,Legislative Relations
+gbr,Lord Privy Seal / Leader of the House of Lords,hog.uh.exc.01,01-02,Head of Government Office,Legislative Relations
+can,Office of the Prime Minister of Canada,hog,01-01,Premiership,
+can,Minister of Foreign Affairs,min.forn,02-01,Foreign Relations,
+can,Minister of Finance and National Revenue,min.fisc,02-01,Fiscal Management,
+can,Minister of National Defence,min.dfns,02-01,Defense,
+can,Minister of Justice and Attorney General of Canada,min.jstc,02-01,Justice,
+can,Minister of Public Safety,min.gndm,02-01,Gendarme ,
+can,Minister of Health,min.hlth,02-01,Health & Society,
+can,Minister of Indigenous Services,min.spec.int.01,02-01,Special,Interior
+can,Minister of Crown-Indigenous Relations,min.spec.int.02,02-01,Special,Interior
+can,Minister of Industry,min.comc,02-01,Commercial & Industrial,
+can,Minister of Agriculture and Agri-Food,min.agrc,02-01,Agriculture,
+can,Minister of Transport and Internal Trade,min.infr,02-01,Infrastructure,
+can,Minister of Energy and Natural Resources,min.resr.eng,02-01,Resources,Energy
+can,Minister of Environment and Climate Change,min.resr.env,02-01,Resources,Environment & Climate
+can,Minister of Jobs and Families,min.labr,02-01,Labor & Workforce,
+can,"Minister of Immigration, Refugees and Citizenship",min.jstc.img,02-01,Justice,Migration
+can,Minister of Housing and Infrastructure,min.hous,02-01,Housing,
+can,Minister of Veterans Affairs,min.dfns.vet,02-01,Defense,Veterans Affairs
+can,Minister of Fisheries,min.agrc.pec,02-01,Agriculture,Fisheries
+can,Minister of International Trade,min.trde,02-01,Trade,
+can,Minister of Canadian Identity and Culture,min.cltr,02-01,Cultural Affairs,
+can,Minister of Women and Gender Equality,min.labr.soc,02-01,Labor & Workforce,Society
+can,Minister of Northern and Arctic Affairs,min.resr.int,02-01,Resources,Interior
+can,Minister of Artificial Intelligence and Digital Innovation,min.comc.dig,02-01,Commercial & Industrial,Digital
+can,Minister of Emergency Management and Community Resilience,min.gndm.ops,02-01,Gendarme ,Operations
+can,"Minister of Government Transformation, Public Works and Procurement",min.spec.ops,02-01,Special,Operations
+aus,Office of the Prime Minister of Australia,hog,01-01,Premiership,
+aus,Minister for Foreign Affairs (Cabinet),min.forn,02-01,Foreign Relations,
+aus,Treasurer (Cabinet),min.fisc,02-01,Fiscal Management,
+aus,Minister for Defence and Deputy Prime Minister (Cabinet),min.dfns,02-01,Defense,
+aus,Attorney-General (Cabinet),min.jstc,02-01,Justice,
+aus,Minister for Finance (Cabinet),min.fisc.ops,02-02,Fiscal Management,Operations
+aus,Minister for Health and Ageing (Cabinet),min.hlth,02-01,Health & Society,
+aus,Minister for Disability and NDIS (Cabinet),min.hlth.soc,02-01,Health & Society,Society
+aus,Minister for Home Affairs (Cabinet),min.gndm,02-01,Gendarme ,
+aus,Minister for Immigration and Citizenship (Cabinet),min.jstc.img,02-01,Justice,Migration
+aus,Minister for Cyber Security (Cabinet),min.gndm.dig,02-01,Defense,Digital
+aus,Minister for the Arts (Cabinet),min.cltr.kns,02-01,Cultural Affairs,Arts
+aus,Minister for Climate Change and Energy (Cabinet),min.resr.eng,02-01,Resources,Energy
+aus,Minister for Education (Cabinet),min.educ,02-01,Education,
+aus,"Minister for Infrastructure, Transport, Regional Development and Local Government (Cabinet)",min.infr,02-01,Infrastructure,
+aus,Minister for Communications,min.infr.cms,02-01,Communications,
+aus,Minister for Environment and Water (Cabinet),min.resr.env,02-01,Resources,Environment & Climate
+aus,Minister for Social Services (Cabinet),min.labr.psn,02-01,Labor & Workforce,Pensions
+aus,Minister for Employment and Workplace Relations (Cabinet),min.labr,02-01,Labor & Workforce,
+aus,Minister for Indigenous Australians (Cabinet),min.spec.int,02-01,Special,Interior
+aus,"Minister for Housing, Homelessness and Cities (Cabinet)",min.hous,02-01,Housing,
+aus,"Minister for Agriculture, Fisheries and Forestry (Cabinet)",min.agrc,02-01,Agriculture,
+aus,Minister for Industry and Innovation (Cabinet),min.comc,02-01,Commercial & Industrial,
+aus,Minister for Science (Cabinet),min.scnc,02-02,Science,
+aus,Minister for Trade and Tourism (Cabinet),min.trde,02-01,Trade,
+jpn,Office of the Prime Minister of Japan,hog,01-01,Premiership,
+jpn,Minister for Foreign Affairs,min.forn,02-01,Foreign Relations,
+jpn,Minister of Finance,min.fisc,02-01,Fiscal Management,
+jpn,Minister of Defense,min.dfns,02-01,Defense,
+jpn,Minister of Justice,min.jstc,02-01,Justice,
+jpn,Minister of Internal Affairs and Communications,min.spec.int.ops,02-01,Special,Interior
+jpn,"Minister of Economy, Trade and Industry",min.comc,02-01,Commercial & Industrial,
+jpn,"Minister of Health, Labour and Welfare",min.hlth,02-01,Health & Society,
+jpn,Minister of Education,min.educ,02-01,Education,
+jpn,"Minister of Agriculture, Forestry and Fisheries",min.agrc,02-01,Agriculture,
+jpn,"Minister of Land, Infrastructure, Transport and Tourism",min.infr,02-01,Infrastructure,
+jpn,Minister of the Environment,min.resr.env,02-01,Resources,Environment & Climate
+jpn,Minister for Reconstruction,min.spec.int.exi.01,02-01,Special,Interior
+jpn,Chief Cabinet Secretary,min.hog.ops,02-01,Head of Government Office,Operations
+jpn,Minister for Digital Transformation,min.comc.dig,02-01,Commercial & Industrial,Digital
+jpn,Minister of State for Economic and Fiscal Policy,min.hog.fisc.chm,02-01,Head of Government Office,Fiscal
+jpn,Minister of State for Policies Related to Children,hog.hlth.enf.chm,01-02,Head of Government Office,Health
+jpn,Minister of State for Economic Security,hog.dfns.eco.chm,01-02,Head of Government Office,Defense
+jpn,Minister of State for Disaster Management,hog.gndm.env.chm,01-02,Head of Government Office,Gendarme
+jpn,"Minister of State for Cool Japan Strategy, Intellectual Property, Science and Technology, Space Policy, AI Strategy",hog.cltr.eco.chm,01-02,Head of Government Office,Cultural Affairs
+jpn,"Minister of State for Okinawa and Northern Territories Affairs, Consumer Affairs, Regional Revitalization, Ainu Policies, World Expo 2025",hog.int.chm,01-02,Head of Government Office,Interior
+deu,Office of the Federal Chancellor,hog,01-01,Premiership,
+deu,Federal Foreign Office,min.forn,02-01,Foreign Relations,
+deu,Federal Ministry of the Interior and Sport,min.gndm,02-01,Gendarme ,
+deu,Federal Ministry of Justice,min.jstc,02-01,Justice,
+deu,Federal Ministry of Finance,min.fisc,02-01,Fiscal Management,
+deu,Federal Ministry for Economy and Climate Protection,min.comc,02-01,Commercial & Industrial,
+deu,Federal Ministry of Labor and Social Affairs,min.labr,02-01,Labor & Workforce,
+deu,Federal Ministry of Defense,min.dfns,02-01,Defense,
+deu,Federal Ministry of Food and Agriculture,min.agrc,02-01,Agriculture,
+deu,Federal Ministry of Health,min.hlth,02-01,Health & Society,
+deu,Federal Ministry of Transport,min.infr,02-01,Infrastructure,
+deu,"Federal Ministry of Environment, Climate Action, Nature Conservation and Nuclear Safety",min.resr,02-01,Resources,
+deu,"Federal Ministry of Education, Family Affairs, Senior Citizens, Women and Youth",min.labr.soc,02-01,Labor & Workforce,Society
+deu,"Federal Ministry of Housing, Urban Development and Building",min.hous,02-01,Housing,
+deu,Federal Ministry of Economic Cooperation and Development,min.forn.dev,02-01,Foreign Relations,Development
+deu,"Federal Ministry of Research, Technology and Space",min.scnc,02-01,Science,
+deu,Federal Ministry of Digital and State Modernisation,min.spec.int.dig,02-01,Special,Interior
+deu,Head of Federal Chancellery (Cabinet-Rank),min.hog.ops,02-01,Head of Government Office,Operations
+rus,Office of the President of the Russian Federation,hos,00-01,Presidency,
+rus,Office of the Prime Minister of the Russian Federation,hog,01-01,Premiership,
+rus,Ministry of Foreign Affairs,min.forn,02-01,Foreign Relations,
+rus,Ministry of Defense,min.dfns,02-01,Defense,
+rus,Ministry of Internal Affairs,min.gndm,02-01,Gendarme,
+rus,Ministry of Justice,min.jstc,02-01,Justice,
+rus,"Ministry of Civil Defense, Emergencies and Disaster Relief",min.gndm.env,02-01,Gendarme ,Environment & Climate
+rus,Ministry of Finance,min.fisc,02-01,Fiscal Management,
+rus,Ministry of Economic Development,min.comc,02-01,Commercial & Industrial,
+rus,Ministry of Industry and Trade,min.trde,02-01,Trade,
+rus,Ministry of Energy,min.resr.eng,02-01,Resources,Energy
+rus,Ministry of Science and Higher Education,min.scnc,02-01,Science,
+rus,Ministry of Education,min.educ,02-01,Education,
+rus,Ministry of Healthcare,min.hlth,02-01,Health & Society,
+rus,Ministry of Labour and Social Protection,min.labr,02-01,Labor & Workforce,
+rus,Ministry of Agriculture,min.agrc,02-01,Agriculture,
+rus,Ministry of Natural Resources and Environment,min.resr,02-01,Resources,
+rus,Ministry of Transport,min.infr,02-01,Infrastructure,
+rus,"Ministry of Construction, Housing and Utilities",min.hous,02-01,Housing,
+rus,Ministry of Culture,min.cltr,02-01,Cultural Affairs,
+rus,Ministry of Sport,min.cltr.ath,02-01,Cultural Affairs,Athletics
+rus,"Ministry of Digital Development, Communications and Mass Media",min.jstc.dig,02-01,Justice,Digital
+rus,Ministry for the Development of the Russian Far East and Arctic,min.spec.int,02-01,Special,Interior
+esp,Office of the President of the Government of Spain,hog,01-01,Premiership,
+esp,"Ministry of Foreign Affairs, European Union and Cooperation",min.forn,02-01,Foreign Relations,
+esp,"Ministry of the Presidency, Justice and Parliamentary Relations",min.spec.ops,02-01,Special,Operations
+esp,Ministry of Defense,min.dfns,02-01,Defense,
+esp,Ministry of Home Affairs,min.gndm,02-01,Gendarme ,
+esp,Ministry of Treasury,min.fisc,02-01,Fiscal Management,
+esp,Ministry of Transport and Sustainable Mobility,min.infr,02-01,Infrastructure,
+esp,"Ministry of Education, Vocational Training and Sports",min.educ,02-01,Education,
+esp,Ministry of Work and Social Economy,min.labr,02-01,Labor & Workforce,
+esp,Ministry of Industry and Tourism,min.comc,02-01,Commercial & Industrial,
+esp,"Ministry of Agriculture, Fisheries and Food",min.agrc,02-01,Agriculture,
+esp,Ministry of Territorial Policy and Democratic Memory,min.spec.int,02-01,Special,Interior
+esp,Ministry of Ecological Transition and Demographic Challenge,min.resr.env,02-01,Resources,Environment & Climate
+esp,Ministry of Housing and Urban Agenda,min.hous,02-01,Housing,
+esp,Ministry of Culture,min.cltr,02-01,Cultural Affairs,
+esp,"Ministry of Economy, Trade and Business",min.trde,02-01,Trade,
+esp,Ministry of Health,min.hlth,02-01,Health & Society,
+esp,"Ministry of Social Rights, Consumer Affairs and 2030 Agenda",min.labr.soc.01,02-02,Labor & Workforce,Society
+esp,"Ministry of Science, Innovation and Universities",min.scnc,02-01,Science,
+esp,Ministry of Equality,min.labr.soc.02,02-01,Labor & Workforce,Society
+esp,"Ministry of Inclusion, Social Security and Migration",min.labr.psn,02-01,Labor & Workforce,Pensions
+esp,Ministry of Digital Transformation and Public Function,min.spec.dig,02-01,Special,Digital
+esp,Ministry of Youth and Children,min.hlth.enf,02-01,Health & Society,Children
+tur,Office of the President of the Republic of Turkiye,hos,00-01,Presidency,
+tur,Ministry of Justice,min.jstc,02-01,Justice,
+tur,Ministry of Trade,min.trde,02-01,Trade,
+tur,Ministry of Transport and Infrastructure,min.infr,02-01,Infrastructure,
+tur,Ministry of Family and Social Services,min.labr.soc,02-01,Labor & Workforce,Society
+tur,Ministry of Labor and Social Security,min.labr,02-01,Labor & Workforce,
+tur,"Ministry of Environment, Urbanization and Climate Change",min.hous.env,02-01,Housing,Environment & Climate
+tur,Ministry of Foreign Affairs,min.forn,02-01,Foreign Relations,
+tur,Ministry of Energy and Natural Resources,min.resr,02-01,Resources,
+tur,Ministry of Youth and Sports,min.cltr.ath,02-01,Cultural Affairs,Athletics
+tur,Ministry of Treasury and Finance,min.fisc,02-01,Fiscal Management,
+tur,Ministry of Interior,min.gndm,02-01,Gendarme ,
+tur,Ministry of Culture and Tourism,min.cltr,02-01,Cultural Affairs,
+tur,Ministry of National Education,min.educ,02-01,Education,
+tur,Ministry of National Defense,min.dfns ,02-01,Defense,
+tur,Ministry of Health,min.hlth,02-01,Health,
+tur,Ministry of Industry and Technology,min.comc,02-01,Commercial & Industrial,
+tur,Ministry of Agriculture and Forestry,min.agrc,02-01,Agriculture,
+rus,Press Secretary of the President of the Russian Federation,hos.spx,00-03,Presidency,Senior Office
+nga,Christian Association of Nigeria,org.rlg.xtn.mmb.01,31-01,Civil Society Leadership,Religious
+gbr,House of Lords,uh,03-01,Upper House,
+usa,New York State Assembly,sbs.nys.lh,14-01,Subnational,Legislature
+aus,eSafety Commission,min.infr.cms.psc,02-03,Infrastructure,Communications
+gbr,Office of the Mayor of London,cpl,20-01,Subnational,Executive
+usa,xAI,usa.com.pvt.45103010.01,40-01,Corporation,Private
+ukr,National Security and Defense Council of Ukraine,hos.dfns.cme,00-02,Presidency,Defense
+vat,Episcopate of Kontagora,sbs.kdn.knt,10-01,Religious,Regional
+deu,Dresden Higher Regional Court,sbs.sxn.jstc.grct.vrbn.02,13-01,Judicial,Judicial Criminal
+aus,Australian House of Representatives,lh,03-01,Legislature,National
+aus,New South Wales Legislative Council,sbs.nsw.lh,14-01,Subnational,Legislature
+ita,Senate of the Republic,uh,03-01,Upper House,
+ita,Chamber of Deputies,lh,03-01,Lower House,
+bra,Supreme Federal Court,jstc.grtc,04-01,Supreme Court,
+bra,Office of the President of the Federative Republic of Brazil,hos,00-01,Presidency,
+igo,European Commission,.002.exc,51-01,Chief Executive,
+gnb,Office of the President of Guinea Bissau,hos,00-01,Presidency
+gnb,Military Office of the Presidency,hos.gndm,00-05,Presidency,Security Services,
+usa,Criminal Justice Coordinating Council of Georgia,sbs.geo.jstc.vrbn.cmte,13-03,Subnational,Judicial Criminal
+usa,Superior Court of Fulton County,sbs.geo.jstc.grtc.vrbn.60,13-01,Subnational, Judicial Criminal
+chn,Hong Kong Fire Services Department,sbs.hkg.ntfd.incd,25-01,Municipal,Emergency Services
+fra,Court of Cassation,jstc.grtc.vrbn,04-01,Judicial,Supreme Review

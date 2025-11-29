@@ -82,14 +82,14 @@ can.1964.001,can.min.hous.exc.01,13-05-25,,Carney I
 can.1979.002,can.min.dfns.vet.exc.01,13-05-25,,Carney I
 can.1960.002,can.min.agrc.pec.exc.01,14-03-25,,Carney I
 can.1984.002,can.min.trde.exc.01,13-05-25,,Carney I
-can.1970.001,can.min.cltr.exc.01,14-03-25,,Carney I
+can.1970.002,can.min.cltr.exc.01,14-03-25,,Carney I
 can.1980.002,can.min.labr.soc.exc.01,13-05-25,,Carney I
 can.1983.001,can.min.resr.int.exc.01,13-05-25,,Carney I
 can.1955.001,can.min.gndm.ops.exc.01,13-05-25,,Carney I
 can.1988.001,can.min.spec.ops.exc.01,13-05-25,,Carney I
 aus.1963.001,aus.hog,23-05-22,,
 aus.1978.001,aus.min.forn.exc.01,23-05-22,,Albanese III
-aus.1978.001,aus.min.fisc.exc.01,23-05-22,,Albanese III
+aus.1978.003,aus.min.fisc.exc.01,23-05-22,,Albanese III
 aus.1967.001,aus.min.dfns.exc.01,23-05-22,,Albanese III
 aus.1971.001,aus.min.jstc.exc.01,13-05-25,,Albanese III
 aus.1970.001,aus.min.fisc.ops.exc.01,20-01-25,,Albanese III
@@ -102,16 +102,16 @@ aus.1969.001,aus.min.cltr.kns.exc.01,01-06-22,,Albanese III
 aus.1973.001,aus.min.resr.eng.exc.01,01-06-22,,Albanese III
 aus.1972.001,aus.min.educ.exc.01,01-06-22,,Albanese III
 aus.1966.001,aus.min.infr.exc.01,01-06-22,,Albanese III
-aus.1985.001,aus.min.cltr.ath.exc.01,13-05-25,,Albanese III
-aus.1973.001,aus.min.resr.env.exc.01,13-05-25,,Albanese III
+aus.1985.001,aus.min.infr.cms.exc.01,13-05-25,,Albanese III
+aus.1973.002,aus.min.resr.env.exc.01,13-05-25,,Albanese III
 aus.1969.002,aus.min.labr.psn.exc.01,13-05-25,,Albanese III
 aus.1978.002,aus.min.labr.exc.01,13-05-25,,Albanese III
 aus.1970.003,aus.min.spec.int.exc.01,29-07-25,,Albanese III
 aus.1980.001,aus.min.hous.exc.01,29-07-24,,Albanese III
 aus.1971.002,aus.min.agrc.exc.01,29-07-24,,Albanese III
-aus.1973.002,aus.min.comc.exc.01,13-05-25,,Albanese III
+aus.1973.003,aus.min.comc.exc.01,13-05-25,,Albanese III
 aus.1954.001,aus.min.trde.exc.01,01-06-22,,Albanese III
-jpn.1961.002,jpn.hog,21-10-25,,
+jpn.1961.003,jpn.hog,21-10-25,,
 jpn.1955.001,jpn.min.forn.exc.01,21-10-25,,Takaichi I
 jpn.1959.001,jpn.min.fisc.exc.01,21-10-25,,Takaichi I
 jpn.1981.001,jpn.min.dfns.exc.01,21-10-25,,Takaichi I
@@ -129,7 +129,7 @@ jpn.1962.001,jpn.min.comc.dig.exc.01,21-10-25,,Takaichi I
 jpn.1965.002,jpn.min.hog.fisc.chm.exc.01,21-10-25,,Takaichi I
 jpn.1964.002,jpn.hog.hlth.enf.chm.exc.01,21-10-25,,Takaichi I
 jpn.1982.002,jpn.hog.dfns.eco.chm.exc.01,21-10-25,,Takaichi I
-jpn.1965.001,jpn.hog.gndm.env.chm.exc.01,21-10-25,,Takaichi I
+jpn.1965.003,jpn.hog.gndm.env.chm.exc.01,21-10-25,,Takaichi I
 jpn.1969.002,jpn.hog.cltr.eco.chm.exc.01,21-10-25,,Takaichi I
 jpn.1976.001,jpn.hog.int.chm.exc.01,21-10-25,,Takaichi I
 deu.1955.001,deu.hog,06-05-25,,
@@ -165,7 +165,7 @@ rus.1978.001,rus.min.scnc.exc.01,21-01-20,,Putin VI
 rus.1974.001,rus.min.educ.exc.01,21-01-20,,Putin VI
 rus.1967.001,rus.min.hlth.exc.01,21-01-20,,Putin VI
 rus.1980.001,rus.min.labr.exc.01,21-01-20,,Putin VI
-rus.1979.001,rus.min.agrc.exc.01,14-05-25,,Putin VI
+rus.1979.004,rus.min.agrc.exc.01,14-05-25,,Putin VI
 rus.1981.001,rus.min.resr.exc.01,10-11-20,,Putin VI
 rus.1979.002,rus.min.infr.exc.01,08-07-25,,Putin VI
 rus.1962.001,rus.min.hous.exc.01,10-11-20,,Putin VI
@@ -194,7 +194,7 @@ esp.1983.001,esp.min.labr.soc.01.exc.01,21-11-23,,Sanchez V
 esp.1980.001,esp.min.scnc.exc.01,21-11-23,,Sanchez V
 esp.1960.001,esp.min.labr.soc.02.exc.01,21-11-23,,Sanchez V
 esp.1975.001,esp.min.labr.psn.exc.01,21-11-23,,Sanchez V
-esp.1971.001,esp.min.spec.dig.exc.01,06-09-24,,Sanchez V
+esp.1971.002,esp.min.spec.dig.exc.01,06-09-24,,Sanchez V
 esp.1973.002,esp.min.hlth.enf.exc.01,21-11-23,,Sanchez V
 tur.1954.001,tur.hos,28-08-14,,
 tur.1971.001,tur.min.jstc.exc.01,04-06-23,,Erdogan IV
@@ -214,3 +214,22 @@ tur.1954.002,tur.min.dfns .exc.01,04-06-23,,Erdogan IV
 tur.1966.004,tur.min.hlth.exc.01,02-07-24,,Erdogan IV
 tur.1984.001,tur.min.comc.exc.01,04-06-23,,Erdogan IV
 tur.1969.001,tur.min.agrc.exc.01,04-06-23,,Erdogan IV
+rus.1967.002,rus.hos.spx,22-05-12,,Putin VI
+nga.1963.001,nga.org.rlg.xtn.mmb.01.exc.01,15-07-22,,Civil Society
+gbr.1949.001,gbr.uh.224,11-10-19,,Upper House
+usa.1991.001,usa.sbs.nys.lh.086,01-01-21,,Subnational Legislature
+aus.1968.001,aus.min.infr.cms.psc.exc.01,15-01-17,,Albanese III
+gbr.1970.002,gbr.cpl.exc.01,09-05-2016,,,
+ukr.1982.001,ukr.hos.dfns.cme.exc.01,18-07-2025,,Zelenskyy II
+nga.1970.001,vat.sbs.kdn.knt.exc.01,02-04-2020,,Francis
+fra.1955.001,fra.hos,16-05-2007,15-05-2012,,
+aus.1973.004,aus.sbs.nsw.lh.040,20-04-2023,,,
+bra.1968.001,bra.jstc.grtc.exc.02,22-03-2017,,Temer I
+bra.1955.001,bra.hos,01-01-2019,01-01-2023,,
+deu.1958.001,igo.002.exc.exc.01,01-12-2019,,,
+gnb.1972.001,gnb.hos,27-02-2020,26-11-2025,,
+gnb.1960.001,gnb.hos,27-11-2025,,,
+gnb.1960.002,gnb.hos.gndm.exc.01,24-02-2021,,,
+usa.1956.002,usa.sbs.geo.jstc.vrbn.cmte.exc.01,15-01-2018,,,
+usa.1988.001,usa.sbs.geo.jstc.grtc.vrbn.60.mgs.12,01-02-2023,,,
+chn.1968.001,chn.sbs.hkg.ntfd.incd.exc.01,26-03-2022,,,
