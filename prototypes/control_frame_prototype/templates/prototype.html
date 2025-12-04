@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Control Frame Prototype</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <!-- LEFT PANEL: INPUT FORM -->
+        <div class="form-panel">
+            <h2>Event Input</h2>
+            <form method="POST">
+                <label>Event ID:</label>
+                <input type="text" name="event_id" value="{{ cf.event_id }}">
+                
+                <label>Event Timestamp:</label>
+                <input type="text" name="event_timestamp" value="{{ cf.event_timestamp }}" placeholder="YYYYMMDD HHMM UTC">
+                
+                <label>REC Timestamp:</label>
+                <input type="text" name="rec_timestamp" value="{{ cf.rec_timestamp }}" placeholder="YYYYMMDD HHMM UTC">
+                
+                <label>Event Actor:</label>
+                <input type="text" name="event_actor" value="{{ cf.event_actor }}" placeholder="rus.hos.spx">
+                
+                <label>Event Type:</label>
+                <input type="text" name="event_type" value="{{ cf.event_type }}" placeholder="Statement">
+                
+                <label>Event Code:</label>
+                <input type="text" name="event_code" value="{{ cf.event_code }}" placeholder="[e-st]">
+                
+                <label>CIE Description:</label>
+                <textarea name="cie_description" rows="6">{{ cf.cie_description }}</textarea>
+                
+                <label>Rel/Cred:</label>
+                <input type="text" name="rel_cred" value="{{ cf.rel_cred }}" placeholder="1-A">
+                
+                <label>Identified Subjects:</label>
+                <textarea name="identified_subjects" rows="3">{{ cf.identified_subjects }}</textarea>
+                
+                <label>Identified Objects:</label>
+                <textarea name="identified_objects" rows="3">{{ cf.identified_objects }}</textarea>
+                
+                <h3>Linked Scenarios</h3>
+                <label>Last hr:</label>
+                <input type="text" name="scenario_1hr" value="{{ cf.scenario_1hr }}">
+                
+                <label>Last 6 hr:</label>
+                <input type="text" name="scenario_6hr" value="{{ cf.scenario_6hr }}">
+                
+                <label>Last 12 hr:</label>
+                <input type="text" name="scenario_12hr" value="{{ cf.scenario_12hr }}">
+                
+                <label>Last 24 hr:</label>
+                <input type="text" name="scenario_24hr" value="{{ cf.scenario_24hr }}">
+                
+                <label>Prev:</label>
+                <input type="text" name="scenario_prev" value="{{ cf.scenario_prev }}">
+                
+                <button type="submit">Update Display</button>
+            </form>
+        </div>
+
+        <!-- RIGHT PANEL: DISPLAY -->
+        <div class="display-panel">
+            <h2>Event Display</h2>
+            {% if cf %}
+            <div class="event-card">
+                <!-- Top Row: Event ID + Timestamps -->
+                    <div class="event-header">
+                        <div class="header-cell">
+                            <span class="header-label">Event ID:</span>
+                            <span class="header-value">{{ cf.event_id }}</span>
+                        </div>
+                        <div class="header-cell">
+                            <span class="header-label">Occurred:</span>
+                            <span class="header-value">{{ cf.event_timestamp }}</span>
+                        </div>
+                    </div>
+
+                <!-- Main Content Grid -->
+                <div class="event-content">
+                    <!-- Left Column -->
+                        <div class="left-column">
+                            <div class="field">
+                                <div class="label">Event Actor</div>
+                                <div class="value">{{ cf.event_actor }}</div>
+                            </div>
+                            
+                            <div class="field code-field">
+                                <div class="label">Code</div>
+                                <div class="value">{{ cf.event_code }}</div>
+                            </div>
+                            
+                            <div class="field cie-field">
+                                <div class="label">CIE Description</div>
+                                <div class="value">
+                                    <pre>{{ cf.cie_description }}</pre>
+                                </div>
+                            </div>
+                        </div>
+
+                    <!-- Right Column -->
+                    <div class="right-column">
+                        <div class="metadata-grid">
+                            <div class="meta-label">REC</div>
+                            <div class="meta-value">{{ cf.rec_timestamp }}</div>
+                            
+                            <div class="meta-label">Type</div>
+                            <div class="meta-value">{{ cf.event_type }}</div>
+                            
+                            <div class="meta-label">Rel/Cred</div>
+                            <div class="meta-value">{{ cf.rel_cred }}</div>
+                        </div>
+
+                        <div class="scenarios">
+                            <div class="scenarios-header">Linked Scenarios</div>
+                            <div class="scenario-row">
+                                <div class="scenario-label">Last hr</div>
+                                <div class="scenario-count">{{ cf.scenario_1hr }}</div>
+                            </div>
+                            <div class="scenario-row">
+                                <div class="scenario-label">Last 6 hr</div>
+                                <div class="scenario-count">{{ cf.scenario_6hr }}</div>
+                            </div>
+                            <div class="scenario-row">
+                                <div class="scenario-label">Last 12 hr</div>
+                                <div class="scenario-count">{{ cf.scenario_12hr }}</div>
+                            </div>
+                            <div class="scenario-row">
+                                <div class="scenario-label">Last 24 hr</div>
+                                <div class="scenario-count">{{ cf.scenario_24hr }}</div>
+                            </div>
+                            <div class="scenario-row">
+                                <div class="scenario-label">Prev</div>
+                                <div class="scenario-count">{{ cf.scenario_prev }}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bottom Row: Subjects and Objects -->
+                <div class="event-footer">
+                    <div class="subjects">
+                        <div class="label">Identified Subjects</div>
+                        <div class="value"><pre>{{ cf.identified_subjects }}</pre></div>
+                    </div>
+                    <div class="objects">
+                        <div class="label">Identified Objects</div>
+                        <div class="value"><pre>{{ cf.identified_objects }}</pre></div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+<script>
+// Replace hyphens at start of lines with hexagons
+document.addEventListener('DOMContentLoaded', function() {
+    const cieDesc = document.querySelector('.cie-field pre');
+    if (cieDesc && cieDesc.textContent) {
+        cieDesc.innerHTML = cieDesc.textContent.replace(/^(\s*)-\s/gm, '$1⬢ ');
+    }
+});
+</script>
+</body>
+</html>
