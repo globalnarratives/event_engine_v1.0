@@ -1,0 +1,118 @@
+action_code,action_type,action_category,definition
+bn,Bans,Legal-Legislative,"The act of an official state agency refusing entry to a specific individual, group or object"
+co,Completes,Legal-Legislative,The act of finishing a specified legal or bureaucratic process
+en,Enacts,Legal-Legislative,The act of a sovereign putting in place a law or measure alone
+nl,Nullifies,Legal-Legislative,"The act of a governmental institutional canceling or otherwise dismantling a specific edict, law, or planned process"
+nt,Introduces,Legal-Legislative,The act of introducing a piece of legislation in a parliamentary chamber
+sb,Submits,Legal-Legislative,The act of submission of a formal legal request for processing
+se,Issues,Legal-Legislative,The act of an executive agency issuing enforceable rules pursuant to its authority
+ts,Testifies,Legal-Legislative,"The act of providing testimony to governmental entities such as parliamentary committees, whether in written or spoken form (not testimony in a trial)"
+vd,Votes Down,Legal-Legislative,The act of a parliament or governmental entity rejecting a proposed piece of legislation or other parliamentary act
+vo,Votes In,Legal-Legislative,The act of a parliament or governmental entity approving a proposed piece of legislation
+vu,Approves,Legal-Legislative,The act of an executive or non-legislative governmental entity approving a formal act or document
+wd,Withdraws,Legal-Legislative,The act of legal withdrawal from a process or status
+ad,Admits,Legal-Juridical,The act of accepting legal claims made against oneself
+ar,Arrests,Legal-Juridical,The act of legal arrest with specified charges performed by agents of the state
+dn,Detains,Legal-Juridical,The act of legal arrest without prior to or without charges having been brought
+xd,Extradites,Legal-Juridical,The act of legal transfer of an arrested person to another jurisdiction 
+fi,Fines,Legal-Juridical,The act of levying a monetary charge for legal infraction on an individual or institution
+id,Indicts,Legal-Juridical,"The act of an agent or institution of the state bringing charges of any scope against variety against an identified target, including cause for arrest"
+jl,Jails,Legal-Juridical,The act of formal incarceration of an individual with respect to specified charges
+ki,Kills,Legal-Juridical,The act of the killing of an individual or individuals by the domestic security forces of the state
+nv,Investigates,Legal-Juridical,"Any act related to the examination of allegedly illegal actions, carried out by agents of the state, at any scale of jurisdiction"
+op,Opens,Legal-Juridical,The act of a specified agency of the court system of a state commencing work on a specified case or other designated process
+pl,Appeals,Legal-Juridical,The act of the resubmitting of an identified court case to a higher court for consideration after a ruling by a lower court
+re,Releases,Legal-Juridical,The act of freeing someone from incarceration
+rf,Refuses,Legal-Juridical,The legal rejection of a request or demand filed formally
+rg,Interrogates,Legal-Juridical,The act of questioning of an individual or institutions by an agent of state security or legal agencies under official capacity
+rl,Rules,Legal-Juridical,The act of a state agency rendering a decision on a case that was before it
+rt,Disrupts,Legal-Juridical,The act of disruption of a public gathering by the domestic security apparatus of the state
+sc,Sentences,Legal-Juridical,The act of a court or other domestic security agency of a state handing down a sentence to be carried out against an arrested individual
+sz,Seizes,Legal-Juridical,The seizure of physical materials by the domestic security forces of a state in connection with formalized legal processes
+pm,Permits,Legal-Juridical,The act of allowing an individual or entity to pursue a specific identified course of action
+su,Sues,Legal-Juridical,The act of filing a lawsuit
+od,Orders,Legal-Executive,The act of making an executive order
+ag,Agrees,Political-Diplomatic,"The act of formal accession to a specified negotiating position, argument or request"
+mt,Meets,Political-Diplomatic,The act of meeting between any two or more agents of two different institutions for any formal purposes; assumes speaking takes place as well
+rv,Receives,Political-Diplomatic,The act of coming into formal possession of an identified missive or communication 
+rc,Recognizes,Political-Diplomatic,"The act of granting formal status under law to a specific person, institution or act"
+sn,Sanctions,Political-Diplomatic,"The act of a state agency establishing designated legal punishment against a state, institution or individual, to be enforced by the state"
+sp,Speaks,Political-Diplomatic,"The act of speaking between any two or more agents of institutions for diplomatic, commercial or political purposes, while not meeting"
+ap,Appoints,Political-Operational,The act of selecting an individual for a designated office or post without the need for confirmation of this choice by another agency
+bg,Begins,Political-Operational,The act of starting a term of office or other designated term
+ed,Endorses,Political-Operational,The act of giving formal verbal or written support for a specified candidate for specified office
+es,Establishes,Political-Operational,The act of legally creating an entity of the state or a political party or similar legal personhood of a political entity
+nm,Nominates,Political-Operational,The act of selecting an individual for a designated office or post with the need for confirmation of this choice by another agency
+ud,Un-Endorses,Political-Operational,The act of verbally retracting an endorsement already given
+hl,Holds,Political-Popular,"The act of holding a public protest, rally or gathering for any political purpose"
+wn,Wins,Political-Popular,The act of winning an election
+by,Buys,Commercial-Operational,The act of purchase of a specified entity or object by a designated purchaser
+cl,Closes,Commercial-Operational,The act of permanently ceasing operations and shutting down a commercial operation
+lo,Loans,Commercial-Operational,"The act of providing economic capital to a designated enterprise, project or state entity in exchange for debt instruments"
+mg,Merges,Commercial-Operational,The act of combining the legal personhoods of more than one commercial entity into a single legal entity
+on,Opens,Commercial-Operational,The act of commencing operations in a new commercial operation
+pt,Capitalizes,Commercial-Operational,The act of providing economic capital to a designated enterprise or project in exchange for equity as part of the initial investment in that enterprise
+sl,Sells,Commercial-Operational,"The act of sale of a specified entity or object by a specified seller, who possessed the sold object prior to sale"
+vs,Invests,Commercial-Operational,The act of providing economic capital to a designated enterprise or project in exchange for equity at any time after initial investment
+dy,Deploys,Military-Operational,The act of the dispatch of a specified number of soldiers or quantity of military matierel to a specified location by an act of the state
+xr,Exercises,Military-Operational,"The act of the public use, deployment or training of military equipment for non-kinetic purposes"
+ab,Abducts,Military-Kinetic,The act of forcibly capturing individuals for coercive or criminal purposes
+ak,Attacks,Military-Kinetic,"The act of a military force, state or nonstate, engaging in a kinetic attack against an identified target"
+ch,Clashes,Military-Kinetic,The act of violence by a military force against a specified target without death resulting
+cp,Captures,Military-Kinetic,"The act of strategic seizure of specified territory or location by an organized military force, whether state or nonstate"
+dp,Departs,Military-Kinetic,"The act of strategic withdrawal from a specified territory or location by an organized military force, whether state or nonstate"
+dv,Advances,Military-Kinetic,"The act of a military force, state or nonstate, moving towards or against a specified place of settlement or other location"
+nu,Neutralizes,Military-Kinetic,"The act of killing or destroying a specified target by an organized military force, whether state or nonstate"
+cn,Cancels,Miscellaneous-General,The act of an agency of the state withdrawing permission for any public gathering or protest for any political purpose
+dg,Damages,Miscellaneous-General,"The act of causing physical damage or destruction to a physical, non-living thing through negligence or error"
+di,Dies,Miscellaneous-General,"The act of dying for reasons of disease, age, suicide or accident"
+dt,Destroys,Miscellaneous-General,"The act of destroying a physical, non-living thing by whatever means, whether by state or non-state actors"
+rm,Removes,Miscellaneous-General,The act of dismissing a specific individual from a specific post at a specific institution
+gv,Gives,Miscellaneous-General,To present a physical object or asset of any size to any individual or institution
+go,Goes,Miscellaneous-General,The act of traveling to a specified location
+hi,Hires,Miscellaneous-General,The act of formally offering a specific post at an institution to a specific individual
+ij,Injurs,Miscellaneous-General,"The act of physical attack, whether by a civilian or agent of the state, without death resulting"
+mu,Murder,Miscellaneous-General,The act of killing by a civilian
+pn,Punishes,Miscellaneous-General,"The act of putting in place any kind of sanction or punishment other than that established and enforced by the sovereign, which is sanction"
+qt,Quits,Miscellaneous-General,The act of a specific individual leaving a specific post voluntarily
+sr,Secures,Miscellaneous-General,"The act of adding additional layers of security, whether physical or digital, to a designated location or site"
+sd,Suspends,Miscellaneous-General,The act of temporarily withdrawing participatory rights in an organization's activities
+s-ac,Accuses,Statement-Inflected,To level a specific complaint of alleged intent or subterfuge at an identified actor or institution
+s-al,Alleges,Statement-Inflected,"To raise a defined, unverified but falsifiable allegation of fact, connection, intent at an identified actor or institution"
+s-as,Asserts,Statement-Inflected,To raise in public the official position of that institution in a capacity as an agent of an institution
+s-bk,Backs,Statement-Inflected,"To offer support and endorsement in rhetoric for a specific individual, institution, practice or other database entity"
+s-cr,Criticizes,Statement-Inflected,"To raise a negative opinion, critique or otherwise unfavorable view of a specific topic"
+s-op,Opines,Statement-Inflected,"To offer an unstructured, unfalsifiable,undirected,public opinion on any individual, institution, condition or other object, negative or positive "
+s-rb,Rebuffs,Statement-Inflected,To offer a public rejection of a previously-offered negotiating position from an identified individual or institution
+s-rg,Regrets,Statement-Inflected,"To offer a public expression of regret, apology, or repentance for a specific action or situation"
+s-tr,Threatens,Statement-Inflected,"To offer a defined warning to a specified individual, instuitution or state regarding a specified course of action and promised response"
+s-ur,Urges,Statement-Inflected,To offer encouragement or external rhetorical impetus directed at a specified individual or instiutution regarding a specified  action
+s-wr,Warns,Statement-Inflected,"To raise public concern regarding possible harm or damage in a defined or undefined way from a specified action, individual or action"
+s-cf,Confirms,Statement,"To assert the factual truth of a statement, speculation, allegation or question"
+s-dn,Denies,Statement,"To reject publicly a specific allegation, accusation or speculation"
+s-ds,Describes,Statement,"To explicate publicly a set of facts regarding a broadly-obtaining condition, set of actions or external situation"
+s-es,Estimates,Statement,"To provide a professional guess or evaluation as to the knowable facts surrounding, or cause of, a specific event, condition, idea, person or thing"
+s-gp,Government Position,Statement,"To offer the formal government position on a given topic, in one's capacity representing that government"
+s-in,Insists,Statement,"As an individual, to assert an interpretation of a specific set of events, actions or situation"
+s-ps,Presses,Statement,To articulate and insist on a specific point of negotiation or difference of argumentation between the speaker and a specific defined counterparty
+s-pr,Proposes,Statement,"As an agent of an institution, to offer publicly a specific negotiating position, suggested action or sought result to be achieved by defined means"
+s-rp,Reports,Statement,To relay an institutional confirmation or explication of a defined set of verifiable external conditions or events
+s-rs,Results,Statement,To announce the results of an election or referendum
+s-sp,Speculates,Statement,To raise publicly a hypothetical possibility regarding motive or intent of past actions or likelihood of future action
+s-st,States,Statement,"To offer a formal declaration of institutional or individual position on a defined individual, institution, condition or event, "
+c-mc,Media Claim,Claim-Rumor,"For a media outlet to raise a defined, unverified but falsifiable allegation of fact, connection, intent at an identified actor or institution"
+c-mo,Media Opinion,Claim-Rumor,"For a media outlet to offer an unstructured, unfalsifiable opinion or interpretation on any individual, institution, event or other condition"
+c-ns,Non-source Rumor,Claim-Rumor,"A reported rumor or widely speculated interpretation whose source can not be identified by the individuals reporting it, but which is widely discussed"
+c-or,OTR Claim,Claim-Rumor,"A specific claim, opinion or interpretation made off-the-record and reported without full attribution at the request of the claimant or in the interest of secrecy"
+c-st,OTR Statement,Claim-Rumor,A statement of fact on institutional representation or intent made without full attribution at the request of the claimant
+c-uv,Unverifiable claim,Claim-Rumor,A factual claim or assessment made by an individual or organization whose underlying factual truth cannot be verified at the time of claim for reasons of security or information access
+a-at,Attendance,Announcement,Announcement that an identified individual or group of individuals will be attending a specified event at a specified time and place
+a-dt,Date,Announcement,Announcement of a date on which a specified event or action has been scheduled to take place
+a-in,Intent,Announcement,"Announcement of the intent of an individual, group of individuals or institution to undertake a specific action"
+a-mt,Meeting,Announcement,Announcement that an identified individual will meet with another identified individual or group of individuals
+a-po,Policy,Announcement,Announcement that a specified institution will adopt a specified policy on a specified issue
+a-tr,Trip,Announcement,Announcement that an identified individual or group of individuals will visit a specified location
+r-dt,Data,Report Release,"Release of data and, if applicable, related calculations and analytic conclusions on them by a statistical agency, commercial entity or research institution"
+r-in,Interview,Report Release,Release of an interview with an identified individual
+r-po,Poll,Report Release,Release of data specifically on an ongoing election in an identified state
+r-rp,Report ,Report Release,"Release of research, conclusions and, if applicable, recommendations on them by a statistical or governmental agency, commercial entity or research institution"

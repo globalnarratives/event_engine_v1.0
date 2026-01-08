@@ -1,5 +1,7 @@
-from datetime import datetime
 from app import db
+from sqlalchemy.dialects.postgresql import JSONB
+from datetime import datetime
+
 
 
 class Article(db.Model):
@@ -20,6 +22,57 @@ class Article(db.Model):
         return f'<Article {self.article_id}: {self.headline[:50]}>'
 
 
+class ActionCode(db.Model):
+    """Action code taxonomy - maps codes to types and categories"""
+    __tablename__ = 'action_codes'
+    
+    action_code = db.Column(db.String(10), primary_key=True)
+    action_type = db.Column(db.String(50), nullable=False)
+    action_category = db.Column(db.String(50))
+    definition = db.Column(db.Text)
+    
+    def __repr__(self):
+        return f'<ActionCode {self.action_code}: {self.action_type}>'
+
+
+class ControlFrame(db.Model):
+    """Control Frame - metadata and parsed content for CIE events"""
+    __tablename__ = 'control_frame'
+    
+    event_code = db.Column(db.String(30), primary_key=True)
+    rec_timestamp = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    event_actor = db.Column(db.Text) 
+    action_type = db.Column(db.String(50))
+    action_code = db.Column(db.String(10), db.ForeignKey('action_codes.action_code'))
+    rel_cred = db.Column(db.String(5)) 
+    cie_body = db.Column(db.Text) 
+
+    # CHANGED: Use JSONB for automatic list handling
+    # No more manual comma-splitting needed
+    identified_subjects = db.Column(JSONB, default=list) 
+    identified_objects = db.Column(JSONB, default=list)
+    
+    source_article_id = db.Column(db.Integer, db.ForeignKey('articles.article_id'))
+    
+    # CHANGED: Specifically use JSONB for better indexing/performance over standard JSON
+    parse_tree_cache = db.Column(JSONB) 
+    
+    updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+    
+    # Relationships
+    action = db.relationship('ActionCode', backref='control_frames')
+    source_article = db.relationship('Article', backref='control_frames')
+    
+    def __repr__(self):
+        return f'<ControlFrame {self.event_code}: {self.action_code}>'
+    
+    # Simplified: JSONB returns a list automatically
+    def get_subjects_list(self):
+        return self.identified_subjects or []
+    
+    def get_objects_list(self):
+        return self.identified_objects or []
+
 class Institution(db.Model):
     """Organizational entities that contain positions"""
     __tablename__ = 'institutions'
@@ -27,10 +80,9 @@ class Institution(db.Model):
     institution_code = db.Column(db.String(100), primary_key=True)
     institution_name = db.Column(db.String(300), nullable=False)
     institution_type = db.Column(db.String(50))
-    institution_layer = db.Column(db.String(6))  # e.g., "01", "02", etc.
-    institution_subtype_01 = db.Column(db.String(50))  # Optional subtype categorization
+    institution_layer = db.Column(db.String(10))  # e.g., "01", "02", etc.
+    institution_subtype = db.Column(db.String(50))  # Optional subtype categorization
     country_code = db.Column(db.String(3))
-    description = db.Column(db.Text)
     
     # Relationships
     positions = db.relationship('Position', back_populates='institution', cascade='all, delete-orphan')
@@ -48,8 +100,7 @@ class Position(db.Model):
     position_code = db.Column(db.String(100), primary_key=True)
     position_title = db.Column(db.String(300), nullable=False)
     institution_code = db.Column(db.String(100), db.ForeignKey('institutions.institution_code'), nullable=False)
-    hierarchy_level = db.Column(db.String(8))
-    description = db.Column(db.Text)
+    hierarchy_level = db.Column(db.String(12))
     
     # Relationships
     institution = db.relationship('Institution', back_populates='positions')
@@ -85,9 +136,6 @@ class Actor(db.Model):
     given_name = db.Column(db.String(150), nullable=False)
     middle_name = db.Column(db.String(150))
     birth_year = db.Column(db.Integer)
-    position_code = db.Column(db.String(100))
-    position_title = db.Column(db.String(300))                          
-    biographical_info = db.Column(db.Text)
     
     # Relationships
     tenures = db.relationship('Tenure', back_populates='actor', cascade='all, delete-orphan')
@@ -119,49 +167,49 @@ class Actor(db.Model):
         return [tenure.position for tenure in tenures]
 
 
-class Event(db.Model):
-    """CIE-coded events - the primary analytical unit"""
-    __tablename__ = 'events'
+# class Event(db.Model):
+#     """CIE-coded events - the primary analytical unit (LEGACY - being replaced by ControlFrame)"""
+#     __tablename__ = 'events'
     
-    event_code = db.Column(db.String(50), primary_key=True)
-    event_date = db.Column(db.Date, nullable=False)
-    region = db.Column(db.String(3), nullable=False)
-    ordinal = db.Column(db.Integer, nullable=False)
-    recorded_timestamp = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
-    core_action = db.Column(db.String(10), nullable=False)
-    cie_description = db.Column(db.String(250), nullable=False)
-    natural_summary = db.Column(db.String(250), nullable=False)
-    article_url = db.Column(db.String(500), nullable=False)
-    article_headline = db.Column(db.String(250))
-    created_by = db.Column(db.String(100))
+#     event_code = db.Column(db.String(50), primary_key=True)
+#     event_date = db.Column(db.Date, nullable=False)
+#     region = db.Column(db.String(3), nullable=False)
+#     ordinal = db.Column(db.Integer, nullable=False)
+#     recorded_timestamp = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+#     core_action = db.Column(db.String(10), nullable=False)
+#     cie_description = db.Column(db.String(250), nullable=False)
+#     natural_summary = db.Column(db.String(250), nullable=False)
+#     article_url = db.Column(db.String(500), nullable=False)
+#     article_headline = db.Column(db.String(250))
+#     created_by = db.Column(db.String(100))
     
-    # Relationships
-    event_actors = db.relationship('EventActor', back_populates='event', cascade='all, delete-orphan')
+#     # Relationships
+#     event_actors = db.relationship('EventActor', back_populates='event', cascade='all, delete-orphan')
     
-    __table_args__ = (
-        db.CheckConstraint(
-            region.in_(['weu', 'eeu', 'nam', 'sam', 'nea', 'sea', 'sas', 'mea', 'ssa']),
-            name='chk_region'
-        ),
-        db.UniqueConstraint('event_date', 'region', 'ordinal', name='unique_event_ordinal'),
-    )
+#     __table_args__ = (
+#         db.CheckConstraint(
+#             region.in_(['weu', 'eeu', 'nam', 'sam', 'cmb', 'nea', 'sea', 'oce', 'sas', 'mea', 'eaf', 'caf', 'saf', 'waf']),
+#             name='chk_region'
+#         ),
+#         db.UniqueConstraint('event_date', 'region', 'ordinal', name='unique_event_ordinal'),
+#     )
     
-    def __repr__(self):
-        return f'<Event {self.event_code}: {self.natural_summary[:50]}>'
+#     def __repr__(self):
+#         return f'<Event {self.event_code}: {self.natural_summary[:50]}>'
     
-    def get_subjects(self):
-        """Get all subject actors/positions for this event"""
-        return EventActor.query.filter_by(
-            event_code=self.event_code,
-            role_type='subject'
-        ).all()
+#     def get_subjects(self):
+#         """Get all subject actors/positions for this event"""
+#         return EventActor.query.filter_by(
+#             event_code=self.event_code,
+#             role_type='subject'
+#         ).all()
     
-    def get_objects(self):
-        """Get all object actors/positions for this event"""
-        return EventActor.query.filter_by(
-            event_code=self.event_code,
-            role_type='object'
-        ).all()
+#     def get_objects(self):
+#         """Get all object actors/positions for this event"""
+#         return EventActor.query.filter_by(
+#             event_code=self.event_code,
+#             role_type='object'
+#         ).all()
 
 
 class Tenure(db.Model):
@@ -201,67 +249,67 @@ class Tenure(db.Model):
                 (self.tenure_end is None or self.tenure_end >= date))
 
 
-class EventActor(db.Model):
-    """Links events to actors/positions as subjects or objects"""
-    __tablename__ = 'event_actors'
+#class EventActor(db.Model):
+    # """Links events to actors/positions as subjects or objects"""
+    # __tablename__ = 'event_actors'
     
-    event_actor_id = db.Column(db.Integer, primary_key=True)
-    event_code = db.Column(db.String(50), db.ForeignKey('events.event_code'), nullable=False)
-    code = db.Column(db.String(100), nullable=False)
-    code_type = db.Column(db.String(20), nullable=False)
-    role_type = db.Column(db.String(20), nullable=False)
+    # event_actor_id = db.Column(db.Integer, primary_key=True)
+    # event_code = db.Column(db.String(50), db.ForeignKey('events.event_code'), nullable=False)
+    # code = db.Column(db.String(100), nullable=False)
+    # code_type = db.Column(db.String(20), nullable=False)
+    # role_type = db.Column(db.String(20), nullable=False)
     
-    # Relationships
-    event = db.relationship('Event', back_populates='event_actors')
+    # # Relationships
+    # event = db.relationship('Event', back_populates='event_actors')
     
-    __table_args__ = (
-        db.CheckConstraint(
-            code_type.in_(['position', 'actor']),
-            name='chk_code_type'
-        ),
-        db.CheckConstraint(
-            role_type.in_(['subject', 'object']),
-            name='chk_role_type'
-        ),
-    )
+    # __table_args__ = (
+    #     db.CheckConstraint(
+    #         code_type.in_(['position', 'actor']),
+    #         name='chk_code_type'
+    #     ),
+    #     db.CheckConstraint(
+    #         role_type.in_(['subject', 'object']),
+    #         name='chk_role_type'
+    #     ),
+    # )
     
-    def __repr__(self):
-        return f'<EventActor {self.code} as {self.role_type} in {self.event_code}>'
+    # def __repr__(self):
+    #     return f'<EventActor {self.code} as {self.role_type} in {self.event_code}>'
     
-    def resolve_actor(self):
-        """Resolve the actual actor, whether directly coded or via position on event date"""
-        if self.code_type == 'actor':
-            return Actor.query.get(self.code)
-        elif self.code_type == 'position':
-            position = Position.query.get(self.code)
-            if position and self.event:
-                return position.get_holder_on_date(self.event.event_date)
-        return None
+    # def resolve_actor(self):
+    #     """Resolve the actual actor, whether directly coded or via position on event date"""
+    #     if self.code_type == 'actor':
+    #         return Actor.query.get(self.code)
+    #     elif self.code_type == 'position':
+    #         position = Position.query.get(self.code)
+    #         if position and self.event:
+    #             return position.get_holder_on_date(self.event.event_date)
+    #     return None
     
-    def get_display_info(self):
-        """Get display information for this event actor"""
-        if self.code_type == 'actor':
-            actor = Actor.query.get(self.code)
-            if actor:
-                return {
-                    'code': self.code,
-                    'type': 'actor',
-                    'display': f'{self.code}: {actor.get_display_name()}'
-                }
-        elif self.code_type == 'position':
-            position = Position.query.get(self.code)
-            if position:
-                holder = None
-                if self.event:
-                    holder = position.get_holder_on_date(self.event.event_date)
-                holder_name = holder.get_display_name() if holder else 'Vacant'
-                return {
-                    'code': self.code,
-                    'type': 'position',
-                    'display': f'{self.code}: {position.position_title} ({holder_name})'
-                }
-        return {
-            'code': self.code,
-            'type': self.code_type,
-            'display': self.code
-        }
+    # def get_display_info(self):
+    #     """Get display information for this event actor"""
+    #     if self.code_type == 'actor':
+    #         actor = Actor.query.get(self.code)
+    #         if actor:
+    #             return {
+    #                 'code': self.code,
+    #                 'type': 'actor',
+    #                 'display': f'{self.code}: {actor.get_display_name()}'
+    #             }
+    #     elif self.code_type == 'position':
+    #         position = Position.query.get(self.code)
+    #         if position:
+    #             holder = None
+    #             if self.event:
+    #                 holder = position.get_holder_on_date(self.event.event_date)
+    #             holder_name = holder.get_display_name() if holder else 'Vacant'
+    #             return {
+    #                 'code': self.code,
+    #                 'type': 'position',
+    #                 'display': f'{self.code}: {position.position_title} ({holder_name})'
+    #             }
+    #     return {
+    #         'code': self.code,
+    #         'type': self.code_type,
+    #         'display': self.code
+    #     }

@@ -1,0 +1,154 @@
+rus.hos.spx [s-st] $ usa.hos {s-pr} / rus<>ukr
+ 	- {s-st} rus.hos x [rv] {s-pr}
+ 	- [s-gp] $ rus <[sp]>usa, rus<[sp]>ukr  
+
+
+usa.hos <[mt]> 
+	- usa.sbs.nys.lh.102 $ usa.sbs.nys.nyc.exc.01
+
+
+gbr.uh.522 [r-rp] 
+	$ gbr.hog \ axn:hlth ∫01012020:30042021 
+   	- {r-rp} [s-cr] *.axn 
+       		- [s-pr] $ *.hlth, *.scnc, *.infr.cms
+
+jpn.sbs.nii.exc.01 [vu] 
+	- $ jpn.com.infr.grd.01 / {sb}
+    	- *.exc.01 [a-in] $ [nt] {vu} @ jpn.sbs.nii.lh
+        	- {nt} > 02122025
+
+aus.min.infr.cms.psc.exc.01 [su] 
+	- $ aus.prl.2024.127.lex
+    	- {su} -> usa.com.mde.16085
+        	- > 10122025
+
+nga.org.rlg.xtn.mmb.01.exc.01 [s-ds] 
+	- $ e.21112025.ssa.001 
+	- [s-es] qty $ {ab} 
+       		- 12.adt / 303.enf
+     
+
+usa.min.forn.delg <[mt]> ukr.min.forn.delg 
+	- @ che.sbs.gnv $ ukr<>rus 
+   		- usa.min.forn.exc.01 [s-op] {mt} : +
+   		- ukr.min.dfns.exc.01 [s-gp] {mt}
+
+fra.min.jstc.exc.01, fra.min.gndm.* [s-gp] 
+	- $ fra.sbs.pac.cpl / vrbn, psc @ *.loc 
+    		- [a-in] min.jstc, min.gndm > [sr] @ *.loc
+
+bra.jstc.grtc [rl] 
+	- $ ap-2668.dkt / {sc}
+   	- {rl} -> bra.1955.001 : [jl] > dt.*
+
+gbr.cpl.exc.01 [s-op] 
+	- $ gbr.lh.318-2024-26.lex
+    	- {s-op} + $ sbs.imp.lex
+
+vat.sbs.kdn.knt.exc.01 [s-op] 
+	- nga.min.gndm \ axn : {s-op} - 
+    	- $ *.axn ^e.21112025.ssa.001
+
+indv.und [c-or] 
+	- $ usa.com.pvt.4503010.01 
+    	- com.unk > [vs] *.com USD 15 B ∫*:31122025
+
+deu.sbs.sxn.jstc.grct.vrbn.02 [op] 
+	- az-4st-2-25.dkt {id} angf.flny, 
+		- 6.hom, 1.fem
+        	- *.dkt [s-as] *.civ $ vrbn.ide.051 
+
+ukr.hos.dfns.cme.exc.01 [c-uv] 
+	- $ ukr<{mt}>usa ^ e.23112025.weu.0002
+     	- {c-uv} ukr<[ag]>usa ^ e.* 
+
+fra.hos [a-in] 
+	- {s-pr} $ fra.dfns.lex ∫*:29112025
+    	- [s-ds] *.lex $ fra.min.dfns {hi} 
+
+chn.sbs.hkg.ntfd.incd.exc.01 [s-ds] 
+	- incd @ *.loc, 26112025 UTC 0651  
+     		- `+65.civ {di}, `+270 {ij} ~incd 
+     		- unk.hom,fem,enf
+
+gnb.1972.001 [s-cf] 
+	- gnb.dfns.ary {rm} *.001 ! gnb.hos
+
+usa.sbs.geo.jstc.vrbn.cmte.exc.01 [s-st] 
+	- $ 23sc188947.dkt
+     	- {wd} dkt.*
+
+fra.jstc.grtc.vrbn [rl] 
+	- $ 24-82.486.dkt
+     	- {rl} $ dkt.* : sldg 
+
+igo.002.exc.exc.01 [s-st] 
+	- @ igo.002.lh
+   		- [s-cr] rus.min.forn .axn $ ^ e.23112025.weu.0002
+        	- [s-op] rus.* x[rc] <[mt]>
+
+gnb.hos.gndm.exc.01 [s-cf] 
+	- gnb.dfns.ary {rm} gnb.1972.001 $ gnb.hos
+     		- [s-st] {ap} gnb.1960.001 $ gnb.hos
+
+isr.hog.dfns.dig.cme.spx [s-ds] 
+	- {ak} #dig @ isr.com.50202010 
+            - ∫ unk.wk:*.dt
+     	- [s-as] irn.min.intl / org.und.06 / {ak} 
+
+ind.hog <[mt]> 
+	- rus.hos, rus.min.dfns.exc.01 @ ind.cpl
+    		- <[sp]> $ resr.eng.hyc, *.nuc, <dfns>
+    	- rus.hos > @ *.loc ∫04122025:05122025
+
+chn.ccp.cme.exc.01 <[mt]> fra.hos @ chn.cpl
+   	- <[sp]> rus <> ukr, chn <comc> fra
+   	- fra.hos > @ *.loc ∫04122025:06122025
+
+esp.com.soe.50101010.01 [s-st] $ che.org.50101010.01
+     	- *.org / > ∫e.12052026:16052026.weu
+     	- x[rc] *.e
+
+usa.hos.spx [a-mt] 
+	- usa.min.forn.amb.spc.012 <> ukr.hos.dfns.cme.chm.exc.01
+     		- > 04122025, @ usa.sbs.fld.mia
+     		- <[sp]> $ ukr<>rus 
+
+usa.hos.spx [s-rp] 
+	- rwa.hos <{mt}> cod.hos @ usa.cpl 
+     		- {s-rp} rwa.hos [ag] cod.hos $ || <{ak}> @ (rwa:cod).fron
+
+igo.002.exc.exc.01 [s-st] 
+	- $ igo.002.lh,uh /{vu}/ com-2025-828.lex
+   		- // $ *.lh.cme.resr.eng,*.lh.cme.trde, *.lh, *.uh {vo}
+          	- *.lh, .uh [vo] ∫11122025:15122025 
+
+usa.sbs.ilo.chi.educ.cme.spx [s-st] $ ilo.sbs.chi.2024-L-004023.dkt
+    - {sl} $ dkt.klgr ~ USD 17.5 mln
+
+twn.com.40203010.012 [r-rp] 45203015.prsv.prx
+     - *.prsv $ 8473.30
+     - *.prx ∫2024Q4:2025Q4 ++ ~+117% USD
+
+deu.com.50201020.003 [c-mc] fra.hos / {s-cr} $ usa.hos
+     - {s-cr} @  *.hos<{sp}>ukr.hos, deu.hog
+         - *. usa.hos x[rc] ukr<{sp}>rus
+
+rus.hos [s-gp] $ rus<>ukr / <{mt}>, <{ag}>
+
+sgp.jstc.grtc.vrbn.02 [rl] 900426-2024, 900427-2024.dkt
+     - {rl} $ *.dkt : sldg
+
+tha.dfns.ary.spx [s-ds] tha.ary {ak} khm 
+   - 3.{ak} ∫@ ~13.9N,~103.2E # .ary, .arf
+   - [c-uv] khm.ary [nu] `+1.tha.ary, [ij] ~8.*
+        
+
+jpn.min.infr.mteo.spx [s-wr] $ natx.smsc ~@ 40.8N, 143.2E
+     - [s-wr] natx.tsun @ jpn.sbs.aom, *.hok, *.iwt
+
+ben.hos [s-st} $ e.07122025.ssa.001
+     - [s-cf] ^.e x[rm] ben.1958.001 $ ben.hos
+
+ita.1973.001 [qt] bel.akd.pvt.005.exc.01
+

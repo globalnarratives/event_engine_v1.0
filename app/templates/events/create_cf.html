@@ -1,0 +1,239 @@
+{% extends "base.html" %}
+
+{% block title %}Create Event - Control Frame{% endblock %}
+
+{% block content %}
+<div class="cf-container">
+    <h1>Create Event - Control Frame</h1>
+    
+    <form method="POST" id="cfForm">
+        {{ form.hidden_tag() }}
+        
+        <!-- Control Frame Table -->
+        <table class="cf-table">
+            <!-- Top Metadata Row -->
+            <tr>
+                <td class="cf-label" style="width: 12%;">Event ID</td>
+                <td style="width: 38%;">
+                    <div style="display: flex; gap: var(--space-sm);">
+                        {{ form.event_date(class="cf-input-small", style="width: 50%;", placeholder="DDMMYYYY") }}
+                        {{ form.region(class="cf-input-small", style="width: 50%;") }}
+                    </div>
+                    <small class="text-dim" style="font-size: 0.65rem;">Auto-generates: e.DDMMYYYY.RRR.001</small>
+                </td>
+                <td class="cf-label" style="width: 10%;">REC</td>
+                <td style="width: 40%;" class="text-dim">
+                    <small>Auto-generated on save</small>
+                </td>
+            </tr>
+            
+            <!-- Event Actor & Action Row -->
+            <tr>
+                <td class="cf-label">Event Actor</td>
+                <td>
+                    {{ form.event_actor(class="cf-input-small", placeholder="e.g., rus.hos.spx") }}
+                    {% if form.event_actor.errors %}
+                        <small class="text-warning" style="font-size: 0.65rem;">{{ form.event_actor.errors[0] }}</small>
+                    {% endif %}
+                </td>
+                <td class="cf-label">Action</td>
+                <td>
+                    <input list="actionCodeList" name="action_code" id="actionCodeSelect" class="cf-input-small" placeholder="Type or select..." required>
+                    <datalist id="actionCodeList">
+                        {% for value, label in form.action_code.choices %}
+                            {% if value != '---' %}
+                                <option value="{{ value }}">{{ label }}</option>
+                            {% endif %}
+                        {% endfor %}
+                    </datalist>
+                </td>
+            </tr>
+            
+            <!-- Type & Rel/Cred Row -->
+            <tr>
+                <td class="cf-label">Type</td>
+                <td>
+                    {{ form.action_type(class="cf-input-small cf-input-readonly", id="actionTypeDisplay", readonly=True) }}
+                </td>
+                <td class="cf-label">Rel/Cred</td>
+                <td>
+                    {{ form.rel_cred(class="cf-input-small", placeholder="e.g., 1-A", style="width: 100px;") }}
+                    {% if form.rel_cred.errors %}
+                        <small class="text-warning" style="font-size: 0.65rem;">{{ form.rel_cred.errors[0] }}</small>
+                    {% endif %}
+                </td>
+            </tr>
+            
+            <!-- CIE Body Row -->
+            <tr>
+                <td colspan="4" style="padding: 0;">
+                    {{ form.cie_body(class="cf-body-textarea", id="cieBodyTextarea", placeholder="Enter event in CIE syntax (use Tab for subordination ▪)") }}
+                    
+                    <div style="padding: var(--space-sm) var(--space-md); background-color: var(--color-bg-primary); border-top: 1px solid var(--color-border);">
+                        <button type="button" class="btn btn-secondary" id="parseBtn" style="font-size: 0.75rem; padding: var(--space-xs) var(--space-md);">
+                            Parse Event
+                        </button>
+                        <div id="parseStatus"></div>
+                    </div>
+                </td>
+            </tr>
+            
+            <!-- Identified Subjects & Objects Row -->
+            <tr>
+                <td class="cf-label" colspan="2">Identified Subjects</td>
+                <td class="cf-label" colspan="2">Identified Objects</td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    {{ form.identified_subjects(class="cf-entity-display", id="identifiedSubjects", rows=3, placeholder="Will be populated after parsing...") }}
+                </td>
+                <td colspan="2">
+                    {{ form.identified_objects(class="cf-entity-display", id="identifiedObjects", rows=3, placeholder="Will be populated after parsing...") }}
+                </td>
+            </tr>
+        </table>
+        
+        <!-- Source Article (if applicable) -->
+        {% if article %}
+        <div style="margin-top: var(--space-md); padding: var(--space-sm); border: 1px solid var(--color-border); border-radius: var(--radius-sm); display: flex; justify-content: space-between; align-items: center;">
+            <a href="{{ article.url }}" target="_blank" class="text-accent" style="font-size: 0.75rem; flex: 1;">{{ article.url }}</a>
+            <span class="text-dim" style="font-size: 0.65rem; margin-left: var(--space-md); white-space: nowrap;">{{ article.source_name }} | {{ article.published_date.strftime('%Y-%m-%d') }}</span>
+        </div>
+        {% else %}
+        <div class="form-group" style="margin-top: var(--space-md);">
+            <label class="form-label" for="source_article_url">Source Article URL (Optional)</label>
+            {{ form.source_article_url(class="form-input", id="source_article_url", placeholder="Paste article URL here", style="font-size: 0.75rem;") }}
+        </div>
+        {% endif %}
+        
+        <!-- Form Actions -->
+        <div class="flex gap-md mt-lg">
+            <button type="submit" class="btn btn-primary" id="submitBtn">Save Event</button>
+            <a href="{{ url_for('articles.dashboard') }}" class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+// Tab handler for bullet (▪) insertion with multi-level indentation
+document.getElementById('cieBodyTextarea').addEventListener('keydown', function(e) {
+    if (e.key === 'Tab') {
+        e.preventDefault();
+        const start = this.selectionStart;
+        const end = this.selectionEnd;
+        const value = this.value;
+        
+        // Find the start of the current line
+        const lineStart = value.lastIndexOf('\n', start - 1) + 1;
+        const beforeCursor = value.substring(lineStart, start);
+        
+        // Check if line already has a bullet
+        const bulletMatch = beforeCursor.match(/^(\s*)(▪\s*)?/);
+        
+        if (bulletMatch && bulletMatch[2]) {
+            // Line already has bullet - add more indentation
+            const currentIndent = bulletMatch[1];
+            const newIndent = currentIndent + '  ';  // Add 2 more spaces
+            
+            // Replace the existing indentation
+            const afterBullet = beforeCursor.substring(bulletMatch[0].length);
+            const newLine = newIndent + '▪ ' + afterBullet;
+            
+            this.value = value.substring(0, lineStart) + newLine + value.substring(start);
+            this.selectionStart = this.selectionEnd = lineStart + newLine.length;
+        } else {
+            // No bullet yet - insert bullet with initial indent
+            const bullet = '  ▪ ';
+            this.value = value.substring(0, start) + bullet + value.substring(end);
+            this.selectionStart = this.selectionEnd = start + bullet.length;
+        }
+    }
+});
+
+// Action code change -> auto-populate action type
+document.getElementById('actionCodeSelect').addEventListener('change', function() {
+    const actionCode = this.value;
+    if (!actionCode) return;
+    
+    fetch(`/events/get-action-type/${actionCode}`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                document.getElementById('actionTypeDisplay').value = data.action_type;
+            }
+        })
+        .catch(error => console.error('Error fetching action type:', error));
+});
+
+// Parse button handler
+document.getElementById('parseBtn').addEventListener('click', function() {
+    const cieBody = document.getElementById('cieBodyTextarea').value;
+    const statusDiv = document.getElementById('parseStatus');
+    const parseBtn = this;
+    
+    if (!cieBody.trim()) {
+        statusDiv.className = 'error';
+        statusDiv.textContent = 'Please enter CIE body before parsing';
+        return;
+    }
+    
+    // Disable button during parsing
+    parseBtn.disabled = true;
+    parseBtn.textContent = 'Parsing...';
+    statusDiv.style.display = 'none';
+    
+    fetch('/events/parse-cie', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ cie_body: cieBody })
+    })
+    .then(response => response.json())
+    .then(data => {
+        parseBtn.disabled = false;
+        parseBtn.textContent = 'Parse Event';
+        
+        if (data.success) {
+            // Update identified subjects
+            document.getElementById('identifiedSubjects').value = data.subjects.join(', ');
+            
+            // Update identified objects
+            document.getElementById('identifiedObjects').value = data.objects.join(', ');
+            
+            // Store parse tree in hidden field
+            document.getElementById('parse_tree_cache').value = JSON.stringify(data.parse_tree);
+            
+            // Show success message
+            statusDiv.className = 'success';
+            statusDiv.textContent = `✓ Parsed successfully! Found ${data.subjects.length} subjects and ${data.objects.length} objects.`;
+        } else {
+            // Show error message
+            statusDiv.className = 'error';
+            statusDiv.style.display = 'block';
+            statusDiv.textContent = `✗ Parse error: ${data.error}`;
+        }
+    })
+    .catch(error => {
+        parseBtn.disabled = false;
+        parseBtn.textContent = 'Parse Event';
+        statusDiv.className = 'error';
+        statusDiv.style.display = 'block';
+        statusDiv.textContent = `✗ Network error: ${error.message}`;
+    });
+});
+
+// Form submission validation
+document.getElementById('cfForm').addEventListener('submit', function(e) {
+    const parseTreeCache = document.getElementById('parse_tree_cache').value;
+    
+    if (!parseTreeCache) {
+        e.preventDefault();
+        alert('Please parse the event body before submitting. Click "Parse Event" button.');
+        return false;
+    }
+});
+</script>
+{% endblock %}

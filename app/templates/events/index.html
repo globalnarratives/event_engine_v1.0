@@ -7,7 +7,7 @@
     <!-- Page Header -->
     <div class="flex items-center justify-between mb-lg">
         <h1>Events</h1>
-        <a href="{{ url_for('events.create') }}" class="btn btn-primary">Create Event</a>
+        <a href="{{ url_for('events.create_cf_route') }}" class="btn btn-primary">Create Event</a>
     </div>
 
     <!-- Search/Filter Card -->
@@ -34,21 +34,26 @@
                             <option value="eeu" {% if request.args.get('region') == 'eeu' %}selected{% endif %}>Eastern Europe</option>
                             <option value="nam" {% if request.args.get('region') == 'nam' %}selected{% endif %}>North America</option>
                             <option value="sam" {% if request.args.get('region') == 'sam' %}selected{% endif %}>South America</option>
+                            <option value="cmb" {% if request.args.get('region') == 'cmb' %}selected{% endif %}>Central America & Caribbean</option>
                             <option value="nea" {% if request.args.get('region') == 'nea' %}selected{% endif %}>Northeast Asia</option>
                             <option value="sea" {% if request.args.get('region') == 'sea' %}selected{% endif %}>Southeast Asia</option>
                             <option value="sas" {% if request.args.get('region') == 'sas' %}selected{% endif %}>South & Central Asia</option>
                             <option value="mea" {% if request.args.get('region') == 'mea' %}selected{% endif %}>Middle East & North Africa</option>
-                            <option value="ssa" {% if request.args.get('region') == 'ssa' %}selected{% endif %}>Sub-Saharan Africa</option>
+                            <option value="oce" {% if request.args.get('region') == 'oce' %}selected{% endif %}>Oceania</option>
+                            <option value="eaf" {% if request.args.get('region') == 'eaf' %}selected{% endif %}>East Africa</option>
+                            <option value="caf" {% if request.args.get('region') == 'caf' %}selected{% endif %}>Central Africa</option>
+                            <option value="saf" {% if request.args.get('region') == 'saf' %}selected{% endif %}>Southern Africa</option>
+                            <option value="waf" {% if request.args.get('region') == 'waf' %}selected{% endif %}>West Africa</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label class="form-label" for="core_action">Core Action</label>
-                        <input type="text" id="core_action" name="core_action" class="form-input" placeholder="e.g., [s-tr]" value="{{ request.args.get('core_action', '') }}">
+                        <label class="form-label" for="action_code">Action Code</label>
+                        <input type="text" id="action_code" name="action_code" class="form-input" placeholder="e.g., SAY, LEG" value="{{ request.args.get('action_code', '') }}">
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="form-label" for="search_text">Search Text</label>
-                    <input type="text" id="search_text" name="search_text" class="form-input" placeholder="Search in CIE description or natural summary" value="{{ request.args.get('search_text', '') }}">
+                    <input type="text" id="search_text" name="search_text" class="form-input" placeholder="Search in CIE body" value="{{ request.args.get('search_text', '') }}">
                 </div>
                 <div class="flex gap-md">
                     <button type="submit" class="btn btn-primary">Apply Filters</button>
@@ -70,10 +75,11 @@
                     <thead>
                         <tr>
                             <th>Event Code</th>
-                            <th>Date</th>
-                            <th>Region</th>
-                            <th>Core Action</th>
-                            <th>Natural Summary</th>
+                            <th>REC Time</th>
+                            <th>Actor</th>
+                            <th>Action</th>
+                            <th>Type</th>
+                            <th>Rel/Cred</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -81,18 +87,18 @@
                         {% for event in events.items %}
                         <tr>
                             <td>
-                                <a href="{{ url_for('events.detail', event_code=event.event_code) }}" class="text-accent">
+                                <a href="{{ url_for('events.detail_cf_route', event_code=event.event_code) }}" class="text-accent">
                                     {{ event.event_code }}
                                 </a>
                             </td>
-                            <td class="text-secondary">{{ event.event_date.strftime('%Y-%m-%d') }}</td>
-                            <td><span class="badge badge-active">{{ event.region.upper() }}</span></td>
-                            <td class="text-accent">{{ event.core_action }}</td>
-                            <td class="text-secondary">{{ event.natural_summary[:80] }}{% if event.natural_summary|length > 80 %}...{% endif %}</td>
+                            <td class="text-secondary">{{ event.rec_timestamp.strftime('%d%m%Y %H%M') }}</td>
+                            <td><code class="text-accent">{{ event.event_actor }}</code></td>
+                            <td class="text-secondary">{{ event.action_code }}</td>
+                            <td class="text-secondary">{{ event.action_type }}</td>
+                            <td><span class="badge badge-active">{{ event.rel_cred }}</span></td>
                             <td>
                                 <div class="flex gap-sm">
-                                    <a href="{{ url_for('events.detail', event_code=event.event_code) }}" class="btn btn-secondary" style="font-size: 0.75rem; padding: 0.25rem 0.75rem;">View</a>
-                                    <a href="{{ url_for('events.edit', event_code=event.event_code) }}" class="btn btn-secondary" style="font-size: 0.75rem; padding: 0.25rem 0.75rem;">Edit</a>
+                                    <a href="{{ url_for('events.detail_cf_route', event_code=event.event_code) }}" class="btn btn-secondary" style="font-size: 0.75rem; padding: 0.25rem 0.75rem;">View</a>
                                 </div>
                             </td>
                         </tr>

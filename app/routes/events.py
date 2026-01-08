@@ -1,11 +1,13 @@
-from flask import Blueprint, render_template, request, redirect, url_for, flash, abort
-from app.models import Event, EventActor, Article, Actor, Position
-from app.forms import EventCreationForm, EventEditForm, EventSearchForm
+from flask import Blueprint, render_template, request, redirect, url_for, flash, jsonify
+from app.models import Article, ControlFrame, ActionCode
+from app.forms import EventCFCreationForm, EventSearchForm
 from app import db
-from datetime import datetime
+from app.parser import CIEParser
+from app.cie_highlighter import highlight_cie_syntax
+import json
 
 bp = Blueprint('events', __name__, url_prefix='/events')
-
+parser = CIEParser()
 
 @bp.route('/')
 def index():
@@ -13,33 +15,8 @@ def index():
     page = request.args.get('page', 1, type=int)
     per_page = 50
     
-    query = Event.query
+    query = ControlFrame.query
     search_form = EventSearchForm(request.args)
-    
-    # Apply filters
-    if request.args.get('date_from'):
-        query = query.filter(Event.event_date >= search_form.date_from.data)
-    
-    if request.args.get('date_to'):
-        query = query.filter(Event.event_date <= search_form.date_to.data)
-    
-    if request.args.get('region') and search_form.region.data:
-        query = query.filter(Event.region == search_form.region.data)
-    
-    if request.args.get('core_action'):
-        query = query.filter(Event.core_action.ilike(f'%{search_form.core_action.data}%'))
-    
-    if request.args.get('search_text'):
-        search = f'%{search_form.search_text.data}%'
-        query = query.filter(
-            db.or_(
-                Event.cie_description.ilike(search),
-                Event.natural_summary.ilike(search)
-            )
-        )
-    
-    # Sort by event date (newest first)
-    query = query.order_by(Event.event_date.desc())
     
     events = query.paginate(page=page, per_page=per_page, error_out=False)
     
@@ -47,196 +24,257 @@ def index():
                          events=events,
                          search_form=search_form)
 
-
-@bp.route('/<event_code>')
-def detail(event_code):
-    """View event details with resolved actors"""
-    event = Event.query.get_or_404(event_code)
-    
-    # Get subjects and objects with display info
-    subjects = []
-    for ea in event.get_subjects():
-        subjects.append(ea.get_display_info())
-    
-    objects = []
-    for ea in event.get_objects():
-        objects.append(ea.get_display_info())
-    
-    return render_template('events/detail.html',
-                         event=event,
-                         subjects=subjects,
-                         objects=objects)
-
-
 @bp.route('/create', methods=['GET', 'POST'])
 @bp.route('/create/<int:article_id>', methods=['GET', 'POST'])
 def create(article_id=None):
-    """Create new event, optionally from an article"""
-    form = EventCreationForm()
+    """Redirect to Control Frame event creation"""
+    if article_id:
+        return redirect(url_for('events.create_cf_route', article_id=article_id))
+    return redirect(url_for('events.create_cf_route'))
+
+
+@bp.route('/create-cf', methods=['GET', 'POST'])
+@bp.route('/create-cf/<int:article_id>', methods=['GET', 'POST'])
+def create_cf_route(article_id=None):
+    """
+    Create new event using Control Frame with parser integration.
+    
+    JSONB columns automatically handle Python list serialization,
+    so conversion is straightforward.
+    """
+    form = EventCFCreationForm()
     article = None
     
     # Load article if specified
     if article_id:
         article = Article.query.get_or_404(article_id)
-        form.article_id.data = article_id
+        form.source_article_id.data = article_id
+        form.source_article_url.data = article.url
     
-    # Populate actor/position choices
-    actors = Actor.query.order_by(Actor.surname, Actor.given_name).all()
-    positions = Position.query.order_by(Position.position_title).all()
+    # Populate action code choices from database
+    action_codes = ActionCode.query.order_by(ActionCode.action_category, ActionCode.action_code).all()
     
-    choices = []
-    for actor in actors:
-        choices.append((f'actor:{actor.actor_id}', f'{actor.actor_id} - {actor.get_display_name()}'))
-    for position in positions:
-        choices.append((f'position:{position.position_code}', f'{position.position_code} - {position.position_title}'))
+    # Group action codes by category for better UX
+    grouped_choices = []
+    current_category = None
+    for ac in action_codes:
+        if ac.action_category != current_category:
+            if current_category is not None:
+                grouped_choices.append(('---', '---'))  # Separator
+            current_category = ac.action_category
+        grouped_choices.append((ac.action_code, f"{ac.action_code} - {ac.action_type}"))
     
-    form.subject_codes.choices = choices
-    form.object_codes.choices = choices
+    form.action_code.choices = grouped_choices
     
     if form.validate_on_submit():
-        # Generate event code
+        # Get form data
         event_date = form.event_date.data
         region = form.region.data
         
         # Calculate ordinal for this date and region
-        existing_count = Event.query.filter_by(
-            event_date=event_date,
-            region=region
-        ).count()
-        ordinal = existing_count + 1
+        date_str = event_date.strftime('%d%m%Y')
+        pattern = f'e.{date_str}.{region}.%'
         
-        # Format event code: e.ddmmyyyy.region.ordinal
-        event_code = f"e.{event_date.strftime('%d%m%Y')}.{region}.{ordinal:04d}"
+        existing_events = ControlFrame.query.filter(
+            ControlFrame.event_code.like(pattern)
+        ).all()
         
-        # Create event
-        event = Event(
+        if existing_events:
+            # Extract ordinals and find max
+            ordinals = []
+            for event in existing_events:
+                # event_code format: e.DDMMYYYY.RRR.NNN
+                parts = event.event_code.split('.')
+                if len(parts) == 4:
+                    try:
+                        ordinals.append(int(parts[3]))
+                    except ValueError:
+                        pass
+            ordinal = max(ordinals) + 1 if ordinals else 1
+        else:
+            ordinal = 1
+        
+        # Format event code
+        event_code = f"e.{event_date.strftime('%d%m%Y')}.{region}.{ordinal:03d}"
+        
+        # Get action category from selected action code
+        action = ActionCode.query.get(form.action_code.data)
+        action_type = action.action_category if action else None
+        
+        # ================================================================
+        # SIMPLIFIED JSONB HANDLING
+        # ================================================================
+        # Convert comma-separated strings to Python lists
+        # JSONB columns automatically serialize these - no special handling needed!
+        
+        subjects_str = form.identified_subjects.data or ''
+        if subjects_str.strip():
+            identified_subjects = [s.strip() for s in subjects_str.split(',') if s.strip()]
+        else:
+            identified_subjects = []
+
+        objects_str = form.identified_objects.data or ''
+        if objects_str.strip():
+            identified_objects = [s.strip() for s in objects_str.split(',') if s.strip()]
+        else:
+            identified_objects = []
+        
+        # Optional: Keep minimal debug output during testing
+        print(f"Creating event {event_code}")
+        print(f"  Subjects: {identified_subjects}")
+        print(f"  Objects: {identified_objects}")
+        
+        # ================================================================
+        # END SIMPLIFIED HANDLING
+        # ================================================================
+
+        # Parse tree cache handling
+        parse_tree_data = None
+        if form.parse_tree_cache.data:
+            try:
+                parse_tree_data = json.loads(form.parse_tree_cache.data)
+            except json.JSONDecodeError:
+                flash('Invalid parse tree data', 'error')
+                return render_template('events/create_cf.html', form=form, article=article)
+
+        # Create Control Frame record
+        # JSONB columns accept Python lists directly - SQLAlchemy handles conversion
+        control_frame = ControlFrame(
             event_code=event_code,
-            event_date=event_date,
-            region=region,
-            ordinal=ordinal,
-            core_action=form.core_action.data,
-            cie_description=form.cie_description.data,
-            natural_summary=form.natural_summary.data,
-            article_url=article.url if article else '',
-            article_headline=article.headline if article else '',
-            created_by=form.created_by.data
+            event_actor=form.event_actor.data,
+            action_code=form.action_code.data,
+            action_type=action_type,
+            rel_cred=form.rel_cred.data,
+            cie_body=form.cie_body.data,
+            identified_subjects=identified_subjects,  # Python list → JSONB automatically
+            identified_objects=identified_objects,    # Python list → JSONB automatically
+            source_article_id=form.source_article_id.data or None,
+            parse_tree_cache=parse_tree_data          # Python dict → JSONB automatically
         )
         
-        db.session.add(event)
-        
-        # Add subject actors
-        for code in form.subject_codes.data:
-            code_type, code_value = code.split(':', 1)
-            event_actor = EventActor(
-                event_code=event_code,
-                code=code_value,
-                code_type=code_type,
-                role_type='subject'
-            )
-            db.session.add(event_actor)
-        
-        # Add object actors
-        for code in form.object_codes.data:
-            code_type, code_value = code.split(':', 1)
-            event_actor = EventActor(
-                event_code=event_code,
-                code=code_value,
-                code_type=code_type,
-                role_type='object'
-            )
-            db.session.add(event_actor)
+        db.session.add(control_frame)
         
         # Mark article as processed if it exists
         if article:
             article.is_processed = True
         
-        db.session.commit()
-        
-        flash(f'Event {event_code} created successfully', 'success')
-        return redirect(url_for('events.detail', event_code=event_code))
+        try:
+            db.session.commit()
+            print(f"✓ Event {event_code} saved successfully!")
+            flash(f'Event {event_code} created successfully', 'success')
+            return redirect(url_for('events.detail_cf_route', event_code=event_code))
+        except Exception as e:
+            db.session.rollback()
+            print(f"✗ Database error: {e}")
+            flash(f'Error saving event: {str(e)}', 'error')
+            return render_template('events/create_cf.html', form=form, article=article)
     
-    return render_template('events/create.html',
+    return render_template('events/create_cf.html',
                          form=form,
                          article=article)
 
 
-@bp.route('/<event_code>/edit', methods=['GET', 'POST'])
-def edit(event_code):
-    """Edit existing event"""
-    event = Event.query.get_or_404(event_code)
-    form = EventEditForm(obj=event)
-    
-    # Populate actor/position choices
-    actors = Actor.query.order_by(Actor.surname, Actor.given_name).all()
-    positions = Position.query.order_by(Position.position_title).all()
-    
-    choices = []
-    for actor in actors:
-        choices.append((f'actor:{actor.actor_id}', f'{actor.actor_id} - {actor.get_display_name()}'))
-    for position in positions:
-        choices.append((f'position:{position.position_code}', f'{position.position_code} - {position.position_title}'))
-    
-    form.subject_codes.choices = choices
-    form.object_codes.choices = choices
-    
-    if request.method == 'GET':
-        # Pre-populate existing actors
-        subjects = [f'{ea.code_type}:{ea.code}' for ea in event.get_subjects()]
-        objects = [f'{ea.code_type}:{ea.code}' for ea in event.get_objects()]
-        form.subject_codes.data = subjects
-        form.object_codes.data = objects
-    
-    if form.validate_on_submit():
-        # Update event fields
-        event.event_date = form.event_date.data
-        event.core_action = form.core_action.data
-        event.cie_description = form.cie_description.data
-        event.natural_summary = form.natural_summary.data
-        event.created_by = form.created_by.data
+@bp.route('/parse-cie', methods=['POST'])
+def parse_cie_route():
+    """AJAX endpoint to parse CIE body and extract entities"""
+    try:
+        data = request.get_json()
+        cie_body = data.get('cie_body', '')
         
-        # Remove existing event actors
-        EventActor.query.filter_by(event_code=event_code).delete()
+        if not cie_body:
+            return jsonify({
+                'success': False,
+                'error': 'No CIE body provided'
+            })
         
-        # Add updated subject actors
-        for code in form.subject_codes.data:
-            code_type, code_value = code.split(':', 1)
-            event_actor = EventActor(
-                event_code=event_code,
-                code=code_value,
-                code_type=code_type,
-                role_type='subject'
-            )
-            db.session.add(event_actor)
+        # Parse the CIE body
+        result = parser.parse_safe(cie_body)
         
-        # Add updated object actors
-        for code in form.object_codes.data:
-            code_type, code_value = code.split(':', 1)
-            event_actor = EventActor(
-                event_code=event_code,
-                code=code_value,
-                code_type=code_type,
-                role_type='object'
-            )
-            db.session.add(event_actor)
+        if not result['success']:
+            return jsonify({
+                'success': False,
+                'error': result['error']
+            })
         
-        db.session.commit()
+        # Extract entities from parse tree
+        tree = result['tree']
+        subjects = set()
+        objects = set()
         
-        flash(f'Event {event_code} updated successfully', 'success')
-        return redirect(url_for('events.detail', event_code=event_code))
-    
-    return render_template('events/edit.html',
-                         form=form,
-                         event=event)
+        # Walk the parse tree to find entity codes
+        def extract_entities(node):
+            if hasattr(node, 'data'):
+                for child in node.children:
+                    if hasattr(child, 'type'):
+                        if child.type in ['POSITION_CODE', 'ACTOR_CODE', 'INSTITUTION_CODE']:
+                            if len(subjects) == 0:
+                                subjects.add(child.value)
+                            else:
+                                objects.add(child.value)
+                    elif hasattr(child, 'children'):
+                        extract_entities(child)
+        
+        extract_entities(tree)
+        
+        # Convert parse tree to JSON for storage
+        def tree_to_dict(node):
+            if hasattr(node, 'data'):
+                return {
+                    'type': 'rule',
+                    'data': node.data,
+                    'children': [tree_to_dict(child) for child in node.children]
+                }
+            else:
+                return {
+                    'type': 'token',
+                    'token_type': node.type if hasattr(node, 'type') else 'unknown',
+                    'value': str(node)
+                }
+        
+        parse_tree_json = tree_to_dict(tree)
+        
+        return jsonify({
+            'success': True,
+            'subjects': list(subjects),
+            'objects': list(objects),
+            'parse_tree': parse_tree_json
+        })
+        
+    except Exception as e:
+        return jsonify({
+            'success': False,
+            'error': str(e)
+        })
 
 
-@bp.route('/<event_code>/delete', methods=['POST'])
-def delete(event_code):
-    """Delete event"""
-    event = Event.query.get_or_404(event_code)
+@bp.route('/cf/<event_code>')
+def detail_cf_route(event_code):
+    """View Control Frame event details"""
+    cf = ControlFrame.query.get_or_404(event_code)
     
-    # EventActor entries will be cascade deleted
-    db.session.delete(event)
-    db.session.commit()
+    # Get subjects and objects as lists
+    subjects = cf.get_subjects_list()
+    objects = cf.get_objects_list()
     
-    flash(f'Event {event_code} deleted', 'success')
-    return redirect(url_for('events.index'))
+    cie_html = highlight_cie_syntax(cf.cie_body)  # Fixed: use cf, not control_frame
+    
+    return render_template('events/detail_cf.html',
+                          control_frame=cf,
+                          subjects=subjects,
+                          objects=objects,
+                          cie_html=cie_html)
+
+
+@bp.route('/get-action-type/<action_code>')
+def get_action_type_route(action_code):
+    """AJAX endpoint to get action type for a given action code"""
+    action = ActionCode.query.get(action_code)
+    if action:
+        return jsonify({
+            'success': True,
+            'action_type': action.action_category
+        })
+    return jsonify({
+        'success': False,
+        'error': 'Action code not found'
+    })

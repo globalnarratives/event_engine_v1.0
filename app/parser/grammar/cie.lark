@@ -1,0 +1,86 @@
+// CIE Grammar - Phase 1.5
+// Covers: Position codes, actor codes, institution codes, basic operators, subordination
+// Version: 2024-12-24
+
+%import .terminals (WS, INDENT, COUNTRY_CODE, REGION_CODE, SUBSTATE, ACTION_CODE, ACTION, GERUND, NEGATION, PREPOSITION, CONCLUDE, INS_TOP, MIN_FACET_01, MIN_FACET_02, ORG_FACET_01, ORG_FACET_02, RANK, FACET_2N, FACET_3N, FACET_YEAR, FACET_8N, POSITION_CODE, ACTOR_CODE, INSTITUTION_CODE, DATE_SIMP, DATE_TIME, MISC_ENTITY, QTY_FACET, QUANTITY, LOCATION, EVENT_REF)
+%ignore WS
+
+//==================================================
+//RULES
+//==================================================
+
+// ===================================================
+// EVENT STRUCTURE
+// ===================================================
+
+start: event
+
+event: main_line sub_line*
+
+main_line: relational_phrase (ind_object_rule | ind_object_terminal)? loc?
+        | mutual_phrase
+        
+sub_line: INDENT object_phrase ind_object_terminal*
+        | INDENT action_phrase (dirobj | object_phrase)? loc?
+        | INDENT time_phrase
+        | INDENT QUANTITY GERUND? ("," QUANTITY GERUND)*
+        | INDENT PREPOSITION? MISC_ENTITY ("," MISC_ENTITY)*
+      
+
+//====================================================
+// Subject Object Rules
+// ===================================================
+
+subject: POSITION_CODE | ACTOR_CODE | institution_ref ("," institution_ref)* | GERUND | MISC_ENTITY | EVENT_REF | mutual_relationship | LOCATION | domain_action
+
+object: EVENT_REF | POSITION_CODE | ACTOR_CODE | institution_ref ("," institution_ref)* | GERUND | MISC_ENTITY | "qty" 
+
+ind_object_rule: PREPOSITION (object | domain_action ("," domain_action)* | mutual_relationship)
+
+ind_object_terminal: PREPOSITION (ACTION | LOCATION | DATE_SIMP )
+
+// ===================================================
+// Sentence Type Rules
+// ===================================================
+
+relational_phrase: PREPOSITION subject ( dirobj_clause | indobj_clause )?
+                | subject GERUND ( dirobj_clause | indobj_clause )?
+                
+object_phrase: GERUND PREPOSITION? ( object | dirobj | ind_object_terminal )? (",")? ( dirobj | PREPOSITION? object)?
+
+action_phrase: subject? ACTION PREPOSITION?
+
+mutual_phrase: subject ("," subject)? loc
+
+time_phrase: PREPOSITION DATE_SIMP
+
+// ==================================================
+// Clause & Component Rules
+// ==================================================
+
+dirobj: NEGATION? ACTION object 
+
+dirobj_clause: object ("," object | object)?
+indobj_clause: object ind_object_rule object?  ("," object)? | ind_object_rule
+
+loc: "@" ( institution_ref | LOCATION ) DATE_TIME?
+        
+
+//====================================================
+// ITEMS
+// ===================================================
+
+domain_action: "axn." (MIN_FACET_01 | MIN_FACET_02)
+             | "axn:" INSTITUTION_CODE 
+
+mutual_relationship: COUNTRY_CODE "<>" COUNTRY_CODE | COUNTRY_CODE "<" GERUND ">" COUNTRY_CODE
+
+institution_ref: INSTITUTION_CODE | institution_short
+
+institution_short: INS_TOP "." MIN_FACET_01 ("." MIN_FACET_02)?
+
+
+
+
+
+

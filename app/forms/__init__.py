@@ -1,4 +1,4 @@
-from .event_forms import EventCreationForm, EventEditForm, EventSearchForm
+from .event_forms import EventCreationForm, EventEditForm, EventSearchForm, EventCFCreationForm
 from .admin_forms import (
     InstitutionForm, 
     PositionForm, 
@@ -12,6 +12,7 @@ __all__ = [
     'EventCreationForm',
     'EventEditForm',
     'EventSearchForm',
+    'EventCFCreationForm',
     'InstitutionForm',
     'PositionForm',
     'ActorForm',

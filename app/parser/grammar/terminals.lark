@@ -1,0 +1,224 @@
+// ==================================================
+// CIE Grammar Phase 1.5
+// Covers Background and Terminals
+// ==================================================
+
+INDENT: /[ \t]*/ "▪"
+
+// ==================================================
+// COUNTRY & REGION CODES
+// ==================================================
+
+// ISO 3166-1 alpha-3 Country Codes (lowercase)
+COUNTRY_CODE: "abw" | "afg" | "ago" | "aia" | "ala" | "alb" | "and" | "are" | "arg" | "arm"
+            | "asm" | "ata" | "atf" | "atg" | "aus" | "aut" | "aze" | "bdi" | "bel" | "ben"
+            | "bes" | "bfa" | "bgd" | "bgr" | "bhr" | "bhs" | "bih" | "blm" | "blr" | "blz"
+            | "bmu" | "bol" | "bra" | "brb" | "brn" | "btn" | "bvt" | "bwa" | "caf" | "can"
+            | "cck" | "che" | "chl" | "chn" | "civ" | "cmr" | "cod" | "cog" | "cok" | "col"
+            | "com" | "cpv" | "cri" | "cub" | "cuw" | "cxr" | "cym" | "cyp" | "cze" | "deu"
+            | "dji" | "dma" | "dnk" | "dom" | "dza" | "ecu" | "egy" | "eri" | "esh" | "esp"
+            | "est" | "eth" | "fin" | "fji" | "flk" | "fra" | "fro" | "fsm" | "gab" | "gbr"
+            | "geo" | "ggy" | "gha" | "gib" | "gin" | "glp" | "gmb" | "gnb" | "gnq" | "grc"
+            | "grd" | "grl" | "gtm" | "guf" | "gum" | "guy" | "hkg" | "hmd" | "hnd" | "hrv"
+            | "hti" | "hun" | "idn" | "imn" | "ind" | "iot" | "irl" | "irn" | "irq" | "isl"
+            | "isr" | "ita" | "jam" | "jey" | "jor" | "jpn" | "kaz" | "ken" | "kgz" | "khm"
+            | "kir" | "kna" | "kor" | "kwt" | "lao" | "lbn" | "lbr" | "lby" | "lca" | "lie"
+            | "lka" | "lso" | "ltu" | "lux" | "lva" | "mac" | "maf" | "mar" | "mco" | "mda"
+            | "mdg" | "mdv" | "mex" | "mhl" | "mkd" | "mli" | "mlt" | "mmr" | "mne" | "mng"
+            | "mnp" | "moz" | "mrt" | "msr" | "mtq" | "mus" | "mwi" | "mys" | "myt" | "nam"
+            | "ncl" | "ner" | "nfk" | "nga" | "nic" | "niu" | "nld" | "nor" | "npl" | "nru"
+            | "nzl" | "omn" | "pak" | "pan" | "pcn" | "per" | "phl" | "plw" | "png" | "pol"
+            | "pri" | "prk" | "prt" | "pry" | "pse" | "pyf" | "qat" | "reu" | "rou" | "rus"
+            | "rwa" | "sau" | "sdn" | "sen" | "sgp" | "sgs" | "shn" | "sjm" | "slb" | "sle"
+            | "slv" | "smr" | "som" | "spm" | "srb" | "ssd" | "stp" | "sur" | "svk" | "svn"
+            | "swe" | "swz" | "sxm" | "syc" | "syr" | "tca" | "tcd" | "tgo" | "tha" | "tjk"
+            | "tkl" | "tkm" | "tls" | "ton" | "tto" | "tun" | "tur" | "tuv" | "twn" | "tza"
+            | "uga" | "ukr" | "umi" | "ury" | "usa" | "uzb" | "vat" | "vct" | "ven" | "vgb"
+            | "vir" | "vnm" | "vut" | "wlf" | "wsm" | "yem" | "zaf" | "zmb" | "zwe" | "igo"
+
+REGION_CODE: "weu" | "eeu" | "nam" | "sam" | "nea" | "sea" | "oce" | "sas" | "cas" | "mea"
+            | "waf" | "eaf" | "caf" | "saf" | "cmb"
+
+SUBSTATE: "nys" | "nyc" | "kdn" | "knt" | "sxn" | "nsw" | "ilo" | "chi" | "geo" | "hkg" | "nii" | "gnv" | "pac" | "fld" | "mia"
+
+// ==================================================
+// MAIN TERMINALS
+// ==================================================
+
+// ==================================================
+// ACTIONS & VERBALS
+// ==================================================
+
+// Legal-Legislative
+
+ACTION_CODE: "bn" | "co" | "en" | "nl" | "nt" | "sb" | "ts"  | "vd" | "vo" | "vu"
+            | "wd"
+
+// Legal-Juridical
+
+            | "ad" | "ar" | "dt" | "xd" | "fi" | "id" | "jl" | "ki" | "nv" 
+            | "op" | "pl" | "re" | "rf" | "rg" | "rl" | "rt" | "sc" | "sz"
+            | "pm" | "su"
+            
+// Legal-Executive
+
+// Political-Diplomatic
+
+            | "ag" | "mt" | "rv" | "rc" | "sn" | "sp"
+
+// Political-Operational
+
+            | "ap" | "bg" | "ed" | "es" | "nm" | "ud"
+
+// Political-Popular
+
+            | "hl" | "wn" 
+
+// Military-Kinetic
+
+            | "ab" | "ak" | "ch" | "cp" | "dp" | "dv" | "nu"
+
+// Miscellaneous-General
+
+            | "cn" | "dn" | "di" | "dt" | "rm" | "gv" | "go" | "hi"
+            | "ij" | "mt" | "pn" | "qt" | "sr" | "sd"
+
+// Statement-Inflected
+
+            | "s-ac" | "s-al" | "s-as" | "s-bk" | "s-cr" | "s-op" | "s-rb"
+            | "s-tr" | "s-ur" | "s-wr"
+
+// Statement-Neutral 
+
+            | "s-cf" | "s-dn" | "s-ds" | "s-es" | "s-gp" | "s-in" | "s-ps"
+            | "s-pr" | "s-rp" | "s-rs" | "s-sp" | "s-st"
+
+// Claims & Rumors
+
+            | "c-mc" | "c-mo" | "c-ns" | "c-or" | "c-st" | "c-uv"
+
+// Announcements
+
+            | "a-at" | "a-dt" | "a-in" | "a-mt" | "a-po" | "a-tr"
+
+// Reports & Data Release
+
+            | "r-dt" | "r-in" | "r-po" | "r-rp"
+
+// Verb Forms
+
+// TOP_ACTION: "[" ACTION_CODE "]" | "<[" ACTION_CODE "]>"
+ACTION: "[" ACTION_CODE "]" | "<[" ACTION_CODE "]>" | "/[" ACTION_CODE "]/" | "</[" ACTION_CODE "]/>" 
+GERUND: "{" ACTION_CODE "}" | "<{" ACTION_CODE "}>" | "/{" ACTION_CODE "}/" | "</{" ACTION_CODE "}/>"
+
+
+NEGATION: "x"
+
+// Prepositions
+
+PREPOSITION: "$"  // Universal preposition
+            | "@" // Locative, literal or figurative
+            | "^" // Reference to previous event
+            | "<" // Past tense; action already concluded as specified time
+            | ">" // Future tense; action to be happen or conclude at specified time
+            | "//" // Conditional resolution
+            | "/" // Possession
+            | "`+" // At least
+            | "`-" // Less than
+            | "#" // Style indicator; by means of which
+            | "->" // Applies to
+            | "!" // Reflexive capacity
+            | ":" // Presentation of result
+            | "<>" // Mutuality
+
+CONCLUDE: "||"
+
+// =====================================================================================
+// FACETS
+// =====================================================================================
+
+// Ministerial Facets
+
+INS_TOP: "min" | "hos" | "hog" | "amb" | "org" | "jud" | "ccp"
+
+MIN_FACET_01: "forn" | "fisc" | "dfns" | "jstc" | "resr" | "agrc" | "comc" | "labr" | "hlth" | "hous" | "infr" | "scnc" | "educ" | "gndm" | "trde" | "intl" | "cltr" | "spec" | "ops" | "exc" | "lh" | "uh" | "ntfd"
+            | "grct"
+
+MIN_FACET_02: "vet" | "env" | "eng" | "trt" | "ext" | "int" | "soc" | "ath" | "exc" | "pec" | "dig" | "ops" | "img" | "kns" | "psn" | "exi" | "chm" | "enf" | "eco" | "cms" | "psc" | "grtc" | "vrbn" | "ntfd" | "cme"
+            | "resr" | "stwl" | "ary" | "mteo" | "grd" | "imp" | "angf" | "flny" | "incd" | "hyc" | "nuc" | "amb" 
+
+            // There is a subset of the Min Facets that should independently operate as functional subjects or objects on their own: incd, vrbn, etc. We kind of addressed this with axn.vrbn etc in Phase I, but more
+            // work is needed
+
+ORG_FACET_01: "rlg" | "pvt" | "pub" | "soe" | "akd" | "ind"
+
+ORG_FACET_02: "xtn" | "mmb" | "pvt"
+
+RANK: "exc" | "spx" | "spec"
+
+// General Purpose TEMPORARY
+
+FACET_2N: /[0-9]{2}/
+FACET_3N: /[0-9]{3}/
+FACET_YEAR: /[0-9]{4}/
+FACET_8N: /[0-9]{8}/
+
+// Position and Actor
+
+POSITION_CODE.2: COUNTRY_CODE "." INS_TOP "." MIN_FACET_01 ("." MIN_FACET_02)* ("." FACET_2N)? ("." RANK) ("." (FACET_2N | FACET_3N))?
+             | COUNTRY_CODE "." INS_TOP "." MIN_FACET_01 ".delg"
+             | COUNTRY_CODE "." ("hos" | "hog" )
+             | "*.exc.01"
+
+ACTOR_CODE: COUNTRY_CODE "." FACET_YEAR "." FACET_3N
+
+INSTITUTION_CODE: COUNTRY_CODE "." INS_TOP "." MIN_FACET_01 ("." MIN_FACET_02)* ("." FACET_2N)?
+                | COUNTRY_CODE "." INS_TOP "." ORG_FACET_01 ("." ORG_FACET_02)* ("." FACET_3N)
+                | COUNTRY_CODE ".sbs" "." SUBSTATE ("." SUBSTATE)? "." MIN_FACET_01 ("." (MIN_FACET_01 | MIN_FACET_02))* ("." FACET_2N)?
+                | COUNTRY_CODE ".cpl"
+                | COUNTRY_CODE ".cpl" "." MIN_FACET_01 ("." MIN_FACET_02)*
+                | COUNTRY_CODE (".com" "." ORG_FACET_01 | ".org") "." FACET_8N ("." FACET_3N)?
+                | "igo" ("." REGION_CODE)? "." FACET_3N "." MIN_FACET_01 ("." MIN_FACET_02)*
+
+MISC_ENTITY: "indv.und"
+            | COUNTRY_CODE ".prl" "." FACET_YEAR "." FACET_3N ".lex"
+            | "sbs" "." MIN_FACET_02 ".lex"
+            | "unk" "." ( QTY_FACET | "com" | "indv" )
+            | "(" (MIN_FACET_01 | MIN_FACET_02) ")"
+            | "org" "." ("und" | "unk") "." FACET_3N
+            | MIN_FACET_02 ( "." MIN_FACET_02)*
+
+            // MISC_ENTITY currently dumping ground for straggler components. Must clean up with "MISC FACET," at least
+
+// ===============================================
+// QUANTITIES
+// ===============================================
+
+
+QTY_FACET: "enf" | "hom" | "fem" | "adt" | "civ"
+
+QUANTITY: (FACET_2N "." QTY_FACET) | (FACET_3N "." QTY_FACET)
+            
+
+// Location
+
+LOCATION : COUNTRY_CODE ".cpl"
+         | COUNTRY_CODE ".sbs" "." SUBSTATE ("." SUBSTATE)* ".cpl"?
+         | "*.loc"
+
+        // *.loc as placeholder before resolution of anaphoric asterisk
+
+// Date & Time
+
+DATE_SIMP: FACET_8N | "e.*"
+DATE_TIME: FACET_8N (WS+ /[0-9]{2}/ "h" /[0-9]{2}/ WS+ "UTC")?
+
+// Events
+
+EVENT_REF: "e." DATE_SIMP "." REGION_CODE "." FACET_3N ("." "axn")?
+
+// Remove dependency on common.WS
+WS: /[ \t\n\r]+/
+
+
+

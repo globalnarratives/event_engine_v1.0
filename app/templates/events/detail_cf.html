@@ -1,0 +1,130 @@
+{% extends "base.html" %}
+
+{% block title %}Event {{ control_frame.event_code }}{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Control Frame Event</h1>
+    
+    <!-- Control Frame Display - Mirrors Creation Form Layout -->
+    <div class="cf-form-container">
+        <table class="cf-table">
+            <!-- Row 1: Event ID, Region, REC -->
+            <tr>
+                <td class="cf-label-cell">EVENT ID</td>
+                <td class="cf-input-cell" colspan="2">
+                    <div class="cf-display-value">{{ control_frame.event_code }}</div>
+                </td>
+                <td class="cf-label-cell">REC</td>
+                <td class="cf-input-cell">
+                    <div class="cf-display-value">{{ control_frame.rec_timestamp.strftime('%d%m%Y %H%M') }} UTC</div>
+                </td>
+            </tr>
+
+            <!-- Row 2: Event Actor, Action -->
+            <tr>
+                <td class="cf-label-cell">EVENT ACTOR</td>
+                <td class="cf-input-cell">
+                    <div class="cf-display-value cf-code">{{ control_frame.event_actor }}</div>
+                </td>
+                <td class="cf-label-cell">ACTION</td>
+                <td class="cf-input-cell" colspan="2">
+                    <div class="cf-display-value">{{ control_frame.action_code }} - {{ control_frame.action.action_type if control_frame.action else '' }}</div>
+                </td>
+            </tr>
+
+            <!-- Row 3: Type, Rel/Cred -->
+            <tr>
+                <td class="cf-label-cell">TYPE</td>
+                <td class="cf-input-cell">
+                    <div class="cf-display-value">{{ control_frame.action_type }}</div>
+                </td>
+                <td class="cf-label-cell">REL/CRED</td>
+                <td class="cf-input-cell" colspan="2">
+                    <div class="cf-display-value cf-badge">{{ control_frame.rel_cred }}</div>
+                </td>
+            </tr>
+        </table>
+
+        <!-- CIE Body Display with Scenarios Sidebar -->
+        <div class="cf-cie-grid">
+            <!-- Left: CIE Body -->
+            <div class="cf-cie-section">
+                <pre class="cf-cie-display">{{ cie_html|safe }}</pre>
+            </div>
+            
+            <!-- Right: Linked Scenarios -->
+            <div class="cf-scenarios-sidebar">
+                <div class="cf-scenarios-header">Linked Scenarios</div>
+                <div class="cf-scenario-row">
+                    <span class="cf-scenario-label">Last hr</span>
+                    <span class="cf-scenario-value">6</span>
+                </div>
+                <div class="cf-scenario-row">
+                    <span class="cf-scenario-label">Last 6 hr</span>
+                    <span class="cf-scenario-value">17</span>
+                </div>
+                <div class="cf-scenario-row">
+                    <span class="cf-scenario-label">Last 12 hr</span>
+                    <span class="cf-scenario-value">22</span>
+                </div>
+                <div class="cf-scenario-row">
+                    <span class="cf-scenario-label">Last 24 hr</span>
+                    <span class="cf-scenario-value">33</span>
+                </div>
+                <div class="cf-scenario-row cf-scenario-row-total">
+                    <span class="cf-scenario-label">Prev</span>
+                    <span class="cf-scenario-value">35</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Identified Entities -->
+        <table class="cf-table">
+            <tr>
+                <td class="cf-label-cell" style="width: 50%;">IDENTIFIED SUBJECTS</td>
+                <td class="cf-label-cell" style="width: 50%;">IDENTIFIED OBJECTS</td>
+            </tr>
+            <tr>
+                <td class="cf-input-cell" style="vertical-align: top;">
+                    <div class="cf-display-value">
+                        {% if subjects %}
+                            {{ subjects|join(', ') }}
+                        {% else %}
+                            <span class="cf-empty">None</span>
+                        {% endif %}
+                    </div>
+                </td>
+                <td class="cf-input-cell" style="vertical-align: top;">
+                    <div class="cf-display-value">
+                        {% if objects %}
+                            {{ objects|join(', ') }}
+                        {% else %}
+                            <span class="cf-empty">None</span>
+                        {% endif %}
+                    </div>
+                </td>
+            </tr>
+        </table>
+
+        <!-- Source Article -->
+        {% if control_frame.source_article %}
+        <div class="cf-source-display">
+            <a href="{{ control_frame.source_article.url }}" target="_blank" class="cf-source-link">
+                {{ control_frame.source_article.url }}
+            </a>
+            <span class="cf-source-meta">
+                {{ control_frame.source_article.source_name if control_frame.source_article.source_name else 'Article' }} | 
+                {{ control_frame.source_article.collected_date.strftime('%Y-%m-%d') if control_frame.source_article.collected_date else '' }}
+            </span>
+        </div>
+        {% endif %}
+
+        <!-- Action Buttons -->
+        <div class="cf-actions">
+            <a href="{{ url_for('events.index') }}" class="btn btn-secondary">← Back to Events</a>
+            <a href="{{ url_for('events.create_cf_route') }}" class="btn btn-primary">Create New Event</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
