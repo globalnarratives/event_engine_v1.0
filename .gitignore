@@ -61,7 +61,7 @@ logs/
 Thumbs.db
 
 #Sensitive
-config.py
+#config.py
 
 # Migrations (optional - uncomment if you want to regenerate)
 # migrations/
