@@ -1,12 +1,13 @@
 from flask import Flask, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy  # type: ignore
 from flask_migrate import Migrate  # type: ignore
+from flask_login import LoginManager  # type: ignore
 from config import config
 
 # Initialize extensions
 db = SQLAlchemy()
 migrate = Migrate()
-
+login_manager = LoginManager()  # Add this line
 
 def create_app(config_name='default'):
     """Application factory pattern"""
@@ -21,15 +22,27 @@ def create_app(config_name='default'):
     # Initialize extensions with app
     db.init_app(app)
     migrate.init_app(app, db)
+    login_manager.init_app(app)  # Add this line
+    
+    # Configure login manager
+    login_manager.login_view = 'auth.login'
+    login_manager.login_message = 'Please log in to access this page.'
+    
+    # User loader callback
+    from app.models import User
+    @login_manager.user_loader
+    def load_user(user_id):
+        return User.query.get(int(user_id))
     
     # Register blueprints
-    from app.routes import articles, events, actors, positions, institutions
+    from app.routes import articles, events, actors, positions, institutions, auth
     
     app.register_blueprint(articles.bp)
     app.register_blueprint(events.bp)
     app.register_blueprint(actors.bp)
     app.register_blueprint(positions.bp)
     app.register_blueprint(institutions.bp)
+    app.register_blueprint(auth.bp)
     
     # Register error handlers
     @app.errorhandler(404)
@@ -44,7 +57,5 @@ def create_app(config_name='default'):
     @app.route('/')
     def index():
         return redirect(url_for('articles.dashboard'))
-
-
 
     return app

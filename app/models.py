@@ -1,7 +1,8 @@
 from app import db
 from sqlalchemy.dialects.postgresql import JSONB
 from datetime import datetime
-
+from flask_login import UserMixin
+from datetime import datetime
 
 
 class Article(db.Model):
@@ -248,6 +249,20 @@ class Tenure(db.Model):
         return (self.tenure_start <= date and 
                 (self.tenure_end is None or self.tenure_end >= date))
 
+class User(UserMixin, db.Model):
+    __tablename__ = 'users'
+    
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(80), unique=True, nullable=False)
+    email = db.Column(db.String(120), unique=True, nullable=False)
+    password_hash = db.Column(db.String(255), nullable=False)
+    role = db.Column(db.String(20), nullable=False, default='analyst')  # 'admin' or 'analyst'
+    is_active = db.Column(db.Boolean, default=True)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    last_login = db.Column(db.DateTime)
+    
+    def __repr__(self):
+        return f'<User {self.username}>'
 
 #class EventActor(db.Model):
     # """Links events to actors/positions as subjects or objects"""
