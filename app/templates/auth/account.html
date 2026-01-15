@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block title %}Account - Global Narratives{% endblock %}
+
+{% block content %}
+<div style="max-width: 600px; margin: 3rem auto;">
+    <div class="card">
+        <div class="card-header">
+            <h1 class="card-title">Account Information</h1>
+        </div>
+        <div class="card-body">
+            <div class="form-group">
+                <label class="form-label">Username</label>
+                <div class="cf-display-value">{{ current_user.username }}</div>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Email</label>
+                <div class="cf-display-value">{{ current_user.email }}</div>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Role</label>
+                <div class="cf-display-value">
+                    <span class="badge badge-{{ 'active' if current_user.role == 'admin' else 'pending' }}">
+                        {{ current_user.role|upper }}
+                    </span>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Account Created</label>
+                <div class="cf-display-value">{{ current_user.created_at.strftime('%Y-%m-%d %H:%M UTC') }}</div>
+            </div>
+            
+            {% if current_user.last_login %}
+            <div class="form-group">
+                <label class="form-label">Last Login</label>
+                <div class="cf-display-value">{{ current_user.last_login.strftime('%Y-%m-%d %H:%M UTC') }}</div>
+            </div>
+            {% endif %}
+        </div>
+        <div class="card-footer">
+            <a href="{{ url_for('dashboard.home') }}" class="btn btn-secondary">Back to Dashboard</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

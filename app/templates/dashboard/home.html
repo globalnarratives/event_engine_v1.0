@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block title %}Dashboard - Global Narratives{% endblock %}
+
+{% block content %}
+<div class="grid grid-cols-2" style="margin-top: 2rem;">
+    <!-- Left Column -->
+    <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+        <!-- Events Hub -->
+        <div class="card">
+            <div class="card-header">
+                <h2 class="card-title">Events Hub</h2>
+            </div>
+            <div class="card-body">
+                <a href="{{ url_for('events.create_cf_route') }}" class="btn btn-primary btn-block">Create Event</a>
+            </div>
+        </div>
+
+        <!-- Directory -->
+        <div class="card">
+            <div class="card-header">
+                <h2 class="card-title">Directory</h2>
+            </div>
+            <div class="card-body" style="display: flex; flex-direction: column; gap: 0.75rem;">
+                <a href="{{ url_for('positions.index') }}" class="btn btn-secondary btn-block">Positions</a>
+                <a href="{{ url_for('actors.index') }}" class="btn btn-secondary btn-block">Actors</a>
+                <a href="{{ url_for('institutions.index') }}" class="btn btn-secondary btn-block">Institutions</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Right Column -->
+    <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+        <!-- Recent Events -->
+        <div class="card">
+            <div class="card-header">
+                <h2 class="card-title">Recent Events</h2>
+            </div>
+            <div class="card-body">
+                {% if recent_events %}
+                    {% for event in recent_events %}
+                        <div style="padding: 0.75rem 0; border-bottom: 1px solid var(--color-border);">
+                            <a href="{{ url_for('events.detail_cf_route', event_code=event.event_code) }}" style="color: var(--color-accent-primary); text-decoration: none;">
+                                {{ event.event_code }}
+                            </a>
+                            <span style="color: var(--color-text-dim); margin-left: 1rem; font-size: 0.875rem;">
+                                {{ event.rec_timestamp.strftime('%Y-%m-%d') }}
+                            </span>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <p style="color: var(--color-text-dim); font-style: italic;">No events yet</p>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Articles -->
+        <div class="card">
+            <div class="card-header">
+                <h2 class="card-title">Articles</h2>
+            </div>
+            <div class="card-body">
+                <p style="margin-bottom: 1rem;">
+                    <span style="color: var(--color-accent-primary); font-weight: 600; font-size: 1.5rem;">{{ unprocessed_articles }}</span>
+                    <span style="color: var(--color-text-secondary);"> unprocessed articles</span>
+                </p>
+                <a href="{{ url_for('articles.dashboard') }}" class="btn btn-secondary btn-block">View Articles Dashboard</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

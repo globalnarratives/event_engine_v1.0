@@ -28,7 +28,7 @@ def login():
             db.session.commit()
             
             next_page = request.args.get('next')
-            return redirect(next_page) if next_page else redirect(url_for('articles.dashboard'))
+            return redirect(next_page) if next_page else redirect(url_for('dashboard.home'))
         else:
             flash('Invalid email or password.', 'error')
     
@@ -41,3 +41,9 @@ def logout():
     logout_user()
     flash('You have been logged out.', 'success')
     return redirect(url_for('auth.login'))
+
+@bp.route('/account')
+@login_required
+def account():
+    """View account information"""
+    return render_template('auth/account.html')
