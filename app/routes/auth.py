@@ -34,30 +34,6 @@ def login():
     
     return render_template('auth/login.html')
 
-@bp.route('/create-first-admin-temp-route')
-def create_first_admin():
-    """Temporary route to create first admin - DELETE AFTER USE"""
-    from werkzeug.security import generate_password_hash
-    
-    # Check if admin already exists
-    existing = User.query.filter_by(email='editor@mondium.org').first()
-    if existing:
-        return "Admin already exists!"
-    
-    admin = User(
-        username='editor',
-        email='editor@mondium.org',
-        password_hash=generate_password_hash('59Danderson&'),
-        role='admin',
-        is_active=True
-    )
-    
-    db.session.add(admin)
-    db.session.commit()
-    
-    return "Admin created! Now DELETE THIS ROUTE from auth.py"
-
-
 
 @bp.route('/logout')
 @login_required
