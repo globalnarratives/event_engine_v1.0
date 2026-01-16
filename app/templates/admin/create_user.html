@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block title %}Create User{% endblock %}
+
+{% block content %}
+<div class="container" style="max-width: 800px;">
+    <h1>Create New User</h1>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="card mb-md flash-{{ category }}">
+                    <div class="card-body">
+                        {{ message }}
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <div class="card">
+        <div class="card-body">
+            <form method="POST">
+                <div class="form-group">
+                    <label class="form-label" for="username">Username</label>
+                    <input type="text" id="username" name="username" class="form-input" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="email">Email</label>
+                    <input type="email" id="email" name="email" class="form-input" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="role">Role</label>
+                    <select id="role" name="role" class="form-select">
+                        <option value="analyst">Analyst</option>
+                        <option value="admin">Admin</option>
+                    </select>
+                </div>
+
+                <div class="card bg-elevated" style="padding: 1rem; margin-bottom: 1.5rem; border-left: 3px solid var(--color-accent-tertiary);">
+                    <p style="margin: 0; color: var(--color-text-secondary); font-size: 0.875rem;">
+                        <strong>Note:</strong> A temporary password will be generated automatically and displayed after user creation. 
+                        Make sure to save it and share it securely with the user.
+                    </p>
+                </div>
+
+                <div class="flex gap-md">
+                    <button type="submit" class="btn btn-primary">Create User</button>
+                    <a href="{{ url_for('admin.users') }}" class="btn btn-secondary">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -39,10 +39,18 @@
                 <div class="cf-display-value">{{ current_user.last_login.strftime('%Y-%m-%d %H:%M UTC') }}</div>
             </div>
             {% endif %}
+
+            <div class="mt-lg">
+                <a href="{{ url_for('auth.change_password') }}" class="btn btn-primary">Change Password</a>
+            </div>
+
         </div>
         <div class="card-footer">
             <a href="{{ url_for('dashboard.home') }}" class="btn btn-secondary">Back to Dashboard</a>
         </div>
     </div>
 </div>
+
+
+
 {% endblock %}

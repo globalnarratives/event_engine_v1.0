@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+
+{% block title %}Edit User{% endblock %}
+
+{% block content %}
+<div class="container" style="max-width: 800px;">
+    <h1>Edit User: {{ user.username }}</h1>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="card mb-md flash-{{ category }}">
+                    <div class="card-body">
+                        {{ message }}
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <div class="card">
+        <div class="card-body">
+            <form method="POST">
+                <div class="form-group">
+                    <label class="form-label" for="username">Username</label>
+                    <input type="text" id="username" name="username" class="form-input" value="{{ user.username }}" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="email">Email</label>
+                    <input type="email" id="email" name="email" class="form-input" value="{{ user.email }}" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="role">Role</label>
+                    <select id="role" name="role" class="form-select" {% if is_self %}disabled{% endif %}>
+                        <option value="analyst" {% if user.role == 'analyst' %}selected{% endif %}>Analyst</option>
+                        <option value="admin" {% if user.role == 'admin' %}selected{% endif %}>Admin</option>
+                    </select>
+                    {% if is_self %}
+                        <p style="font-size: 0.75rem; color: var(--color-text-dim); margin-top: 0.25rem;">
+                            You cannot change your own role
+                        </p>
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                        <input type="checkbox" name="is_active" {% if user.is_active %}checked{% endif %} {% if is_self %}disabled{% endif %}>
+                        <span class="form-label" style="margin: 0;">Active</span>
+                    </label>
+                    {% if is_self %}
+                        <p style="font-size: 0.75rem; color: var(--color-text-dim); margin-top: 0.25rem;">
+                            You cannot deactivate your own account
+                        </p>
+                    {% endif %}
+                </div>
+
+                <div class="border-top" style="margin: 1.5rem 0; padding-top: 1.5rem;">
+                    <h3 style="font-size: 1rem; margin-bottom: 1rem;">Password Management</h3>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="new_password">New Password (optional)</label>
+                        <input type="password" id="new_password" name="new_password" class="form-input" placeholder="Leave blank to keep current password">
+                        <p style="font-size: 0.75rem; color: var(--color-text-dim); margin-top: 0.25rem;">
+                            Only fill this in if you want to manually set a new password
+                        </p>
+                    </div>
+
+                    <form method="POST" action="{{ url_for('admin.reset_password', user_id=user.id) }}" style="margin-top: 1rem;">
+                        <button type="submit" class="btn btn-warning" onclick="return confirm('Generate a new temporary password for this user?')">
+                            Generate Temporary Password
+                        </button>
+                    </form>
+                </div>
+
+                <div class="flex gap-md mt-lg" style="padding-top: 1.5rem; border-top: 1px solid var(--color-border);">
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                    <a href="{{ url_for('admin.users') }}" class="btn btn-secondary">Cancel</a>
+                    
+                    {% if not is_self %}
+                    <form method="POST" action="{{ url_for('admin.delete_user', user_id=user.id) }}" style="margin-left: auto;">
+                        <button type="submit" class="btn btn-warning" onclick="return confirm('Are you sure you want to deactivate this user?')">
+                            Deactivate User
+                        </button>
+                    </form>
+                    {% endif %}
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

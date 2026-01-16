@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+
+{% block title %}User Management{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="flex justify-between items-center mb-lg">
+        <h1>User Management</h1>
+        <a href="{{ url_for('admin.create_user') }}" class="btn btn-primary">
+            Create New User
+        </a>
+    </div>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="card mb-md flash-{{ category }}">
+                    <div class="card-body">
+                        {{ message }}
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <div class="card">
+        <div class="card-body">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                        <th>Status</th>
+                        <th>Created</th>
+                        <th>Last Login</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in users.items %}
+                    <tr>
+                        <td>
+                            <strong>{{ user.username }}</strong>
+                            {% if user.id == current_user.id %}
+                                <span class="badge badge-active" style="margin-left: 0.5rem;">YOU</span>
+                            {% endif %}
+                        </td>
+                        <td>{{ user.email }}</td>
+                        <td>
+                            {% if user.role == 'admin' %}
+                                <span class="badge badge-critical">ADMIN</span>
+                            {% else %}
+                                <span class="badge badge-pending">ANALYST</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if user.is_active %}
+                                <span class="badge badge-active">ACTIVE</span>
+                            {% else %}
+                                <span class="badge badge-resolved">INACTIVE</span>
+                            {% endif %}
+                        </td>
+                        <td>{{ user.created_at.strftime('%Y-%m-%d') if user.created_at else 'N/A' }}</td>
+                        <td>{{ user.last_login.strftime('%Y-%m-%d %H:%M') if user.last_login else 'Never' }}</td>
+                        <td>
+                            <a href="{{ url_for('admin.edit_user', user_id=user.id) }}" class="btn btn-secondary" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;">
+                                Edit
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            {% if users.pages > 1 %}
+            <div class="flex justify-between items-center mt-lg">
+                <div class="text-secondary">
+                    Page {{ users.page }} of {{ users.pages }} ({{ users.total }} users)
+                </div>
+                <div class="flex gap-sm">
+                    {% if users.has_prev %}
+                        <a href="{{ url_for('admin.users', page=users.prev_num) }}" class="btn btn-secondary">← Previous</a>
+                    {% endif %}
+                    {% if users.has_next %}
+                        <a href="{{ url_for('admin.users', page=users.next_num) }}" class="btn btn-secondary">Next →</a>
+                    {% endif %}
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

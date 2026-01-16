@@ -376,6 +376,26 @@ a:hover {
 }
 
 /* ============================================
+   FLASH MESSAGE VARIANTS
+   ============================================ */
+
+.flash-success {
+    border-left: 4px solid var(--color-accent-secondary);
+}
+
+.flash-error {
+    border-left: 4px solid var(--color-accent-warning);
+}
+
+.flash-warning {
+    border-left: 4px solid var(--color-accent-tertiary);
+}
+
+.flash-info {
+    border-left: 4px solid var(--color-accent-primary);
+}
+
+/* ============================================
    BADGES
    ============================================ */
 .badge {

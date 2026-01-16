@@ -60,3 +60,47 @@ def logout():
 def account():
     """View account information"""
     return render_template('auth/account.html')
+
+@bp.route('/change-password', methods=['GET', 'POST'])
+@login_required
+def change_password():
+    """Change password page"""
+    if request.method == 'GET':
+        return render_template('auth/change_password.html')
+    
+    # POST - handle password change
+    current_password = request.form.get('current_password')
+    new_password = request.form.get('new_password')
+    confirm_password = request.form.get('confirm_password')
+    
+    # Validation
+    if not current_password or not new_password or not confirm_password:
+        flash('All password fields are required.', 'error')
+        return render_template('auth/change_password.html')
+    
+    # Verify current password
+    if not check_password_hash(current_user.password_hash, current_password):
+        flash('Current password is incorrect.', 'error')
+        return render_template('auth/change_password.html')
+    
+    # Check new passwords match
+    if new_password != confirm_password:
+        flash('New passwords do not match.', 'error')
+        return render_template('auth/change_password.html')
+    
+    # Check password length
+    if len(new_password) < 8:
+        flash('New password must be at least 8 characters.', 'error')
+        return render_template('auth/change_password.html')
+    
+    # Update password
+    current_user.password_hash = generate_password_hash(new_password)
+    
+    try:
+        db.session.commit()
+        flash('Password changed successfully!', 'success')
+        return redirect(url_for('auth.account'))
+    except Exception as e:
+        db.session.rollback()
+        flash(f'Error changing password: {str(e)}', 'error')
+        return render_template('auth/change_password.html')
