@@ -57,6 +57,6 @@ def create_app(config_name='default'):
     
     @app.route('/')
     def index():
-        return redirect(url_for('articles.dashboard'))
+        return redirect(url_for('dashboard.home'))
 
     return app
