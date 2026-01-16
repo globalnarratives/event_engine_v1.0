@@ -88,7 +88,7 @@ def edit_user(user_id):
         username = request.form.get('username')
         email = request.form.get('email')
         role = request.form.get('role')
-        is_active = request.form.get('is_active') == 'on'
+        is_active = 'is_active' in request.form
         new_password = request.form.get('new_password')
         
         # Validation

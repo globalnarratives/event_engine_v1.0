@@ -67,11 +67,9 @@
                         </p>
                     </div>
 
-                    <form method="POST" action="{{ url_for('admin.reset_password', user_id=user.id) }}" style="margin-top: 1rem;">
-                        <button type="submit" class="btn btn-warning" onclick="return confirm('Generate a new temporary password for this user?')">
-                            Generate Temporary Password
-                        </button>
-                    </form>
+                    <button type="submit" formaction="{{ url_for('admin.reset_password', user_id=user.id) }}" class="btn btn-warning" onclick="return confirm('Generate a new temporary password for this user?')" style="margin-top: 1rem;">
+                        Generate Temporary Password
+                    </button>
                 </div>
 
                 <div class="flex gap-md mt-lg" style="padding-top: 1.5rem; border-top: 1px solid var(--color-border);">
