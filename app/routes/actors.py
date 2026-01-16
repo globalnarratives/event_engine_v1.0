@@ -2,11 +2,13 @@ from flask import Blueprint, render_template, request, redirect, url_for, flash
 from app.models import Actor, Tenure
 from app.forms import ActorForm, ActorEditForm
 from app import db
+from flask_login import login_required
 
 bp = Blueprint('actors', __name__, url_prefix='/actors')
 
 
 @bp.route('/')
+@login_required
 def index():
     """List all actors"""
     page = request.args.get('page', 1, type=int)
@@ -35,6 +37,7 @@ def index():
 
 
 @bp.route('/<actor_id>')
+@login_required
 def detail(actor_id):
     """View actor details including tenure history"""
     actor = Actor.query.get_or_404(actor_id)
@@ -48,6 +51,7 @@ def detail(actor_id):
 
 
 @bp.route('/create', methods=['GET', 'POST'])
+@login_required
 def create():
     """Create new actor"""
     form = ActorForm()
@@ -96,6 +100,7 @@ def create():
 
 
 @bp.route('/<actor_id>/edit', methods=['GET', 'POST'])
+@login_required
 def edit(actor_id):
     """Edit existing actor"""
     actor = Actor.query.get_or_404(actor_id)
@@ -116,6 +121,7 @@ def edit(actor_id):
 
 
 @bp.route('/<actor_id>/delete', methods=['POST'])
+@login_required
 def delete(actor_id):
     """Delete actor (will cascade delete tenures)"""
     actor = Actor.query.get_or_404(actor_id)

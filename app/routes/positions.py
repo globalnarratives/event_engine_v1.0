@@ -3,11 +3,13 @@ from app.models import Position, Institution, Tenure, Actor
 from app.forms import PositionForm, TenureForm
 from app import db
 from datetime import date
+from flask_login import login_required
 
 bp = Blueprint('positions', __name__, url_prefix='/positions')
 
 
 @bp.route('/')
+@login_required
 def index():
     """List all positions"""
     page = request.args.get('page', 1, type=int)
@@ -35,6 +37,7 @@ def index():
 
 
 @bp.route('/<position_code>')
+@login_required
 def detail(position_code):
     """View position details including tenure history"""
     position = Position.query.get_or_404(position_code)
@@ -54,6 +57,7 @@ def detail(position_code):
 
 
 @bp.route('/create', methods=['GET', 'POST'])
+@login_required
 def create():
     """Create new position"""
     form = PositionForm()
@@ -84,6 +88,7 @@ def create():
 
 
 @bp.route('/<position_code>/edit', methods=['GET', 'POST'])
+@login_required
 def edit(position_code):
     """Edit existing position"""
     position = Position.query.get_or_404(position_code)
@@ -112,6 +117,7 @@ def edit(position_code):
 
 
 @bp.route('/<position_code>/delete', methods=['POST'])
+@login_required
 def delete(position_code):
     """Delete position (will cascade delete tenures)"""
     position = Position.query.get_or_404(position_code)
@@ -125,6 +131,7 @@ def delete(position_code):
 
 
 @bp.route('/<position_code>/assign', methods=['GET', 'POST'])
+@login_required
 def assign_tenure(position_code):
     """Assign an actor to this position (create tenure)"""
     position = Position.query.get_or_404(position_code)
@@ -160,6 +167,7 @@ def assign_tenure(position_code):
 
 
 @bp.route('/tenure/<int:tenure_id>/edit', methods=['GET', 'POST'])
+@login_required
 def edit_tenure(tenure_id):
     """Edit existing tenure"""
     tenure = Tenure.query.get_or_404(tenure_id)
@@ -195,6 +203,7 @@ def edit_tenure(tenure_id):
 
 
 @bp.route('/tenure/<int:tenure_id>/delete', methods=['POST'])
+@login_required
 def delete_tenure(tenure_id):
     """Delete tenure"""
     tenure = Tenure.query.get_or_404(tenure_id)

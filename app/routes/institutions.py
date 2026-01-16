@@ -2,11 +2,13 @@ from flask import Blueprint, render_template, request, redirect, url_for, flash
 from app.models import Institution, Position
 from app.forms import InstitutionForm
 from app import db
+from flask_login import login_required
 
 bp = Blueprint('institutions', __name__, url_prefix='/institutions')
 
 
 @bp.route('/')
+@login_required
 def index():
     """List all institutions"""
     page = request.args.get('page', 1, type=int)
@@ -37,6 +39,7 @@ def index():
 
 
 @bp.route('/<institution_code>')
+@login_required
 def detail(institution_code):
     """View institution details including all positions"""
     institution = Institution.query.get_or_404(institution_code)
@@ -52,6 +55,7 @@ def detail(institution_code):
 
 
 @bp.route('/create', methods=['GET', 'POST'])
+@login_required
 def create():
     """Create new institution"""
     form = InstitutionForm()
@@ -76,6 +80,7 @@ def create():
 
 
 @bp.route('/<institution_code>/edit', methods=['GET', 'POST'])
+@login_required
 def edit(institution_code):
     """Edit existing institution"""
     institution = Institution.query.get_or_404(institution_code)
@@ -98,6 +103,7 @@ def edit(institution_code):
 
 
 @bp.route('/<institution_code>/delete', methods=['POST'])
+@login_required
 def delete(institution_code):
     """Delete institution (will cascade delete positions and tenures)"""
     institution = Institution.query.get_or_404(institution_code)

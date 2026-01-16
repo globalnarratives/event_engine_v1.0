@@ -3,12 +3,14 @@ from app.models import Article
 from app.forms import ArticleSearchForm
 from app import db
 from datetime import datetime
+from flask_login import login_required
 
 bp = Blueprint('articles', __name__, url_prefix='/articles')
 
 
 @bp.route('/')
 @bp.route('/dashboard')
+@login_required
 def dashboard():
     """Display article review dashboard"""
     page = request.args.get('page', 1, type=int)
@@ -58,6 +60,7 @@ def dashboard():
 
 
 @bp.route('/<int:article_id>')
+@login_required
 def view(article_id):
     """View article details"""
     article = Article.query.get_or_404(article_id)
@@ -65,6 +68,7 @@ def view(article_id):
 
 
 @bp.route('/<int:article_id>/mark_processed', methods=['POST'])
+@login_required
 def mark_processed(article_id):
     """Mark article as processed"""
     article = Article.query.get_or_404(article_id)
@@ -75,6 +79,7 @@ def mark_processed(article_id):
 
 
 @bp.route('/<int:article_id>/mark_junk', methods=['POST'])
+@login_required
 def mark_junk(article_id):
     """Mark article as junk/irrelevant"""
     article = Article.query.get_or_404(article_id)
@@ -85,6 +90,7 @@ def mark_junk(article_id):
 
 
 @bp.route('/<int:article_id>/unmark', methods=['POST'])
+@login_required
 def unmark(article_id):
     """Reset article to unprocessed state"""
     article = Article.query.get_or_404(article_id)
@@ -96,6 +102,7 @@ def unmark(article_id):
 
 
 @bp.route('/stats')
+@login_required
 def stats():
     """Display article collection statistics"""
     total_articles = Article.query.count()
@@ -120,6 +127,7 @@ def stats():
     return render_template('articles/stats.html', stats=stats)
 
 @bp.route('/collect', methods=['POST'])
+@login_required
 def collect_now():
     """Manually trigger article collection"""
     try:

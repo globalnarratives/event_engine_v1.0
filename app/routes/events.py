@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash, jsonify
+from flask_login import login_required
 from app.models import Article, ControlFrame, ActionCode
 from app.forms import EventCFCreationForm, EventSearchForm
 from app import db
@@ -10,6 +11,7 @@ bp = Blueprint('events', __name__, url_prefix='/events')
 parser = CIEParser()
 
 @bp.route('/')
+@login_required
 def index():
     """List all events with search/filter"""
     page = request.args.get('page', 1, type=int)
@@ -26,6 +28,7 @@ def index():
 
 @bp.route('/create', methods=['GET', 'POST'])
 @bp.route('/create/<int:article_id>', methods=['GET', 'POST'])
+@login_required
 def create(article_id=None):
     """Redirect to Control Frame event creation"""
     if article_id:
@@ -35,6 +38,7 @@ def create(article_id=None):
 
 @bp.route('/create-cf', methods=['GET', 'POST'])
 @bp.route('/create-cf/<int:article_id>', methods=['GET', 'POST'])
+@login_required
 def create_cf_route(article_id=None):
     """
     Create new event using Control Frame with parser integration.
@@ -175,6 +179,7 @@ def create_cf_route(article_id=None):
 
 
 @bp.route('/parse-cie', methods=['POST'])
+@login_required
 def parse_cie_route():
     """AJAX endpoint to parse CIE body and extract entities"""
     try:
@@ -248,6 +253,7 @@ def parse_cie_route():
 
 
 @bp.route('/cf/<event_code>')
+@login_required
 def detail_cf_route(event_code):
     """View Control Frame event details"""
     cf = ControlFrame.query.get_or_404(event_code)
@@ -266,6 +272,7 @@ def detail_cf_route(event_code):
 
 
 @bp.route('/get-action-type/<action_code>')
+@login_required
 def get_action_type_route(action_code):
     """AJAX endpoint to get action type for a given action code"""
     action = ActionCode.query.get(action_code)

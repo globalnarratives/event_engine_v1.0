@@ -2,14 +2,28 @@ from flask import Blueprint, render_template, redirect, url_for, flash, request
 from flask_login import login_user, logout_user, login_required, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
 from app.models import User
-from app import db 
+from app import db
+from functools import wraps
 
 bp = Blueprint('auth', __name__, url_prefix='/auth')
+
+def admin_required(f):
+    """Decorator to require admin role for a route"""
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if not current_user.is_authenticated:
+            flash('Please log in to access this page.', 'error')
+            return redirect(url_for('auth.login'))
+        if current_user.role != 'admin':
+            flash('You do not have permission to access this page.', 'error')
+            return redirect(url_for('dashboard.home'))
+        return f(*args, **kwargs)
+    return decorated_function
 
 @bp.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
-        return redirect(url_for('articles.dashboard'))
+        return redirect(url_for('dashboard.home'))
     
     if request.method == 'POST':
         email = request.form.get('email')
@@ -33,7 +47,6 @@ def login():
             flash('Invalid email or password.', 'error')
     
     return render_template('auth/login.html')
-
 
 @bp.route('/logout')
 @login_required
