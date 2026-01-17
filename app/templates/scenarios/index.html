@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+
+{% block title %}Scenarios{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="flex justify-between items-center mb-lg">
+        <h1>Scenarios</h1>
+        <a href="{{ url_for('scenarios.create') }}" class="btn btn-primary">Create New Scenario</a>
+    </div>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="card mb-md flash-{{ category }}">
+                    <div class="card-body">
+                        {{ message }}
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <div class="card">
+        <div class="card-body">
+            {% if scenarios.items %}
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Code</th>
+                            <th>Proposition</th>
+                            <th>Close Date</th>
+                            <th>Created By</th>
+                            <th>Assessments</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for scenario in scenarios.items %}
+                        <tr>
+                            <td>
+                                <span style="color: var(--color-accent-primary); font-family: var(--font-body);">
+                                    {{ scenario.scenario_code }}
+                                </span>
+                            </td>
+                            <td>{{ scenario.title }}</td>
+                            <td>{{ scenario.close_date.strftime('%Y-%m-%d') if scenario.close_date else 'N/A' }}</td>
+                            <td>{{ scenario.created_by.username }}</td>
+                            <td>{{ scenario.marked_scenarios|length }}</td>
+                            <td>
+                                <a href="{{ url_for('scenarios.detail', scenario_id=scenario.id) }}" 
+                                   class="btn btn-secondary" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;">
+                                    View
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+                {% if scenarios.pages > 1 %}
+                <div class="flex justify-between items-center mt-lg">
+                    <div class="text-secondary">
+                        Page {{ scenarios.page }} of {{ scenarios.pages }} ({{ scenarios.total }} scenarios)
+                    </div>
+                    <div class="flex gap-sm">
+                        {% if scenarios.has_prev %}
+                            <a href="{{ url_for('scenarios.index', page=scenarios.prev_num) }}" class="btn btn-secondary">← Previous</a>
+                        {% endif %}
+                        {% if scenarios.has_next %}
+                            <a href="{{ url_for('scenarios.index', page=scenarios.next_num) }}" class="btn btn-secondary">Next →</a>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endif %}
+            {% else %}
+                <p style="color: var(--color-text-dim); text-align: center; padding: 2rem 0;">
+                    No scenarios yet. Create your first scenario to begin tracking assessments.
+                </p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template
 from flask_login import login_required, current_user
-from app.models import ControlFrame, Article
+from app.models import ControlFrame, Article, Scenario
 from datetime import datetime, timedelta
 
 bp = Blueprint('dashboard', __name__)
@@ -20,6 +20,8 @@ def home():
         is_processed=False, 
         is_junk=False
     ).count()
+
+    recent_scenarios = Scenario.query.order_by(Scenario.created_at.desc()).limit(5).all()
     
     return render_template('dashboard/home.html',
                          recent_events=recent_events,

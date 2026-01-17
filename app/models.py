@@ -328,3 +328,134 @@ class User(UserMixin, db.Model):
     #         'type': self.code_type,
     #         'display': self.code
     #     }
+
+    # Add these models to your existing app/models.py file
+
+class Scenario(db.Model):
+    """Shared scenario template - the proposition/question"""
+    __tablename__ = 'scenarios'
+    
+    id = db.Column(db.Integer, primary_key=True)
+    scenario_code = db.Column(db.String(50), unique=True, nullable=False, index=True)
+    title = db.Column(db.Text, nullable=False)
+    description = db.Column(db.Text)
+    close_date = db.Column(db.Date, nullable=False)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+    created_by_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    
+    # Relationships
+    created_by = db.relationship('User', backref='created_scenarios')
+    marked_scenarios = db.relationship('MarkedScenario', back_populates='scenario', cascade='all, delete-orphan')
+    
+    def __repr__(self):
+        return f'<Scenario {self.scenario_code}>'
+
+
+class MarkedScenario(db.Model):
+    """Analyst's assessment of a scenario - the work product"""
+    __tablename__ = 'marked_scenarios'
+    
+    id = db.Column(db.Integer, primary_key=True)
+    scenario_id = db.Column(db.Integer, db.ForeignKey('scenarios.id', ondelete='CASCADE'), nullable=False)
+    analyst_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    title = db.Column(db.Text)  # Optional custom label like "Conservative Estimate"
+    description = db.Column(db.Text)  # Analyst's notes
+    
+    # Probability tracking
+    current_probability = db.Column(db.Numeric(4, 3))  # 0.000 to 1.000
+    initial_probability = db.Column(db.Numeric(4, 3))  # Starting assessment
+    probability_history = db.Column(db.JSON)  # Array of {probability, timestamp, reason, event_code, user_id}
+    
+    # Status and metadata
+    status = db.Column(db.String(20), default='active')  # active, resolved_true, resolved_false, deprecated
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+    
+    # Future: narratives
+    # narrative_id = db.Column(db.Integer, db.ForeignKey('narratives.id'))
+    
+    # Relationships
+    scenario = db.relationship('Scenario', back_populates='marked_scenarios')
+    analyst = db.relationship('User', backref='marked_scenarios')
+    event_links = db.relationship('ScenarioEvent', back_populates='marked_scenario', cascade='all, delete-orphan')
+    
+    @property
+    def display_name(self):
+        """Auto-generated display name: analyst-scenario_code [optional title]"""
+        base = f"{self.analyst.username}-{self.scenario.scenario_code}"
+        if self.title:
+            return f"{base} [{self.title}]"
+        return base
+    
+    def add_event(self, event_code, weight, user_id, notes=None):
+        """Link an event with weight and recalculate probability"""
+        # Create the link
+        link = ScenarioEvent(
+            marked_scenario_id=self.id,
+            event_code=event_code,
+            weight=weight,
+            notes=notes,
+            linked_by_id=user_id
+        )
+        db.session.add(link)
+        
+        # Recalculate probability (placeholder - implement your calculation logic)
+        self.recalculate_probability(event_code, weight, user_id)
+        
+        return link
+    
+    def recalculate_probability(self, event_code, weight, user_id):
+        """Update probability based on new event (implement your formula here)"""
+        # Placeholder: Simple additive model
+        previous_prob = float(self.current_probability) if self.current_probability else float(self.initial_probability)
+        new_prob = previous_prob + float(weight)
+        
+        # Clamp to [0, 1]
+        new_prob = max(0.0, min(1.0, new_prob))
+        
+        # Update current probability
+        self.current_probability = new_prob
+        
+        # Add to history
+        if not self.probability_history:
+            self.probability_history = []
+        
+        self.probability_history.append({
+            'probability': float(new_prob),
+            'timestamp': datetime.utcnow().isoformat(),
+            'reason': f'Event {event_code} linked with weight {weight}',
+            'event_code': event_code,
+            'user_id': user_id
+        })
+        
+        self.updated_at = datetime.utcnow()
+    
+    def __repr__(self):
+        return f'<MarkedScenario {self.display_name}>'
+
+
+class ScenarioEvent(db.Model):
+    """Junction table: Links events to marked scenarios with weights"""
+    __tablename__ = 'scenario_events'
+    
+    id = db.Column(db.Integer, primary_key=True)
+    marked_scenario_id = db.Column(db.Integer, db.ForeignKey('marked_scenarios.id', ondelete='CASCADE'), nullable=False, index=True)
+    event_code = db.Column(db.String(50), db.ForeignKey('control_frame.event_code', ondelete='CASCADE'), nullable=False, index=True)
+    weight = db.Column(db.Numeric(5, 3))  # -9.999 to 9.999
+    notes = db.Column(db.Text)  # Analyst's explanation for linking
+    linked_at = db.Column(db.DateTime, default=datetime.utcnow)
+    linked_by_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    
+    # Relationships
+    marked_scenario = db.relationship('MarkedScenario', back_populates='event_links')
+    event = db.relationship('ControlFrame', backref='scenario_links')
+    linked_by = db.relationship('User')
+    
+    # Prevent duplicate links
+    __table_args__ = (
+        db.UniqueConstraint('marked_scenario_id', 'event_code', name='uq_marked_scenario_event'),
+    )
+    
+    def __repr__(self):
+        return f'<ScenarioEvent {self.marked_scenario_id}:{self.event_code} w={self.weight}>'

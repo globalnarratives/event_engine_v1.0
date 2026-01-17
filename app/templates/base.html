@@ -20,6 +20,7 @@
                     <a href="{{ url_for('actors.index') }}" class="nav-link {% if request.endpoint and 'actors' in request.endpoint %}active{% endif %}">Actors</a>
                     <a href="{{ url_for('positions.index') }}" class="nav-link {% if request.endpoint and 'positions' in request.endpoint %}active{% endif %}">Positions</a>
                     <a href="{{ url_for('institutions.index') }}" class="nav-link {% if request.endpoint and 'institutions' in request.endpoint %}active{% endif %}">Institutions</a>
+                    <a href="{{ url_for('scenarios.index') }}" class="nav-link">Scenarios</a>
                 </nav>
                 {% if current_user.is_authenticated %}
                 <div style="display: flex; gap: 1rem; align-items: center;">

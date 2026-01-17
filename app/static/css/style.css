@@ -833,3 +833,22 @@ a:hover {
     color: #6BCF7F;  /* Green - Relation operators <>, <, > */
     font-weight: 600;
 }
+
+/* Weight styling */
+.weight-positive {
+    font-weight: 600;
+    font-family: var(--font-body);
+    color: var(--color-accent-secondary);
+}
+
+.weight-negative {
+    font-weight: 600;
+    font-family: var(--font-body);
+    color: var(--color-accent-warning);
+}
+
+.weight-neutral {
+    font-weight: 600;
+    font-family: var(--font-body);
+    color: var(--color-text-primary);
+}

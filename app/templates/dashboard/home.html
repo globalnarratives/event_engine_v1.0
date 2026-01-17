@@ -16,6 +16,58 @@
             </div>
         </div>
 
+        <!-- Add this to your dashboard/home.html after the Events Hub section -->
+
+        <div class="card">
+            <div class="card-header">
+                <h2 class="card-title">SCENARIOS HUB</h2>
+            </div>
+            <div class="card-body">
+                <a href="{{ url_for('scenarios.create') }}" class="btn btn-primary btn-block">
+                    CREATE SCENARIO
+                </a>
+            </div>
+        </div>
+
+        <div class="card mt-lg">
+            <div class="card-header">
+                <h2 class="card-title">RECENT SCENARIOS</h2>
+            </div>
+            <div class="card-body">
+                {% if recent_scenarios %}
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Code</th>
+                                <th>Proposition</th>
+                                <th>Close Date</th>
+                                <th>Assessments</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for scenario in recent_scenarios %}
+                            <tr>
+                                <td>
+                                    <a href="{{ url_for('scenarios.detail', scenario_id=scenario.id) }}" 
+                                    style="color: var(--color-accent-primary); font-family: var(--font-body);">
+                                        {{ scenario.scenario_code }}
+                                    </a>
+                                </td>
+                                <td>{{ scenario.title }}</td>
+                                <td>{{ scenario.close_date.strftime('%Y-%m-%d') if scenario.close_date else 'N/A' }}</td>
+                                <td>{{ scenario.marked_scenarios|length }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                {% else %}
+                    <p style="color: var(--color-text-dim); text-align: center; padding: 2rem 0;">
+                        No scenarios yet. Create your first scenario to begin tracking assessments.
+                    </p>
+                {% endif %}
+            </div>
+        </div>
+
         <!-- Directory -->
         <div class="card">
             <div class="card-header">
@@ -28,7 +80,6 @@
             </div>
         </div>
     </div>
-
     <!-- Right Column -->
     <div style="display: flex; flex-direction: column; gap: 1.5rem;">
         <!-- Recent Events -->

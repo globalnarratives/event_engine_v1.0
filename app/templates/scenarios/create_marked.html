@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+
+{% block title %}Create Assessment - {{ scenario.scenario_code }}{% endblock %}
+
+{% block content %}
+<div class="container" style="max-width: 800px;">
+    <h1>Create Assessment</h1>
+    <p style="color: var(--color-text-secondary); margin-bottom: 1.5rem;">
+        Scenario: <span style="color: var(--color-accent-primary); font-family: var(--font-body);">{{ scenario.scenario_code }}</span>
+    </p>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="card mb-md flash-{{ category }}">
+                    <div class="card-body">
+                        {{ message }}
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <!-- Scenario Context Card -->
+    <div class="card mb-lg" style="background-color: var(--color-bg-elevated);">
+        <div class="card-body">
+            <h3 style="font-size: 1rem; margin-bottom: 0.5rem; color: var(--color-text-tertiary); text-transform: uppercase; font-weight: 600;">
+                Proposition
+            </h3>
+            <p style="font-size: 1.1rem; color: var(--color-text-primary); margin-bottom: 1rem;">
+                {{ scenario.title }}
+            </p>
+
+            {% if scenario.description %}
+            <h3 style="font-size: 1rem; margin-bottom: 0.5rem; color: var(--color-text-tertiary); text-transform: uppercase; font-weight: 600;">
+                Description
+            </h3>
+            <p style="color: var(--color-text-secondary);">
+                {{ scenario.description }}
+            </p>
+            {% endif %}
+
+            <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--color-border);">
+                <span style="color: var(--color-text-tertiary); font-size: 0.875rem;">Resolution Date:</span>
+                <span style="color: var(--color-text-primary); margin-left: 0.5rem;">
+                    {{ scenario.close_date.strftime('%Y-%m-%d') if scenario.close_date else 'N/A' }}
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Assessment Form -->
+    <div class="card">
+        <div class="card-header">
+            <h2 class="card-title">Your Assessment</h2>
+        </div>
+        <div class="card-body">
+            <form method="POST">
+                <div class="form-group">
+                    <label class="form-label" for="initial_probability">Initial Probability</label>
+                    <input type="number" id="initial_probability" name="initial_probability" 
+                           class="form-input" min="0" max="1" step="0.001" 
+                           placeholder="0.350" required autofocus>
+                    <p style="font-size: 0.75rem; color: var(--color-text-dim); margin-top: 0.25rem;">
+                        Enter as decimal: 0.350 = 35%, 0.427 = 42.7%, 1.000 = 100%
+                    </p>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="title">Custom Label (Optional)</label>
+                    <input type="text" id="title" name="title" class="form-input" 
+                           placeholder="e.g., Conservative Estimate, Aggressive Projection">
+                    <p style="font-size: 0.75rem; color: var(--color-text-dim); margin-top: 0.25rem;">
+                        This will appear as: {{ current_user.username }}-{{ scenario.scenario_code }} [Your Label]
+                    </p>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="description">Notes (Optional)</label>
+                    <textarea id="description" name="description" class="form-textarea" rows="4"
+                              placeholder="Document your reasoning, assumptions, or methodology..."></textarea>
+                </div>
+
+                <div class="card bg-elevated" style="padding: 1rem; margin-bottom: 1.5rem; border-left: 3px solid var(--color-accent-tertiary);">
+                    <p style="margin: 0; color: var(--color-text-secondary); font-size: 0.875rem;">
+                        <strong>Note:</strong> After creating your assessment, you'll be able to link events and adjust probabilities based on new information.
+                    </p>
+                </div>
+
+                <div class="flex gap-md">
+                    <button type="submit" class="btn btn-primary">Create Assessment</button>
+                    <a href="{{ url_for('scenarios.detail', scenario_id=scenario.id) }}" class="btn btn-secondary">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

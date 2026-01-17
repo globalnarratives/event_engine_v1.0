@@ -1,0 +1,240 @@
+{% extends "base.html" %}
+
+{% block title %}{{ marked.display_name }}{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>{{ marked.display_name }}</h1>
+    <p style="color: var(--color-text-secondary); margin-bottom: 1.5rem;">
+        Assessment by {{ marked.analyst.username }}
+    </p>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="card mb-md flash-{{ category }}">
+                    <div class="card-body">
+                        {{ message }}
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <div class="grid grid-cols-2">
+        <!-- Left Column -->
+        <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+            <!-- Assessment Info -->
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Assessment Details</h2>
+                </div>
+                <div class="card-body">
+                    <table style="width: 100%; border-collapse: collapse;">
+                        <tr style="border-bottom: 1px solid var(--color-border);">
+                            <td style="padding: 0.75rem; color: var(--color-text-tertiary); font-weight: 600; text-transform: uppercase; font-size: 0.85rem; width: 180px;">
+                                Scenario
+                            </td>
+                            <td style="padding: 0.75rem;">
+                                <a href="{{ url_for('scenarios.detail', scenario_id=marked.scenario.id) }}" 
+                                   style="color: var(--color-accent-primary); font-family: var(--font-body);">
+                                    {{ marked.scenario.scenario_code }}
+                                </a>
+                            </td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--color-border);">
+                            <td style="padding: 0.75rem; color: var(--color-text-tertiary); font-weight: 600; text-transform: uppercase; font-size: 0.85rem;">
+                                Proposition
+                            </td>
+                            <td style="padding: 0.75rem; color: var(--color-text-primary);">
+                                {{ marked.scenario.title }}
+                            </td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--color-border);">
+                            <td style="padding: 0.75rem; color: var(--color-text-tertiary); font-weight: 600; text-transform: uppercase; font-size: 0.85rem;">
+                                Analyst
+                            </td>
+                            <td style="padding: 0.75rem; color: var(--color-text-primary);">
+                                {{ marked.analyst.username }}
+                            </td>
+                        </tr>
+                        {% if marked.title %}
+                        <tr style="border-bottom: 1px solid var(--color-border);">
+                            <td style="padding: 0.75rem; color: var(--color-text-tertiary); font-weight: 600; text-transform: uppercase; font-size: 0.85rem;">
+                                Label
+                            </td>
+                            <td style="padding: 0.75rem; color: var(--color-text-primary);">
+                                {{ marked.title }}
+                            </td>
+                        </tr>
+                        {% endif %}
+                        <tr style="border-bottom: 1px solid var(--color-border);">
+                            <td style="padding: 0.75rem; color: var(--color-text-tertiary); font-weight: 600; text-transform: uppercase; font-size: 0.85rem;">
+                                Status
+                            </td>
+                            <td style="padding: 0.75rem;">
+                                {% if marked.status == 'active' %}
+                                    <span class="badge badge-active">ACTIVE</span>
+                                {% elif marked.status == 'resolved_true' %}
+                                    <span class="badge badge-active">RESOLVED TRUE</span>
+                                {% elif marked.status == 'resolved_false' %}
+                                    <span class="badge badge-resolved">RESOLVED FALSE</span>
+                                {% else %}
+                                    <span class="badge badge-resolved">{{ marked.status|upper }}</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 0.75rem; color: var(--color-text-tertiary); font-weight: 600; text-transform: uppercase; font-size: 0.85rem;">
+                                Created
+                            </td>
+                            <td style="padding: 0.75rem; color: var(--color-text-secondary);">
+                                {{ marked.created_at.strftime('%Y-%m-%d %H:%M') if marked.created_at else 'N/A' }}
+                            </td>
+                        </tr>
+                    </table>
+
+                    {% if marked.description %}
+                    <div style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--color-border);">
+                        <div style="color: var(--color-text-tertiary); font-weight: 600; text-transform: uppercase; font-size: 0.85rem; margin-bottom: 0.75rem;">
+                            Notes
+                        </div>
+                        <div style="color: var(--color-text-secondary); line-height: 1.6;">
+                            {{ marked.description }}
+                        </div>
+                    </div>
+                    {% endif %}
+
+                    <div style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--color-border);">
+                        <a href="{{ url_for('scenarios.detail', scenario_id=marked.scenario.id) }}" class="btn btn-secondary">
+                            Back to Scenario
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Probability Display -->
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Current Probability</h2>
+                </div>
+                <div class="card-body" style="text-align: center; padding: 2rem;">
+                    <div style="color: var(--color-accent-primary); font-size: 4rem; font-weight: 700; font-family: var(--font-body); line-height: 1;">
+                        {{ (marked.current_probability * 100)|round(1) }}%
+                    </div>
+                    <div style="color: var(--color-text-dim); font-size: 0.875rem; margin-top: 1rem;">
+                        Initial: {{ (marked.initial_probability * 100)|round(1) }}%
+                    </div>
+                </div>
+            </div>
+
+            <!-- Probability History -->
+            {% if marked.probability_history and marked.probability_history|length > 1 %}
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Probability History</h2>
+                </div>
+                <div class="card-body">
+                    <div style="max-height: 400px; overflow-y: auto;">
+                        {% for entry in marked.probability_history|reverse %}
+                        <div style="padding: 0.75rem; margin-bottom: 0.75rem; background: var(--color-bg-elevated); border-radius: var(--radius-sm); border-left: 3px solid var(--color-accent-primary);">
+                            <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.25rem;">
+                                <span style="color: var(--color-accent-primary); font-weight: 600; font-size: 1.1rem; font-family: var(--font-body);">
+                                    {{ (entry.probability * 100)|round(1) }}%
+                                </span>
+                                <span style="color: var(--color-text-dim); font-size: 0.85rem;">
+                                    {{ entry.timestamp[:10] if entry.timestamp else 'N/A' }}
+                                </span>
+                            </div>
+                            <div style="color: var(--color-text-secondary); font-size: 0.875rem;">
+                                {{ entry.reason }}
+                            </div>
+                            {% if entry.event_code %}
+                            <div style="margin-top: 0.25rem;">
+                                <a href="{{ url_for('events.detail_cf_route', event_code=entry.event_code) }}" 
+                                   style="color: var(--color-accent-secondary); font-size: 0.85rem; font-family: var(--font-body);">
+                                    → {{ entry.event_code }}
+                                </a>
+                            </div>
+                            {% endif %}
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+
+        <!-- Right Column -->
+        <div>
+            <!-- Linked Events -->
+            <div class="card">
+                <div class="card-header" style="display: flex; justify-content: space-between; align-items: center;">
+                    <h2 class="card-title">Linked Events ({{ event_links|length }})</h2>
+                    {% if current_user.id == marked.analyst_id %}
+                    <a href="{{ url_for('scenarios.link_event', marked_id=marked.id) }}" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.875rem;">
+                        Link Event
+                    </a>
+                    {% endif %}
+                </div>
+                <div class="card-body">
+                    {% if event_links %}
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Event Code</th>
+                                    <th>Weight</th>
+                                    <th>Linked</th>
+                                    {% if current_user.id == marked.analyst_id %}
+                                    <th>Actions</th>
+                                    {% endif %}
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for link in event_links %}
+                                <tr>
+                                    <td>
+                                        <a href="{{ url_for('events.detail_cf_route', event_code=link.event_code) }}" 
+                                           style="color: var(--color-accent-primary); font-family: var(--font-body);">
+                                            {{ link.event_code }}
+                                        </a>
+                                        {% if link.notes %}
+                                        <div style="color: var(--color-text-dim); font-size: 0.85rem; margin-top: 0.25rem;">
+                                            {{ link.notes }}
+                                        </div>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        <span class="{% if link.weight > 0 %}weight-positive{% elif link.weight < 0 %}weight-negative{% else %}weight-neutral{% endif %}">
+                                            {% if link.weight > 0 %}+{% endif %}{{ link.weight }}
+                                        </span>
+                                    </td>
+                                    <td style="color: var(--color-text-dim); font-size: 0.85rem;">
+                                        {{ link.linked_at.strftime('%Y-%m-%d') if link.linked_at else 'N/A' }}
+                                    </td>
+                                    {% if current_user.id == marked.analyst_id %}
+                                    <td>
+                                        <form method="POST" action="{{ url_for('scenarios.unlink_event', marked_id=marked.id, event_code=link.event_code) }}" style="display: inline;">
+                                            <button type="submit" class="btn btn-warning" 
+                                                    style="padding: 0.25rem 0.5rem; font-size: 0.75rem;"
+                                                    onclick="return confirm('Remove this event link? Probability will be adjusted.');">
+                                                Unlink
+                                            </button>
+                                        </form>
+                                    </td>
+                                    {% endif %}
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    {% else %}
+                        <p style="color: var(--color-text-dim); text-align: center; padding: 2rem 0;">
+                            No events linked yet.
+                        </p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -35,7 +35,7 @@ def create_app(config_name='default'):
         return User.query.get(int(user_id))
     
     # Register blueprints
-    from app.routes import articles, events, actors, positions, institutions, auth, dashboard, admin
+    from app.routes import articles, events, actors, positions, institutions, auth, dashboard, admin, scenarios
     
     app.register_blueprint(dashboard.bp)
     app.register_blueprint(articles.bp)
@@ -45,6 +45,7 @@ def create_app(config_name='default'):
     app.register_blueprint(institutions.bp)
     app.register_blueprint(auth.bp)
     app.register_blueprint(admin.bp)
+    app.register_blueprint(scenarios.bp)
     
     # Register error handlers
     @app.errorhandler(404)
