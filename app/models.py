@@ -331,6 +331,8 @@ class User(UserMixin, db.Model):
 
     # Add these models to your existing app/models.py file
 
+# Update your Scenario model in app/models.py
+
 class Scenario(db.Model):
     """Shared scenario template - the proposition/question"""
     __tablename__ = 'scenarios'
@@ -339,8 +341,9 @@ class Scenario(db.Model):
     scenario_code = db.Column(db.String(50), unique=True, nullable=False, index=True)
     title = db.Column(db.Text, nullable=False)
     description = db.Column(db.Text)
-    close_date = db.Column(db.Date, nullable=False)
-    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    start_date = db.Column(db.Date, nullable=False)  # NEW: When tracking begins
+    close_date = db.Column(db.Date, nullable=False)  # When proposition resolves
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)  # When added to system
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
     created_by_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     

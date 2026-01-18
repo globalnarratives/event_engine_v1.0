@@ -70,13 +70,28 @@
                 </div>
             </div>
 
-            <div style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--color-border);">
+            <div style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--color-border); display: flex; gap: 0.75rem;">
                 <a href="{{ url_for('scenarios.create_marked', scenario_id=scenario.id) }}" class="btn btn-primary">
-                    Mark Scenario
+                    Create My Assessment
                 </a>
                 <a href="{{ url_for('scenarios.index') }}" class="btn btn-secondary">
                     Back to Scenarios
                 </a>
+                
+                {% if current_user.id == scenario.created_by_id or current_user.role == 'admin' %}
+                    {% if marked_scenarios|length == 0 %}
+                    <form method="POST" action="{{ url_for('scenarios.delete_scenario', scenario_id=scenario.id) }}" style="display: inline;">
+                        <button type="submit" class="btn btn-warning" 
+                                onclick="return confirm('Delete scenario {{ scenario.scenario_code }}? This cannot be undone.');">
+                            Delete Scenario
+                        </button>
+                    </form>
+                    {% else %}
+                    <button type="button" class="btn btn-warning" disabled title="Cannot delete scenario with existing assessments">
+                        Delete Scenario
+                    </button>
+                    {% endif %}
+                {% endif %}
             </div>
         </div>
     </div>

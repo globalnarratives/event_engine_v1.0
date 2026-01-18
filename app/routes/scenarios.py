@@ -19,6 +19,8 @@ def index():
     
     return render_template('scenarios/index.html', scenarios=scenarios)
 
+# Update the create() function in app/routes/scenarios.py
+
 @bp.route('/create', methods=['GET', 'POST'])
 @login_required
 def create():
@@ -27,11 +29,12 @@ def create():
         scenario_code = request.form.get('scenario_code')
         title = request.form.get('title')
         description = request.form.get('description')
+        start_date_str = request.form.get('start_date')  # NEW
         close_date_str = request.form.get('close_date')
         
         # Validation
-        if not scenario_code or not title or not close_date_str:
-            flash('Scenario code, title, and close date are required.', 'error')
+        if not scenario_code or not title or not start_date_str or not close_date_str:
+            flash('Scenario code, title, start date, and close date are required.', 'error')
             return render_template('scenarios/create.html')
         
         # Check if scenario code already exists
@@ -39,11 +42,17 @@ def create():
             flash('A scenario with this code already exists.', 'error')
             return render_template('scenarios/create.html')
         
-        # Parse date
+        # Parse dates
         try:
+            start_date = datetime.strptime(start_date_str, '%Y-%m-%d').date()
             close_date = datetime.strptime(close_date_str, '%Y-%m-%d').date()
         except ValueError:
             flash('Invalid date format. Use YYYY-MM-DD.', 'error')
+            return render_template('scenarios/create.html')
+        
+        # Validate date logic
+        if close_date <= start_date:
+            flash('Resolution date must be after start date.', 'error')
             return render_template('scenarios/create.html')
         
         # Create scenario
@@ -51,6 +60,7 @@ def create():
             scenario_code=scenario_code,
             title=title,
             description=description,
+            start_date=start_date,  # NEW
             close_date=close_date,
             created_by_id=current_user.id
         )
@@ -272,3 +282,33 @@ def unlink_event(marked_id, event_code):
         flash(f'Error unlinking event: {str(e)}', 'error')
     
     return redirect(url_for('scenarios.marked_detail', marked_id=marked_id))
+
+    # Add this route to app/routes/scenarios.py
+
+@bp.route('/<int:scenario_id>/delete', methods=['POST'])
+@login_required
+def delete_scenario(scenario_id):
+    """Delete a scenario (admin/creator only)"""
+    scenario = Scenario.query.get_or_404(scenario_id)
+    
+    # Check if user created this scenario or is admin
+    if scenario.created_by_id != current_user.id and current_user.role != 'admin':
+        flash('You do not have permission to delete this scenario.', 'error')
+        return redirect(url_for('scenarios.detail', scenario_id=scenario_id))
+    
+    # Check if scenario has marked scenarios
+    if scenario.marked_scenarios:
+        flash(f'Cannot delete scenario with {len(scenario.marked_scenarios)} existing assessments.', 'error')
+        return redirect(url_for('scenarios.detail', scenario_id=scenario_id))
+    
+    scenario_code = scenario.scenario_code
+    
+    try:
+        db.session.delete(scenario)
+        db.session.commit()
+        flash(f'Scenario {scenario_code} deleted successfully.', 'success')
+        return redirect(url_for('scenarios.index'))
+    except Exception as e:
+        db.session.rollback()
+        flash(f'Error deleting scenario: {str(e)}', 'error')
+        return redirect(url_for('scenarios.detail', scenario_id=scenario_id))
