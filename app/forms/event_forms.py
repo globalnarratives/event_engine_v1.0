@@ -93,7 +93,7 @@ class EventCFCreationForm(FlaskForm):
         """Basic validation of event actor code format"""
         # Should match pattern like: xxx.yyy.zzz or xxx.yyy.zzz.nnn
         # We'll do database validation in the route
-        if not re.match(r'^[a-z]{3}(\.[a-z0-9]+)+$', field.data.lower()):
+        if not re.match(r'^[a-z]{3,4}(\.[a-z0-9]{3,4})+$', field.data.lower()):
             raise ValidationError('Event actor must be a valid CIE code (e.g., rus.hos.spx)')
 
 
