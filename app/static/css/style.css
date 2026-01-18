@@ -852,3 +852,8 @@ a:hover {
     font-family: var(--font-body);
     color: var(--color-text-primary);
 }
+
+.card-body table td {
+    word-break: break-word;
+    max-width: 400px;
+}

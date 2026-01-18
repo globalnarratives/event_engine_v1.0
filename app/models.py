@@ -3,6 +3,7 @@ from sqlalchemy.dialects.postgresql import JSONB
 from datetime import datetime
 from flask_login import UserMixin
 from datetime import datetime
+from sqlalchemy.orm.attributes import flag_modified
 
 
 class Article(db.Model):
@@ -432,6 +433,8 @@ class MarkedScenario(db.Model):
             'user_id': user_id
         })
         
+        flag_modified(self, 'probability_history')
+
         self.updated_at = datetime.utcnow()
     
     def __repr__(self):

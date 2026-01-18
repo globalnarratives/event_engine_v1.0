@@ -21,7 +21,7 @@
         {% endif %}
     {% endwith %}
 
-    <div class="grid grid-cols-2">
+    <div class="grid" style="grid-template-columns: 500px 800px; gap: 1.5rem;">
         <!-- Left Column -->
         <div style="display: flex; flex-direction: column; gap: 1.5rem;">
             <!-- Assessment Info -->
@@ -129,6 +129,7 @@
                 </div>
             </div>
 
+            <pre>{{ marked.probability_history }}</pre>
             <!-- Probability History Text List -->
             {% if marked.probability_history and marked.probability_history|length > 1 %}
             <div class="card">
