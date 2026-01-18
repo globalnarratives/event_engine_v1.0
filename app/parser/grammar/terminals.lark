@@ -74,6 +74,14 @@ ACTION_CODE: "bn" | "co" | "en" | "nl" | "nt" | "sb" | "ts"  | "vd" | "vo" | "vu
 
             | "hl" | "wn" 
 
+// Commercial-Operational
+
+            | "kf" | "cl" | "lo" | "mg" | "on" | "pt" | "vf" | "vs"
+
+// Military-Operational
+
+            | "dy" | "xr"
+
 // Military-Kinetic
 
             | "ab" | "ak" | "ch" | "cp" | "dp" | "dv" | "nu"
