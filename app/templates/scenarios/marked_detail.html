@@ -52,6 +52,22 @@
                         </tr>
                         <tr style="border-bottom: 1px solid var(--color-border);">
                             <td style="padding: 0.75rem; color: var(--color-text-tertiary); font-weight: 600; text-transform: uppercase; font-size: 0.85rem;">
+                                Start Date
+                            </td>
+                            <td style="padding: 0.75rem; color: var(--color-text-secondary);">
+                                {{ marked.scenario.start_date.strftime('%Y-%m-%d') if marked.scenario.start_date else 'N/A' }}
+                            </td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--color-border);">
+                            <td style="padding: 0.75rem; color: var(--color-text-tertiary); font-weight: 600; text-transform: uppercase; font-size: 0.85rem;">
+                                Resolution Date
+                            </td>
+                            <td style="padding: 0.75rem; color: var(--color-text-secondary);">
+                                {{ marked.scenario.close_date.strftime('%Y-%m-%d') if marked.scenario.close_date else 'N/A' }}
+                            </td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--color-border);">
+                            <td style="padding: 0.75rem; color: var(--color-text-tertiary); font-weight: 600; text-transform: uppercase; font-size: 0.85rem;">
                                 Analyst
                             </td>
                             <td style="padding: 0.75rem; color: var(--color-text-primary);">
@@ -113,22 +129,7 @@
                 </div>
             </div>
 
-            <!-- Probability Display -->
-            <div class="card">
-                <div class="card-header">
-                    <h2 class="card-title">Current Probability</h2>
-                </div>
-                <div class="card-body" style="text-align: center; padding: 2rem;">
-                    <div style="color: var(--color-accent-primary); font-size: 4rem; font-weight: 700; font-family: var(--font-body); line-height: 1;">
-                        {{ (marked.current_probability * 100)|round(1) }}%
-                    </div>
-                    <div style="color: var(--color-text-dim); font-size: 0.875rem; margin-top: 1rem;">
-                        Initial: {{ (marked.initial_probability * 100)|round(1) }}%
-                    </div>
-                </div>
-            </div>
-
-            <!-- Probability History -->
+            <!-- Probability History Text List -->
             {% if marked.probability_history and marked.probability_history|length > 1 %}
             <div class="card">
                 <div class="card-header">
@@ -166,7 +167,40 @@
         </div>
 
         <!-- Right Column -->
-        <div>
+        <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+            <!-- Probability Chart -->
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Probability Over Time</h2>
+                </div>
+                <div class="card-body">
+                    <!-- Current Stats Display -->
+                    <div style="display: flex; justify-content: space-around; margin-bottom: 1.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--color-border);">
+                        <div style="text-align: center;">
+                            <div style="color: var(--color-text-tertiary); font-size: 0.75rem; text-transform: uppercase; margin-bottom: 0.25rem;">
+                                Initial
+                            </div>
+                            <div style="color: var(--color-text-secondary); font-size: 1.5rem; font-weight: 600; font-family: var(--font-body);">
+                                {{ (marked.initial_probability * 100)|round(1) }}%
+                            </div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="color: var(--color-text-tertiary); font-size: 0.75rem; text-transform: uppercase; margin-bottom: 0.25rem;">
+                                Current
+                            </div>
+                            <div style="color: var(--color-accent-primary); font-size: 2rem; font-weight: 700; font-family: var(--font-body);">
+                                {{ (marked.current_probability * 100)|round(1) }}%
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Chart Canvas -->
+                    <canvas id="probabilityChart" 
+                        data-history='{{ marked.probability_history|tojson|safe }}'
+                        style="max-height: 300px;"></canvas>
+                </div>
+            </div>
+
             <!-- Linked Events -->
             <div class="card">
                 <div class="card-header" style="display: flex; justify-content: space-between; align-items: center;">
@@ -237,4 +271,81 @@
         </div>
     </div>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+
+<script>
+(function() {
+    const canvas = document.getElementById('probabilityChart');
+    if (!canvas) return;
+
+    // 1. Pull data from the HTML attributes we set above
+    const rawHistory = JSON.parse(canvas.dataset.history || '[]');
+
+    // 2. Map the data into the format Chart.js expects
+    const dataPoints = rawHistory.map(entry => ({
+        x: new Date(entry.timestamp),
+        y: entry.probability
+    })).sort((a, b) => a.x - b.x);
+
+    // 3. Initialize Chart
+    const ctx = canvas.getContext('2d');
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            datasets: [{
+                label: 'Probability',
+                data: dataPoints,
+                borderColor: '#33f5ff',
+                backgroundColor: 'rgba(51, 245, 255, 0.1)',
+                borderWidth: 2,
+                pointRadius: 4,
+                tension: 0.1,
+                fill: true
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: true,
+            plugins: {
+                legend: { display: false },
+                tooltip: {
+                    callbacks: {
+                        label: (context) => (context.parsed.y * 100).toFixed(1) + '%'
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    type: 'time',
+                    time: {
+                        unit: 'day',
+                        displayFormats: { day: 'MMM d' }
+                    },
+                    title: { display: true, text: 'Date', color: '#b2b3b6' },
+                    grid: { color: '#2a3441' },
+                    ticks: { color: '#b2b3b6' }
+                },
+                y: {
+                    grace: '10%',
+                    title: { 
+                        display: true, 
+                        text: 'Probability', 
+                        color: '#b2b3b6' 
+                    },
+                    grid: { 
+                        color: '#2a3441' 
+                    },
+                    ticks: {
+                        color: '#b2b3b6',
+                        callback: (value) => (value * 100).toFixed(0) + '%'
+                    }
+                    
+                }
+            }
+        }
+    });
+})();
+</script>
 {% endblock %}
