@@ -20,7 +20,7 @@ def index():
     query = ControlFrame.query
     search_form = EventSearchForm(request.args)
     
-    query = query.order_by(ControlFrame.rec_time.desc())
+    query = query.order_by(ControlFrame.event_code.desc())
     
     events = query.paginate(page=page, per_page=per_page, error_out=False)
     
