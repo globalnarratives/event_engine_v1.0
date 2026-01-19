@@ -42,7 +42,7 @@ class EventCFCreationForm(FlaskForm):
     # Control Frame Metadata
     event_actor = StringField('Event Actor',
                              validators=[DataRequired(), Length(max=100)],
-                             description='Primary actor (position/actor code, e.g., rus.hos.spx)')
+                             description='Primary actor (position/actor code)')
     
     action_code = SelectField('Action Code',
                              validators=[DataRequired()],
