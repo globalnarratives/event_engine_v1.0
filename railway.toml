@@ -1,6 +1,6 @@
 [build]
 
 [deploy]
-startCommand = "flask db upgrade && gunicorn run:app"
+startCommand = "gunicorn run:app"
 restartPolicyType = "on_failure"
 restartPolicyMaxRetries = 3
