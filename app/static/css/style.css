@@ -857,3 +857,15 @@ a:hover {
     word-break: break-word;
     max-width: 400px;
 }
+
+.testing-banner {
+    background: var(--color-accent-warning);
+    color: var(--color-bg-primary);
+    padding: 0.75rem;
+    text-align: center;
+    font-family: var(--font-ui);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    border-bottom: 2px solid var(--color-accent-critical);
+}
