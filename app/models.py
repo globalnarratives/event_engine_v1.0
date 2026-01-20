@@ -414,10 +414,28 @@ class MarkedScenario(db.Model):
         return link
     
     def recalculate_probability(self, event_code, weight, user_id):
-        """Update probability based on new event (implement your formula here)"""
-        # Placeholder: Simple additive model
+        """
+        Update probability based on new event using categorical weighting algorithm.
+        
+        This method:
+        1. Calculates immediate probability adjustment
+        2. Updates current_probability (clamped to [0, 1])
+        3. Records change in probability_history with full metrics
+        4. Triggers async batch recalculation for time windows (future)
+        
+        NOTE: Batch calculations (1-day, 7-day, 30-day) are computed separately
+        and stored in time-series storage. This method only handles immediate impact.
+        """
+        from probability_algorithms import ProbabilityCalculator
+        
+        # Calculate immediate adjustment
+        result = ProbabilityCalculator.calculate_immediate(float(weight))
+        
+        # Get previous probability
         previous_prob = float(self.current_probability) if self.current_probability else float(self.initial_probability)
-        new_prob = previous_prob + float(weight)
+        
+        # Apply adjustment
+        new_prob = previous_prob + result['probability_adjustment']
         
         # Clamp to [0, 1]
         new_prob = max(0.0, min(1.0, new_prob))
@@ -425,21 +443,31 @@ class MarkedScenario(db.Model):
         # Update current probability
         self.current_probability = new_prob
         
-        # Add to history
+        # Add to history with full calculation metadata
         if not self.probability_history:
             self.probability_history = []
         
         self.probability_history.append({
             'probability': float(new_prob),
             'timestamp': datetime.utcnow().isoformat(),
-            'reason': f'Event {event_code} linked with weight {weight}',
+            'reason': f'Event {event_code} linked',
             'event_code': event_code,
-            'user_id': user_id
+            'user_id': user_id,
+            # Calculation metadata
+            'weight': float(weight),
+            'category': result['category'],
+            'multiplier': result['multiplier'],
+            'adjusted_weight': result['adjusted_weight'],
+            'basis_points': result['basis_points'],
+            'probability_adjustment': result['probability_adjustment']
         })
         
         flag_modified(self, 'probability_history')
 
         self.updated_at = datetime.utcnow()
+        
+        # TODO: Trigger async batch recalculation for 1-day, 7-day, 30-day windows
+        # This will be handled by scheduled jobs writing to time-series storage
     
     def __repr__(self):
         return f'<MarkedScenario {self.display_name}>'
@@ -452,7 +480,7 @@ class ScenarioEvent(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     marked_scenario_id = db.Column(db.Integer, db.ForeignKey('marked_scenarios.id', ondelete='CASCADE'), nullable=False, index=True)
     event_code = db.Column(db.String(50), db.ForeignKey('control_frame.event_code', ondelete='CASCADE'), nullable=False, index=True)
-    weight = db.Column(db.Numeric(5, 3))  # -9.999 to 9.999
+    weight = db.Column(db.Numeric(4, 1))  # -12.0 to 12.0 in 0.1 increments
     notes = db.Column(db.Text)  # Analyst's explanation for linking
     linked_at = db.Column(db.DateTime, default=datetime.utcnow)
     linked_by_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
