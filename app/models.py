@@ -426,7 +426,7 @@ class MarkedScenario(db.Model):
         NOTE: Batch calculations (1-day, 7-day, 30-day) are computed separately
         and stored in time-series storage. This method only handles immediate impact.
         """
-        from probability_algorithms import ProbabilityCalculator
+        from app.probability_algorithms import ProbabilityCalculator
         
         # Calculate immediate adjustment
         result = ProbabilityCalculator.calculate_immediate(float(weight))
