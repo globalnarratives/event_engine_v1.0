@@ -14,9 +14,9 @@ from decimal import Decimal
 
 class WeightCategory:
     """Weight category definitions with Fibonacci-inspired multipliers"""
-    MINOR = (0.1, 4.0, 1)      # 0.1 ≤ |weight| ≤ 4.0, multiplier = 1x
-    MODERATE = (5.0, 7.0, 3)    # 5.0 ≤ |weight| ≤ 7.0, multiplier = 3x
-    MAJOR = (8.0, 10.0, 8)      # 8.0 ≤ |weight| ≤ 10.0, multiplier = 8x
+    MINOR = (0.1, 4.9, 1)      # 0.1 ≤ |weight| ≤ 4.9, multiplier = 1x
+    MODERATE = (5.0, 7.9, 3)    # 5.0 ≤ |weight| ≤ 7.9, multiplier = 3x
+    MAJOR = (8.0, 10.9, 8)      # 8.0 ≤ |weight| ≤ 10.9, multiplier = 8x
     CRITICAL = (11.0, 12.0, 20) # 11.0 ≤ |weight| ≤ 12.0, multiplier = 20x
     
     @classmethod
