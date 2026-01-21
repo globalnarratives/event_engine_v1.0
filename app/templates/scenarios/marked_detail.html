@@ -284,10 +284,31 @@
     const rawHistory = JSON.parse(canvas.dataset.history || '[]');
 
     // 2. Map the data into the format Chart.js expects
-    const dataPoints = rawHistory.map(entry => ({
-        x: new Date(entry.timestamp),
-        y: entry.probability
-    })).sort((a, b) => a.x - b.x);
+   const dataPoints = rawHistory.map(entry => {
+        let eventDate;
+        
+        // Initial assessment: use scenario start_date
+        if (!entry.event_code) {
+            eventDate = new Date('{{ marked.scenario.start_date.isoformat() }}');
+        } else if (entry.event_code.startsWith('e.')) {
+            // Parse event date from event_code (format: e.DDMMYYYY.region.ordinal)
+            const datePart = entry.event_code.split('.')[1]; // e.g., "17012026"
+            if (datePart && datePart.length === 8) {
+                const day = datePart.substring(0, 2);
+                const month = datePart.substring(2, 4);
+                const year = datePart.substring(4, 8);
+                eventDate = new Date(`${year}-${month}-${day}`);
+            }
+        }
+        
+        // If parse failed, eventDate will be undefined and this entry will cause issues
+        // This is intentional - we want to know if data is malformed
+        
+        return {
+            x: eventDate,
+            y: entry.probability
+        };
+    }).sort((a, b) => a.x - b.x);
 
     // 3. Initialize Chart
     const ctx = canvas.getContext('2d');
