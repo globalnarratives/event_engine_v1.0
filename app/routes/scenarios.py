@@ -157,11 +157,18 @@ def marked_detail(marked_id):
         marked_scenario_id=marked_id
     ).order_by(ScenarioEvent.linked_at.desc()).all()
     
+    # Get all events for sidebar listing
+    from app.models import ControlFrame
+    all_events = ControlFrame.query.order_by(ControlFrame.rec_timestamp.desc()).limit(100).all()
+    
+    # Get list of already-linked event codes to filter out
+    linked_event_codes = [link.event_code for link in event_links]
+    
     return render_template('scenarios/marked_detail.html',
                          marked=marked,
-                         event_links=event_links)
-
-# Add these routes to your existing app/routes/scenarios.py
+                         event_links=event_links,
+                         all_events=all_events,
+                         linked_event_codes=linked_event_codes)
 
 @bp.route('/marked/<int:marked_id>/link-event', methods=['GET', 'POST'])
 @login_required
