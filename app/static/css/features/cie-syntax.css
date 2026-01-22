@@ -1,0 +1,56 @@
+/* ============================================
+   CIE SYNTAX HIGHLIGHTING - IDE STYLE
+   ============================================ */
+.cf-symbol {
+  color: var(--color-accent-primary);
+  font-weight: bold;
+}
+
+.cf-bullet {
+  color: var(--color-accent-primary);
+  font-weight: bold;
+}
+
+.cf-entity {
+  color: #FF6B9D;
+  font-weight: 500;
+}
+
+.cf-action {
+  color: #FFD93D;
+  font-weight: 600;
+}
+
+.cf-bracket {
+  color: #FFD93D;
+  font-weight: 600;
+}
+
+.cf-operator {
+  color: var(--color-accent-primary);
+  font-weight: bold;
+  margin: 0 0.25rem;
+}
+
+.cf-relation-op {
+  color: #6BCF7F;
+  font-weight: 600;
+}
+
+.weight-positive {
+  font-weight: 600;
+  font-family: var(--font-body);
+  color: var(--color-accent-secondary);
+}
+
+.weight-negative {
+  font-weight: 600;
+  font-family: var(--font-body);
+  color: var(--color-accent-warning);
+}
+
+.weight-neutral {
+  font-weight: 600;
+  font-family: var(--font-body);
+  color: var(--color-text-primary);
+}

@@ -1,0 +1,40 @@
+/* ============================================
+   BADGES
+   ============================================ */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: var(--space-xs) var(--space-sm);
+  border: 1px solid;
+  border-radius: var(--radius-sm);
+  line-height: 1;
+}
+
+.badge-active {
+  background-color: rgba(0, 255, 159, 0.1);
+  border-color: var(--color-accent-secondary);
+  color: var(--color-accent-secondary);
+}
+
+.badge-pending {
+  background-color: rgba(255, 215, 0, 0.1);
+  border-color: var(--color-accent-tertiary);
+  color: var(--color-accent-tertiary);
+}
+
+.badge-resolved {
+  background-color: rgba(107, 114, 128, 0.1);
+  border-color: var(--color-text-tertiary);
+  color: var(--color-text-tertiary);
+}
+
+.badge-critical {
+  background-color: rgba(255, 0, 85, 0.1);
+  border-color: var(--color-accent-critical);
+  color: var(--color-accent-critical);
+}

@@ -2,6 +2,10 @@
 
 {% block title %}{{ marked.display_name }}{% endblock %}
 
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/pages/marked-detail.css') }}">
+{% endblock %}
+
 {% block content %}
 <div class="marked-detail-container">
     <!-- Header Section - Spans all columns -->

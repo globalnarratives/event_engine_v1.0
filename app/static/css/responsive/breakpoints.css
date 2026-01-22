@@ -1,0 +1,35 @@
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+@media (max-width: 768px) {
+  .container,
+  .container-fluid,
+  .cf-container,
+  .cf-form-container {
+    padding: var(--space-md);
+  }
+
+  .grid-cols-2,
+  .grid-cols-3,
+  .grid-cols-4 {
+    grid-template-columns: 1fr;
+  }
+
+  .site-header {
+    padding: var(--space-sm) var(--space-md);
+  }
+
+  .nav-primary {
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+  }
+
+  .cf-table {
+    font-size: 0.85rem;
+  }
+
+  .cf-source-display {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
