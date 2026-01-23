@@ -1,83 +1,182 @@
 {% extends "base.html" %}
+{% from 'components/event_card.html' import event_card %}
 
 {% block title %}Scenarios{% endblock %}
 
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/scenarios/scenarios.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/components/event-card.css') }}">
+{% endblock %}
+
 {% block content %}
-<div class="container">
-    <div class="flex justify-between items-center mb-lg">
-        <h1>Scenarios</h1>
+<div class="scenarios-index-container">
+    <!-- Header Section - Spans all columns -->
+    <div class="scenarios-header">
+        <h1>SCENARIOS</h1>
         <a href="{{ url_for('scenarios.create') }}" class="btn btn-primary">Create New Scenario</a>
     </div>
 
-    {% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
-            {% for category, message in messages %}
-                <div class="card mb-md flash-{{ category }}">
-                    <div class="card-body">
-                        {{ message }}
-                    </div>
-                </div>
-            {% endfor %}
-        {% endif %}
-    {% endwith %}
-
-    <div class="card">
-        <div class="card-body">
-            {% if scenarios.items %}
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Code</th>
-                            <th>Proposition</th>
-                            <th>Close Date</th>
-                            <th>Created By</th>
-                            <th>Assessments</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for scenario in scenarios.items %}
-                        <tr>
-                            <td>
-                                <span style="color: var(--color-accent-primary); font-family: var(--font-body);">
-                                    {{ scenario.scenario_code }}
-                                </span>
-                            </td>
-                            <td>{{ scenario.title }}</td>
-                            <td>{{ scenario.close_date.strftime('%Y-%m-%d') if scenario.close_date else 'N/A' }}</td>
-                            <td>{{ scenario.created_by.username }}</td>
-                            <td>{{ scenario.marked_scenarios|length }}</td>
-                            <td>
-                                <a href="{{ url_for('scenarios.detail', scenario_id=scenario.id) }}" 
-                                   class="btn btn-secondary" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;">
-                                    View
-                                </a>
-                            </td>
-                        </tr>
+    <!-- Left Column: Available Scenarios -->
+    <div class="scenarios-left-column">
+        <div class="card">
+            <div class="card-header">
+                <h2 class="card-title">Available Scenarios</h2>
+            </div>
+            <div class="card-body">
+                {% if all_scenarios %}
+                    <div class="scenario-list">
+                        {% for scenario in all_scenarios %}
+                        <div class="scenario-item">
+                            <div class="scenario-item-content">
+                                <div class="scenario-item-header">
+                                    <a href="{{ url_for('scenarios.detail', scenario_id=scenario.id) }}" 
+                                       class="scenario-code">
+                                        {{ scenario.scenario_code }}
+                                    </a>
+                                    {% if scenario.id in user_marked_scenario_ids %}
+                                        <span class="scenario-marked-badge">✓</span>
+                                    {% endif %}
+                                </div>
+                                <div class="scenario-item-title">
+                                    {{ scenario.title }}
+                                </div>
+                                <div class="scenario-item-meta">
+                                    {{ scenario.start_date.strftime('%Y-%m-%d') if scenario.start_date else 'N/A' }}
+                                    →
+                                    {{ scenario.close_date.strftime('%Y-%m-%d') if scenario.close_date else 'N/A' }}
+                                </div>
+                            </div>
+                        </div>
                         {% endfor %}
-                    </tbody>
-                </table>
-
-                {% if scenarios.pages > 1 %}
-                <div class="flex justify-between items-center mt-lg">
-                    <div class="text-secondary">
-                        Page {{ scenarios.page }} of {{ scenarios.pages }} ({{ scenarios.total }} scenarios)
                     </div>
-                    <div class="flex gap-sm">
-                        {% if scenarios.has_prev %}
-                            <a href="{{ url_for('scenarios.index', page=scenarios.prev_num) }}" class="btn btn-secondary">← Previous</a>
-                        {% endif %}
-                        {% if scenarios.has_next %}
-                            <a href="{{ url_for('scenarios.index', page=scenarios.next_num) }}" class="btn btn-secondary">Next →</a>
-                        {% endif %}
-                    </div>
-                </div>
+                {% else %}
+                    <p class="text-secondary">No scenarios yet. Create your first scenario to begin tracking assessments.</p>
                 {% endif %}
-            {% else %}
-                <p style="color: var(--color-text-dim); text-align: center; padding: 2rem 0;">
-                    No scenarios yet. Create your first scenario to begin tracking assessments.
-                </p>
-            {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Center Column: My Marked & Public Marked -->
+    <div class="scenarios-middle-column">
+        <!-- My Marked Scenarios -->
+        <div class="card">
+            <div class="card-header">
+                <h2 class="card-title">My Marked Scenarios</h2>
+            </div>
+            <div class="card-body">
+                {% if my_marked_with_metrics %}
+                    <table class="marked-table">
+                        <thead>
+                            <tr>
+                                <th>Scenario</th>
+                                <th>P<sub>i</sub></th>
+                                <th>P<sub>c</sub></th>
+                                <th>Vol</th>
+                                <th>Vel</th>
+                                <th>Count</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in my_marked_with_metrics %}
+                            <tr>
+                                <td>
+                                    <a href="{{ url_for('scenarios.marked_detail', marked_id=item.marked.id) }}" 
+                                       class="code-link">
+                                        {{ item.marked.scenario.scenario_code }}
+                                    </a>
+                                </td>
+                                <td class="metric-cell">{{ (item.pi * 100)|round(1) }}</td>
+                                <td class="metric-cell metric-current">{{ (item.pc * 100)|round(1) }}</td>
+                                <td class="metric-cell">{{ item.volatility|round(1) }}</td>
+                                <td class="metric-cell">{{ item.velocity|round(1) }}</td>
+                                <td class="metric-cell">{{ item.event_count }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                {% else %}
+                    <p class="text-secondary">You haven't marked any scenarios yet. Select a scenario from the left to begin your assessment.</p>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Public Marked Scenarios -->
+        <div class="card">
+            <div class="card-header">
+                <h2 class="card-title">Public Marked</h2>
+            </div>
+            <div class="card-body">
+                {% if public_marked_with_metrics %}
+                    <table class="marked-table">
+                        <thead>
+                            <tr>
+                                <th>Scenario</th>
+                                <th>Analyst</th>
+                                <th>P<sub>i</sub></th>
+                                <th>P<sub>c</sub></th>
+                                <th>Vol</th>
+                                <th>Vel</th>
+                                <th>Count</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in public_marked_with_metrics %}
+                            <tr>
+                                <td>
+                                    <a href="{{ url_for('scenarios.marked_detail', marked_id=item.marked.id) }}" 
+                                       class="code-link">
+                                        {{ item.marked.scenario.scenario_code }}
+                                    </a>
+                                </td>
+                                <td class="analyst-cell">{{ item.marked.analyst.username }}</td>
+                                <td class="metric-cell">{{ (item.pi * 100)|round(1) }}</td>
+                                <td class="metric-cell metric-current">{{ (item.pc * 100)|round(1) }}</td>
+                                <td class="metric-cell">{{ item.volatility|round(1) }}</td>
+                                <td class="metric-cell">{{ item.velocity|round(1) }}</td>
+                                <td class="metric-cell">{{ item.event_count }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                {% else %}
+                    <p class="text-secondary">No public assessments available yet.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Right Column: Events List -->
+    <div class="scenarios-right-column">
+        <div class="card">
+            <div class="card-header">
+                <h2 class="card-title">Events List</h2>
+            </div>
+            <div class="card-body">
+                {% if recent_events %}
+                    <div class="events-list-container">
+                        {% set events_by_region = {} %}
+                        {% for event in recent_events %}
+                            {% set region = event.event_code.split('.')[2] if event.event_code else 'unknown' %}
+                            {% if region not in events_by_region %}
+                                {% set _ = events_by_region.update({region: []}) %}
+                            {% endif %}
+                            {% set _ = events_by_region[region].append(event) %}
+                        {% endfor %}
+                        
+                        {% for region, events in events_by_region.items()|sort %}
+                            <div class="event-region-header">
+                                {{ region.upper() }}
+                            </div>
+                            
+                            {% for event in events|sort(attribute='rec_timestamp', reverse=True) %}
+                                {{ event_card(event, selectable=false) }}
+                            {% endfor %}
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <p class="text-secondary">No events available.</p>
+                {% endif %}
+            </div>
         </div>
     </div>
 </div>

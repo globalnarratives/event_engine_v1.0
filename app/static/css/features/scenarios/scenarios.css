@@ -1,4 +1,230 @@
-/* Scenarios Index Grid Layout */
+/* Scenarios Index - 3 Column Layout */
+.scenarios-index-container {
+    display: grid;
+    grid-template-columns: 400px 1fr 350px;
+    gap: var(--spacing-lg);
+    max-width: 1600px;
+    margin: 0 auto;
+    align-items: start;
+}
+
+.scenarios-header {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-md);
+}
+
+.scenarios-header h1 {
+    margin: 0;
+}
+
+/* Column Layouts */
+.scenarios-left-column,
+.scenarios-middle-column,
+.scenarios-right-column {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+}
+
+/* Left Column: Available Scenarios */
+.scenario-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+.scenario-item {
+    background: rgba(51, 245, 255, 0.03);
+    border: 1px solid rgba(51, 245, 255, 0.1);
+    border-radius: 4px;
+    padding: var(--spacing-md);
+    transition: all 0.2s ease;
+}
+
+.scenario-item:hover {
+    background: rgba(51, 245, 255, 0.08);
+    border-color: rgba(51, 245, 255, 0.3);
+}
+
+.scenario-item-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+}
+
+.scenario-item-header {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.scenario-code {
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--primary);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.scenario-code:hover {
+    color: var(--primary-light);
+}
+
+.scenario-marked-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    background: rgba(51, 255, 153, 0.2);
+    color: #33ff99;
+    border: 1px solid rgba(51, 255, 153, 0.4);
+    border-radius: 50%;
+    font-size: 0.7rem;
+    font-weight: 600;
+}
+
+.scenario-item-title {
+    font-size: 0.85rem;
+    color: var(--text-primary);
+    line-height: 1.4;
+}
+
+.scenario-item-meta {
+    font-size: 0.75rem;
+    color: var(--text-tertiary);
+    font-family: var(--font-mono);
+}
+
+/* Center Column: Marked Scenarios Tables */
+.marked-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+}
+
+.marked-table thead {
+    background: rgba(51, 245, 255, 0.05);
+}
+
+.marked-table th {
+    padding: var(--spacing-sm) var(--spacing-md);
+    text-align: left;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-secondary);
+    border-bottom: 1px solid rgba(51, 245, 255, 0.2);
+    font-weight: 600;
+}
+
+.marked-table td {
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-bottom: 1px solid rgba(51, 245, 255, 0.1);
+}
+
+.marked-table tbody tr:hover {
+    background: rgba(51, 245, 255, 0.05);
+}
+
+.marked-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.metric-cell {
+    font-family: var(--font-mono);
+    font-weight: 600;
+    color: var(--text-primary);
+    text-align: right;
+}
+
+.metric-current {
+    color: var(--primary);
+}
+
+.analyst-cell {
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+}
+
+.code-link {
+    font-family: var(--font-mono);
+    font-weight: 600;
+    color: var(--primary);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.code-link:hover {
+    color: var(--primary-light);
+}
+
+/* Right Column: Events List */
+.events-list-container {
+    max-height: 800px;
+    overflow-y: auto;
+}
+
+.event-region-header {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-secondary);
+    padding: var(--spacing-sm) 0;
+    margin-top: var(--spacing-md);
+    border-bottom: 1px solid rgba(51, 245, 255, 0.2);
+}
+
+.event-region-header:first-child {
+    margin-top: 0;
+}
+
+/* Responsive Layout */
+@media (max-width: 1400px) {
+    .scenarios-index-container {
+        grid-template-columns: 350px 1fr 300px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .scenarios-index-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .scenarios-right-column {
+        order: -1;
+    }
+}
+
+/* Card styling adjustments for this page */
+.scenarios-index-container .card {
+    height: 100%;
+}
+
+.scenarios-index-container .card-body {
+    max-height: none;
+}
+
+/* Scrollable card bodies for long lists */
+.scenarios-left-column .card-body {
+    max-height: 600px;
+    overflow-y: auto;
+}
+
+.scenarios-middle-column .card-body {
+    overflow-x: auto;
+}
+
+
+
+
+
+/* 
 .scenarios-index-grid {
     display: grid;
     grid-template-columns: 70% 30%;
@@ -13,7 +239,7 @@
     gap: var(--space-lg);
 }
 
-/* Scenarios Table */
+
 .scenarios-table {
     width: 100%;
     border-collapse: collapse;
@@ -73,7 +299,7 @@
     font-size: 0.85rem;
 }
 
-/* Event Cards - Enhanced from marked-detail */
+
 .event-list-container {
     background-color: var(--color-bg-primary);
     border: 1px solid var(--color-border);
@@ -156,7 +382,7 @@
     border-color: var(--color-border);
 }
 
-/* Empty State */
+
 .empty-state {
     color: var(--color-text-dim);
     text-align: center;
@@ -164,7 +390,7 @@
     font-style: italic;
 }
 
-/* Responsive Adjustments */
+
 @media (max-width: 1200px) {
     .scenarios-index-grid {
         grid-template-columns: 65% 35%;
@@ -184,4 +410,4 @@
     .scenarios-table td {
         padding: var(--space-sm);
     }
-}
+} */

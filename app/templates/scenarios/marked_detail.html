@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% from 'components/event_card.html' import event_card %}
+
 {% block title %}{{ marked.display_name }}{% endblock %}
 
 {% block extra_css %}
@@ -308,7 +310,6 @@
             <div class="mb-lg">
                 <label class="form-label">AVAILABLE EVENTS</label>
                 <div class="event-list-container">
-                    
                     {% set available_events = [] %}
                     {% for event in all_events %}
                         {% if event.event_code not in linked_event_codes %}
@@ -334,30 +335,7 @@
                             
                             <!-- Events in Region (sorted by date, most recent first) -->
                             {% for event in events|sort(attribute='rec_timestamp', reverse=True) %}
-                            <div class="event-list-item" 
-                                onclick="selectEvent(this, '{{ event.event_code }}', '{{ event.event_actor }}', '{{ event.action_code }}')">
-                                <div class="event-list-item-content">
-                                    <!-- Checkbox -->
-                                    <input type="radio" name="event_radio" value="{{ event.event_code }}" 
-                                        class="event-radio"
-                                        onclick="event.stopPropagation();">
-                                    
-                                    <!-- Event Details -->
-                                    <div class="event-list-details">
-                                        <!-- Event Code -->
-                                        <div class="event-code">
-                                            {{ event.event_code }}
-                                        </div>
-                                        
-                                        <!-- Actor and Action -->
-                                        <div class="event-meta">
-                                            <span class="text-primary">{{ event.event_actor or 'N/A' }}</span>
-                                            <span class="event-separator">•</span>
-                                            <span class="text-accent">{{ event.action_code or 'N/A' }}</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                                {{ event_card(event, selectable=true) }}
                             {% endfor %}
                         {% endfor %}
                     {% else %}
@@ -365,7 +343,6 @@
                             No available events to link
                         </div>
                     {% endif %}
-                    
                 </div>
             </div>
             
@@ -525,11 +502,12 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 
 <script>
-// Event selection handler
 function selectEvent(element, eventCode, eventActor, actionCode) {
     // Update radio button
     const radio = element.querySelector('input[type="radio"]');
-    radio.checked = true;
+    if (radio) {
+        radio.checked = true;
+    }
     
     // Update hidden input
     document.getElementById('selected-event-code').value = eventCode;
@@ -542,16 +520,16 @@ function selectEvent(element, eventCode, eventActor, actionCode) {
                 ${eventCode}
             </div>
             <div class="selected-event-meta">
-                ${eventActor || 'N/A'} • ${actionCode || 'N/A'}
+                ${eventActor} • ${actionCode}
             </div>
         </div>
     `;
     
     // Highlight selected item
-    document.querySelectorAll('.event-list-item').forEach(item => {
-        item.classList.remove('selected');
+    document.querySelectorAll('.event-card-selectable').forEach(item => {
+        item.classList.remove('event-card-selected');
     });
-    element.classList.add('selected');
+    element.classList.add('event-card-selected');
 }
 </script>
 

@@ -6,25 +6,114 @@ from datetime import datetime
 
 bp = Blueprint('scenarios', __name__, url_prefix='/scenarios')
 
-@bp.route('/')
+@bp.route('/scenarios')
 @login_required
 def index():
-    """List all marked scenarios"""
-    scenarios = MarkedScenario.query.order_by(
-        MarkedScenario.updated_at.desc()
-    ).all()
+    """Scenarios index page with 3-column layout"""
+    from app.models import Scenario, MarkedScenario, ControlFrame
+    from app.probability_algorithms import VolatilityCalculator, VelocityCalculator, WeightCategory
     
-    events = ControlFrame.query.order_by(
+    # Left Column: All available scenarios
+    all_scenarios = Scenario.query.order_by(Scenario.created_at.desc()).all()
+    
+    # Get list of scenario IDs the current user has already marked
+    user_marked_scenario_ids = [
+        m.scenario_id for m in MarkedScenario.query.filter_by(
+            analyst_id=current_user.id
+        ).all()
+    ]
+    
+    # Center Column Top: Current user's marked scenarios
+    my_marked = MarkedScenario.query.filter_by(
+        analyst_id=current_user.id
+    ).order_by(MarkedScenario.created_at.desc()).all()
+    
+    # Calculate metrics for my marked scenarios
+    my_marked_with_metrics = []
+    for marked in my_marked:
+        # Get linked events for this marked scenario
+        event_links = ScenarioEvent.query.filter_by(
+            marked_scenario_id=marked.id
+        ).all()
+        
+        # Prepare events data
+        events_data = [
+            (link.event_code, float(link.weight), link.linked_at)
+            for link in event_links
+        ]
+        
+        # Calculate metrics
+        if events_data:
+            volatility_result = VolatilityCalculator.calculate(events_data)
+            velocity = VelocityCalculator.calculate(
+                volatility_result['volatility_score'],
+                len(events_data)
+            )
+            volatility = volatility_result['volatility_score']
+        else:
+            velocity = 0.0
+            volatility = 0.0
+        
+        my_marked_with_metrics.append({
+            'marked': marked,
+            'pi': marked.initial_probability,
+            'pc': marked.current_probability,
+            'velocity': velocity,
+            'volatility': volatility,
+            'event_count': len(events_data)
+        })
+    
+    # Center Column Bottom: Other analysts' public marked scenarios
+    public_marked = MarkedScenario.query.filter(
+        MarkedScenario.analyst_id != current_user.id
+    ).order_by(MarkedScenario.created_at.desc()).all()
+    
+    # Calculate metrics for public marked scenarios
+    public_marked_with_metrics = []
+    for marked in public_marked:
+        # Get linked events
+        event_links = ScenarioEvent.query.filter_by(
+            marked_scenario_id=marked.id
+        ).all()
+        
+        # Prepare events data
+        events_data = [
+            (link.event_code, float(link.weight), link.linked_at)
+            for link in event_links
+        ]
+        
+        # Calculate metrics
+        if events_data:
+            volatility_result = VolatilityCalculator.calculate(events_data)
+            velocity = VelocityCalculator.calculate(
+                volatility_result['volatility_score'],
+                len(events_data)
+            )
+            volatility = volatility_result['volatility_score']
+        else:
+            velocity = 0.0
+            volatility = 0.0
+        
+        public_marked_with_metrics.append({
+            'marked': marked,
+            'pi': marked.initial_probability,
+            'pc': marked.current_probability,
+            'velocity': velocity,
+            'volatility': volatility,
+            'event_count': len(events_data)
+        })
+    
+    # Right Column: Recent events for reference
+    recent_events = ControlFrame.query.order_by(
         ControlFrame.rec_timestamp.desc()
-    ).limit(50).all()
+    ).limit(100).all()
     
-    return render_template(
-        'scenarios/index.html',
-        scenarios=scenarios,
-        events=events
-    )
-
-# Update the create() function in app/routes/scenarios.py
+    return render_template('scenarios/index.html',
+                         all_scenarios=all_scenarios,
+                         user_marked_scenario_ids=user_marked_scenario_ids,
+                         my_marked_with_metrics=my_marked_with_metrics,
+                         public_marked_with_metrics=public_marked_with_metrics,
+                         recent_events=recent_events)
 
 @bp.route('/create', methods=['GET', 'POST'])
 @login_required
