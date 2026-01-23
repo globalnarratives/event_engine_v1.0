@@ -1,0 +1,187 @@
+/* Scenarios Index Grid Layout */
+.scenarios-index-grid {
+    display: grid;
+    grid-template-columns: 70% 30%;
+    gap: var(--space-lg);
+    margin-top: var(--space-xl);
+}
+
+.scenarios-column,
+.events-column {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+}
+
+/* Scenarios Table */
+.scenarios-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+}
+
+.scenarios-table thead {
+    border-bottom: 2px solid var(--color-border);
+}
+
+.scenarios-table th {
+    font-family: var(--font-ui);
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-text-tertiary);
+    text-align: left;
+    padding: var(--space-md);
+}
+
+.scenarios-table td {
+    padding: var(--space-md);
+    border-top: 1px solid var(--color-border);
+    color: var(--color-text-secondary);
+}
+
+.scenario-row {
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.scenario-row:hover {
+    background-color: var(--color-bg-elevated);
+}
+
+.scenario-code {
+    font-family: var(--font-body);
+    color: var(--color-accent-primary);
+    font-weight: 600;
+}
+
+.scenario-stat {
+    font-family: var(--font-body);
+    text-align: center;
+}
+
+.scenario-current {
+    color: var(--color-accent-primary);
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.scenario-analyst {
+    color: var(--color-text-tertiary);
+    font-size: 0.85rem;
+}
+
+/* Event Cards - Enhanced from marked-detail */
+.event-list-container {
+    background-color: var(--color-bg-primary);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    max-height: 600px;
+    overflow-y: auto;
+}
+
+.event-region-header {
+    background-color: var(--color-bg-elevated);
+    padding: var(--space-sm) var(--space-md);
+    border-bottom: 1px solid var(--color-border);
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.7rem;
+    letter-spacing: 0.05em;
+    color: var(--color-text-tertiary);
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+.event-card {
+    padding: var(--space-md);
+    border-bottom: 1px solid var(--color-border);
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.event-card:hover {
+    background-color: var(--color-bg-elevated);
+}
+
+.event-card-header {
+    font-family: var(--font-ui);
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: var(--color-text-dim);
+    margin-bottom: var(--space-sm);
+    letter-spacing: 0.05em;
+}
+
+.event-card-code {
+    font-family: var(--font-body);
+    color: var(--color-accent-primary);
+    font-size: 0.85rem;
+    margin-bottom: var(--space-sm);
+    font-weight: 500;
+}
+
+.event-card-badges {
+    display: flex;
+    gap: var(--space-sm);
+    flex-wrap: wrap;
+}
+
+.event-badge {
+    display: inline-block;
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    background-color: var(--color-bg-elevated);
+}
+
+.event-badge-actor {
+    color: var(--color-accent-secondary);
+    border-color: var(--color-accent-secondary);
+}
+
+.event-badge-action {
+    color: var(--color-accent-tertiary);
+    border-color: var(--color-accent-tertiary);
+}
+
+.event-badge-relcred {
+    color: var(--color-text-tertiary);
+    border-color: var(--color-border);
+}
+
+/* Empty State */
+.empty-state {
+    color: var(--color-text-dim);
+    text-align: center;
+    padding: 2rem 0;
+    font-style: italic;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 1200px) {
+    .scenarios-index-grid {
+        grid-template-columns: 65% 35%;
+    }
+}
+
+@media (max-width: 768px) {
+    .scenarios-index-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .scenarios-table {
+        font-size: 0.8rem;
+    }
+    
+    .scenarios-table th,
+    .scenarios-table td {
+        padding: var(--space-sm);
+    }
+}

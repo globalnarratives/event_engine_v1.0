@@ -168,52 +168,6 @@ class Actor(db.Model):
         ).all()
         return [tenure.position for tenure in tenures]
 
-
-# class Event(db.Model):
-#     """CIE-coded events - the primary analytical unit (LEGACY - being replaced by ControlFrame)"""
-#     __tablename__ = 'events'
-    
-#     event_code = db.Column(db.String(50), primary_key=True)
-#     event_date = db.Column(db.Date, nullable=False)
-#     region = db.Column(db.String(3), nullable=False)
-#     ordinal = db.Column(db.Integer, nullable=False)
-#     recorded_timestamp = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
-#     core_action = db.Column(db.String(10), nullable=False)
-#     cie_description = db.Column(db.String(250), nullable=False)
-#     natural_summary = db.Column(db.String(250), nullable=False)
-#     article_url = db.Column(db.String(500), nullable=False)
-#     article_headline = db.Column(db.String(250))
-#     created_by = db.Column(db.String(100))
-    
-#     # Relationships
-#     event_actors = db.relationship('EventActor', back_populates='event', cascade='all, delete-orphan')
-    
-#     __table_args__ = (
-#         db.CheckConstraint(
-#             region.in_(['weu', 'eeu', 'nam', 'sam', 'cmb', 'nea', 'sea', 'oce', 'sas', 'mea', 'eaf', 'caf', 'saf', 'waf']),
-#             name='chk_region'
-#         ),
-#         db.UniqueConstraint('event_date', 'region', 'ordinal', name='unique_event_ordinal'),
-#     )
-    
-#     def __repr__(self):
-#         return f'<Event {self.event_code}: {self.natural_summary[:50]}>'
-    
-#     def get_subjects(self):
-#         """Get all subject actors/positions for this event"""
-#         return EventActor.query.filter_by(
-#             event_code=self.event_code,
-#             role_type='subject'
-#         ).all()
-    
-#     def get_objects(self):
-#         """Get all object actors/positions for this event"""
-#         return EventActor.query.filter_by(
-#             event_code=self.event_code,
-#             role_type='object'
-#         ).all()
-
-
 class Tenure(db.Model):
     """Links actors to positions with time bounds"""
     __tablename__ = 'tenures'
@@ -264,75 +218,6 @@ class User(UserMixin, db.Model):
     
     def __repr__(self):
         return f'<User {self.username}>'
-
-#class EventActor(db.Model):
-    # """Links events to actors/positions as subjects or objects"""
-    # __tablename__ = 'event_actors'
-    
-    # event_actor_id = db.Column(db.Integer, primary_key=True)
-    # event_code = db.Column(db.String(50), db.ForeignKey('events.event_code'), nullable=False)
-    # code = db.Column(db.String(100), nullable=False)
-    # code_type = db.Column(db.String(20), nullable=False)
-    # role_type = db.Column(db.String(20), nullable=False)
-    
-    # # Relationships
-    # event = db.relationship('Event', back_populates='event_actors')
-    
-    # __table_args__ = (
-    #     db.CheckConstraint(
-    #         code_type.in_(['position', 'actor']),
-    #         name='chk_code_type'
-    #     ),
-    #     db.CheckConstraint(
-    #         role_type.in_(['subject', 'object']),
-    #         name='chk_role_type'
-    #     ),
-    # )
-    
-    # def __repr__(self):
-    #     return f'<EventActor {self.code} as {self.role_type} in {self.event_code}>'
-    
-    # def resolve_actor(self):
-    #     """Resolve the actual actor, whether directly coded or via position on event date"""
-    #     if self.code_type == 'actor':
-    #         return Actor.query.get(self.code)
-    #     elif self.code_type == 'position':
-    #         position = Position.query.get(self.code)
-    #         if position and self.event:
-    #             return position.get_holder_on_date(self.event.event_date)
-    #     return None
-    
-    # def get_display_info(self):
-    #     """Get display information for this event actor"""
-    #     if self.code_type == 'actor':
-    #         actor = Actor.query.get(self.code)
-    #         if actor:
-    #             return {
-    #                 'code': self.code,
-    #                 'type': 'actor',
-    #                 'display': f'{self.code}: {actor.get_display_name()}'
-    #             }
-    #     elif self.code_type == 'position':
-    #         position = Position.query.get(self.code)
-    #         if position:
-    #             holder = None
-    #             if self.event:
-    #                 holder = position.get_holder_on_date(self.event.event_date)
-    #             holder_name = holder.get_display_name() if holder else 'Vacant'
-    #             return {
-    #                 'code': self.code,
-    #                 'type': 'position',
-    #                 'display': f'{self.code}: {position.position_title} ({holder_name})'
-    #             }
-    #     return {
-    #         'code': self.code,
-    #         'type': self.code_type,
-    #         'display': self.code
-    #     }
-
-    # Add these models to your existing app/models.py file
-
-# Update your Scenario model in app/models.py
 
 class Scenario(db.Model):
     """Shared scenario template - the proposition/question"""

@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, redirect, url_for, flash, request
 from flask_login import login_required, current_user
-from app.models import Scenario, MarkedScenario, ScenarioEvent, User
+from app.models import Scenario, MarkedScenario, ScenarioEvent, ControlFrame, User
 from app import db
 from datetime import datetime
 
@@ -9,15 +9,20 @@ bp = Blueprint('scenarios', __name__, url_prefix='/scenarios')
 @bp.route('/')
 @login_required
 def index():
-    """List all scenarios"""
-    page = request.args.get('page', 1, type=int)
-    per_page = 50
+    """List all marked scenarios"""
+    scenarios = MarkedScenario.query.order_by(
+        MarkedScenario.updated_at.desc()
+    ).all()
     
-    scenarios = Scenario.query.order_by(Scenario.created_at.desc()).paginate(
-        page=page, per_page=per_page, error_out=False
+    events = ControlFrame.query.order_by(
+        ControlFrame.rec_timestamp.desc()
+    ).limit(50).all()
+    
+    return render_template(
+        'scenarios/index.html',
+        scenarios=scenarios,
+        events=events
     )
-    
-    return render_template('scenarios/index.html', scenarios=scenarios)
 
 # Update the create() function in app/routes/scenarios.py
 
@@ -164,11 +169,48 @@ def marked_detail(marked_id):
     # Get list of already-linked event codes to filter out
     linked_event_codes = [link.event_code for link in event_links]
     
+    # Calculate current velocity and volatility
+    from app.probability_algorithms import VolatilityCalculator, VelocityCalculator, WeightCategory
+    
+    # Prepare events data for calculation (all linked events)
+    events_data = [
+        (link.event_code, float(link.weight), link.linked_at)
+        for link in event_links
+    ]
+    
+    # Calculate volatility and velocity
+    if events_data:
+        volatility_result = VolatilityCalculator.calculate(events_data)
+        velocity = VelocityCalculator.calculate(
+            volatility_result['volatility_score'],
+            len(events_data)
+        )
+        volatility = volatility_result['volatility_score']
+    else:
+        velocity = 0.0
+        volatility = 0.0
+    
+    # Count events by category
+    category_counts = {
+        'minor': 0,
+        'moderate': 0,
+        'major': 0,
+        'critical': 0
+    }
+    
+    for link in event_links:
+        abs_weight = abs(float(link.weight))
+        category, _ = WeightCategory.categorize(abs_weight)
+        category_counts[category] += 1
+    
     return render_template('scenarios/marked_detail.html',
                          marked=marked,
                          event_links=event_links,
                          all_events=all_events,
-                         linked_event_codes=linked_event_codes)
+                         linked_event_codes=linked_event_codes,
+                         velocity=velocity,
+                         volatility=volatility,
+                         category_counts=category_counts)
 
 @bp.route('/marked/<int:marked_id>/link-event', methods=['GET', 'POST'])
 @login_required

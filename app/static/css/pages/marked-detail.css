@@ -36,6 +36,10 @@
   gap: var(--space-lg);
 }
 
+.marked-middle-column > .card:first-child {
+  min-height: 650px;  /* Makes the chart card taller */
+}
+
 .link-event-sidebar {
   display: none;
   background: var(--color-bg-secondary);
@@ -318,4 +322,78 @@
 
 .small-text {
   font-size: 0.85rem;
+}
+
+/* Probability Metrics Grid - 4 columns, 6 rows */
+.prob-metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    margin-bottom: var(--spacing-lg);
+    background: rgba(51, 245, 255, 0.03);
+    border: 1px solid rgba(51, 245, 255, 0.2);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.prob-metric {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-md);
+    border: 1px solid rgba(51, 245, 255, 0.1);
+}
+
+/* Column spanning */
+.prob-metric-wide {
+    grid-column: span 2;
+}
+
+.prob-metric-narrow {
+    grid-column: span 1;
+}
+
+/* Header cells */
+.prob-metric-header {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-secondary);
+    font-weight: 600;
+    background: rgba(51, 245, 255, 0.05);
+}
+
+/* Value cells */
+.prob-metric-value-cell {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    font-family: var(--font-mono);
+}
+
+/* Chart container */
+.prob-chart {
+    width: 100%;
+    margin-top: var(--spacing-md);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .prob-metrics-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .prob-metric-wide {
+        grid-column: span 1;
+    }
+}
+
+.prob-metric-current {
+    color: var(--primary);
+}
+
+/* Chart container adjustments */
+.prob-chart {
+    width: 100%;
+    margin-top: var(--spacing-md);
 }

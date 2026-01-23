@@ -157,24 +157,71 @@
         <!-- Probability Chart -->
         <div class="card">
             <div class="card-header">
-                <h2 class="card-title">Probability Over Time</h2>
+                <h2 class="card-title">Scenario Metrics</h2>
             </div>
             <div class="card-body">
-                <!-- Current Stats Display -->
-                <div class="prob-stats">
-                    <div class="prob-stat">
-                        <div class="prob-stat-label">Initial</div>
-                        <div class="prob-stat-value">
-                            {{ (marked.initial_probability * 100)|round(1) }}%
+                <!-- Enhanced Stats Grid -->
+                    <div class="prob-metrics-grid">
+                        <!-- Row 1: Pi and Pc Headers -->
+                        <div class="prob-metric prob-metric-header prob-metric-wide">
+                            P<sub>i</sub>
+                        </div>
+                        <div class="prob-metric prob-metric-header prob-metric-wide">
+                            P<sub>c</sub>
+                        </div>
+                        
+                        <!-- Row 2: Pi and Pc Values -->
+                        <div class="prob-metric prob-metric-value-cell prob-metric-wide">
+                            {{ (marked.initial_probability * 100)|round(1) }}
+                        </div>
+                        <div class="prob-metric prob-metric-value-cell prob-metric-wide">
+                            {{ (marked.current_probability * 100)|round(1) }}
+                        </div>
+                        
+                        <!-- Row 3: Vol and Vel Headers -->
+                        <div class="prob-metric prob-metric-header prob-metric-wide">
+                            Vol
+                        </div>
+                        <div class="prob-metric prob-metric-header prob-metric-wide">
+                            Vel
+                        </div>
+                        
+                        <!-- Row 4: Vol and Vel Values -->
+                        <div class="prob-metric prob-metric-value-cell prob-metric-wide">
+                            {{ volatility|round(1) }}
+                        </div>
+                        <div class="prob-metric prob-metric-value-cell prob-metric-wide">
+                            {{ velocity|round(1) }}
+                        </div>
+                        
+                        <!-- Row 5: Category Headers -->
+                        <div class="prob-metric prob-metric-header prob-metric-narrow">
+                            min
+                        </div>
+                        <div class="prob-metric prob-metric-header prob-metric-narrow">
+                            mod
+                        </div>
+                        <div class="prob-metric prob-metric-header prob-metric-narrow">
+                            maj
+                        </div>
+                        <div class="prob-metric prob-metric-header prob-metric-narrow">
+                            crit
+                        </div>
+                        
+                        <!-- Row 6: Category Values -->
+                        <div class="prob-metric prob-metric-value-cell prob-metric-narrow">
+                            {{ category_counts.minor }}
+                        </div>
+                        <div class="prob-metric prob-metric-value-cell prob-metric-narrow">
+                            {{ category_counts.moderate }}
+                        </div>
+                        <div class="prob-metric prob-metric-value-cell prob-metric-narrow">
+                            {{ category_counts.major }}
+                        </div>
+                        <div class="prob-metric prob-metric-value-cell prob-metric-narrow">
+                            {{ category_counts.critical }}
                         </div>
                     </div>
-                    <div class="prob-stat">
-                        <div class="prob-stat-label">Current</div>
-                        <div class="prob-stat-value prob-stat-current">
-                            {{ (marked.current_probability * 100)|round(1) }}%
-                        </div>
-                    </div>
-                </div>
 
                 <!-- Chart Canvas -->
                 <canvas id="probabilityChart" 
@@ -422,7 +469,8 @@
         },
         options: {
             responsive: true,
-            maintainAspectRatio: true,
+            maintainAspectRatio: false,
+            aspectRatio: 1.15, 
             plugins: {
                 legend: { display: false },
                 tooltip: {
