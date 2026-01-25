@@ -18,7 +18,9 @@
     
     <!-- Event Code -->
     <div class="event-card-code">
-        {{ event.event_code }}
+        <a href="{{ url_for('events.detail_cf_route', event_code=event.event_code) }}" class="event-code-link">
+            {{ event.event_code }}
+        </a>
     </div>
     
     <!-- Badge Row -->

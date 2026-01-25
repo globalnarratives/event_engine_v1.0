@@ -29,9 +29,9 @@
 
 /* Header: Timestamp */
 .event-card-header {
-    font-size: 0.7rem;
+    font-size: 0.85rem;
     text-transform: uppercase;
-    color: var(--text-tertiary);
+    color: #3bcaf5;
     letter-spacing: 0.05em;
     margin-bottom: var(--spacing-xs);
     font-family: var(--font-mono);
@@ -46,6 +46,18 @@
     margin-bottom: var(--spacing-sm);
 }
 
+.event-code-link {
+    font-family: var(--font-mono);
+    font-weight: 600;
+    color: var(--primary);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.event-code-link:hover {
+    color: var(--primary-light);
+}
+
 /* Badge Row */
 .event-card-badges {
     display: flex;
@@ -55,18 +67,18 @@
 
 .event-badge {
     display: inline-block;
-    padding: 2px 8px;
+    padding: 4px 12px;
     border-radius: 3px;
-    font-size: 0.75rem;
+    font-size: 0.95rem;
     font-family: var(--font-mono);
-    font-weight: 500;
+    font-weight: 650;
     line-height: 1.4;
 }
 
 /* Badge Colors */
 .event-badge-actor {
-    background: rgba(255, 153, 51, 0.2);
-    color: #ff9933;
+    background: rgba(240, 196, 152, 0.2);
+    color: #eea862;
     border: 1px solid rgba(255, 153, 51, 0.4);
 }
 
@@ -77,8 +89,8 @@
 }
 
 .event-badge-relcred {
-    background: rgba(51, 153, 255, 0.2);
-    color: #3399ff;
+    background: rgba(37, 53, 70, 0.2);
+    color: #81b7ec;
     border: 1px solid rgba(51, 153, 255, 0.4);
 }
 
