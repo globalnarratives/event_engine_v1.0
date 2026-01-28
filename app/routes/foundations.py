@@ -71,7 +71,7 @@ def index():
             
             # Get most recent action (where actor is subject)
             most_recent_event = ControlFrame.query.filter(
-                ControlFrame.identified_subjects.contains([actor.actor_id])
+                ControlFrame.event_actor == actor.actor_id
             ).order_by(ControlFrame.rec_timestamp.desc()).first()
             
             most_recent_action = None
@@ -129,62 +129,101 @@ def index():
     elif active_tab == 'institutions':
         query = Institution.query
         if search:
-                query = query.filter(
-                    db.or_(
-                        Institution.institution_code.ilike(f'%{search}%'),
-                        Institution.institution_name.ilike(f'%{search}%')
-                    )
+            query = query.filter(
+                db.or_(
+                    Institution.institution_code.ilike(f'%{search}%'),
+                    Institution.institution_name.ilike(f'%{search}%')
                 )
-        all_institutions = query.all()                                  
-        
+            )
+        all_institutions = query.all()
+
         # Get user's tracked institutions
         tracked_institution_codes = [ti.institution_code for ti in TrackedInstitution.query.filter_by(user_id=current_user.id).all()]
         
-        # Group by region
+        # Calculate 24-hour cutoff
+        cutoff = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0) - timedelta(days=1)
         
+        # Group by region
         for inst in all_institutions:
             country_code = inst.institution_code.split('.')[0]
             region = COUNTRY_REGIONS.get(country_code, 'UNKNOWN')
+            
+            # Format layer and type info
+            layer_info = f"""Layer: {inst.institution_layer.lstrip("'")}""" if inst.institution_layer else None
+            
+            type_info = None
+            if inst.institution_type:
+                if inst.institution_subtype:
+                    type_info = f"Type: {inst.institution_type} / {inst.institution_subtype}"
+                else:
+                    type_info = f"Type: {inst.institution_type}"
+            
+            # Count events in last 24h where institution appears
+            event_count_24h = db.session.query(db.func.count(ControlFrame.event_code)).filter(
+                ControlFrame.rec_timestamp >= cutoff,
+                db.or_(
+                    ControlFrame.identified_subjects.contains([inst.institution_code]),
+                    ControlFrame.identified_objects.contains([inst.institution_code])
+                )
+            ).scalar() or 0
+            
+            # Get most recent action where institution is event_actor
+            most_recent_event = ControlFrame.query.filter(
+                ControlFrame.event_actor == inst.institution_code
+            ).order_by(ControlFrame.rec_timestamp.desc()).first()
+            
+            most_recent_action = None
+            if most_recent_event:
+                most_recent_action = most_recent_event.action_code
+            
+            # Count scenarios where institution is named_actor
+            scenario_count = Scenario.query.filter_by(named_actor=inst.institution_code).count()
+            
             if region not in institutions_by_region:
                 institutions_by_region[region] = []
             institutions_by_region[region].append({
                 'code': inst.institution_code,
                 'display_name': inst.institution_name,
+                'layer_info': layer_info,
+                'type_info': type_info,
                 'is_tracked': inst.institution_code in tracked_institution_codes,
                 'metrics': None,
-                'country': country_code
+                'country': country_code,
+                'event_count_24h': event_count_24h,
+                'most_recent_action': most_recent_action,
+                'scenario_count': scenario_count
             })
+
+        # Sort within regions
+        for region in institutions_by_region:
+            institutions_by_region[region].sort(
+                key=lambda x: (x['country'], x['display_name'])
+            )
         
-           # Sort within regions
-            for region in institutions_by_region:
-                institutions_by_region[region].sort(
-                    key=lambda x: (x['country'], x['display_name'])
-                )
-            
-            # Prepare grouped entities with region info
-            grouped_entities = []
-            for region in sorted(institutions_by_region.keys()):
-                grouped_entities.append({
-                    'type': 'region_header',
-                    'region_code': region,
-                    'region_name': REGION_NAMES.get(region, region)
-                })
-                grouped_entities.extend(institutions_by_region[region])
-            
-            # Pagination
-            page = request.args.get('page', 1, type=int)
-            per_page = 25
-            total_entities = len(grouped_entities)
-            total_pages = ceil(total_entities / per_page) if total_entities > 0 else 1
-            
-            # Ensure page is within valid range
-            page = max(1, min(page, total_pages))
-            
-            # Slice for current page
-            start_idx = (page - 1) * per_page
-            end_idx = start_idx + per_page
-            entities = grouped_entities[start_idx:end_idx]
+        # Prepare grouped entities with region info
+        grouped_entities = []
+        for region in sorted(institutions_by_region.keys()):
+            grouped_entities.append({
+                'type': 'region_header',
+                'region_code': region,
+                'region_name': REGION_NAMES.get(region, region)
+            })
+            grouped_entities.extend(institutions_by_region[region])
         
+        # Pagination
+        page = request.args.get('page', 1, type=int)
+        per_page = 25
+        total_entities = len(grouped_entities)
+        total_pages = ceil(total_entities / per_page) if total_entities > 0 else 1
+        
+        # Ensure page is within valid range
+        page = max(1, min(page, total_pages))
+        
+        # Slice for current page
+        start_idx = (page - 1) * per_page
+        end_idx = start_idx + per_page
+        entities = grouped_entities[start_idx:end_idx]
+            
     else:  # positions (default)
         query = Position.query
         if search:
@@ -196,54 +235,95 @@ def index():
             )
         all_positions = query.all()
         
-        # Get user's tracked positions
+            # Get user's tracked positions
         tracked_position_codes = [tp.position_code for tp in TrackedPosition.query.filter_by(user_id=current_user.id).all()]
         
-        # Group by region
+        # Calculate 24-hour cutoff
+        cutoff = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0) - timedelta(days=1)
         
+        # Group by region
         for pos in all_positions:
             country_code = pos.position_code.split('.')[0]
             region = COUNTRY_REGIONS.get(country_code, 'UNKNOWN')
+            
+            # Get current holder (tenure with no tenure_end)
+            current_tenure = Tenure.query.filter_by(
+                position_code=pos.position_code,
+                tenure_end=None
+            ).first()
+            
+            current_holder = None
+            if current_tenure:
+                actor = Actor.query.filter_by(
+                    actor_id=current_tenure.actor_id
+                ).first()
+                if actor:
+                    current_holder = f"{actor.surname}, {actor.given_name}" if actor.given_name else actor.surname
+            
+            # Count events in last 24h where position appears
+            event_count_24h = db.session.query(db.func.count(ControlFrame.event_code)).filter(
+                ControlFrame.rec_timestamp >= cutoff,
+                db.or_(
+                    ControlFrame.identified_subjects.contains([pos.position_code]),
+                    ControlFrame.identified_objects.contains([pos.position_code])
+                )
+            ).scalar() or 0
+            
+            # Get most recent action where position is event_actor (position acting)
+            most_recent_event = ControlFrame.query.filter(
+                ControlFrame.event_actor == pos.position_code
+            ).order_by(ControlFrame.rec_timestamp.desc()).first()
+            
+            most_recent_action = None
+            if most_recent_event:
+                most_recent_action = most_recent_event.action_code
+            
+            # Count scenarios where position is named_actor
+            scenario_count = Scenario.query.filter_by(named_actor=pos.position_code).count()
+            
             if region not in positions_by_region:
                 positions_by_region[region] = []
             positions_by_region[region].append({
                 'code': pos.position_code,
                 'display_name': pos.position_title,
+                'current_holder': current_holder,
                 'is_tracked': pos.position_code in tracked_position_codes,
                 'metrics': None,
-                'country': country_code
+                'country': country_code,
+                'event_count_24h': event_count_24h,
+                'most_recent_action': most_recent_action,
+                'scenario_count': scenario_count
             })
-        
-        # Sort within regions
-            for region in positions_by_region:
-                positions_by_region[region].sort(
-                    key=lambda x: (x['country'], x['display_name'])
-                )
-            
-            # Prepare grouped entities with region info
-            grouped_entities = []
-            for region in sorted(positions_by_region.keys()):
-                grouped_entities.append({
-                    'type': 'region_header',
-                    'region_code': region,
-                    'region_name': REGION_NAMES.get(region, region)
-                })
-                grouped_entities.extend(positions_by_region[region])
-            
-            # Pagination
-            page = request.args.get('page', 1, type=int)
-            per_page = 25
-            total_entities = len(grouped_entities)
-            total_pages = ceil(total_entities / per_page) if total_entities > 0 else 1
-            
-            # Ensure page is within valid range
-            page = max(1, min(page, total_pages))
-            
-            # Slice for current page
-            start_idx = (page - 1) * per_page
-            end_idx = start_idx + per_page
-            entities = grouped_entities[start_idx:end_idx]
 
+        # Sort within regions
+        for region in positions_by_region:
+            positions_by_region[region].sort(
+                key=lambda x: (x['country'], x['display_name'])
+            )
+        
+        # Prepare grouped entities with region info
+        grouped_entities = []
+        for region in sorted(positions_by_region.keys()):
+            grouped_entities.append({
+                'type': 'region_header',
+                'region_code': region,
+                'region_name': REGION_NAMES.get(region, region)
+            })
+            grouped_entities.extend(positions_by_region[region])
+        
+        # Pagination
+        page = request.args.get('page', 1, type=int)
+        per_page = 25
+        total_entities = len(grouped_entities)
+        total_pages = ceil(total_entities / per_page) if total_entities > 0 else 1
+        
+        # Ensure page is within valid range
+        page = max(1, min(page, total_pages))
+        
+        # Slice for current page
+        start_idx = (page - 1) * per_page
+        end_idx = start_idx + per_page
+        entities = grouped_entities[start_idx:end_idx]
 
 
    # Calculate 24-hour cutoff (midnight yesterday)

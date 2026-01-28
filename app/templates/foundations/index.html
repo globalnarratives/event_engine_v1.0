@@ -54,13 +54,20 @@
                                     <div class="card-header">
                                         <div class="card-main-info">
                                             <div class="entity-code-large">{{ entity.code }}</div>
-                                            <div class="entity-name-full">
-                                                {{ entity.display_name }}{% if entity.given_name %}, {{ entity.given_name }}{% endif %}
+                                                <div class="entity-name-full">
+                                                    {{ entity.display_name }}{% if entity.given_name %}, {{ entity.given_name }}{% endif %}
+                                                </div>
+                                                {% if entity.current_position %}
+                                                <div class="entity-current-position">{{ entity.current_position }}</div>
+                                                {% elif entity.current_holder %}
+                                                <div class="entity-current-position">{{ entity.current_holder }}</div>
+                                                {% elif entity.layer_info %}
+                                                <div class="entity-current-position">{{ entity.layer_info }}</div>
+                                                {% if entity.type_info %}
+                                                <div class="entity-current-position">{{ entity.type_info }}</div>
+                                                {% endif %}
+                                                {% endif %}
                                             </div>
-                                            {% if entity.current_position %}
-                                            <div class="entity-current-position">{{ entity.current_position }}</div>
-                                            {% endif %}
-                                        </div>
                                         <button class="chevron-btn" onclick="toggleExpand(event, '{{ entity.code }}')">
                                             <span class="chevron">▲</span>
                                         </button>
