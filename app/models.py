@@ -229,6 +229,7 @@ class Scenario(db.Model):
     description = db.Column(db.Text)
     start_date = db.Column(db.Date, nullable=False)  # NEW: When tracking begins
     close_date = db.Column(db.Date, nullable=False)  # When proposition resolves
+    named_actor = db.Column(db.String, db.ForeignKey ('actors.actor_id'), nullable=True)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)  # When added to system
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
     created_by_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
@@ -382,3 +383,30 @@ class ScenarioEvent(db.Model):
     
     def __repr__(self):
         return f'<ScenarioEvent {self.marked_scenario_id}:{self.event_code} w={self.weight}>'
+    
+class TrackedActor(db.Model):
+    __tablename__ = 'tracked_actors'
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    actor_id = db.Column(db.String(100), db.ForeignKey('actors.actor_id'), nullable=False)
+    tracked_at = db.Column(db.DateTime, default=datetime.utcnow)
+    
+    __table_args__ = (db.UniqueConstraint('user_id', 'actor_id', name='uq_user_actor'),)
+
+class TrackedPosition(db.Model):
+    __tablename__ = 'tracked_positions'
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    position_code = db.Column(db.String(100), db.ForeignKey('positions.position_code'), nullable=False)
+    tracked_at = db.Column(db.DateTime, default=datetime.utcnow)
+    
+    __table_args__ = (db.UniqueConstraint('user_id', 'position_code', name='uq_user_position'),)
+
+class TrackedInstitution(db.Model):
+    __tablename__ = 'tracked_institutions'
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    institution_code = db.Column(db.String(100), db.ForeignKey('institutions.institution_code'), nullable=False)
+    tracked_at = db.Column(db.DateTime, default=datetime.utcnow)
+    
+    __table_args__ = (db.UniqueConstraint('user_id', 'institution_code', name='uq_user_institution'),)

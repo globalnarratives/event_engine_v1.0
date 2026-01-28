@@ -33,6 +33,7 @@
 @import url('features/control-frame/parse-status.css');
 @import url('features/cie-syntax.css');
 @import url('features/scenarios/scenarios.css');
+@import url('features/foundations/foundations.css');
 
 /* Utility Classes */
 @import url('utilities/colors.css');
