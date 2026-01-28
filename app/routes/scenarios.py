@@ -338,31 +338,30 @@ def link_event(marked_id):
             flash(f'Event {event_code} is already linked to this assessment.', 'error')
             return render_template('scenarios/link_event.html', marked=marked)
         
+        # CONVERT WEIGHT FIRST - MOVE THIS UP
+        try:
+            weight = float(weight_str)
+        except ValueError:
+            flash('Invalid weight value.', 'error')
+            return render_template('scenarios/link_event.html', marked=marked)
+        
+        # NOW DO ALL VALIDATIONS
         if abs(weight) < 0.1:
             flash('Weight must be at least 0.1 or -0.1 (minimum magnitude).', 'error')
             return render_template('scenarios/link_event.html', marked=marked, available_events=[])
         
-        try:
-            weight = float(weight_str)
-            
-            # Validate weight range and increment
-            if weight == 0:
-                flash('Weight cannot be zero. Please use a value between -12.0 and +12.0.', 'error')
-                return render_template('scenarios/link_event.html', marked=marked, available_events=[])
-            
-            if not (-12.0 <= weight <= 12.0):
-                flash('Weight must be between -12.0 and +12.0.', 'error')
-                return render_template('scenarios/link_event.html', marked=marked, available_events=[])
-            
-            # Check if weight is in valid 0.1 increments
-            # Allow some floating point tolerance
-            if abs(round(weight * 10) - (weight * 10)) > 0.01:
-                flash('Weight must be in 0.1 increments (e.g., 3.5, -7.2, 11.0).', 'error')
-                return render_template('scenarios/link_event.html', marked=marked, available_events=[])
-                
-        except ValueError:
-            flash('Invalid weight value.', 'error')
-            return render_template('scenarios/link_event.html', marked=marked)
+        if weight == 0:
+            flash('Weight cannot be zero. Please use a value between -12.0 and +12.0.', 'error')
+            return render_template('scenarios/link_event.html', marked=marked, available_events=[])
+        
+        if not (-12.0 <= weight <= 12.0):
+            flash('Weight must be between -12.0 and +12.0.', 'error')
+            return render_template('scenarios/link_event.html', marked=marked, available_events=[])
+        
+        # Check if weight is in valid 0.1 increments
+        if abs(round(weight * 10) - (weight * 10)) > 0.01:
+            flash('Weight must be in 0.1 increments (e.g., 3.5, -7.2, 11.0).', 'error')
+            return render_template('scenarios/link_event.html', marked=marked, available_events=[])
         
         # Link the event
         try:
