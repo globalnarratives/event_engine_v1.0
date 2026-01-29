@@ -338,7 +338,7 @@ def link_event(marked_id):
             flash(f'Event {event_code} is already linked to this assessment.', 'error')
             return render_template('scenarios/link_event.html', marked=marked)
         
-        if abs(weight) < 0.1:
+        if abs(float(request.form.get('weight', 0))) < 0.1:
             flash('Weight must be at least 0.1 or -0.1 (minimum magnitude).', 'error')
             return render_template('scenarios/link_event.html', marked=marked, available_events=[])
         
