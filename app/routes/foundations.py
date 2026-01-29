@@ -4,6 +4,7 @@ from app.models import db, Actor, Institution, Tenure, Scenario, Position, Contr
 from datetime import datetime, timedelta
 from app.reference_data import COUNTRY_REGIONS, REGION_NAMES
 from math import ceil
+from sqlalchemy.orm import joinedload
 import statistics
 
 bp = Blueprint('foundations', __name__, url_prefix='/foundations')
@@ -33,7 +34,9 @@ def index():
                     Actor.given_name.ilike(f'%{search}%')
                 )
             )
-        all_actors = query.all()
+        all_actors = query.options(
+            joinedload(Actor.tenures).joinedload(Tenure.position)
+        ).all()
 
         # Get user's tracked actors
         tracked_actor_ids = [ta.actor_id for ta in TrackedActor.query.filter_by(user_id=current_user.id).all()]
@@ -45,20 +48,10 @@ def index():
         for actor in all_actors:
             country_code = actor.actor_id.split('.')[0]
             region = COUNTRY_REGIONS.get(country_code, 'UNKNOWN')
-            
-            # Get current position (tenure with no end_date)
-            current_tenure = Tenure.query.filter_by(
-                actor_id=actor.actor_id,
-                tenure_end=None
-            ).first()
-            
-            current_position = None
-            if current_tenure:
-                position = Position.query.filter_by(
-                    position_code=current_tenure.position_code
-                ).first()
-                if position:
-                    current_position = position.position_title
+
+            # Get current position from preloaded tenures
+            current_tenure = next((t for t in actor.tenures if t.tenure_end is None), None)
+            current_position = current_tenure.position.position_title if current_tenure and current_tenure.position else None
             
             # Count events in last 24h where actor appears
             event_count_24h = db.session.query(db.func.count(ControlFrame.event_code)).filter(
@@ -233,8 +226,10 @@ def index():
                     Position.position_title.ilike(f'%{search}%')
                 )
             )
-        all_positions = query.all()
-        
+        all_positions = query.options(
+            joinedload(Position.tenures).joinedload(Tenure.actor)
+        ).all()
+                
             # Get user's tracked positions
         tracked_position_codes = [tp.position_code for tp in TrackedPosition.query.filter_by(user_id=current_user.id).all()]
         
@@ -246,19 +241,13 @@ def index():
             country_code = pos.position_code.split('.')[0]
             region = COUNTRY_REGIONS.get(country_code, 'UNKNOWN')
             
-            # Get current holder (tenure with no tenure_end)
-            current_tenure = Tenure.query.filter_by(
-                position_code=pos.position_code,
-                tenure_end=None
-            ).first()
-            
-            current_holder = None
-            if current_tenure:
-                actor = Actor.query.filter_by(
-                    actor_id=current_tenure.actor_id
-                ).first()
-                if actor:
-                    current_holder = f"{actor.surname}, {actor.given_name}" if actor.given_name else actor.surname
+            # Get current holder from preloaded tenures
+            current_tenure = next((t for t in pos.tenures if t.tenure_end is None), None)
+            if current_tenure and current_tenure.actor:
+                actor = current_tenure.actor
+                current_holder = f"{actor.surname}, {actor.given_name}" if actor.given_name else actor.surname
+            else:
+                current_holder = None
             
             # Count events in last 24h where position appears
             event_count_24h = db.session.query(db.func.count(ControlFrame.event_code)).filter(
