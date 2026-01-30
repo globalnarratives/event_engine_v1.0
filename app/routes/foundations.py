@@ -7,6 +7,54 @@ from math import ceil
 from sqlalchemy.orm import joinedload
 import statistics
 
+def get_bulk_metrics(entity_codes, cutoff):
+    """
+    Get bulk metrics for a list of entity codes.
+    Returns three dicts: event_counts, most_recent_actions, scenario_counts
+    """
+    if not entity_codes:
+        return {}, {}, {}
+    
+    # Bulk event counts (using JSONB array unnesting)
+    event_counts_query = db.session.query(
+        db.func.unnest(
+            ControlFrame.identified_subjects + ControlFrame.identified_objects
+        ).label('entity_code'),
+        db.func.count('*').label('event_count')
+    ).filter(
+        ControlFrame.rec_timestamp >= cutoff
+    ).group_by('entity_code')
+    
+    event_counts = {row.entity_code: row.event_count for row in event_counts_query.all()}
+    
+    # Bulk most recent actions (using window function)
+    most_recent_query = db.session.query(
+        ControlFrame.event_actor,
+        ControlFrame.action_code,
+        db.func.row_number().over(
+            partition_by=ControlFrame.event_actor,
+            order_by=ControlFrame.rec_timestamp.desc()
+        ).label('rn')
+    ).filter(
+        ControlFrame.event_actor.in_(entity_codes)
+    ).subquery()
+    
+    most_recent_actions = {
+        row.event_actor: row.action_code 
+        for row in db.session.query(most_recent_query).filter(most_recent_query.c.rn == 1).all()
+    }
+    
+    # Bulk scenario counts
+    scenario_counts_query = db.session.query(
+        Scenario.named_actor,
+        db.func.count(Scenario.scenario_code).label('scenario_count')
+    ).group_by(Scenario.named_actor)
+    
+    scenario_counts = {row.named_actor: row.scenario_count for row in scenario_counts_query.all()}
+    
+    return event_counts, most_recent_actions, scenario_counts
+
+
 bp = Blueprint('foundations', __name__, url_prefix='/foundations')
 
 @bp.route('/')
@@ -40,39 +88,21 @@ def index():
 
         # Get user's tracked actors
         tracked_actor_ids = [ta.actor_id for ta in TrackedActor.query.filter_by(user_id=current_user.id).all()]
-    
-        # Calculate 24-hour cutoff
-        cutoff = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0) - timedelta(days=1)
-    
+        
+        # Get all actor codes for bulk query
+        actor_codes = [actor.actor_id for actor in all_actors]
+        
+        # Bulk fetch metrics
+        event_counts, most_recent_actions, scenario_counts = get_bulk_metrics(actor_codes, cutoff)
+        
         # Group by region
         for actor in all_actors:
             country_code = actor.actor_id.split('.')[0]
             region = COUNTRY_REGIONS.get(country_code, 'UNKNOWN')
-
+            
             # Get current position from preloaded tenures
             current_tenure = next((t for t in actor.tenures if t.tenure_end is None), None)
             current_position = current_tenure.position.position_title if current_tenure and current_tenure.position else None
-            
-            # Count events in last 24h where actor appears
-            event_count_24h = db.session.query(db.func.count(ControlFrame.event_code)).filter(
-                ControlFrame.rec_timestamp >= cutoff,
-                db.or_(
-                    ControlFrame.identified_subjects.contains([actor.actor_id]),
-                    ControlFrame.identified_objects.contains([actor.actor_id])
-                )
-            ).scalar() or 0
-            
-            # Get most recent action (where actor is subject)
-            most_recent_event = ControlFrame.query.filter(
-                ControlFrame.event_actor == actor.actor_id
-            ).order_by(ControlFrame.rec_timestamp.desc()).first()
-            
-            most_recent_action = None
-            if most_recent_event:
-                most_recent_action = most_recent_event.action_code
-            
-            # Count scenarios where actor is named
-            scenario_count = Scenario.query.filter_by(named_actor=actor.actor_id).count()
             
             if region not in actors_by_region:
                 actors_by_region[region] = []
@@ -84,9 +114,9 @@ def index():
                 'is_tracked': actor.actor_id in tracked_actor_ids,
                 'metrics': None,
                 'country': country_code,
-                'event_count_24h': event_count_24h,
-                'most_recent_action': most_recent_action,
-                'scenario_count': scenario_count
+                'event_count_24h': event_counts.get(actor.actor_id, 0),
+                'most_recent_action': most_recent_actions.get(actor.actor_id),
+                'scenario_count': scenario_counts.get(actor.actor_id, 0)
             })
 
         # Sort within regions
@@ -117,7 +147,7 @@ def index():
         # Slice for current page
         start_idx = (page - 1) * per_page
         end_idx = start_idx + per_page
-        entities = grouped_entities[start_idx:end_idx]  
+        entities = grouped_entities[start_idx:end_idx]
 
     elif active_tab == 'institutions':
         query = Institution.query
@@ -216,7 +246,7 @@ def index():
         start_idx = (page - 1) * per_page
         end_idx = start_idx + per_page
         entities = grouped_entities[start_idx:end_idx]
-            
+
     else:  # positions (default)
         query = Position.query
         if search:
@@ -229,12 +259,15 @@ def index():
         all_positions = query.options(
             joinedload(Position.tenures).joinedload(Tenure.actor)
         ).all()
-                
-            # Get user's tracked positions
+        
+        # Get user's tracked positions
         tracked_position_codes = [tp.position_code for tp in TrackedPosition.query.filter_by(user_id=current_user.id).all()]
         
-        # Calculate 24-hour cutoff
-        cutoff = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0) - timedelta(days=1)
+        # Get all position codes for bulk query
+        position_codes = [pos.position_code for pos in all_positions]
+        
+        # Bulk fetch metrics
+        event_counts, most_recent_actions, scenario_counts = get_bulk_metrics(position_codes, cutoff)
         
         # Group by region
         for pos in all_positions:
@@ -249,27 +282,6 @@ def index():
             else:
                 current_holder = None
             
-            # Count events in last 24h where position appears
-            event_count_24h = db.session.query(db.func.count(ControlFrame.event_code)).filter(
-                ControlFrame.rec_timestamp >= cutoff,
-                db.or_(
-                    ControlFrame.identified_subjects.contains([pos.position_code]),
-                    ControlFrame.identified_objects.contains([pos.position_code])
-                )
-            ).scalar() or 0
-            
-            # Get most recent action where position is event_actor (position acting)
-            most_recent_event = ControlFrame.query.filter(
-                ControlFrame.event_actor == pos.position_code
-            ).order_by(ControlFrame.rec_timestamp.desc()).first()
-            
-            most_recent_action = None
-            if most_recent_event:
-                most_recent_action = most_recent_event.action_code
-            
-            # Count scenarios where position is named_actor
-            scenario_count = Scenario.query.filter_by(named_actor=pos.position_code).count()
-            
             if region not in positions_by_region:
                 positions_by_region[region] = []
             positions_by_region[region].append({
@@ -279,9 +291,9 @@ def index():
                 'is_tracked': pos.position_code in tracked_position_codes,
                 'metrics': None,
                 'country': country_code,
-                'event_count_24h': event_count_24h,
-                'most_recent_action': most_recent_action,
-                'scenario_count': scenario_count
+                'event_count_24h': event_counts.get(pos.position_code, 0),
+                'most_recent_action': most_recent_actions.get(pos.position_code),
+                'scenario_count': scenario_counts.get(pos.position_code, 0)
             })
 
         # Sort within regions
