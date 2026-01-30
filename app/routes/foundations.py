@@ -72,6 +72,9 @@ def index():
     institutions_by_region = {}
     positions_by_region = {}
    
+    # Calculate 24-hour cutoff (midnight yesterday)
+    cutoff = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0) - timedelta(days=1)
+
     if active_tab == 'actors':
         query = Actor.query
         if search:
@@ -325,10 +328,6 @@ def index():
         start_idx = (page - 1) * per_page
         end_idx = start_idx + per_page
         entities = grouped_entities[start_idx:end_idx]
-
-
-   # Calculate 24-hour cutoff (midnight yesterday)
-    cutoff = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0) - timedelta(days=1)
     
     # Query user's tracked positions with metrics
     tracked_positions = []
