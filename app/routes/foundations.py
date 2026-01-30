@@ -157,8 +157,11 @@ def index():
         # Get user's tracked institutions
         tracked_institution_codes = [ti.institution_code for ti in TrackedInstitution.query.filter_by(user_id=current_user.id).all()]
         
-        # Calculate 24-hour cutoff
-        cutoff = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0) - timedelta(days=1)
+        # Get all institution codes for bulk query
+        institution_codes = [inst.institution_code for inst in all_institutions]
+        
+        # Bulk fetch metrics
+        event_counts, most_recent_actions, scenario_counts = get_bulk_metrics(institution_codes, cutoff)
         
         # Group by region
         for inst in all_institutions:
@@ -175,27 +178,6 @@ def index():
                 else:
                     type_info = f"Type: {inst.institution_type}"
             
-            # Count events in last 24h where institution appears
-            event_count_24h = db.session.query(db.func.count(ControlFrame.event_code)).filter(
-                ControlFrame.rec_timestamp >= cutoff,
-                db.or_(
-                    ControlFrame.identified_subjects.contains([inst.institution_code]),
-                    ControlFrame.identified_objects.contains([inst.institution_code])
-                )
-            ).scalar() or 0
-            
-            # Get most recent action where institution is event_actor
-            most_recent_event = ControlFrame.query.filter(
-                ControlFrame.event_actor == inst.institution_code
-            ).order_by(ControlFrame.rec_timestamp.desc()).first()
-            
-            most_recent_action = None
-            if most_recent_event:
-                most_recent_action = most_recent_event.action_code
-            
-            # Count scenarios where institution is named_actor
-            scenario_count = Scenario.query.filter_by(named_actor=inst.institution_code).count()
-            
             if region not in institutions_by_region:
                 institutions_by_region[region] = []
             institutions_by_region[region].append({
@@ -206,9 +188,9 @@ def index():
                 'is_tracked': inst.institution_code in tracked_institution_codes,
                 'metrics': None,
                 'country': country_code,
-                'event_count_24h': event_count_24h,
-                'most_recent_action': most_recent_action,
-                'scenario_count': scenario_count
+                'event_count_24h': event_counts.get(inst.institution_code, 0),
+                'most_recent_action': most_recent_actions.get(inst.institution_code),
+                'scenario_count': scenario_counts.get(inst.institution_code, 0)
             })
 
         # Sort within regions
