@@ -1,0 +1,107 @@
+/* Event Card Component */
+.event-card {
+    background: rgba(51, 245, 255, 0.03);
+    border: 1px solid rgba(51, 245, 255, 0.1);
+    border-radius: 4px;
+    padding: var(--spacing-md);
+    margin-bottom: var(--spacing-sm);
+    transition: all 0.2s ease;
+}
+
+.event-card-selectable {
+    cursor: pointer;
+    position: relative;
+}
+
+.event-card-selectable:hover {
+    background: rgba(51, 245, 255, 0.08);
+    border-color: rgba(51, 245, 255, 0.3);
+}
+
+.event-card-selected {
+    background: rgba(51, 245, 255, 0.15);
+    border-color: var(--primary);
+}
+
+.event-card-radio {
+    display: none;
+}
+
+/* Header: Timestamp */
+.event-card-header {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    color: #3bcaf5;
+    letter-spacing: 0.05em;
+    margin-bottom: var(--spacing-xs);
+    font-family: var(--font-mono);
+}
+
+/* Event Code */
+.event-card-code {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--primary);
+    font-family: var(--font-mono);
+    margin-bottom: var(--spacing-sm);
+}
+
+.event-code-link {
+    font-family: var(--font-mono);
+    font-weight: 600;
+    color: var(--primary);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.event-code-link:hover {
+    color: var(--primary-light);
+}
+
+/* Badge Row */
+.event-card-badges {
+    display: flex;
+    gap: var(--spacing-xs);
+    flex-wrap: wrap;
+}
+
+.event-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 3px;
+    font-size: 0.95rem;
+    font-family: var(--font-mono);
+    font-weight: 650;
+    line-height: 1.4;
+}
+
+/* Badge Colors */
+.event-badge-actor {
+    background: rgba(240, 196, 152, 0.2);
+    color: #eea862;
+    border: 1px solid rgba(255, 153, 51, 0.4);
+}
+
+.event-badge-action {
+    background: rgba(51, 255, 153, 0.2);
+    color: #33ff99;
+    border: 1px solid rgba(51, 255, 153, 0.4);
+}
+
+.event-badge-relcred {
+    background: rgba(37, 53, 70, 0.2);
+    color: #81b7ec;
+    border: 1px solid rgba(51, 153, 255, 0.4);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .event-card-badges {
+        flex-direction: column;
+    }
+    
+    .event-badge {
+        display: block;
+        text-align: center;
+    }
+}

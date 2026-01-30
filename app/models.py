@@ -168,52 +168,6 @@ class Actor(db.Model):
         ).all()
         return [tenure.position for tenure in tenures]
 
-
-# class Event(db.Model):
-#     """CIE-coded events - the primary analytical unit (LEGACY - being replaced by ControlFrame)"""
-#     __tablename__ = 'events'
-    
-#     event_code = db.Column(db.String(50), primary_key=True)
-#     event_date = db.Column(db.Date, nullable=False)
-#     region = db.Column(db.String(3), nullable=False)
-#     ordinal = db.Column(db.Integer, nullable=False)
-#     recorded_timestamp = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
-#     core_action = db.Column(db.String(10), nullable=False)
-#     cie_description = db.Column(db.String(250), nullable=False)
-#     natural_summary = db.Column(db.String(250), nullable=False)
-#     article_url = db.Column(db.String(500), nullable=False)
-#     article_headline = db.Column(db.String(250))
-#     created_by = db.Column(db.String(100))
-    
-#     # Relationships
-#     event_actors = db.relationship('EventActor', back_populates='event', cascade='all, delete-orphan')
-    
-#     __table_args__ = (
-#         db.CheckConstraint(
-#             region.in_(['weu', 'eeu', 'nam', 'sam', 'cmb', 'nea', 'sea', 'oce', 'sas', 'mea', 'eaf', 'caf', 'saf', 'waf']),
-#             name='chk_region'
-#         ),
-#         db.UniqueConstraint('event_date', 'region', 'ordinal', name='unique_event_ordinal'),
-#     )
-    
-#     def __repr__(self):
-#         return f'<Event {self.event_code}: {self.natural_summary[:50]}>'
-    
-#     def get_subjects(self):
-#         """Get all subject actors/positions for this event"""
-#         return EventActor.query.filter_by(
-#             event_code=self.event_code,
-#             role_type='subject'
-#         ).all()
-    
-#     def get_objects(self):
-#         """Get all object actors/positions for this event"""
-#         return EventActor.query.filter_by(
-#             event_code=self.event_code,
-#             role_type='object'
-#         ).all()
-
-
 class Tenure(db.Model):
     """Links actors to positions with time bounds"""
     __tablename__ = 'tenures'
@@ -265,75 +219,6 @@ class User(UserMixin, db.Model):
     def __repr__(self):
         return f'<User {self.username}>'
 
-#class EventActor(db.Model):
-    # """Links events to actors/positions as subjects or objects"""
-    # __tablename__ = 'event_actors'
-    
-    # event_actor_id = db.Column(db.Integer, primary_key=True)
-    # event_code = db.Column(db.String(50), db.ForeignKey('events.event_code'), nullable=False)
-    # code = db.Column(db.String(100), nullable=False)
-    # code_type = db.Column(db.String(20), nullable=False)
-    # role_type = db.Column(db.String(20), nullable=False)
-    
-    # # Relationships
-    # event = db.relationship('Event', back_populates='event_actors')
-    
-    # __table_args__ = (
-    #     db.CheckConstraint(
-    #         code_type.in_(['position', 'actor']),
-    #         name='chk_code_type'
-    #     ),
-    #     db.CheckConstraint(
-    #         role_type.in_(['subject', 'object']),
-    #         name='chk_role_type'
-    #     ),
-    # )
-    
-    # def __repr__(self):
-    #     return f'<EventActor {self.code} as {self.role_type} in {self.event_code}>'
-    
-    # def resolve_actor(self):
-    #     """Resolve the actual actor, whether directly coded or via position on event date"""
-    #     if self.code_type == 'actor':
-    #         return Actor.query.get(self.code)
-    #     elif self.code_type == 'position':
-    #         position = Position.query.get(self.code)
-    #         if position and self.event:
-    #             return position.get_holder_on_date(self.event.event_date)
-    #     return None
-    
-    # def get_display_info(self):
-    #     """Get display information for this event actor"""
-    #     if self.code_type == 'actor':
-    #         actor = Actor.query.get(self.code)
-    #         if actor:
-    #             return {
-    #                 'code': self.code,
-    #                 'type': 'actor',
-    #                 'display': f'{self.code}: {actor.get_display_name()}'
-    #             }
-    #     elif self.code_type == 'position':
-    #         position = Position.query.get(self.code)
-    #         if position:
-    #             holder = None
-    #             if self.event:
-    #                 holder = position.get_holder_on_date(self.event.event_date)
-    #             holder_name = holder.get_display_name() if holder else 'Vacant'
-    #             return {
-    #                 'code': self.code,
-    #                 'type': 'position',
-    #                 'display': f'{self.code}: {position.position_title} ({holder_name})'
-    #             }
-    #     return {
-    #         'code': self.code,
-    #         'type': self.code_type,
-    #         'display': self.code
-    #     }
-
-    # Add these models to your existing app/models.py file
-
-# Update your Scenario model in app/models.py
-
 class Scenario(db.Model):
     """Shared scenario template - the proposition/question"""
     __tablename__ = 'scenarios'
@@ -344,6 +229,7 @@ class Scenario(db.Model):
     description = db.Column(db.Text)
     start_date = db.Column(db.Date, nullable=False)  # NEW: When tracking begins
     close_date = db.Column(db.Date, nullable=False)  # When proposition resolves
+    named_actor = db.Column(db.String, db.ForeignKey ('actors.actor_id'), nullable=True)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)  # When added to system
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
     created_by_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
@@ -414,10 +300,28 @@ class MarkedScenario(db.Model):
         return link
     
     def recalculate_probability(self, event_code, weight, user_id):
-        """Update probability based on new event (implement your formula here)"""
-        # Placeholder: Simple additive model
+        """
+        Update probability based on new event using categorical weighting algorithm.
+        
+        This method:
+        1. Calculates immediate probability adjustment
+        2. Updates current_probability (clamped to [0, 1])
+        3. Records change in probability_history with full metrics
+        4. Triggers async batch recalculation for time windows (future)
+        
+        NOTE: Batch calculations (1-day, 7-day, 30-day) are computed separately
+        and stored in time-series storage. This method only handles immediate impact.
+        """
+        from app.probability_algorithms import ProbabilityCalculator
+        
+        # Calculate immediate adjustment
+        result = ProbabilityCalculator.calculate_immediate(float(weight))
+        
+        # Get previous probability
         previous_prob = float(self.current_probability) if self.current_probability else float(self.initial_probability)
-        new_prob = previous_prob + float(weight)
+        
+        # Apply adjustment
+        new_prob = previous_prob + result['probability_adjustment']
         
         # Clamp to [0, 1]
         new_prob = max(0.0, min(1.0, new_prob))
@@ -425,21 +329,31 @@ class MarkedScenario(db.Model):
         # Update current probability
         self.current_probability = new_prob
         
-        # Add to history
+        # Add to history with full calculation metadata
         if not self.probability_history:
             self.probability_history = []
         
         self.probability_history.append({
             'probability': float(new_prob),
             'timestamp': datetime.utcnow().isoformat(),
-            'reason': f'Event {event_code} linked with weight {weight}',
+            'reason': f'Event {event_code} linked',
             'event_code': event_code,
-            'user_id': user_id
+            'user_id': user_id,
+            # Calculation metadata
+            'weight': float(weight),
+            'category': result['category'],
+            'multiplier': result['multiplier'],
+            'adjusted_weight': result['adjusted_weight'],
+            'basis_points': result['basis_points'],
+            'probability_adjustment': result['probability_adjustment']
         })
         
         flag_modified(self, 'probability_history')
 
         self.updated_at = datetime.utcnow()
+        
+        # TODO: Trigger async batch recalculation for 1-day, 7-day, 30-day windows
+        # This will be handled by scheduled jobs writing to time-series storage
     
     def __repr__(self):
         return f'<MarkedScenario {self.display_name}>'
@@ -452,7 +366,7 @@ class ScenarioEvent(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     marked_scenario_id = db.Column(db.Integer, db.ForeignKey('marked_scenarios.id', ondelete='CASCADE'), nullable=False, index=True)
     event_code = db.Column(db.String(50), db.ForeignKey('control_frame.event_code', ondelete='CASCADE'), nullable=False, index=True)
-    weight = db.Column(db.Numeric(5, 3))  # -9.999 to 9.999
+    weight = db.Column(db.Numeric(4, 1))  # -12.0 to 12.0 in 0.1 increments
     notes = db.Column(db.Text)  # Analyst's explanation for linking
     linked_at = db.Column(db.DateTime, default=datetime.utcnow)
     linked_by_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
@@ -469,3 +383,30 @@ class ScenarioEvent(db.Model):
     
     def __repr__(self):
         return f'<ScenarioEvent {self.marked_scenario_id}:{self.event_code} w={self.weight}>'
+    
+class TrackedActor(db.Model):
+    __tablename__ = 'tracked_actors'
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    actor_id = db.Column(db.String(100), db.ForeignKey('actors.actor_id'), nullable=False)
+    tracked_at = db.Column(db.DateTime, default=datetime.utcnow)
+    
+    __table_args__ = (db.UniqueConstraint('user_id', 'actor_id', name='uq_user_actor'),)
+
+class TrackedPosition(db.Model):
+    __tablename__ = 'tracked_positions'
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    position_code = db.Column(db.String(100), db.ForeignKey('positions.position_code'), nullable=False)
+    tracked_at = db.Column(db.DateTime, default=datetime.utcnow)
+    
+    __table_args__ = (db.UniqueConstraint('user_id', 'position_code', name='uq_user_position'),)
+
+class TrackedInstitution(db.Model):
+    __tablename__ = 'tracked_institutions'
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    institution_code = db.Column(db.String(100), db.ForeignKey('institutions.institution_code'), nullable=False)
+    tracked_at = db.Column(db.DateTime, default=datetime.utcnow)
+    
+    __table_args__ = (db.UniqueConstraint('user_id', 'institution_code', name='uq_user_institution'),)

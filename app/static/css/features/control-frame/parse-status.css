@@ -1,0 +1,25 @@
+/* ============================================
+   CONTROL FRAME - PARSE STATUS
+   ============================================ */
+
+#parseStatus {
+  margin-top: var(--space-sm);
+  padding: var(--space-sm);
+  border-radius: var(--radius-sm);
+  font-size: 0.875rem;
+  display: none;
+}
+
+#parseStatus.success {
+  background-color: rgba(0, 255, 159, 0.1);
+  border: 1px solid var(--color-accent-secondary);
+  color: var(--color-accent-secondary);
+  display: block;
+}
+
+#parseStatus.error {
+  background-color: rgba(255, 107, 53, 0.1);
+  border: 1px solid var(--color-accent-warning);
+  color: var(--color-accent-warning);
+  display: block;
+}

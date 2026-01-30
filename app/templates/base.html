@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Global Narratives System{% endblock %}</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
     {% block extra_css %}{% endblock %}
 </head>
 <body>
+    <div class="testing-banner">⚠️ TESTING ENVIRONMENT - Alpha Build</div>
     <!-- Site Header -->
     <header class="site-header">
         <div style="display: flex; justify-content: space-between; align-items: center;">
@@ -17,9 +18,7 @@
                     <a href="{{ url_for('dashboard.home') }}" class="nav-link {% if request.endpoint == 'dashboard.home' %}active{% endif %}">Dashboard</a>
                     <a href="{{ url_for('events.index') }}" class="nav-link {% if request.endpoint and 'events' in request.endpoint %}active{% endif %}">Events</a>
                     <a href="{{ url_for('articles.dashboard') }}" class="nav-link {% if request.endpoint and 'articles' in request.endpoint %}active{% endif %}">Articles</a>
-                    <a href="{{ url_for('actors.index') }}" class="nav-link {% if request.endpoint and 'actors' in request.endpoint %}active{% endif %}">Actors</a>
-                    <a href="{{ url_for('positions.index') }}" class="nav-link {% if request.endpoint and 'positions' in request.endpoint %}active{% endif %}">Positions</a>
-                    <a href="{{ url_for('institutions.index') }}" class="nav-link {% if request.endpoint and 'institutions' in request.endpoint %}active{% endif %}">Institutions</a>
+                    <a href="{{ url_for('foundations.index') }}" class="nav-link {% if request.endpoint and 'foundations' in request.endpoint %}active{% endif %}"> Foundations</a>
                     <a href="{{ url_for('scenarios.index') }}" class="nav-link">Scenarios</a>
                 </nav>
                 {% if current_user.is_authenticated %}

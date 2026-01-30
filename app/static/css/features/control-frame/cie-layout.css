@@ -1,0 +1,66 @@
+/* ============================================
+   CONTROL FRAME - CIE BODY SECTION & SCENARIOS GRID
+   ============================================ */
+
+.cf-cie-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 0;
+  margin: 1.5rem 0;
+}
+
+.cf-cie-section {
+  border-right: 2px solid var(--color-border);
+  min-height: 250px;
+}
+
+.cf-scenarios-sidebar {
+  background-color: var(--color-bg-elevated);
+  padding: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  min-height: 250px;
+}
+
+.cf-scenarios-header {
+  font-family: var(--font-ui);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-text-tertiary);
+  margin-bottom: var(--space-md);
+  padding-bottom: var(--space-sm);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.cf-scenario-row {
+  display: flex;
+  justify-content: space-between;
+  padding: var(--space-sm) 0;
+  font-size: 1.05rem;
+  color: var(--color-text-secondary);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.cf-scenario-row:last-child {
+  border-bottom: none;
+}
+
+.cf-scenario-row-total {
+  margin-top: var(--space-sm);
+  padding-top: var(--space-md);
+  border-top: 2px solid var(--color-border);
+  font-weight: 600;
+}
+
+.cf-scenario-label {
+  color: var(--color-text-tertiary);
+}
+
+.cf-scenario-value {
+  color: var(--color-accent-primary);
+  font-weight: 600;
+  font-family: var(--font-body);
+}

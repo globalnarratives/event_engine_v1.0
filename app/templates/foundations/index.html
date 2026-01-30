@@ -1,0 +1,264 @@
+{% extends "base.html" %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="foundations-container">
+    <div class="left-column">
+        <div class="card">
+            <div class="card-body">
+                <div class="search-bar">
+                    <form method="get" action="{{ url_for('foundations.index') }}">
+                        <input type="search" name="search" value="{{ request.args.get('search', '') }}" placeholder="Search...">
+                        <input type="hidden" name="tab" value="{{ active_tab }}">
+                    </form>
+                </div>
+                
+                <div class="tab-selector">
+                    <a href="{{ url_for('foundations.index', tab='actors') }}" 
+                    class="{% if active_tab == 'actors' %}active{% endif %}">Actors</a>
+                    <a href="{{ url_for('foundations.index', tab='institutions') }}" 
+                    class="{% if active_tab == 'institutions' %}active{% endif %}">Institutions</a>
+                    <a href="{{ url_for('foundations.index', tab='positions' ) }}" 
+                    class="{% if active_tab == 'positions' %}active{% endif %}">Positions</a>
+                </div>
+                
+                <div class="entity-list">
+                    {% for entity in entities %}
+                        {% if entity.get('type') == 'region_header' %}
+                            <div class="region-header">
+                                <span class="region-code">{{ entity.region_code }}</span>
+                                <span class="region-name">{{ entity.region_name }}</span>
+                            </div>
+                        {% else %}
+                            <div class="entity-card" data-entity-code="{{ entity.code }}">
+                                <!-- Left sidebar with tracking indicator and toggle -->
+                                <div class="card-sidebar">
+                                    <div class="tracking-indicator {% if entity.is_tracked %}tracked{% else %}not-tracked{% endif %}"></div>
+                                    <form action="{{ url_for('foundations.toggle_track', entity_type=active_tab.rstrip('s'), entity_code=entity.code) }}" method="POST" class="track-form">
+                                        <button type="submit" class="track-toggle-btn">
+                                            {% if entity.is_tracked %}
+                                                <span class="track-icon">✓</span>
+                                            {% else %}
+                                                <span class="track-icon">○</span>
+                                            {% endif %}
+                                        </button>
+                                    </form>
+                                </div>
+                                
+                                <!-- Main card content -->
+                                <div class="card-content">
+                                    <!-- Collapsed state - always visible -->
+                                    <div class="card-header">
+                                        <div class="card-main-info">
+                                            <div class="entity-code-large">{{ entity.code }}</div>
+                                                <div class="entity-name-full">
+                                                    {{ entity.display_name }}{% if entity.given_name %}, {{ entity.given_name }}{% endif %}
+                                                </div>
+                                                {% if entity.current_position %}
+                                                <div class="entity-current-position">{{ entity.current_position }}</div>
+                                                {% elif entity.current_holder %}
+                                                <div class="entity-current-position">{{ entity.current_holder }}</div>
+                                                {% elif entity.layer_info %}
+                                                <div class="entity-current-position">{{ entity.layer_info }}</div>
+                                                {% if entity.type_info %}
+                                                <div class="entity-current-position">{{ entity.type_info }}</div>
+                                                {% endif %}
+                                                {% endif %}
+                                            </div>
+                                        <button class="chevron-btn" onclick="toggleExpand(event, '{{ entity.code }}')">
+                                            <span class="chevron">▲</span>
+                                        </button>
+                                    </div>
+                                    
+                                    <!-- Expanded state - hidden by default -->
+                                    <div class="card-details" id="details-{{ entity.code }}" style="display: none;">
+                                        <div class="metrics-grid">
+                                            <div class="metric-cell">
+                                                <div class="metric-label">Events in last 24h</div>
+                                                <div class="metric-value">{{ entity.event_count_24h }}</div>
+                                            </div>
+                                            <div class="metric-cell">
+                                                <div class="metric-label">Most recent action</div>
+                                                <div class="metric-value">{{ entity.most_recent_action or 'None' }}</div>
+                                            </div>
+                                            <div class="metric-cell">
+                                                <div class="metric-label">Scenario #</div>
+                                                <div class="metric-value">{{ entity.scenario_count }}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+
+                {% if total_pages > 1 %}
+                <div class="pagination">
+                    <div class="pagination-info">
+                        Page {{ page }} of {{ total_pages }} ({{ total_entities }} total)
+                    </div>
+                    <div class="pagination-controls">
+                        {% if page > 1 %}
+                        <a href="{{ url_for('foundations.index', tab=active_tab, page=page-1, search=request.args.get('search', '')) }}" class="page-btn">← Prev</a>
+                        {% endif %}
+                        
+                        {% for p in range(1, total_pages + 1) %}
+                            {% if p == page %}
+                                <span class="page-number active">{{ p }}</span>
+                            {% elif p == 1 or p == total_pages or (p >= page - 2 and p <= page + 2) %}
+                                <a href="{{ url_for('foundations.index', tab=active_tab, page=p, search=request.args.get('search', '')) }}" class="page-number">{{ p }}</a>
+                            {% elif p == page - 3 or p == page + 3 %}
+                                <span class="page-ellipsis">...</span>
+                            {% endif %}
+                        {% endfor %}
+                        
+                        {% if page < total_pages %}
+                        <a href="{{ url_for('foundations.index', tab=active_tab, page=page+1, search=request.args.get('search', '')) }}" class="page-btn">Next →</a>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Right Column: My Tracked -->
+    <div class="right-column">
+        <div class="card">
+            <div class="card-body">
+                <div class="search-bar">
+                    <form method="get" action="{{ url_for('foundations.index') }}">
+                        <input type="search" name="search_tracked" placeholder="Search tracked...">
+                    </form>
+                </div>
+                
+                <h2>Tracked Positions</h2>
+                {% for position in tracked_positions %}
+                <div class="tracked-entity">
+                    <div class="tracked-header">
+                        <a href="{{ url_for('foundations.index', expand=position.code) }}">
+                            {{ position.code }}
+                        </a>
+                        <span>{{ position.display_name }}</span>
+                    </div>
+                    
+                    <div class="collapsed-metrics">
+                        <span>Total: {{ position.collapsed_metrics.total_events_24h }}</span>
+                        <span>Subj: {{ position.collapsed_metrics.as_subject_24h }}</span>
+                        <span>Obj: {{ position.collapsed_metrics.as_object_24h }}</span>
+                        <span>Med wt: {{ position.collapsed_metrics.median_weight or 'null' }}</span>
+                    </div>
+                    
+                    {% if position.expanded_details %}
+                    <div class="expanded-details">
+                        {% for detail in position.expanded_details %}
+                        <div class="event-detail">
+                            <a href="{{ url_for('events.detail', event_code=detail.event_code) }}">
+                                {{ detail.event_code }}
+                            </a>
+                            <span>{{ detail.action_code }}</span>
+                            <span>{{ detail.relationship }}</span>
+                            <span>Scenarios: {{ detail.scenario_count }}</span>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                </div>
+                {% endfor %}
+                
+                <h2>Tracked Institutions</h2>
+                {% for institution in tracked_institutions %}
+                <div class="tracked-entity">
+                    <div class="tracked-header">
+                        <a href="{{ url_for('foundations.index', expand=institution.code) }}">
+                            {{ institution.code }}
+                        </a>
+                        <span>{{ institution.display_name }}</span>
+                    </div>
+                    
+                    <div class="collapsed-metrics">
+                        <span>Total: {{ institution.collapsed_metrics.total_events_24h }}</span>
+                        <span>Subj: {{ institution.collapsed_metrics.as_subject_24h }}</span>
+                        <span>Obj: {{ institution.collapsed_metrics.as_object_24h }}</span>
+                        <span>Med wt: {{ institution.collapsed_metrics.median_weight or 'null' }}</span>
+                    </div>
+                    
+                    {% if institution.expanded_details %}
+                    <div class="expanded-details">
+                        {% for detail in institution.expanded_details %}
+                        <div class="event-detail">
+                            <a href="{{ url_for('events.detail', event_code=detail.event_code) }}">
+                                {{ detail.event_code }}
+                            </a>
+                            <span>{{ detail.action_code }}</span>
+                            <span>{{ detail.relationship }}</span>
+                            <span>Scenarios: {{ detail.scenario_count }}</span>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                </div>
+                {% endfor %}
+                
+                <h2>Tracked Actors</h2>
+                {% for actor in tracked_actors %}
+                <div class="tracked-entity">
+                    <div class="tracked-header">
+                        <a href="{{ url_for('foundations.index', expand=actor.code) }}">
+                            {{ actor.code }}
+                        </a>
+                        <span>{{ actor.display_name }}</span>
+                    </div>
+                    
+                    <div class="collapsed-metrics">
+                        <span>Total: {{ actor.collapsed_metrics.total_events_24h }}</span>
+                        <span>Subj: {{ actor.collapsed_metrics.as_subject_24h }}</span>
+                        <span>Obj: {{ actor.collapsed_metrics.as_object_24h }}</span>
+                        <span>Med wt: {{ actor.collapsed_metrics.median_weight or 'null' }}</span>
+                    </div>
+                    
+                    {% if actor.expanded_details %}
+                    <div class="expanded-details">
+                        {% for detail in actor.expanded_details %}
+                        <div class="event-detail">
+                            <a href="{{ url_for('events.detail', event_code=detail.event_code) }}">
+                                {{ detail.event_code }}
+                            </a>
+                            <span>{{ detail.action_code }}</span>
+                            <span>{{ detail.relationship }}</span>
+                            <span>Scenarios: {{ detail.scenario_count }}</span>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+{{ super() }}
+<script>
+function toggleExpand(event, entityCode) {
+    event.preventDefault();
+    
+    const detailsDiv = document.getElementById('details-' + entityCode);
+    const chevron = event.currentTarget.querySelector('.chevron');
+    
+    if (detailsDiv.style.display === 'none') {
+        detailsDiv.style.display = 'block';
+        chevron.textContent = '▼';
+    } else {
+        detailsDiv.style.display = 'none';
+        chevron.textContent = '▲';
+    }
+}
+</script>
+{% endblock %}

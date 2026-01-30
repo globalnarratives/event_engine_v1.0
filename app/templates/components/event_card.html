@@ -1,0 +1,39 @@
+{# Macro for displaying event cards with timestamp, code, and badges #}
+{% macro event_card(event, selectable=false, selected_code=none) %}
+<div class="event-card {% if selectable %}event-card-selectable{% endif %} {% if event.event_code == selected_code %}event-card-selected{% endif %}"
+     {% if selectable %}
+     onclick="selectEvent(this, '{{ event.event_code }}', '{{ event.event_actor or 'N/A' }}', '{{ event.action_code or 'N/A' }}')"
+     {% endif %}>
+    
+    {% if selectable %}
+    <input type="radio" name="event_radio" value="{{ event.event_code }}" 
+           {% if event.event_code == selected_code %}checked{% endif %}
+           class="event-card-radio">
+    {% endif %}
+    
+    <!-- Header: Timestamp -->
+    <div class="event-card-header">
+        REC: {{ event.rec_timestamp.strftime('%d%m%Y %H%M') if event.rec_timestamp else 'N/A' }} UTC
+    </div>
+    
+    <!-- Event Code -->
+    <div class="event-card-code">
+        <a href="{{ url_for('events.detail_cf_route', event_code=event.event_code) }}" class="event-code-link">
+            {{ event.event_code }}
+        </a>
+    </div>
+    
+    <!-- Badge Row -->
+    <div class="event-card-badges">
+        <span class="event-badge event-badge-actor">
+            {{ event.event_actor or 'N/A' }}
+        </span>
+        <span class="event-badge event-badge-action">
+            {{ event.action_code or 'N/A' }}
+        </span>
+        <span class="event-badge event-badge-relcred">
+            {{ event.rel_cred or 'N/A' }}
+        </span>
+    </div>
+</div>
+{% endmacro %}

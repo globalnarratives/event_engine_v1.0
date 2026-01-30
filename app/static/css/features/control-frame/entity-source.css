@@ -1,0 +1,57 @@
+/* ============================================
+   CONTROL FRAME - ENTITY & SOURCE DISPLAYS
+   ============================================ */
+
+.cf-entity-display {
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  padding: var(--space-sm);
+  background-color: var(--color-bg-primary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  color: var(--color-accent-secondary);
+  min-height: 40px;
+}
+
+.cf-entity-item {
+  font-family: 'Courier New', monospace;
+  color: var(--color-accent-primary);
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.cf-entity-item:last-child {
+  border-bottom: none;
+}
+
+.cf-source-display {
+  margin-top: 1rem;
+  padding: 1rem;
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cf-source-link {
+  color: var(--color-accent-primary);
+  text-decoration: none;
+  font-size: 0.9rem;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cf-source-link:hover {
+  text-decoration: underline;
+}
+
+.cf-source-meta {
+  color: var(--color-text-dim);
+  font-size: 0.85rem;
+  white-space: nowrap;
+  margin-left: 1rem;
+}

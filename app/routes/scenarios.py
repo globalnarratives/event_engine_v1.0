@@ -1,25 +1,119 @@
 from flask import Blueprint, render_template, redirect, url_for, flash, request
 from flask_login import login_required, current_user
-from app.models import Scenario, MarkedScenario, ScenarioEvent, User
+from app.models import Scenario, MarkedScenario, ScenarioEvent, ControlFrame, User
 from app import db
 from datetime import datetime
 
 bp = Blueprint('scenarios', __name__, url_prefix='/scenarios')
 
-@bp.route('/')
+@bp.route('/scenarios')
 @login_required
 def index():
-    """List all scenarios"""
-    page = request.args.get('page', 1, type=int)
-    per_page = 50
+    """Scenarios index page with 3-column layout"""
+    from app.models import Scenario, MarkedScenario, ControlFrame
+    from app.probability_algorithms import VolatilityCalculator, VelocityCalculator, WeightCategory
     
-    scenarios = Scenario.query.order_by(Scenario.created_at.desc()).paginate(
-        page=page, per_page=per_page, error_out=False
-    )
+    # Left Column: All available scenarios
+    all_scenarios = Scenario.query.order_by(Scenario.created_at.desc()).all()
     
-    return render_template('scenarios/index.html', scenarios=scenarios)
-
-# Update the create() function in app/routes/scenarios.py
+    # Get list of scenario IDs the current user has already marked
+    user_marked_scenario_ids = [
+        m.scenario_id for m in MarkedScenario.query.filter_by(
+            analyst_id=current_user.id
+        ).all()
+    ]
+    
+    # Center Column Top: Current user's marked scenarios
+    my_marked = MarkedScenario.query.filter_by(
+        analyst_id=current_user.id
+    ).order_by(MarkedScenario.created_at.desc()).all()
+    
+    # Calculate metrics for my marked scenarios
+    my_marked_with_metrics = []
+    for marked in my_marked:
+        # Get linked events for this marked scenario
+        event_links = ScenarioEvent.query.filter_by(
+            marked_scenario_id=marked.id
+        ).all()
+        
+        # Prepare events data
+        events_data = [
+            (link.event_code, float(link.weight), link.linked_at)
+            for link in event_links
+        ]
+        
+        # Calculate metrics
+        if events_data:
+            volatility_result = VolatilityCalculator.calculate(events_data)
+            velocity = VelocityCalculator.calculate(
+                volatility_result['volatility_score'],
+                len(events_data)
+            )
+            volatility = volatility_result['volatility_score']
+        else:
+            velocity = 0.0
+            volatility = 0.0
+        
+        my_marked_with_metrics.append({
+            'marked': marked,
+            'pi': marked.initial_probability,
+            'pc': marked.current_probability,
+            'velocity': velocity,
+            'volatility': volatility,
+            'event_count': len(events_data)
+        })
+    
+    # Center Column Bottom: Other analysts' public marked scenarios
+    public_marked = MarkedScenario.query.filter(
+        MarkedScenario.analyst_id != current_user.id
+    ).order_by(MarkedScenario.created_at.desc()).all()
+    
+    # Calculate metrics for public marked scenarios
+    public_marked_with_metrics = []
+    for marked in public_marked:
+        # Get linked events
+        event_links = ScenarioEvent.query.filter_by(
+            marked_scenario_id=marked.id
+        ).all()
+        
+        # Prepare events data
+        events_data = [
+            (link.event_code, float(link.weight), link.linked_at)
+            for link in event_links
+        ]
+        
+        # Calculate metrics
+        if events_data:
+            volatility_result = VolatilityCalculator.calculate(events_data)
+            velocity = VelocityCalculator.calculate(
+                volatility_result['volatility_score'],
+                len(events_data)
+            )
+            volatility = volatility_result['volatility_score']
+        else:
+            velocity = 0.0
+            volatility = 0.0
+        
+        public_marked_with_metrics.append({
+            'marked': marked,
+            'pi': marked.initial_probability,
+            'pc': marked.current_probability,
+            'velocity': velocity,
+            'volatility': volatility,
+            'event_count': len(events_data)
+        })
+    
+    # Right Column: Recent events for reference
+    recent_events = ControlFrame.query.order_by(
+        ControlFrame.rec_timestamp.desc()
+    ).limit(100).all()
+    
+    return render_template('scenarios/index.html',
+                         all_scenarios=all_scenarios,
+                         user_marked_scenario_ids=user_marked_scenario_ids,
+                         my_marked_with_metrics=my_marked_with_metrics,
+                         public_marked_with_metrics=public_marked_with_metrics,
+                         recent_events=recent_events)
 
 @bp.route('/create', methods=['GET', 'POST'])
 @login_required
@@ -157,11 +251,55 @@ def marked_detail(marked_id):
         marked_scenario_id=marked_id
     ).order_by(ScenarioEvent.linked_at.desc()).all()
     
+    # Get all events for sidebar listing
+    from app.models import ControlFrame
+    all_events = ControlFrame.query.order_by(ControlFrame.rec_timestamp.desc()).limit(100).all()
+    
+    # Get list of already-linked event codes to filter out
+    linked_event_codes = [link.event_code for link in event_links]
+    
+    # Calculate current velocity and volatility
+    from app.probability_algorithms import VolatilityCalculator, VelocityCalculator, WeightCategory
+    
+    # Prepare events data for calculation (all linked events)
+    events_data = [
+        (link.event_code, float(link.weight), link.linked_at)
+        for link in event_links
+    ]
+    
+    # Calculate volatility and velocity
+    if events_data:
+        volatility_result = VolatilityCalculator.calculate(events_data)
+        velocity = VelocityCalculator.calculate(
+            volatility_result['volatility_score'],
+            len(events_data)
+        )
+        volatility = volatility_result['volatility_score']
+    else:
+        velocity = 0.0
+        volatility = 0.0
+    
+    # Count events by category
+    category_counts = {
+        'minor': 0,
+        'moderate': 0,
+        'major': 0,
+        'critical': 0
+    }
+    
+    for link in event_links:
+        abs_weight = abs(float(link.weight))
+        category, _ = WeightCategory.categorize(abs_weight)
+        category_counts[category] += 1
+    
     return render_template('scenarios/marked_detail.html',
                          marked=marked,
-                         event_links=event_links)
-
-# Add these routes to your existing app/routes/scenarios.py
+                         event_links=event_links,
+                         all_events=all_events,
+                         linked_event_codes=linked_event_codes,
+                         velocity=velocity,
+                         volatility=volatility,
+                         category_counts=category_counts)
 
 @bp.route('/marked/<int:marked_id>/link-event', methods=['GET', 'POST'])
 @login_required
@@ -200,8 +338,28 @@ def link_event(marked_id):
             flash(f'Event {event_code} is already linked to this assessment.', 'error')
             return render_template('scenarios/link_event.html', marked=marked)
         
+        if abs(float(request.form.get('weight', 0))) < 0.1:
+            flash('Weight must be at least 0.1 or -0.1 (minimum magnitude).', 'error')
+            return render_template('scenarios/link_event.html', marked=marked, available_events=[])
+        
         try:
             weight = float(weight_str)
+            
+            # Validate weight range and increment
+            if weight == 0:
+                flash('Weight cannot be zero. Please use a value between -12.0 and +12.0.', 'error')
+                return render_template('scenarios/link_event.html', marked=marked, available_events=[])
+            
+            if not (-12.0 <= weight <= 12.0):
+                flash('Weight must be between -12.0 and +12.0.', 'error')
+                return render_template('scenarios/link_event.html', marked=marked, available_events=[])
+            
+            # Check if weight is in valid 0.1 increments
+            # Allow some floating point tolerance
+            if abs(round(weight * 10) - (weight * 10)) > 0.01:
+                flash('Weight must be in 0.1 increments (e.g., 3.5, -7.2, 11.0).', 'error')
+                return render_template('scenarios/link_event.html', marked=marked, available_events=[])
+                
         except ValueError:
             flash('Invalid weight value.', 'error')
             return render_template('scenarios/link_event.html', marked=marked)

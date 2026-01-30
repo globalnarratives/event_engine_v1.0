@@ -1,274 +1,385 @@
 {% extends "base.html" %}
 
+{% from 'components/event_card.html' import event_card %}
+
 {% block title %}{{ marked.display_name }}{% endblock %}
 
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/pages/marked-detail.css') }}">
+{% endblock %}
+
 {% block content %}
-<div class="container">
-    <h1>{{ marked.display_name }}</h1>
-    <p style="color: var(--color-text-secondary); margin-bottom: 1.5rem;">
-        Assessment by {{ marked.analyst.username }}
-    </p>
+<div class="marked-detail-container">
+    <!-- Header Section - Spans all columns -->
+    <div class="marked-header">
+        <h1>{{ marked.display_name }}</h1>
+        <p class="text-secondary mb-lg">
+            Assessment by {{ marked.analyst.username }}
+        </p>
 
-    {% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
-            {% for category, message in messages %}
-                <div class="card mb-md flash-{{ category }}">
-                    <div class="card-body">
-                        {{ message }}
-                    </div>
-                </div>
-            {% endfor %}
-        {% endif %}
-    {% endwith %}
-
-    <div class="grid" style="grid-template-columns: 500px 800px; gap: 1.5rem;">
-        <!-- Left Column -->
-        <div style="display: flex; flex-direction: column; gap: 1.5rem;">
-            <!-- Assessment Info -->
-            <div class="card">
-                <div class="card-header">
-                    <h2 class="card-title">Assessment Details</h2>
-                </div>
-                <div class="card-body">
-                    <table style="width: 100%; border-collapse: collapse;">
-                        <tr style="border-bottom: 1px solid var(--color-border);">
-                            <td style="padding: 0.75rem; color: var(--color-text-tertiary); font-weight: 600; text-transform: uppercase; font-size: 0.85rem; width: 180px;">
-                                Scenario
-                            </td>
-                            <td style="padding: 0.75rem;">
-                                <a href="{{ url_for('scenarios.detail', scenario_id=marked.scenario.id) }}" 
-                                   style="color: var(--color-accent-primary); font-family: var(--font-body);">
-                                    {{ marked.scenario.scenario_code }}
-                                </a>
-                            </td>
-                        </tr>
-                        <tr style="border-bottom: 1px solid var(--color-border);">
-                            <td style="padding: 0.75rem; color: var(--color-text-tertiary); font-weight: 600; text-transform: uppercase; font-size: 0.85rem;">
-                                Proposition
-                            </td>
-                            <td style="padding: 0.75rem; color: var(--color-text-primary);">
-                                {{ marked.scenario.title }}
-                            </td>
-                        </tr>
-                        <tr style="border-bottom: 1px solid var(--color-border);">
-                            <td style="padding: 0.75rem; color: var(--color-text-tertiary); font-weight: 600; text-transform: uppercase; font-size: 0.85rem;">
-                                Start Date
-                            </td>
-                            <td style="padding: 0.75rem; color: var(--color-text-secondary);">
-                                {{ marked.scenario.start_date.strftime('%Y-%m-%d') if marked.scenario.start_date else 'N/A' }}
-                            </td>
-                        </tr>
-                        <tr style="border-bottom: 1px solid var(--color-border);">
-                            <td style="padding: 0.75rem; color: var(--color-text-tertiary); font-weight: 600; text-transform: uppercase; font-size: 0.85rem;">
-                                Resolution Date
-                            </td>
-                            <td style="padding: 0.75rem; color: var(--color-text-secondary);">
-                                {{ marked.scenario.close_date.strftime('%Y-%m-%d') if marked.scenario.close_date else 'N/A' }}
-                            </td>
-                        </tr>
-                        <tr style="border-bottom: 1px solid var(--color-border);">
-                            <td style="padding: 0.75rem; color: var(--color-text-tertiary); font-weight: 600; text-transform: uppercase; font-size: 0.85rem;">
-                                Analyst
-                            </td>
-                            <td style="padding: 0.75rem; color: var(--color-text-primary);">
-                                {{ marked.analyst.username }}
-                            </td>
-                        </tr>
-                        {% if marked.title %}
-                        <tr style="border-bottom: 1px solid var(--color-border);">
-                            <td style="padding: 0.75rem; color: var(--color-text-tertiary); font-weight: 600; text-transform: uppercase; font-size: 0.85rem;">
-                                Label
-                            </td>
-                            <td style="padding: 0.75rem; color: var(--color-text-primary);">
-                                {{ marked.title }}
-                            </td>
-                        </tr>
-                        {% endif %}
-                        <tr style="border-bottom: 1px solid var(--color-border);">
-                            <td style="padding: 0.75rem; color: var(--color-text-tertiary); font-weight: 600; text-transform: uppercase; font-size: 0.85rem;">
-                                Status
-                            </td>
-                            <td style="padding: 0.75rem;">
-                                {% if marked.status == 'active' %}
-                                    <span class="badge badge-active">ACTIVE</span>
-                                {% elif marked.status == 'resolved_true' %}
-                                    <span class="badge badge-active">RESOLVED TRUE</span>
-                                {% elif marked.status == 'resolved_false' %}
-                                    <span class="badge badge-resolved">RESOLVED FALSE</span>
-                                {% else %}
-                                    <span class="badge badge-resolved">{{ marked.status|upper }}</span>
-                                {% endif %}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="padding: 0.75rem; color: var(--color-text-tertiary); font-weight: 600; text-transform: uppercase; font-size: 0.85rem;">
-                                Created
-                            </td>
-                            <td style="padding: 0.75rem; color: var(--color-text-secondary);">
-                                {{ marked.created_at.strftime('%Y-%m-%d %H:%M') if marked.created_at else 'N/A' }}
-                            </td>
-                        </tr>
-                    </table>
-
-                    {% if marked.description %}
-                    <div style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--color-border);">
-                        <div style="color: var(--color-text-tertiary); font-weight: 600; text-transform: uppercase; font-size: 0.85rem; margin-bottom: 0.75rem;">
-                            Notes
-                        </div>
-                        <div style="color: var(--color-text-secondary); line-height: 1.6;">
-                            {{ marked.description }}
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="card mb-md flash-{{ category }}">
+                        <div class="card-body">
+                            {{ message }}
                         </div>
                     </div>
-                    {% endif %}
-
-                    <div style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--color-border);">
-                        <a href="{{ url_for('scenarios.detail', scenario_id=marked.scenario.id) }}" class="btn btn-secondary">
-                            Back to Scenario
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Probability History Text List -->
-            {% if marked.probability_history and marked.probability_history|length > 1 %}
-            <div class="card">
-                <div class="card-header">
-                    <h2 class="card-title">Probability History</h2>
-                </div>
-                <div class="card-body">
-                    <div style="max-height: 400px; overflow-y: auto;">
-                        {% for entry in marked.probability_history|reverse %}
-                        <div style="padding: 0.75rem; margin-bottom: 0.75rem; background: var(--color-bg-elevated); border-radius: var(--radius-sm); border-left: 3px solid var(--color-accent-primary);">
-                            <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.25rem;">
-                                <span style="color: var(--color-accent-primary); font-weight: 600; font-size: 1.1rem; font-family: var(--font-body);">
-                                    {{ (entry.probability * 100)|round(1) }}%
-                                </span>
-                                <span style="color: var(--color-text-dim); font-size: 0.85rem;">
-                                    {{ entry.timestamp[:10] if entry.timestamp else 'N/A' }}
-                                </span>
-                            </div>
-                            <div style="color: var(--color-text-secondary); font-size: 0.875rem;">
-                                {{ entry.reason }}
-                            </div>
-                            {% if entry.event_code %}
-                            <div style="margin-top: 0.25rem;">
-                                <a href="{{ url_for('events.detail_cf_route', event_code=entry.event_code) }}" 
-                                   style="color: var(--color-accent-secondary); font-size: 0.85rem; font-family: var(--font-body);">
-                                    → {{ entry.event_code }}
-                                </a>
-                            </div>
-                            {% endif %}
-                        </div>
-                        {% endfor %}
-                    </div>
-                </div>
-            </div>
+                {% endfor %}
             {% endif %}
+        {% endwith %}
+    </div>
+
+    <!-- Left Column -->
+    <div class="marked-left-column">
+        <!-- Assessment Info -->
+        <div class="card">
+            <div class="card-header">
+                <h2 class="card-title">Assessment Details</h2>
+            </div>
+            <div class="card-body">
+                <table class="detail-table">
+                    <tr>
+                        <td class="detail-label">Scenario</td>
+                        <td class="detail-value">
+                            <a href="{{ url_for('scenarios.detail', scenario_id=marked.scenario.id) }}" class="code-link">
+                                {{ marked.scenario.scenario_code }}
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="detail-label">Proposition</td>
+                        <td class="detail-value text-primary">
+                            {{ marked.scenario.title }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="detail-label">Start Date</td>
+                        <td class="detail-value">
+                            {{ marked.scenario.start_date.strftime('%Y-%m-%d') if marked.scenario.start_date else 'N/A' }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="detail-label">Resolution Date</td>
+                        <td class="detail-value">
+                            {{ marked.scenario.close_date.strftime('%Y-%m-%d') if marked.scenario.close_date else 'N/A' }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="detail-label">Analyst</td>
+                        <td class="detail-value text-primary">
+                            {{ marked.analyst.username }}
+                        </td>
+                    </tr>
+                    {% if marked.title %}
+                    <tr>
+                        <td class="detail-label">Label</td>
+                        <td class="detail-value text-primary">
+                            {{ marked.title }}
+                        </td>
+                    </tr>
+                    {% endif %}
+                    <tr>
+                        <td class="detail-label">Status</td>
+                        <td class="detail-value">
+                            {% if marked.status == 'active' %}
+                                <span class="badge badge-active">ACTIVE</span>
+                            {% elif marked.status == 'resolved_true' %}
+                                <span class="badge badge-active">RESOLVED TRUE</span>
+                            {% elif marked.status == 'resolved_false' %}
+                                <span class="badge badge-resolved">RESOLVED FALSE</span>
+                            {% else %}
+                                <span class="badge badge-resolved">{{ marked.status|upper }}</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="detail-label">Created</td>
+                        <td class="detail-value">
+                            {{ marked.created_at.strftime('%Y-%m-%d %H:%M') if marked.created_at else 'N/A' }}
+                        </td>
+                    </tr>
+                </table>
+
+                {% if marked.description %}
+                <div class="detail-notes">
+                    <div class="detail-notes-label">Notes</div>
+                    <div class="detail-notes-content">
+                        {{ marked.description }}
+                    </div>
+                </div>
+                {% endif %}
+
+                <div class="detail-actions">
+                    <a href="{{ url_for('scenarios.detail', scenario_id=marked.scenario.id) }}" class="btn btn-secondary">
+                        Back to Scenario
+                    </a>
+                </div>
+            </div>
         </div>
 
-        <!-- Right Column -->
-        <div style="display: flex; flex-direction: column; gap: 1.5rem;">
-            <!-- Probability Chart -->
-            <div class="card">
-                <div class="card-header">
-                    <h2 class="card-title">Probability Over Time</h2>
-                </div>
-                <div class="card-body">
-                    <!-- Current Stats Display -->
-                    <div style="display: flex; justify-content: space-around; margin-bottom: 1.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--color-border);">
-                        <div style="text-align: center;">
-                            <div style="color: var(--color-text-tertiary); font-size: 0.75rem; text-transform: uppercase; margin-bottom: 0.25rem;">
-                                Initial
-                            </div>
-                            <div style="color: var(--color-text-secondary); font-size: 1.5rem; font-weight: 600; font-family: var(--font-body);">
-                                {{ (marked.initial_probability * 100)|round(1) }}%
-                            </div>
+        <!-- Probability History Text List -->
+        {% if marked.probability_history and marked.probability_history|length > 1 %}
+        <div class="card">
+            <div class="card-header">
+                <h2 class="card-title">Probability History</h2>
+            </div>
+            <div class="card-body">
+                <div class="history-list">
+                    {% for entry in marked.probability_history|reverse %}
+                    <div class="history-entry">
+                        <div class="history-entry-header">
+                            <span class="history-probability">
+                                {{ (entry.probability * 100)|round(1) }}%
+                            </span>
+                            <span class="history-date">
+                                {{ entry.timestamp[:10] if entry.timestamp else 'N/A' }}
+                            </span>
                         </div>
-                        <div style="text-align: center;">
-                            <div style="color: var(--color-text-tertiary); font-size: 0.75rem; text-transform: uppercase; margin-bottom: 0.25rem;">
-                                Current
-                            </div>
-                            <div style="color: var(--color-accent-primary); font-size: 2rem; font-weight: 700; font-family: var(--font-body);">
-                                {{ (marked.current_probability * 100)|round(1) }}%
-                            </div>
+                        <div class="history-reason">
+                            {{ entry.reason }}
+                        </div>
+                        {% if entry.event_code %}
+                        <div class="history-event">
+                            <a href="{{ url_for('events.detail_cf_route', event_code=entry.event_code) }}" class="event-link">
+                                → {{ entry.event_code }}
+                            </a>
+                        </div>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- Middle Column -->
+    <div class="marked-middle-column">
+        <!-- Probability Chart -->
+        <div class="card">
+            <div class="card-header">
+                <h2 class="card-title">Scenario Metrics</h2>
+            </div>
+            <div class="card-body">
+                <!-- Enhanced Stats Grid -->
+                    <div class="prob-metrics-grid">
+                        <!-- Row 1: Pi and Pc Headers -->
+                        <div class="prob-metric prob-metric-header prob-metric-wide">
+                            P<sub>i</sub>
+                        </div>
+                        <div class="prob-metric prob-metric-header prob-metric-wide">
+                            P<sub>c</sub>
+                        </div>
+                        
+                        <!-- Row 2: Pi and Pc Values -->
+                        <div class="prob-metric prob-metric-value-cell prob-metric-wide">
+                            {{ (marked.initial_probability * 100)|round(1) }}
+                        </div>
+                        <div class="prob-metric prob-metric-value-cell prob-metric-wide">
+                            {{ (marked.current_probability * 100)|round(1) }}
+                        </div>
+                        
+                        <!-- Row 3: Vol and Vel Headers -->
+                        <div class="prob-metric prob-metric-header prob-metric-wide">
+                            Vol
+                        </div>
+                        <div class="prob-metric prob-metric-header prob-metric-wide">
+                            Vel
+                        </div>
+                        
+                        <!-- Row 4: Vol and Vel Values -->
+                        <div class="prob-metric prob-metric-value-cell prob-metric-wide">
+                            {{ volatility|round(1) }}
+                        </div>
+                        <div class="prob-metric prob-metric-value-cell prob-metric-wide">
+                            {{ velocity|round(1) }}
+                        </div>
+                        
+                        <!-- Row 5: Category Headers -->
+                        <div class="prob-metric prob-metric-header prob-metric-narrow">
+                            min
+                        </div>
+                        <div class="prob-metric prob-metric-header prob-metric-narrow">
+                            mod
+                        </div>
+                        <div class="prob-metric prob-metric-header prob-metric-narrow">
+                            maj
+                        </div>
+                        <div class="prob-metric prob-metric-header prob-metric-narrow">
+                            crit
+                        </div>
+                        
+                        <!-- Row 6: Category Values -->
+                        <div class="prob-metric prob-metric-value-cell prob-metric-narrow">
+                            {{ category_counts.minor }}
+                        </div>
+                        <div class="prob-metric prob-metric-value-cell prob-metric-narrow">
+                            {{ category_counts.moderate }}
+                        </div>
+                        <div class="prob-metric prob-metric-value-cell prob-metric-narrow">
+                            {{ category_counts.major }}
+                        </div>
+                        <div class="prob-metric prob-metric-value-cell prob-metric-narrow">
+                            {{ category_counts.critical }}
                         </div>
                     </div>
 
-                    <!-- Chart Canvas -->
-                    <canvas id="probabilityChart" 
-                        data-history='{{ marked.probability_history|tojson|safe }}'
-                        style="max-height: 300px;"></canvas>
-                </div>
-            </div>
-
-            <!-- Linked Events -->
-            <div class="card">
-                <div class="card-header" style="display: flex; justify-content: space-between; align-items: center;">
-                    <h2 class="card-title">Linked Events ({{ event_links|length }})</h2>
-                    {% if current_user.id == marked.analyst_id %}
-                    <a href="{{ url_for('scenarios.link_event', marked_id=marked.id) }}" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.875rem;">
-                        Link Event
-                    </a>
-                    {% endif %}
-                </div>
-                <div class="card-body">
-                    {% if event_links %}
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Event Code</th>
-                                    <th>Weight</th>
-                                    <th>Linked</th>
-                                    {% if current_user.id == marked.analyst_id %}
-                                    <th>Actions</th>
-                                    {% endif %}
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for link in event_links %}
-                                <tr>
-                                    <td>
-                                        <a href="{{ url_for('events.detail_cf_route', event_code=link.event_code) }}" 
-                                           style="color: var(--color-accent-primary); font-family: var(--font-body);">
-                                            {{ link.event_code }}
-                                        </a>
-                                        {% if link.notes %}
-                                        <div style="color: var(--color-text-dim); font-size: 0.85rem; margin-top: 0.25rem;">
-                                            {{ link.notes }}
-                                        </div>
-                                        {% endif %}
-                                    </td>
-                                    <td>
-                                        <span class="{% if link.weight > 0 %}weight-positive{% elif link.weight < 0 %}weight-negative{% else %}weight-neutral{% endif %}">
-                                            {% if link.weight > 0 %}+{% endif %}{{ link.weight }}
-                                        </span>
-                                    </td>
-                                    <td style="color: var(--color-text-dim); font-size: 0.85rem;">
-                                        {{ link.linked_at.strftime('%Y-%m-%d') if link.linked_at else 'N/A' }}
-                                    </td>
-                                    {% if current_user.id == marked.analyst_id %}
-                                    <td>
-                                        <form method="POST" action="{{ url_for('scenarios.unlink_event', marked_id=marked.id, event_code=link.event_code) }}" style="display: inline;">
-                                            <button type="submit" class="btn btn-warning" 
-                                                    style="padding: 0.25rem 0.5rem; font-size: 0.75rem;"
-                                                    onclick="return confirm('Remove this event link? Probability will be adjusted.');">
-                                                Unlink
-                                            </button>
-                                        </form>
-                                    </td>
-                                    {% endif %}
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
-                    {% else %}
-                        <p style="color: var(--color-text-dim); text-align: center; padding: 2rem 0;">
-                            No events linked yet.
-                        </p>
-                    {% endif %}
-                </div>
+                <!-- Chart Canvas -->
+                <canvas id="probabilityChart" 
+                    data-history='{{ marked.probability_history|tojson|safe }}'
+                    class="prob-chart"></canvas>
             </div>
         </div>
+
+        <!-- Linked Events -->
+        <div class="card">
+            <div class="card-header">
+                <h2 class="card-title">Linked Events ({{ event_links|length }})</h2>
+                {% if current_user.id == marked.analyst_id %}
+                <button class="btn btn-primary link-event-btn">Link Event</button>
+                {% endif %}
+            </div>
+            <div class="card-body">
+                {% if event_links %}
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Event Code</th>
+                                <th>Weight</th>
+                                <th>Linked</th>
+                                {% if current_user.id == marked.analyst_id %}
+                                <th>Actions</th>
+                                {% endif %}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for link in event_links %}
+                            <tr>
+                                <td>
+                                    <a href="{{ url_for('events.detail_cf_route', event_code=link.event_code) }}" class="code-link">
+                                        {{ link.event_code }}
+                                    </a>
+                                    {% if link.notes %}
+                                    <div class="link-notes">
+                                        {{ link.notes }}
+                                    </div>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <span class="{% if link.weight > 0 %}weight-positive{% elif link.weight < 0 %}weight-negative{% else %}weight-neutral{% endif %}">
+                                        {% if link.weight > 0 %}+{% endif %}{{ link.weight }}
+                                    </span>
+                                </td>
+                                <td class="text-dim small-text">
+                                    {{ link.linked_at.strftime('%Y-%m-%d') if link.linked_at else 'N/A' }}
+                                </td>
+                                {% if current_user.id == marked.analyst_id %}
+                                <td>
+                                    <form method="POST" action="{{ url_for('scenarios.unlink_event', marked_id=marked.id, event_code=link.event_code) }}" class="inline-form">
+                                        <button type="submit" class="btn btn-warning btn-small"
+                                                onclick="return confirm('Remove this event link? Probability will be adjusted.');">
+                                            Unlink
+                                        </button>
+                                    </form>
+                                </td>
+                                {% endif %}
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                {% else %}
+                    <p class="empty-state">
+                        No events linked yet.
+                    </p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Link Event Sidebar (hidden by default) -->
+    <div class="link-event-sidebar">
+        <!-- Header with close button -->
+        <div class="sidebar-header">
+            <h2 class="sidebar-title">LINK EVENT</h2>
+            <button class="close-sidebar sidebar-close-btn">&times;</button>
+        </div>
+        
+        <form method="POST" action="{{ url_for('scenarios.link_event', marked_id=marked.id) }}">
+            <!-- Section 1: Events Listing -->
+            <div class="mb-lg">
+                <label class="form-label">AVAILABLE EVENTS</label>
+                <div class="event-list-container">
+                    {% set available_events = [] %}
+                    {% for event in all_events %}
+                        {% if event.event_code not in linked_event_codes %}
+                            {% set _ = available_events.append(event) %}
+                        {% endif %}
+                    {% endfor %}
+                    
+                    {% if available_events %}
+                        {% set events_by_region = {} %}
+                        {% for event in available_events %}
+                            {% set region = event.event_code.split('.')[2] if event.event_code else 'unknown' %}
+                            {% if region not in events_by_region %}
+                                {% set _ = events_by_region.update({region: []}) %}
+                            {% endif %}
+                            {% set _ = events_by_region[region].append(event) %}
+                        {% endfor %}
+                        
+                        {% for region, events in events_by_region.items()|sort %}
+                            <!-- Region Header -->
+                            <div class="event-region-header">
+                                {{ region.upper() }}
+                            </div>
+                            
+                            <!-- Events in Region (sorted by date, most recent first) -->
+                            {% for event in events|sort(attribute='rec_timestamp', reverse=True) %}
+                                {{ event_card(event, selectable=true) }}
+                            {% endfor %}
+                        {% endfor %}
+                    {% else %}
+                        <div class="empty-state">
+                            No available events to link
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            
+            <!-- Section 2: Selected Event Display -->
+            <div class="mb-lg">
+                <label class="form-label">SELECTED EVENT</label>
+                <div id="selected-event-display" class="selected-event-display">
+                    No event selected
+                </div>
+                <input type="hidden" name="event_code" id="selected-event-code" required>
+            </div>
+            
+            <!-- Section 3: Weight Input -->
+            <div class="mb-lg">
+                <label class="form-label" for="weight">WEIGHT</label>
+                <input type="number" id="weight" name="weight" 
+                    class="form-input" step="0.1" min="-12" max="12"
+                    placeholder="3.5" required>
+                <p class="form-helper">
+                    Minor (0.1-4.9), Moderate (5.0-7.9), Major (8.0-10.9), Critical (11.0-12.0)
+                </p>
+            </div>
+            
+            <!-- Section 4: Notes (Optional) -->
+            <div class="mb-xl">
+                <label class="form-label" for="notes">NOTES (OPTIONAL)</label>
+                <textarea id="notes" name="notes" 
+                        class="form-textarea" rows="3"
+                        placeholder="Explain why this event affects the scenario..."></textarea>
+            </div>
+            
+            <!-- Action Buttons -->
+            <div class="sidebar-actions">
+                <button type="submit" class="btn btn-primary btn-block">LINK EVENT</button>
+                <button type="button" class="close-sidebar btn btn-secondary btn-block">CANCEL</button>
+            </div>
+        </form>
     </div>
 </div>
 
@@ -284,10 +395,38 @@
     const rawHistory = JSON.parse(canvas.dataset.history || '[]');
 
     // 2. Map the data into the format Chart.js expects
-    const dataPoints = rawHistory.map(entry => ({
-        x: new Date(entry.timestamp),
-        y: entry.probability
-    })).sort((a, b) => a.x - b.x);
+   const dataPoints = rawHistory.map(entry => {
+        let eventDate;
+        
+        // Initial assessment: use scenario start_date
+        if (!entry.event_code) {
+            eventDate = new Date('{{ marked.scenario.start_date.isoformat() }}');
+        } else if (entry.event_code.startsWith('e.')) {
+            // Parse event date from event_code (format: e.DDMMYYYY.region.ordinal)
+            const datePart = entry.event_code.split('.')[1]; // e.g., "17012026"
+            if (datePart && datePart.length === 8) {
+                const day = datePart.substring(0, 2);
+                const month = datePart.substring(2, 4);
+                const year = datePart.substring(4, 8);
+                eventDate = new Date(`${year}-${month}-${day}`);
+            }
+        }
+        
+        // If parse failed, eventDate will be undefined and this entry will cause issues
+        // This is intentional - we want to know if data is malformed
+        
+        return {
+            x: eventDate,
+            y: entry.probability
+        };
+   }).sort((a, b) => a.x - b.x);
+
+    // Calculate min and max probability from data for Y-axis scaling
+    const probabilities = dataPoints.map(p => p.y);
+    const minProb = Math.min(...probabilities);
+    const maxProb = Math.max(...probabilities);
+
+    
 
     // 3. Initialize Chart
     const ctx = canvas.getContext('2d');
@@ -307,7 +446,8 @@
         },
         options: {
             responsive: true,
-            maintainAspectRatio: true,
+            maintainAspectRatio: false,
+            aspectRatio: 1.15, 
             plugins: {
                 legend: { display: false },
                 tooltip: {
@@ -317,35 +457,80 @@
                 }
             },
             scales: {
+                y: {
+                    beginAtZero: false,
+                    min: Math.max(0, minProb - 0.05),    // Add 5% buffer below
+                    max: Math.min(1, maxProb + 0.05),    // Add 5% buffer above
+                    ticks: {
+                        callback: function(value) {
+                            return (value * 100).toFixed(1) + '%';
+                        }
+                    }
+                },
                 x: {
                     type: 'time',
                     time: {
-                        unit: 'day',
-                        displayFormats: { day: 'MMM d' }
-                    },
-                    title: { display: true, text: 'Date', color: '#b2b3b6' },
-                    grid: { color: '#2a3441' },
-                    ticks: { color: '#b2b3b6' }
-                },
-                y: {
-                    grace: '10%',
-                    title: { 
-                        display: true, 
-                        text: 'Probability', 
-                        color: '#b2b3b6' 
-                    },
-                    grid: { 
-                        color: '#2a3441' 
-                    },
-                    ticks: {
-                        color: '#b2b3b6',
-                        callback: (value) => (value * 100).toFixed(0) + '%'
+                        unit: 'day'
                     }
-                    
                 }
             }
         }
     });
 })();
 </script>
+
+<script>
+// Toggle link event sidebar
+document.addEventListener('DOMContentLoaded', function() {
+    const linkBtn = document.querySelector('.link-event-btn');
+    const container = document.querySelector('.marked-detail-container');
+    const closeBtn = document.querySelector('.close-sidebar');
+    
+    if (linkBtn) {
+        linkBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            container.classList.add('link-mode');
+        });
+    }
+    
+    if (closeBtn) {
+        closeBtn.addEventListener('click', function() {
+            container.classList.remove('link-mode');
+        });
+    }
+});
+</script>
+
+<script>
+function selectEvent(element, eventCode, eventActor, actionCode) {
+    // Update radio button
+    const radio = element.querySelector('input[type="radio"]');
+    if (radio) {
+        radio.checked = true;
+    }
+    
+    // Update hidden input
+    document.getElementById('selected-event-code').value = eventCode;
+    
+    // Update selected event display
+    const display = document.getElementById('selected-event-display');
+    display.innerHTML = `
+        <div class="selected-event-content">
+            <div class="selected-event-code">
+                ${eventCode}
+            </div>
+            <div class="selected-event-meta">
+                ${eventActor} • ${actionCode}
+            </div>
+        </div>
+    `;
+    
+    // Highlight selected item
+    document.querySelectorAll('.event-card-selectable').forEach(item => {
+        item.classList.remove('event-card-selected');
+    });
+    element.classList.add('event-card-selected');
+}
+</script>
+
 {% endblock %}
