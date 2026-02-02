@@ -365,9 +365,11 @@ def link_event(marked_id):
             return render_template('scenarios/link_event.html', marked=marked)
         
         # Link the event
+        # Link the event
         try:
             marked.add_event(event_code, weight, current_user.id, notes)
             db.session.commit()
+            db.session.refresh(marked)  # Add this line
             flash(f'Event {event_code} linked successfully!', 'success')
             return redirect(url_for('scenarios.marked_detail', marked_id=marked_id))
         except Exception as e:

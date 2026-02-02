@@ -328,6 +328,7 @@ class MarkedScenario(db.Model):
         
         # Update current probability
         self.current_probability = new_prob
+        flag_modified(self, 'current_probability')
         
         # Add to history with full calculation metadata
         if not self.probability_history:

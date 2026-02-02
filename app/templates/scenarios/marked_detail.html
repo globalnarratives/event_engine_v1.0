@@ -176,7 +176,7 @@
                         <div class="prob-metric prob-metric-value-cell prob-metric-wide">
                             {{ (marked.initial_probability * 100)|round(1) }}
                         </div>
-                        <div class="prob-metric prob-metric-value-cell prob-metric-wide">
+                        <div id="pc-metric-value" class="prob-metric prob-metric-value-cell prob-metric-wide">
                             {{ (marked.current_probability * 100)|round(1) }}
                         </div>
                         
@@ -434,6 +434,16 @@
     const probabilities = dataPoints.map(p => p.y);
     const minProb = Math.min(...probabilities);
     const maxProb = Math.max(...probabilities);
+    if (dataPoints.length > 0) {
+        // Get the most recent probability from the sorted history
+        const latestPc = dataPoints[dataPoints.length - 1].y;
+        const pcElement = document.getElementById('pc-metric-value');
+        
+        if (pcElement) {
+            // Update the metric card to match the chart's latest point (29.9% in your case)
+            pcElement.innerText = (latestPc * 100).toFixed(1);
+        }
+    }
     const expirationDate = new Date(canvas.dataset.expiration);
 
     // Custom plugin to draw axis breaks and labels
