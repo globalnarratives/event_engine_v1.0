@@ -524,10 +524,52 @@
                     plugins: {
                         legend: { display: false },
                         tooltip: {
-                            callbacks: {
-                                label: (context) => (context.parsed.y * 100).toFixed(1) + '%'
+                        backgroundColor: 'rgba(0, 20, 30, 0.95)',
+                        titleColor: '#33f5ff',
+                        bodyColor: '#fff',
+                        borderColor: '#33f5ff',
+                        borderWidth: 1,
+                        padding: 12,
+                        displayColors: false,
+                        bodyFont: {
+                            size: 14,
+                            family: 'monospace'
+                        },
+                        titleFont: {
+                            size: 16,
+                            family: 'monospace',
+                            weight: 'bold'
+                        },
+                        callbacks: {
+                            title: (tooltipItems) => {
+                                const index = tooltipItems[0].dataIndex;
+                                const entry = rawHistory[index];
+                                return entry.event_code || 'Initial Assessment';
+                            },
+                            label: (context) => {
+                                const index = context.dataIndex;
+                                const entry = rawHistory[index];
+                                
+                                const lines = [];
+                                const date = entry.timestamp ? new Date(entry.timestamp) : null;
+                                const formattedTime = date ? date.toLocaleString('en-US', {
+                                    timeZone: 'America/New_York',
+                                    year: 'numeric',
+                                    month: 'short',
+                                    day: 'numeric',
+                                    hour: '2-digit',
+                                    minute: '2-digit',
+                                    hour12: false
+                                }).replace(',', '').replace(':', 'h') : 'N/A';
+                                lines.push(`Assigned: ${formattedTime}`);    
+                                lines.push(`Weight: ${entry.weight ? (entry.weight > 0 ? '+' : '') + entry.weight : 'N/A'}`);
+                                lines.push(`Adjustment: ${entry.probability_adjustment ? (entry.probability_adjustment > 0 ? '+' : '') + (entry.probability_adjustment * 100).toFixed(1) + '%' : 'N/A'}`);
+                                lines.push(`Result: ${(context.parsed.y * 100).toFixed(1)}%`);
+                                
+                                return lines;
                             }
                         }
+                    }
                     },
                     scales: {
                         y: {
