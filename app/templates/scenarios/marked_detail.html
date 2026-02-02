@@ -228,9 +228,19 @@
                 <!-- Chart Canvas -->
                 <canvas id="probabilityChart" 
                     data-history='{{ marked.probability_history|tojson|safe }}'
-                    class="prob-chart"></canvas>
+                    class="prob-chart"
+                    data-expiration="{{ marked.scenario.close_date.isoformat() }}">
+                </canvas>
             </div>
         </div>
+
+                    <div style="margin-bottom: 10px; display: flex; align-items: center; gap: 10px;">
+                <label class="switch">
+                    <input type="checkbox" id="viewToggle">
+                    <span class="slider"></span>
+                </label>
+                <span style="color: rgba(51, 245, 255, 0.8); font-family: monospace; font-size: 12px;">VIEW THROUGH EXPIRATION</span>
+            </div>
 
         <!-- Linked Events -->
         <div class="card">
@@ -389,7 +399,9 @@
 <script>
 (function() {
     const canvas = document.getElementById('probabilityChart');
-    if (!canvas) return;
+    const toggle = document.getElementById('viewToggle');
+    if (!canvas || !toggle) return;
+    //if (!canvas) return;
 
     // 1. Pull data from the HTML attributes we set above
     const rawHistory = JSON.parse(canvas.dataset.history || '[]');
@@ -412,9 +424,6 @@
             }
         }
         
-        // If parse failed, eventDate will be undefined and this entry will cause issues
-        // This is intentional - we want to know if data is malformed
-        
         return {
             x: eventDate,
             y: entry.probability
@@ -425,58 +434,146 @@
     const probabilities = dataPoints.map(p => p.y);
     const minProb = Math.min(...probabilities);
     const maxProb = Math.max(...probabilities);
+    const expirationDate = new Date(canvas.dataset.expiration);
 
-    
+    // Custom plugin to draw axis breaks and labels
+    // 3. Custom plugin to draw axis breaks and labels
+            const axisBreakPlugin = {
+                id: 'axisBreak',
+                afterDraw: (chart) => {
+                    const ctx = chart.ctx;
+                    const { left, top, bottom } = chart.chartArea;
+                    const extensionLength = 12; 
+                    const breakWidth = 12;
+                    const breakHeight = 8;
+                    const bgColor = '#0b161d'; // Dashboard background color
+                    const strokeColor = 'rgba(51, 245, 255, 0.8)';
 
-    // 3. Initialize Chart
-    const ctx = canvas.getContext('2d');
-    new Chart(ctx, {
-        type: 'line',
-        data: {
-            datasets: [{
-                label: 'Probability',
-                data: dataPoints,
-                borderColor: '#33f5ff',
-                backgroundColor: 'rgba(51, 245, 255, 0.1)',
-                borderWidth: 2,
-                pointRadius: 4,
-                tension: 0.1,
-                fill: true
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            aspectRatio: 1.15, 
-            plugins: {
-                legend: { display: false },
-                tooltip: {
-                    callbacks: {
-                        label: (context) => (context.parsed.y * 100).toFixed(1) + '%'
-                    }
+                    ctx.save();
+                    ctx.strokeStyle = strokeColor;
+                    ctx.lineWidth = 1.5;
+                    ctx.font = 'bold 11px monospace';
+                    ctx.textAlign = 'right';
+                    ctx.textBaseline = 'middle';
+
+                    const drawBreak = (yPos, isTop) => {
+                        // Mask the axis line
+                        ctx.fillStyle = bgColor;
+                        ctx.fillRect(left - 2, yPos - (breakHeight / 2), 4, breakHeight);
+                        
+                        // Draw ZigZag (S-curve)
+                        ctx.beginPath();
+                        ctx.moveTo(left - (breakWidth / 2), yPos + (isTop ? breakHeight / 2 : -breakHeight / 2));
+                        ctx.lineTo(left + (breakWidth / 2), yPos + (isTop ? breakHeight / 4 : -breakHeight / 4));
+                        ctx.lineTo(left - (breakWidth / 2), yPos + (isTop ? -breakHeight / 4 : breakHeight / 4));
+                        ctx.lineTo(left + (breakWidth / 2), yPos + (isTop ? -breakHeight / 2 : breakHeight / 2));
+                        ctx.stroke();
+
+                        // Draw extension line toward the outer label
+                        const extY = isTop ? yPos - extensionLength : yPos + extensionLength;
+                        ctx.beginPath();
+                        ctx.moveTo(left, yPos + (isTop ? -breakHeight / 2 : breakHeight / 2));
+                        ctx.lineTo(left, extY);
+                        ctx.stroke();
+
+                        // Draw the static 100% or 0% label
+                        ctx.fillStyle = strokeColor;
+                        ctx.fillText(isTop ? '100.0%' : '0.0%', left - 10, extY);
+                    };
+
+                    drawBreak(top, true);    // Top 100%
+                    drawBreak(bottom, false); // Bottom 0%
+                    ctx.restore();
                 }
-            },
-            scales: {
-                y: {
-                    beginAtZero: false,
-                    min: Math.max(0, minProb - 0.05),    // Add 5% buffer below
-                    max: Math.min(1, maxProb + 0.05),    // Add 5% buffer above
-                    ticks: {
-                        callback: function(value) {
-                            return (value * 100).toFixed(1) + '%';
+            };
+
+            // 4. Initialize Chart
+            const ctx = canvas.getContext('2d');
+            const myChart = new Chart(ctx, {
+                type: 'line',
+                plugins: [axisBreakPlugin], 
+                data: {
+                    datasets: [{
+                        label: 'Probability',
+                        data: dataPoints,
+                        borderColor: '#33f5ff',
+                        backgroundColor: 'rgba(51, 245, 255, 0.1)',
+                        borderWidth: 2,
+                        pointRadius: 4,
+                        tension: 0.1,
+                        fill: true,
+                        clip: false
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    layout: {
+                        padding: { top: 40, bottom: 40, left: 10 }
+                    },
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: (context) => (context.parsed.y * 100).toFixed(1) + '%'
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: false,
+                            // Buffer reduced to 0.02 to push data labels (like 66%) higher
+                            min: Math.max(0, minProb - 0.02),
+                            max: Math.min(1, maxProb + 0.02),
+                            border: { display: true, color: 'rgba(51, 245, 255, 0.3)', width: 2 },
+                            grid: { color: 'rgba(51, 245, 255, 0.1)', drawBorder: true },
+                            ticks: {
+                                color: 'rgba(51, 245, 255, 0.8)',
+                                font: { size: 12, weight: '500' },
+                                padding: 10,
+                                callback: function(value, index, ticks) {
+                                    // Hide top/bottom data labels to avoid clashing with our 0%/100%
+                                    if (index === 0 || index === ticks.length - 1) return null;
+                                    return (value * 100).toFixed(1) + '%';
+                                }
+                            }
+                        },
+                        x: {
+                            type: 'time',
+                            time: { 
+                                unit: 'week', 
+                                displayFormats: { week: 'MMM d' } 
+                            },
+                            // Explicitly re-enable the axis line
+                            border: {
+                                display: true,
+                                color: 'rgba(51, 245, 255, 0.5)', // Match your theme
+                                width: 2
+                            },
+                            grid: {
+                                display: true,
+                                drawOnChartArea: true,
+                                drawTicks: true,
+                                color: 'rgba(51, 245, 255, 0.1)'
+                            },
+                            ticks: {
+                                autoSkip: true,
+                                maxRotation: 0,
+                                color: 'rgba(51, 245, 255, 0.8)',
+                                font: { size: 11, weight: '500' }
+                            }
                         }
                     }
-                },
-                x: {
-                    type: 'time',
-                    time: {
-                        unit: 'day'
-                    }
                 }
-            }
-        }
-    });
+            });
+
+        // 5. Resolution Date Toggle Listener
+        toggle.addEventListener('change', (e) => {
+            myChart.options.scales.x.max = e.target.checked ? expirationDate : undefined;
+            myChart.update();
+        });
 })();
+
 </script>
 
 <script>
