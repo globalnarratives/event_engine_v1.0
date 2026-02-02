@@ -167,6 +167,80 @@ class Actor(db.Model):
             db.or_(Tenure.tenure_end.is_(None), Tenure.tenure_end >= date)
         ).all()
         return [tenure.position for tenure in tenures]
+    
+class ActorRelationship(db.Model):
+    """Relationships between actors - family and professional connections"""
+    __tablename__ = 'actor_relationships'
+    
+    relationship_id = db.Column(db.Integer, primary_key=True)
+    actor_id_primary = db.Column(db.String(20), db.ForeignKey('actors.actor_id', ondelete='CASCADE'), nullable=False, index=True)
+    actor_id_related = db.Column(db.String(20), db.ForeignKey('actors.actor_id', ondelete='CASCADE'), nullable=False, index=True)
+    relationship_type = db.Column(db.String(20), nullable=False, index=True)  # 'family' or 'professional'
+    relationship_label = db.Column(db.String(20), nullable=False)  # specific label from enum
+    start_date = db.Column(db.Date, nullable=True)
+    end_date = db.Column(db.Date, nullable=True)
+    notes = db.Column(db.Text, nullable=True)
+    confidence_level = db.Column(db.Integer, nullable=True)  # 1-5 scale
+    created_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    updated_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow, onupdate=datetime.utcnow)
+    
+    # Relationships
+    primary_actor = db.relationship('Actor', foreign_keys=[actor_id_primary], backref='relationships_as_primary')
+    related_actor = db.relationship('Actor', foreign_keys=[actor_id_related], backref='relationships_as_related')
+    
+    # Constraints
+    __table_args__ = (
+        db.CheckConstraint('actor_id_primary != actor_id_related', name='chk_different_actors'),
+        db.CheckConstraint('end_date IS NULL OR end_date >= start_date', name='chk_relationship_dates'),
+        db.CheckConstraint('confidence_level IS NULL OR (confidence_level >= 1 AND confidence_level <= 5)', name='chk_confidence_range'),
+        db.UniqueConstraint('actor_id_primary', 'actor_id_related', 'relationship_label', name='uq_relationship'),
+    )
+    
+    # Valid relationship labels (gender-neutral for prototype)
+    FAMILY_LABELS = [
+        'grandparent',
+        'grandchild',
+        'parent',
+        'child',
+        'sibling',
+        'spouse'
+    ]
+    
+    PROFESSIONAL_LABELS = [
+        'mentor',
+        'mentee',
+        'known_associate'
+    ]
+    
+    # Label reciprocals for bidirectional display
+    RECIPROCAL_LABELS = {
+        'grandparent': 'grandchild',
+        'grandchild': 'grandparent',
+        'parent': 'child',
+        'child': 'parent',
+        'sibling': 'sibling',
+        'spouse': 'spouse',
+        'mentor': 'mentee',
+        'mentee': 'mentor',
+        'known_associate': 'known_associate'
+    }
+    
+    def __repr__(self):
+        return f'<ActorRelationship {self.actor_id_primary} → {self.actor_id_related}: {self.relationship_label}>'
+    
+    def get_reciprocal_label(self):
+        """Get the reciprocal relationship label for display from related actor's perspective"""
+        return self.RECIPROCAL_LABELS.get(self.relationship_label, self.relationship_label)
+    
+    @classmethod
+    def get_all_relationships_for_actor(cls, actor_id):
+        """Get all relationships for an actor (both directions)"""
+        return cls.query.filter(
+            db.or_(
+                cls.actor_id_primary == actor_id,
+                cls.actor_id_related == actor_id
+            )
+        ).all()
 
 class Tenure(db.Model):
     """Links actors to positions with time bounds"""
