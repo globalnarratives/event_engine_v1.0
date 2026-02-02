@@ -125,6 +125,7 @@ def create():
         description = request.form.get('description')
         start_date_str = request.form.get('start_date')  # NEW
         close_date_str = request.form.get('close_date')
+        named_actor = request.form.get('named_actor')
         
         # Validation
         if not scenario_code or not title or not start_date_str or not close_date_str:
@@ -156,7 +157,8 @@ def create():
             description=description,
             start_date=start_date,  # NEW
             close_date=close_date,
-            created_by_id=current_user.id
+            created_by_id=current_user.id,
+            named_actor=named_actor if named_actor else None
         )
         
         db.session.add(scenario)
@@ -389,6 +391,52 @@ def link_event(marked_id):
                          marked=marked,
                          available_events=available_events)
 
+@bp.route('/api/search-entities')
+@login_required
+def search_entities():
+    """API endpoint for autocomplete: search actors, positions, and institutions"""
+    from flask import jsonify
+    from app.models import Actor, Position, Institution
+    
+    query = request.args.get('q', '').strip()
+    
+    if len(query) < 2:
+        return jsonify([])
+    
+    results = []
+    
+    # Search actors
+    actors = Actor.query.filter(
+        db.or_(
+            Actor.actor_id.ilike(f'%{query}%'),
+            Actor.surname.ilike(f'%{query}%'),
+            Actor.given_name.ilike(f'%{query}%')
+        )
+    ).limit(10).all()
+    
+    for actor in actors:
+        results.append({
+            'code': actor.actor_id,
+            'label': f"{actor.actor_id} - {actor.surname}, {actor.given_name or ''}",
+            'type': 'Actor'
+        })
+    
+    # Search positions
+    positions = Position.query.filter(
+        db.or_(
+            Position.position_code.ilike(f'%{query}%'),
+            Position.position_title.ilike(f'%{query}%')
+        )
+    ).limit(10).all()
+    
+    for pos in positions:
+        results.append({
+            'code': pos.position_code,
+            'label': f"{pos.position_code} - {pos.position_title}",
+            'type': 'Position'
+        })
+    
+    return jsonify(results[:20])  # Limit to 20 total results
 
 @bp.route('/marked/<int:marked_id>/unlink-event/<event_code>', methods=['POST'])
 @login_required

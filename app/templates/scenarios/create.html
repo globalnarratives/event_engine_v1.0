@@ -1,8 +1,30 @@
 {% extends "base.html" %}
 
-{% block title %}Create Scenario{% endblock %}
-
 {% block content %}
+<style>
+    .autocomplete-dropdown {
+        position: absolute;
+        background: #0b161d !important; /* Force dark background */
+        border: 1px solid #33f5ff !important;
+        z-index: 9999 !important;
+        display: none;
+        width: 100%;
+        max-height: 200px;
+        overflow-y: auto;
+    }
+    .autocomplete-item {
+        padding: 10px;
+        border-bottom: 1px solid rgba(51, 245, 255, 0.2);
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+    }
+    .autocomplete-item:hover {
+        background: rgba(51, 245, 255, 0.1);
+    }
+    .autocomplete-item-code { color: #33f5ff; font-family: monospace; }
+</style>
+
 <div class="container" style="max-width: 800px;">
     <h1>Create New Scenario</h1>
 
@@ -37,6 +59,16 @@
                 </div>
 
                 <div class="form-group">
+                    <label class="form-label" for="named_actor">Named Actor/Position (Optional)</label>
+                    <input type="text" id="named_actor" name="named_actor" class="form-input" 
+                           placeholder="Start typing to search..." autocomplete="off">
+                    <div id="autocomplete-results" class="autocomplete-dropdown"></div>
+                    <p style="font-size: 0.75rem; color: var(--color-text-dim); margin-top: 0.25rem;">
+                        Primary actor or position this scenario concerns (searches actors, positions, and institutions)
+                    </p>
+                </div>
+
+                <div class="form-group">
                     <label class="form-label" for="description">Description (Optional)</label>
                     <textarea id="description" name="description" class="form-textarea" rows="4"
                               placeholder="Additional context or clarifications..."></textarea>
@@ -66,4 +98,58 @@
         </div>
     </div>
 </div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+const namedActorInput = document.getElementById('named_actor');
+const resultsDiv = document.getElementById('autocomplete-results');
+let debounceTimer;
+
+namedActorInput.addEventListener('input', function() {
+    clearTimeout(debounceTimer);
+    const query = this.value.trim();
+    
+    if (query.length < 2) {
+        resultsDiv.style.display = 'none';
+        return;
+    }
+    
+    debounceTimer = setTimeout(() => {
+        fetch(`{{ url_for('scenarios.search_entities') }}?q=${encodeURIComponent(query)}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.length === 0) {
+                    resultsDiv.style.display = 'none';
+                    return;
+                }
+                
+                resultsDiv.innerHTML = data.map(item => `
+                    <div class="autocomplete-item" data-code="${item.code}">
+                        <div class="autocomplete-item-code">${item.code}</div>
+                        <div class="autocomplete-item-label">${item.label}</div>
+                        <div class="autocomplete-item-type">${item.type}</div>
+                    </div>
+                `).join('');
+                
+                resultsDiv.style.display = 'block';
+                
+                // Add click handlers
+                resultsDiv.querySelectorAll('.autocomplete-item').forEach(item => {
+                    item.addEventListener('click', function() {
+                        namedActorInput.value = this.dataset.code;
+                        resultsDiv.style.display = 'none';
+                    });
+                });
+            });
+    }, 300);
+});
+
+// Close dropdown when clicking outside
+document.addEventListener('click', function(e) {
+    if (!namedActorInput.contains(e.target) && !resultsDiv.contains(e.target)) {
+        resultsDiv.style.display = 'none';
+    }
+});
+</script>
 {% endblock %}
