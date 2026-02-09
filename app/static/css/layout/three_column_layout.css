@@ -1,0 +1,619 @@
+/* Scenarios Index - 3 Column Layout */
+.scenarios-index-container {
+    display: grid;
+    grid-template-columns: 400px 1fr 350px;
+    gap: var(--space-lg);
+    max-width: 1600px;
+    margin: 0 auto;
+    align-items: start;
+}
+
+.scenarios-header {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-md);
+}
+
+.scenarios-header h1,
+.card-title {
+    font-family: var(--font-ui);
+}
+
+/* Column Layouts */
+.scenarios-left-column,
+.scenarios-middle-column,
+.scenarios-right-column {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+}
+
+/* Left Column: Available Scenarios */
+.scenario-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.scenario-item {
+    background: rgba(51, 245, 255, 0.03);
+    border: 1px solid rgba(51, 245, 255, 0.1);
+    border-radius: 4px;
+    padding: var(--space-md);
+    transition: all 0.2s ease;
+}
+
+.scenario-item:hover {
+    background: rgba(51, 245, 255, 0.08);
+    border-color: rgba(51, 245, 255, 0.3);
+}
+
+.scenario-item-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+}
+
+.scenario-item-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+}
+
+.scenario-code {
+    font-family: var(--font-mono);
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--primary);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.scenario-code:hover {
+    color: var(--primary-light);
+}
+
+.scenario-marked-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    background: rgba(51, 255, 153, 0.2);
+    color: #33ff99;
+    border: 1px solid rgba(51, 255, 153, 0.4);
+    border-radius: 50%;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.scenario-item-title {
+    font-size: 1.0rem;
+    color: var(--text-primary);
+    line-height: 1.4;
+}
+
+.scenario-item-meta {
+    font-size: 0.95rem;
+    color: var(--text-tertiary);
+    font-family: var(--font-mono);
+}
+
+/* Center Column: Marked Scenarios Tables */
+.marked-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 1.0rem;
+}
+
+.marked-table thead {
+    background: rgba(51, 245, 255, 0.05);
+}
+
+.marked-table th {
+    padding: var(--space-sm) var(--space-md);
+    text-align: left;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-secondary);
+    border-bottom: 1px solid rgba(51, 245, 255, 0.2);
+    font-weight: 600;
+}
+
+.marked-table th sub {
+    text-transform: none;
+    font-size: 0.70rem;
+}
+
+.marked-table td {
+    padding: var(--space-sm) var(--space-md);
+    border-bottom: 1px solid rgba(51, 245, 255, 0.1);
+}
+
+.marked-table tbody tr:hover {
+    background: rgba(51, 245, 255, 0.05);
+}
+
+.marked-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.metric-cell {
+    font-family: var(--font-mono);
+    font-weight: 600;
+    color: var(--text-primary);
+    text-align: right;
+}
+
+.metric-current {
+    color: var(--primary);
+}
+
+.analyst-cell {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+}
+
+.code-link {
+    font-family: var(--font-mono);
+    font-weight: 600;
+    color: var(--primary);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.code-link:hover {
+    color: var(--primary-light);
+}
+
+/* Right Column: Events List */
+.events-list-container {
+    max-height: 800px;
+    overflow-y: auto;
+}
+
+.event-region-header {
+    font-size: 1.0rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-secondary);
+    padding: var(--space-sm) 0;
+    margin-top: var(--space-md);
+    border-bottom: 1px solid rgba(51, 245, 255, 0.2);
+}
+
+.event-region-header:first-child {
+    margin-top: 0;
+}
+
+/* Responsive Layout */
+@media (max-width: 1400px) {
+    .scenarios-index-container {
+        grid-template-columns: 350px 1fr 300px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .scenarios-index-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .scenarios-right-column {
+        order: -1;
+    }
+}
+
+/* Card styling adjustments for this page */
+.scenarios-index-container .card {
+    height: 100%;
+}
+
+.scenarios-index-container .card-body {
+    max-height: none;
+}
+
+/* Scrollable card bodies for long lists */
+.scenarios-left-column .card-body {
+    max-height: 600px;
+    overflow-y: auto;
+}
+
+.scenarios-middle-column .card-body {
+    overflow-x: auto;
+}
+
+/* Named Actor dropdown & autocomplete */
+/* Currently not working and supplanted by a manual import in scenarios/create.html - must be resolved */
+
+
+.form-group {
+    position: relative; /* Important - makes autocomplete position relative to this */
+}
+
+.autocomplete-dropdown {
+    position: absolute;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    max-height: 300px;
+    overflow-y: auto;
+    z-index: 1000;
+    width: 100%;
+    margin-top: 2px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.autocomplete-item {
+    padding: 12px;
+    cursor: pointer;
+    border-bottom: 1px solid var(--border-color);
+    transition: background 0.2s;
+}
+
+.autocomplete-item:last-child {
+    border-bottom: none;
+}
+
+.autocomplete-item:hover {
+    background: var(--bg-tertiary);
+}
+
+.autocomplete-item-code {
+    font-family: var(--font-mono);
+    color: var(--accent-primary);
+    font-weight: bold;
+    font-size: 0.9rem;
+    margin-bottom: 4px;
+}
+
+.autocomplete-item-label {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+}
+
+.autocomplete-item-type {
+    color: var(--text-muted);
+    font-size: 0.75rem;
+    font-style: italic;
+    margin-top: 2px;
+}
+
+/* ========================================
+   ACTOR DETAIL PAGE SPECIFIC COMPONENTS
+   ======================================== */
+
+/* Actor Header */
+.actor-header-content {
+    display: flex;
+    gap: var(--space-lg);
+    align-items: flex-start;
+}
+
+.actor-photo-placeholder {
+    flex-shrink: 0;
+}
+
+.actor-photo {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid rgba(51, 245, 255, 0.3);
+}
+
+.photo-circle {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: rgba(51, 245, 255, 0.1);
+    border: 2px solid rgba(51, 245, 255, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: var(--primary);
+    font-family: var(--font-mono);
+}
+
+.actor-basic-info {
+    flex: 1;
+}
+
+.actor-name {
+    font-family: var(--font-ui);
+    font-size: 2.0rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0 0 var(--space-sm) 0;
+}
+
+.actor-meta {
+    display: flex;
+    gap: var(--space-md);
+    margin-bottom: var(--space-sm);
+    font-size: 0.95rem;
+}
+
+.actor-id {
+    font-family: var(--font-mono);
+    color: var(--primary);
+    font-weight: 600;
+}
+
+.actor-age {
+    color: var(--text-secondary);
+}
+
+.current-positions {
+    margin-bottom: var(--space-md);
+}
+
+.current-position {
+    font-size: 1.05rem;
+    color: var(--text-primary);
+    margin-bottom: var(--space-xs);
+}
+
+.position-institution {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+}
+
+.relationships-link a {
+    color: var(--primary);
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: color 0.2s ease;
+}
+
+.relationships-link a:hover {
+    color: var(--primary-light);
+}
+
+/* Tenure History Table - extends marked-table pattern */
+.tenure-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 1.0rem;
+}
+
+.tenure-table thead {
+    background: rgba(51, 245, 255, 0.05);
+}
+
+.tenure-table th {
+    padding: var(--space-sm) var(--space-md);
+    text-align: left;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-secondary);
+    border-bottom: 1px solid rgba(51, 245, 255, 0.2);
+    font-weight: 600;
+}
+
+.tenure-table td {
+    padding: var(--space-sm) var(--space-md);
+    border-bottom: 1px solid rgba(51, 245, 255, 0.1);
+    vertical-align: top;
+}
+
+.tenure-table tbody tr:hover {
+    background: rgba(51, 245, 255, 0.05);
+}
+
+.tenure-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.current-tenure {
+    background: rgba(51, 255, 153, 0.05);
+}
+
+.current-tenure:hover {
+    background: rgba(51, 255, 153, 0.08) !important;
+}
+
+.position-title {
+    color: var(--text-primary);
+    font-weight: 500;
+    margin-bottom: var(--space-xs);
+}
+
+.position-code {
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    color: var(--text-tertiary);
+}
+
+.event-count-placeholder {
+    color: var(--text-tertiary);
+}
+
+/* Placeholder Sections */
+.hierarchy-placeholder,
+.metrics-placeholder {
+    padding: var(--space-xl);
+    background: rgba(51, 245, 255, 0.03);
+    border: 1px dashed rgba(51, 245, 255, 0.2);
+    border-radius: 4px;
+    text-align: center;
+}
+
+.hierarchy-placeholder p,
+.metrics-placeholder p {
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+.placeholder-note {
+    color: var(--text-tertiary);
+    font-size: 0.9rem;
+    margin-top: var(--space-sm);
+}
+
+/* Relationships Section */
+.relationship-category {
+    margin-bottom: var(--space-lg);
+}
+
+.relationship-category:last-child {
+    margin-bottom: 0;
+}
+
+.relationship-category h3 {
+    font-family: var(--font-ui);
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 0 0 var(--space-md) 0;
+    padding-bottom: var(--space-xs);
+    border-bottom: 1px solid rgba(51, 245, 255, 0.2);
+}
+
+.relationship-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.relationship-item {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-sm);
+    padding: var(--space-sm);
+    background: rgba(51, 245, 255, 0.03);
+    border-radius: 4px;
+    transition: background 0.2s ease;
+}
+
+.relationship-item:hover {
+    background: rgba(51, 245, 255, 0.08);
+}
+
+.relationship-label {
+    font-size: 0.9rem;
+    color: var(--text-tertiary);
+    text-transform: capitalize;
+    min-width: 100px;
+}
+
+.relationship-actor {
+    font-family: var(--font-mono);
+    font-weight: 600;
+    color: var(--primary);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.relationship-actor:hover {
+    color: var(--primary-light);
+}
+
+.relationship-notes {
+    font-size: 0.9rem;
+    color: var(--text-tertiary);
+    font-style: italic;
+}
+
+/* Event Category Sections - extends existing event patterns */
+.event-category {
+    margin-bottom: var(--space-lg);
+}
+
+.event-category:last-child {
+    margin-bottom: 0;
+}
+
+.event-category h3 {
+    font-family: var(--font-ui);
+    font-size: 1.0rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 0 0 var(--space-sm) 0;
+    padding-bottom: var(--space-xs);
+    border-bottom: 1px solid rgba(51, 245, 255, 0.2);
+}
+
+.event-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+}
+
+.event-item {
+    padding: var(--space-sm);
+    background: rgba(51, 245, 255, 0.03);
+    border: 1px solid rgba(51, 245, 255, 0.1);
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+.event-item:hover {
+    background: rgba(51, 245, 255, 0.08);
+    border-color: rgba(51, 245, 255, 0.3);
+}
+
+.event-item a {
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--primary);
+    text-decoration: none;
+    transition: color 0.2s ease;
+    display: block;
+    margin-bottom: var(--space-xs);
+}
+
+.event-item a:hover {
+    color: var(--primary-light);
+}
+
+.event-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.9rem;
+}
+
+.action-code {
+    font-family: var(--font-mono);
+    color: var(--text-secondary);
+}
+
+.event-date {
+    color: var(--text-tertiary);
+}
+
+/* Shared container classes for different pages */
+.actor-detail-container,
+.scenarios-index-container {
+    display: grid;
+    grid-template-columns: 300px 1fr 350px;
+    gap: var(--space-lg);
+    max-width: 1600px;
+    margin: 0 auto;
+    align-items: start;
+}
+
+.scenarios-index-container {
+    grid-template-columns: 400px 1fr 350px;
+}
+
+/* Shared column classes */
+.left-sidebar,
+.center-column,
+.right-sidebar,
+.scenarios-left-column,
+.scenarios-middle-column,
+.scenarios-right-column {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+}

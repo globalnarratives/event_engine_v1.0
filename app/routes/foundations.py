@@ -483,6 +483,81 @@ def index():
                          total_pages=total_pages,
                          total_entities=total_entities)
 
+@bp.route('/actor/<actor_id>')
+@login_required
+def actor_detail(actor_id):
+    """Display detailed information for a specific actor"""
+    # Get actor with preloaded relationships
+    actor = Actor.query.filter_by(actor_id=actor_id).options(
+        joinedload(Actor.tenures).joinedload(Tenure.position).joinedload(Position.institution)
+    ).first_or_404()
+    
+    # Get all relationships (both directions)
+    from app.models import ActorRelationship
+    relationships = ActorRelationship.get_all_relationships_for_actor(actor_id)
+    
+    # Process relationships for display
+    family_relationships = []
+    professional_relationships = []
+    
+    for rel in relationships:
+        # Determine if we're viewing from primary or related perspective
+        if rel.actor_id_primary == actor_id:
+            other_actor = rel.related_actor
+            label = rel.relationship_label
+        else:
+            other_actor = rel.primary_actor
+            label = rel.get_reciprocal_label()
+        
+        rel_data = {
+            'actor_id': other_actor.actor_id,
+            'display_name': other_actor.get_display_name(),
+            'label': label,
+            'start_date': rel.start_date,
+            'end_date': rel.end_date,
+            'notes': rel.notes
+        }
+        
+        if rel.relationship_type == 'family':
+            family_relationships.append(rel_data)
+        else:
+            professional_relationships.append(rel_data)
+    
+    # Get recent events where actor appears
+    cutoff = datetime.now() - timedelta(days=30)  # Last 30 days
+    
+    # Events as event_actor
+    events_as_actor = ControlFrame.query.filter(
+        ControlFrame.event_actor == actor_id,
+        ControlFrame.rec_timestamp >= cutoff
+    ).order_by(ControlFrame.rec_timestamp.desc()).limit(20).all()
+    
+    # Events in subjects (JSONB contains)
+    events_as_subject = ControlFrame.query.filter(
+        ControlFrame.identified_subjects.contains([actor_id]),
+        ControlFrame.rec_timestamp >= cutoff
+    ).order_by(ControlFrame.rec_timestamp.desc()).limit(20).all()
+    
+    # Events in objects (JSONB contains)
+    events_as_object = ControlFrame.query.filter(
+        ControlFrame.identified_objects.contains([actor_id]),
+        ControlFrame.rec_timestamp >= cutoff
+    ).order_by(ControlFrame.rec_timestamp.desc()).limit(20).all()
+    
+    # Get scenarios naming this actor
+    named_scenarios = Scenario.query.filter_by(named_actor=actor_id).all()
+    
+    return render_template('foundations/actor_detail.html',
+                         actor=actor,
+                         family_relationships=family_relationships,
+                         professional_relationships=professional_relationships,
+                         events_as_actor=events_as_actor,
+                         events_as_subject=events_as_subject,
+                         events_as_object=events_as_object,
+                         named_scenarios=named_scenarios)
+
+
+
 @bp.route('/toggle_track/<entity_type>/<entity_code>', methods=['POST'])
 @login_required
 def toggle_track(entity_type, entity_code):

@@ -85,9 +85,11 @@ class Institution(db.Model):
     institution_layer = db.Column(db.String(10))  # e.g., "01", "02", etc.
     institution_subtype = db.Column(db.String(50))  # Optional subtype categorization
     country_code = db.Column(db.String(3))
+    parent_institution_code = db.Column(db.String(100), db.ForeignKey('institutions.institution_code'), nullable=True, index=True)
     
     # Relationships
     positions = db.relationship('Position', back_populates='institution', cascade='all, delete-orphan')
+    parent_institution = db.relationship('Institution', remote_side=[institution_code], backref='sub_institutions')
     
     def __repr__(self):
         return f'<Institution {self.institution_code}: {self.institution_name}>'
@@ -103,10 +105,12 @@ class Position(db.Model):
     position_title = db.Column(db.String(300), nullable=False)
     institution_code = db.Column(db.String(100), db.ForeignKey('institutions.institution_code'), nullable=False)
     hierarchy_level = db.Column(db.String(12))
+    reports_to_position_code = db.Column(db.String(100), db.ForeignKey('positions.position_code'), nullable=True, index=True)
     
     # Relationships
     institution = db.relationship('Institution', back_populates='positions')
     tenures = db.relationship('Tenure', back_populates='position', cascade='all, delete-orphan')
+    reports_to = db.relationship('Position', remote_side=[position_code], backref='direct_reports', foreign_keys=[reports_to_position_code])
     
     def __repr__(self):
         return f'<Position {self.position_code}: {self.position_title}>'

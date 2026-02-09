@@ -53,7 +53,13 @@
                                     <!-- Collapsed state - always visible -->
                                     <div class="card-header">
                                         <div class="card-main-info">
-                                            <div class="entity-code-large">{{ entity.code }}</div>
+                                            <div class="entity-code-large">
+                                                    {% if active_tab == 'actors' %}
+                                                        <a href="{{ url_for('foundations.actor_detail', actor_id=entity.code) }}">{{ entity.code }}</a>
+                                                    {% else %}
+                                                        {{ entity.code }}
+                                                    {% endif %}
+                                                </div>
                                                 <div class="entity-name-full">
                                                     {{ entity.display_name }}{% if entity.given_name %}, {{ entity.given_name }}{% endif %}
                                                 </div>

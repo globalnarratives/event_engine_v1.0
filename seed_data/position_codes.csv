@@ -1,6 +1,6 @@
 ﻿country_code,institution_name,institution_code,position_code,position_title,hierarchy_level
 usa,Department of State,usa.min.forn,usa.min.forn.exc.01,Secretary of State,'02-01-01
-usa,Department of the Treasury,usa.min.fisc,usa.min.fisc.exc.01,Secretary of the Treasury,''02-01-01
+usa,Department of the Treasury,usa.min.fisc,usa.min.fisc.exc.01,Secretary of the Treasury,02-01-01
 usa,Department of Defense,usa.min.dfns,usa.min.dfns.exc.01,Secretary of Defense,'02-01-01
 usa,Department of Justice,usa.min.jstc,usa.min.jstc.exc.01,Attorney General,'02-01-01
 usa,Department of the Interior,usa.min.resr,usa.min.resr.exc.01,Secretary of the Interior,'02-01-01
