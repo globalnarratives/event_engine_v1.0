@@ -6,6 +6,7 @@ from app.reference_data import COUNTRY_REGIONS, REGION_NAMES
 from math import ceil
 from sqlalchemy.orm import joinedload
 import statistics
+import json
 
 def get_bulk_metrics(entity_codes, cutoff):
     """
@@ -483,6 +484,85 @@ def index():
                          total_pages=total_pages,
                          total_entities=total_entities)
 
+def _build_hierarchy_data(position, actor_id):
+    """Build org chart hierarchy data: 2 levels up, current position, 2 levels down + peers.
+
+    Returns a nested dict suitable for JSON serialization for the org chart,
+    or None if no current position.
+    """
+    def _position_node(pos, is_current=False):
+        """Create a node dict for a position."""
+        holder = pos.get_current_holder()
+        return {
+            'id': pos.position_code,
+            'title': pos.position_title,
+            'holder': holder.get_display_name() if holder else 'Vacant',
+            'position_code': pos.position_code,
+            'is_current': is_current,
+            'children': []
+        }
+
+    def _get_reports_down(pos, depth, current_position_code):
+        """Recursively get direct reports down to specified depth."""
+        if depth <= 0:
+            return []
+        nodes = []
+        for report in pos.direct_reports:
+            is_current = (report.position_code == current_position_code)
+            node = _position_node(report, is_current)
+            if depth > 1:
+                node['children'] = _get_reports_down(report, depth - 1, current_position_code)
+            nodes.append(node)
+        return nodes
+
+    # Walk up the chain: collect ancestors (up to 2 levels)
+    ancestors = []
+    current = position
+    for _ in range(2):
+        parent = current.reports_to
+        if parent is None:
+            break
+        ancestors.append(parent)
+        current = parent
+
+    # Build tree from the topmost ancestor down
+    # Start from the highest ancestor we found
+    if ancestors:
+        top = ancestors[-1]  # highest ancestor
+        root = _position_node(top)
+
+        # Build the chain downward through ancestors
+        parent_node = root
+        # Walk ancestors from top to bottom (reverse order, skipping the top which is root)
+        # ancestors = [immediate_parent, ..., grandparent]
+        # We iterate from second-highest down to immediate parent
+        for i in range(len(ancestors) - 2, -1, -1):
+            anc = ancestors[i]
+            anc_node = _position_node(anc)
+            parent_node['children'].append(anc_node)
+            parent_node = anc_node
+
+        # Add peers of current position (other direct reports of immediate parent)
+        immediate_parent = ancestors[0]
+        for sibling in immediate_parent.direct_reports:
+            if sibling.position_code == position.position_code:
+                continue  # skip self, added next with children
+            peer_node = _position_node(sibling)
+            parent_node['children'].append(peer_node)
+
+        # Add current position with its direct reports (2 levels down)
+        current_node = _position_node(position, is_current=True)
+        current_node['children'] = _get_reports_down(position, 2, position.position_code)
+        parent_node['children'].append(current_node)
+
+    else:
+        # Current position is at the top (no ancestors found)
+        root = _position_node(position, is_current=True)
+        root['children'] = _get_reports_down(position, 2, position.position_code)
+
+    return root
+
+
 @bp.route('/actor/<actor_id>')
 @login_required
 def actor_detail(actor_id):
@@ -546,7 +626,15 @@ def actor_detail(actor_id):
     
     # Get scenarios naming this actor
     named_scenarios = Scenario.query.filter_by(named_actor=actor_id).all()
-    
+
+    # Build org chart hierarchy data for the actor's first current tenure
+    hierarchy_data = None
+    current_tenures = [t for t in actor.tenures if t.tenure_end is None]
+    if current_tenures:
+        current_position = current_tenures[0].position
+        hierarchy_data = _build_hierarchy_data(current_position, actor_id)
+    hierarchy_json = json.dumps(hierarchy_data) if hierarchy_data else 'null'
+
     return render_template('foundations/actor_detail.html',
                          actor=actor,
                          family_relationships=family_relationships,
@@ -554,7 +642,8 @@ def actor_detail(actor_id):
                          events_as_actor=events_as_actor,
                          events_as_subject=events_as_subject,
                          events_as_object=events_as_object,
-                         named_scenarios=named_scenarios)
+                         named_scenarios=named_scenarios,
+                         hierarchy_json=hierarchy_json)
 
 
 

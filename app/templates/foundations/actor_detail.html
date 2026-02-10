@@ -116,16 +116,21 @@
             </div>
         </div>
 
-        <!-- Current Hierarchy Section (Placeholder) -->
+        <!-- Current Hierarchy Section -->
         <div class="card current-hierarchy" id="family-associates">
             <div class="card-header">
                 <h2>Current Hierarchy</h2>
             </div>
             <div class="card-body">
-                <div class="hierarchy-placeholder">
-                    <p>Organizational hierarchy chart will be rendered here</p>
-                    <p class="placeholder-note">(Institution → Leadership Layer → Current Position → Peer Positions)</p>
+                {% if hierarchy_json and hierarchy_json != 'null' %}
+                <div class="orgchart-wrapper">
+                    <div id="orgchart-container"></div>
                 </div>
+                {% else %}
+                <div class="hierarchy-placeholder">
+                    <p>No current position found for hierarchy display</p>
+                </div>
+                {% endif %}
             </div>
         </div>
 
@@ -267,4 +272,60 @@
         </div>
     </div>
 </div>
+{% endblock %}
+
+{% block extra_js %}
+{% if hierarchy_json and hierarchy_json != 'null' %}
+<script>
+(function() {
+    var data = {{ hierarchy_json|safe }};
+    if (!data) return;
+
+    var container = document.getElementById('orgchart-container');
+    if (!container) return;
+
+    function buildNode(node) {
+        var li = document.createElement('li');
+
+        var nodeDiv = document.createElement('div');
+        nodeDiv.className = 'orgchart-node' + (node.is_current ? ' orgchart-node--current' : '');
+
+        var link = document.createElement('a');
+        link.href = '/positions/' + encodeURIComponent(node.position_code);
+        link.className = 'orgchart-node-link';
+
+        var titleEl = document.createElement('div');
+        titleEl.className = 'orgchart-node-title';
+        titleEl.textContent = node.title;
+
+        var holderEl = document.createElement('div');
+        holderEl.className = 'orgchart-node-holder';
+        holderEl.textContent = node.holder;
+
+        link.appendChild(titleEl);
+        link.appendChild(holderEl);
+        nodeDiv.appendChild(link);
+        li.appendChild(nodeDiv);
+
+        if (node.children && node.children.length > 0) {
+            var childUl = document.createElement('ul');
+            for (var i = 0; i < node.children.length; i++) {
+                childUl.appendChild(buildNode(node.children[i]));
+            }
+            li.appendChild(childUl);
+        }
+
+        return li;
+    }
+
+    var tree = document.createElement('div');
+    tree.className = 'orgchart-tree';
+
+    var rootUl = document.createElement('ul');
+    rootUl.appendChild(buildNode(data));
+    tree.appendChild(rootUl);
+    container.appendChild(tree);
+})();
+</script>
+{% endif %}
 {% endblock %}
