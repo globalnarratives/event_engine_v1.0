@@ -1,268 +1,272 @@
-﻿country_code,institution_name,institution_code,position_code,position_title,hierarchy_level,reports_to_position_code
-usa,Department of State,usa.min.forn,usa.min.forn.exc.01,Secretary of State,'02-01-01,usa.hos
-usa,Department of the Treasury,usa.min.fisc,usa.min.fisc.exc.01,Secretary of the Treasury,02-01-01,usa.hos
-usa,Department of Defense,usa.min.dfns,usa.min.dfns.exc.01,Secretary of Defense,'02-01-01,usa.hos
-usa,Department of Justice,usa.min.jstc,usa.min.jstc.exc.01,Attorney General,'02-01-01,usa.hos
-usa,Department of the Interior,usa.min.resr,usa.min.resr.exc.01,Secretary of the Interior,'02-01-01,usa.hos
-usa,Department of Agriculture,usa.min.agrc,usa.min.agrc.exc.01,Secretary of Agriculture,'02-01-01,usa.hos
-usa,Department of Commerce,usa.min.comc,usa.min.comc.exc.01,Secretary of Commerce,'02-01-01,usa.hos
-usa,Department of Labor,usa.min.labr,usa.min.labr.exc.01,Secretary of Labor,'02-01-01,usa.hos
-usa,Department of Health and Human Services,usa.min.hlth,usa.min.hlth.exc.01,Secretary of Health and Human Services,'02-01-01,usa.hos
-usa,Department of Housing and Urban Development,usa.min.hous,usa.min.hous.exc.01,Secretary of Housing and Urban Development,'02-01-01,usa.hos
-usa,Department of Transportation,usa.min.infr,usa.min.infr.exc.01,Secretary of Transportation,'02-01-01,usa.hos
-usa,Department of Energy,usa.min.scnc,usa.min.scnc.exc.01,Secretary of Energy,'02-01-01,usa.hos
-usa,Department of Education,usa.min.educ,usa.min.educ.exc.01,Secretary of Education,'02-01-01,usa.hos
-usa,Department of Veterans Affairs,usa.min.dfns.vet,usa.min.dfns.vet.exc.01,Secretary of Veterans Affairs,'02-01-01,usa.hos
-usa,Department of Homeland Security,usa.min.gndm,usa.min.gndm.exc.01,Secretary of Homeland Security,'02-01-01,usa.hos
-usa,Environmental Protection Agency (Cabinet-Rank),usa.min.resr.env,usa.min.resr.env.exc.01,Administrator of the Environmental Protection Agency,'02-01-01,usa.hos
-usa,Office of Management and Budget (Cabinet-Rank),usa.hos.fisc,usa.hos.fisc.exc.01,Director of the Office of Management and Budget,'00-02-01,usa.hos
-usa,U.S. Trade Representative (Cabinet-Rank),usa.hos.trde,usa.hos.trde.exc.01,United States Trade Representative,'00-02-01,usa.hos
-usa,Director of National Intelligence (Cabinet-Rank),usa.hos.intl,usa.hos.intl.exc.01,Director of National Intelligence,'00-02-01,usa.hos
-usa,Central Intelligence Agency (Cabinet-Rank),usa.min.intl,usa.min.intl.exc.01,Director of the Central Intelligence Agency,'02-01-01,usa.hos
-usa,UN Ambassador (Cabinet-Rank),usa.amb.igo.001,usa.amb.igo.001.exc.01,United States Ambassador to the United Nations,'00-01-01,usa.hos
-usa,Presidency,usa.hos,usa.hos,President of the United States,'00-01-01,usa.hos
-fra,Office of the Prime Minister,fra.hog,fra.hog,Prime Minister of the Republic,'01-01-01,fra.hos
-fra,Office of the President,fra.hos,fra.hos,President of the Republic,'00-00-01,
-fra,Ministry of Europe and Foreign Affairs,fra.min.forn,fra.min.forn.exc.01,Minister for Europe and Foreign Affairs,'02-01-01,fra.hog
-fra,Ministry of the Interior,fra.min.gndm,fra.min.gndm.exc.01,Minister of the Interior,'02-01-01,fra.hog
-fra,Ministry of the Armed Forces,fra.min.dfns,fra.min.dfns.exc.01,Minister of the Armed Forces,'02-01-01,fra.hog
-fra,Ministry of Economy and Finance,fra.min.fisc,fra.min.fisc.exc.01,Minister of the Economy and Finance,'02-01-01,fra.hog
-fra,Ministry of Justice,fra.min.jstc,fra.min.jstc.exc.01,Minister of Justice,'02-01-01,fra.hog
-fra,Ministry of National Education,fra.min.educ,fra.min.educ.exc.01,Minister of National Education,'02-01-01,fra.hog
-fra,Ministry of Culture,fra.min.cltr,fra.min.cltr.exc.01,Minister of Culture,'02-01-01,fra.hog
-fra,Ministry of Health,fra.min.hlth,fra.min.hlth.exc.01,Minister of Health,'02-01-01,fra.hog
-fra,Ministry of Labor,fra.min.labr,fra.min.labr.exc.01,Minister of Labour,'02-01-01,fra.hog
-fra,Ministry of Ecological Transition and Energy,fra.min.resr,fra.min.resr.exc.01,Minister for the Ecological Transition and Territorial Cohesion,'02-01-01,fra.hog
-fra,Ministry of Agriculture,fra.min.agrc,fra.min.agrc.exc.01,Minister of Agriculture and Food Sovereignty,'02-01-01,fra.hog
-fra,Ministry of Housing,fra.min.hous,fra.min.hous.exc.01,Minister of Housing,'02-01-01,fra.hog
-fra,Ministry of Transport,fra.min.infr,fra.min.infr.exc.01,Minister of Transport,'02-01-01,fra.hog
-fra,Ministry of Higher Education and Research,fra.min.educ.trt,fra.min.educ.trt.exc.01,Minister of Higher Education and Research,'02-01-01,fra.hog
-fra,Ministry of Overseas Territories,fra.min.spec.ext,fra.min.spec.ext.exc.01,Minister of Overseas Territories,'02-01-01,fra.hog
-fra,Ministry of Solidarity and Family,fra.min.hlth.soc,fra.min.hlth.soc.exc.01,Minister of Solidarity and Families,'02-01-01,fra.hog
-fra,Ministry of Sports,fra.min.cltr.ath,fra.min.cltr.ath.exc.01,Minister of Sports and the Olympic and Paralympic Games,'02-02-01,fra.hog
-gbr,Office of the Prime Minister,gbr.hog,gbr.hog,Prime Minister of the United Kingdom of Great Britain and Northern Ireland,'01-01-01,gbr.hos
-gbr,"Foreign, Commonwealth and Development Office",gbr.min.forn,gbr.min.forn.exc.01,"Secretary of State for Foreign, Commonwealth and Development Affairs",'02-01-01,gbr.hog
-gbr,Home Office,gbr.min.gndm,gbr.min.gndm.exc.01,Secretary of State for the Home Department,'02-01-01,gbr.hog
-gbr,HM Treasury,gbr.min.fisc,gbr.min.fisc.exc.01,Chancellor of the Exchequer,'02-01-01,gbr.hog
-gbr,Ministry of Defence,gbr.min.dfns,gbr.min.dfns.exc.01,Secretary of State for Defence,'02-01-01,gbr.hog
-gbr,Ministry of Justice,gbr.min.jstc,gbr.min.jstc.exc.01,Secretary of State for Justice,'02-01-01,gbr.hog
-gbr,Department of Health and Social Care,gbr.min.hlth,gbr.min.hlth.exc.01,Secretary of State for Health and Social Care,'02-01-01,gbr.hog
-gbr,Department for Education,gbr.min.educ,gbr.min.educ.exc.01,Secretary of State for Education,'02-01-01,gbr.hog
-gbr,Department for Business and Trade,gbr.min.comc,gbr.min.comc.exc.01,Secretary of State for Business and Trade,'02-01-01,gbr.hog
-gbr,Department for Energy Security and Net Zero,gbr.min.resr,gbr.min.resr.exc.01,Secretary of State for Energy Security and Net Zero,'02-01-01,gbr.hog
-gbr,"Department for Science, Innovation and Technology",gbr.min.scnc,gbr.min.scnc.exc.01,"Secretary of State for Science, Innovation and Technology",'02-01-01,gbr.hog
-gbr,"Department for Environment, Food and Rural Affairs",gbr.min.agrc,gbr.min.agrc.exc.01,"Secretary of State for Environment, Food and Rural Affairs",'01-01-01,gbr.hog
-gbr,Department for Transport,gbr.min.infr,gbr.min.infr.exc.01,Secretary of State for Transport,'02-01-01,gbr.hog
-gbr,Department for Work and Pensions,gbr.min.labr,gbr.min.labr.exc.01,Secretary of State for Work and Pensions,'02-01-01,gbr.hog
-gbr,"Department for Housing, Communities and Local Government",gbr.min.hous,gbr.min.hous.exc.01,"Secretary of State for Housing, Communities and Local Government",'02-01-01,gbr.hog
-gbr,"Department for Culture, Media and Sport",gbr.min.cltr,gbr.min.cltr.exc.01,"Secretary of State for Culture, Media and Sport",'02-01-01,gbr.hog
-gbr,Northern Ireland Office,gbr.min.spec.int.01,gbr.min.spec.int.01.exc.01,Secretary of State for Northern Ireland,'02-01-01,gbr.hog
-gbr,Scotland Office,gbr.min.spec.int.02,gbr.min.spec.int.02.exc.01,Secretary of State for Scotland,'02-01-01,gbr.hog
-gbr,Wales Office,gbr.min.spec.int.03,gbr.min.spec.int.03.exc.01,Secretary of State for Wales,'02-01-01,gbr.hog
-gbr,Cabinet Office,gbr.hog.ops,gbr.hog.ops.exc.01,Chancellor of the Duchy of Lancaster,'01-02-01,gbr.hog
-gbr,Attorney General's Office,gbr.min.jst.exc.01,gbr.min.jst.exc.01.exc.01,Attorney General,'02-01-01,gbr.hog
-gbr,Lord President of the Council / Leader of the House of Commons,gbr.hog.lh.exc.01,gbr.hog.lh.exc.01.exc.01,Lord President of the Council,'01-02-01,gbr.hog
-gbr,Lord Privy Seal / Leader of the House of Lords,gbr.hog.uh.exc.01,gbr.hog.uh.exc.01.exc.01,Lord Privy Seal,'01-02-01,gbr.hog
-can,Office of the Prime Minister,can.hog,can.hog,Prime Minister of Canada,'01-01-01,can.hos
-can,Minister of Foreign Affairs,can.min.forn,can.min.forn.exc.01,Minister of Foreign Affairs,'02-01-01,can.hog
-can,Minister of Finance and National Revenue,can.min.fisc,can.min.fisc.exc.01,Minister of Finance,'02-01-01,can.hog
-can,Minister of National Defence,can.min.dfns,can.min.dfns.exc.01,Minister of National Defence,'02-01-01,can.hog
-can,Minister of Justice and Attorney General of Canada,can.min.jstc,can.min.jstc.exc.01,Minister of Justice and Attorney General of Canada,'02-01-01,can.hog
-can,Minister of Public Safety,can.min.gndm,can.min.gndm.exc.01,Minister of Public Safety,'02-01-01,can.hog
-can,Minister of Health,can.min.hlth,can.min.hlth.exc.01,Minister of Health,'02-01-01,can.hog
-can,Minister of Indigenous Services,can.min.spec.int.01,can.min.spec.int.01.exc.01,Minister of Indigenous Services,'02-01-01,can.hog
-can,Minister of Crown-Indigenous Relations,can.min.spec.int.02,can.min.spec.int.02.exc.01,Minister of Crown-Indigenous Relations,'02-01-01,can.hog
-can,Minister of Industry,can.min.comc,can.min.comc.exc.01,"Minister of Innovation, Science and Industry",'02-01-01,can.hog
-can,Minister of Agriculture and Agri-Food,can.min.agrc,can.min.agrc.exc.01,Minister of Agriculture and Agri-Food,'02-01-01,can.hog
-can,Minister of Transport and Internal Trade,can.min.infr,can.min.infr.exc.01,Minister of Transport,'02-01-01,can.hog
-can,Minister of Energy and Natural Resources,can.min.resr.eng,can.min.resr.eng.exc.01,Minister of Natural Resources,'02-01-01,can.hog
-can,Minister of Environment and Climate Change,can.min.resr.env,can.min.resr.env.exc.01,Minister of Environment and Climate Change,'02-01-01,can.hog
-can,Minister of Jobs and Families,can.min.labr,can.min.labr.exc.01,"Minister of Employment, Workforce Development and Official Languages",'02-01-01,can.hog
-can,"Minister of Immigration, Refugees and Citizenship",can.min.jstc.img,can.min.jstc.img.exc.01,"Minister of Immigration, Refugees and Citizenship",'02-01-01,can.hog
-can,Minister of Housing and Infrastructure,can.min.hous,can.min.hous.exc.01,"Minister of Housing, Infrastructure and Communities",'02-01-01,can.hog
-can,Minister of Veterans Affairs,can.min.dfns.vet,can.min.dfns.vet.exc.01,Minister of Veterans Affairs,'02-01-01,can.hog
-can,Minister of Fisheries,can.min.agrc.pec,can.min.agrc.pec.exc.01,"Minister of Fisheries, Oceans and the Canadian Coast Guard",'02-01-01,can.hog
-can,Minister of International Trade,can.min.trde,can.min.trde.exc.01,"Minister of Export Promotion, International Trade and Economic Development",'02-01-01,can.hog
-can,Minister of Canadian Identity and Culture,can.min.cltr,can.min.cltr.exc.01,Minister of Canadian Heritage,'02-01-01,can.hog
-can,Minister of Women and Gender Equality,can.min.labr.soc,can.min.labr.soc.exc.01,Minister for Women and Gender Equality and Youth,'02-01-01,can.hog
-can,Minister of Northern and Arctic Affairs,can.min.resr.int,can.min.resr.int.exc.01,Minister of Northern Affairs,'02-01-01,can.hog
-can,Minister of Artificial Intelligence and Digital Innovation,can.min.comc.dig,can.min.comc.dig.exc.01,"Minister of Innovation, Science and Industry",'02-01-01,can.hog
-can,Minister of Emergency Management and Community Resilience,can.min.gndm.ops,can.min.gndm.ops.exc.01,Minister of Emergency Preparedness,'02-01-01,can.hog
-can,"Minister of Government Transformation, Public Works and Procurement",can.min.spec.ops,can.min.spec.ops.exc.01,Minister of Public Services and Procurement,'02-01-01,can.hog
-aus,Office of the Prime Minister,aus.hog,aus.hog,Prime Minister of Australia,'01-01-01,can.hos
-aus,Minister for Foreign Affairs (Cabinet),aus.min.forn,aus.min.forn.exc.01,Minister for Foreign Affairs,'02-01-01,can.hog
-aus,Treasurer (Cabinet),aus.min.fisc,aus.min.fisc.exc.01,Federal Treasurer,'02-01-01,can.hog
-aus,Minister for Defence and Deputy Prime Minister (Cabinet),aus.min.dfns,aus.min.dfns.exc.01,Deputy Prime Minister and Minister for Defence,'02-01-01,can.hog
-aus,Attorney-General (Cabinet),aus.min.jstc,aus.min.jstc.exc.01,Attorney-General,'02-01-01,can.hog
-aus,Minister for Finance (Cabinet),aus.min.fisc.ops,aus.min.fisc.ops.exc.01,Minister for Finance,'02-01-01,can.hog
-aus,Minister for Health and Ageing (Cabinet),aus.min.hlth,aus.min.hlth.exc.01,Minister for Health and Aged Care,'02-01-01,can.hog
-aus,Minister for Disability and NDIS (Cabinet),aus.min.hlth.soc,aus.min.hlth.soc.exc.01,Minister for the National Disability Insurance Scheme,'02-01-01,can.hog
-aus,Minister for Home Affairs (Cabinet),aus.min.gndm,aus.min.gndm.exc.01,Minister for Home Affairs,'02-01-01,can.hog
-aus,Minister for Immigration and Citizenship (Cabinet),aus.min.jstc.img,aus.min.jstc.img.exc.01,"Minister for Immigration, Citizenship and Multicultural Affairs",'02-01-01,can.hog
-aus,Minister for Cyber Security (Cabinet),aus.min.gndm.dig,aus.min.gndm.dig.exc.01,Minister for Cyber Security,'02-01-01,can.hog
-aus,Minister for the Arts (Cabinet),aus.min.cltr.kns,aus.min.cltr.kns.exc.01,Minister for the Arts,'02-01-01,can.hog
-aus,Minister for Climate Change and Energy (Cabinet),aus.min.resr.eng,aus.min.resr.eng.exc.01,Minister for Climate Change and Energy,'02-01-01,can.hog
-aus,Minister for Education (Cabinet),aus.min.educ,aus.min.educ.exc.01,Minister for Education,'02-01-01,can.hog
-aus,"Minister for Infrastructure, Transport, Regional Development and Local Government (Cabinet)",aus.min.infr,aus.min.infr.exc.01,"Minister for Infrastructure, Transport, Regional Development and Local Government",'02-01-01,can.hog
-aus,Minister for Communications,aus.min.infr.cms,aus.min.infr.cms.exc.01,Minister for Communications,'02-01-01,can.hog
-aus,Minister for Environment and Water (Cabinet),aus.min.resr.env,aus.min.resr.env.exc.01,Minister for the Environment and Water,'02-01-01,can.hog
-aus,Minister for Social Services (Cabinet),aus.min.labr.psn,aus.min.labr.psn.exc.01,Minister for Social Services,'02-01-01,can.hog
-aus,Minister for Employment and Workplace Relations (Cabinet),aus.min.labr,aus.min.labr.exc.01,Minister for Employment and Workplace Relations,'02-01-01,can.hog
-aus,Minister for Indigenous Australians (Cabinet),aus.min.spec.int,aus.min.spec.int.exc.01,Minister for Indigenous Australians,'02-01-01,can.hog
-aus,"Minister for Housing, Homelessness and Cities (Cabinet)",aus.min.hous,aus.min.hous.exc.01,Minister for Housing,'02-01-01,can.hog
-aus,"Minister for Agriculture, Fisheries and Forestry (Cabinet)",aus.min.agrc,aus.min.agrc.exc.01,"Minister for Agriculture, Fisheries and Forestry",'02-01-01,can.hog
-aus,Minister for Industry and Innovation (Cabinet),aus.min.comc,aus.min.comc.exc.01,Minister for Industry and Science,'02-01-01,can.hog
-aus,Minister for Science (Cabinet),aus.min.scnc,aus.min.scnc.exc.01,Minister for Industry and Science,'02-02-01,can.hog
-aus,Minister for Trade and Tourism (Cabinet),aus.min.trde,aus.min.trde.exc.01,Minister for Trade and Tourism,'02-01-01,can.hog
-jpn,Office of the Prime Minister,jpn.hog,jpn.hog,Prime Minister of Japan,'01-01-01,jpn.hos
-jpn,Minister for Foreign Affairs,jpn.min.forn,jpn.min.forn.exc.01,Minister for Foreign Affairs,'02-01-01,jpn.hog
-jpn,Minister of Finance,jpn.min.fisc,jpn.min.fisc.exc.01,Minister of Finance,'02-01-01,jpn.hog
-jpn,Minister of Defense,jpn.min.dfns,jpn.min.dfns.exc.01,Minister of Defense,'02-01-01,jpn.hog
-jpn,Minister of Justice,jpn.min.jstc,jpn.min.jstc.exc.01,Minister of Justice,'02-01-01,jpn.hog
-jpn,Minister of Internal Affairs and Communications,jpn.min.spec.int.ops,jpn.min.spec.int.ops.exc.01,Minister of Internal Affairs and Communications,'02-01-01,jpn.hog
-jpn,"Minister of Economy, Trade and Industry",jpn.min.comc,jpn.min.comc.exc.01,"Minister of Economy, Trade and Industry",'02-01-01,jpn.hog
-jpn,"Minister of Health, Labour and Welfare",jpn.min.hlth,jpn.min.hlth.exc.01,"Minister of Health, Labour and Welfare",'02-01-01,jpn.hog
-jpn,Minister of Education,jpn.min.educ,jpn.min.educ.exc.01,"Minister of Education, Culture, Sports, Science and Technology",'02-01-01,jpn.hog
-jpn,"Minister of Agriculture, Forestry and Fisheries",jpn.min.agrc,jpn.min.agrc.exc.01,"Minister of Agriculture, Forestry and Fisheries",'02-01-01,jpn.hog
-jpn,"Minister of Land, Infrastructure, Transport and Tourism",jpn.min.infr,jpn.min.infr.exc.01,"Minister of Land, Infrastructure, Transport and Tourism",'02-01-01,jpn.hog
-jpn,Minister of the Environment,jpn.min.resr.env,jpn.min.resr.env.exc.01,Minister of the Environment,'02-01-01,jpn.hog
-jpn,Minister for Reconstruction,jpn.min.spec.int.exi.01,jpn.min.spec.int.exi.01.exc.01,Minister for Reconstruction,'02-01-01,jpn.hog
-jpn,Chief Cabinet Secretary,jpn.min.hog.ops,jpn.min.hog.ops.exc.01,Chief Cabinet Secretary,'02-01-01,jpn.hog
-jpn,Minister for Digital Transformation,jpn.min.comc.dig,jpn.min.comc.dig.exc.01,Minister for Digital Transformation,'02-01-01,jpn.hog
-jpn,Minister of State for Economic and Fiscal Policy,jpn.min.hog.fisc.chm,jpn.min.hog.fisc.chm.exc.01,Minister of State for Economic and Fiscal Policy,'02-01-01,jpn.hog
-jpn,Minister of State for Policies Related to Children,jpn.hog.hlth.enf.chm,jpn.hog.hlth.enf.chm.exc.01,Minister of State for Children's Policies and Measures for Declining Birthrate,'01-02-01,jpn.hog
-jpn,Minister of State for Economic Security,jpn.hog.dfns.eco.chm,jpn.hog.dfns.eco.chm.exc.01,Minister of State for Economic Security,'01-02-01,jpn.hog
-jpn,Minister of State for Disaster Management,jpn.hog.gndm.env.chm,jpn.hog.gndm.env.chm.exc.01,Minister of State for Disaster Management,'01-02-01,jpn.hog
-jpn,"Minister of State for Cool Japan Strategy, Intellectual Property, Science and Technology, Space Policy, AI Strategy",jpn.hog.cltr.eco.chm,jpn.hog.cltr.eco.chm.exc.01,"Minister of State for Cool Japan Strategy, Intellectual Property, Science and Technology, Space Policy, and AI Strategy",'01-02-01,jpn.hog
-jpn,"Minister of State for Okinawa and Northern Territories Affairs, Consumer Affairs, Regional Revitalization, Ainu Policies, World Expo 2025",jpn.hog.int.chm,jpn.hog.int.chm.exc.01,"Minister of State for Okinawa and Northern Territories Affairs, Consumer Affairs, Regional Revitalization, Ainu Policies, and World Expo 2025",'01-02-01,jpn.hog
-deu,Federal Chancellery,deu.hog,deu.hog,Federal Chancellor of the Federal Republic of Germany,'01-01-01,deu.hos
-deu,Federal Foreign Office,deu.min.forn,deu.min.forn.exc.01,Federal Minister for Foreign Affairs,'02-01-01,deu.hog
-deu,Federal Ministry of the Interior and Sport,deu.min.gndm,deu.min.gndm.exc.01,Federal Minister of the Interior and for Community,'02-01-01,deu.hog
-deu,Federal Ministry of Justice,deu.min.jstc,deu.min.jstc.exc.01,Federal Minister of Justice,'02-01-01,deu.hog
-deu,Federal Ministry of Finance,deu.min.fisc,deu.min.fisc.exc.01,Federal Minister of Finance,'02-01-01,deu.hog
-deu,Federal Ministry for Economy and Climate Protection,deu.min.comc,deu.min.comc.exc.01,Federal Minister for Economic Affairs and Climate Action,'02-01-01,deu.hog
-deu,Federal Ministry of Labor and Social Affairs,deu.min.labr,deu.min.labr.exc.01,Federal Minister of Labour and Social Affairs,'02-01-01,deu.hog
-deu,Federal Ministry of Defense,deu.min.dfns,deu.min.dfns.exc.01,Federal Minister of Defence,'02-01-01,deu.hog
-deu,Federal Ministry of Food and Agriculture,deu.min.agrc,deu.min.agrc.exc.01,Federal Minister of Food and Agriculture,'02-01-01,deu.hog
-deu,Federal Ministry of Health,deu.min.hlth,deu.min.hlth.exc.01,Federal Minister of Health,'02-01-01,deu.hog
-deu,Federal Ministry of Transport,deu.min.infr,deu.min.infr.exc.01,Federal Minister for Digital and Transport,'02-01-01,deu.hog
-deu,"Federal Ministry of Environment, Climate Action, Nature Conservation and Nuclear Safety",deu.min.resr,deu.min.resr.exc.01,"Federal Minister for the Environment, Nature Conservation, Nuclear Safety and Consumer Protection",'02-01-01,deu.hog
-deu,"Federal Ministry of Education, Family Affairs, Senior Citizens, Women and Youth",deu.min.labr.soc,deu.min.labr.soc.exc.01,"Federal Minister for Family Affairs, Senior Citizens, Women and Youth",'02-01-01,deu.hog
-deu,"Federal Ministry of Housing, Urban Development and Building",deu.min.hous,deu.min.hous.exc.01,"Federal Minister for Housing, Urban Development and Building",'02-01-01,deu.hog
-deu,Federal Ministry of Economic Cooperation and Development,deu.min.forn.dev,deu.min.forn.dev.exc.01,Federal Minister for Economic Cooperation and Development,'02-01-01,deu.hog
-deu,"Federal Ministry of Research, Technology and Space",deu.min.scnc,deu.min.scnc.exc.01,Federal Minister of Education and Research,'02-01-01,deu.hog
-deu,Federal Ministry of Digital and State Modernisation,deu.min.spec.int.dig,deu.min.spec.int.dig.exc.01,Federal Minister for Digital and Transport,'02-01-01,deu.hog
-deu,Head of Federal Chancellery (Cabinet-Rank),deu.min.hog.ops,deu.min.hog.ops.exc.01,Head of the Federal Chancellery,'02-01-01,deu.hog
-rus,Office of the President of the Russian Federation,rus.hos,rus.hos,President of the Russian Federation,'00-01-01,
-rus,Office of the Prime Minister,rus.hog,rus.hog,Prime Minister of the Russian Federation,'01-01-01,rus.hos
-rus,Ministry of Foreign Affairs,rus.min.forn,rus.min.forn.exc.01,Minister of Foreign Affairs,'02-01-01,rus.hos
-rus,Ministry of Defense,rus.min.dfns,rus.min.dfns.exc.01,Minister of Defense,'02-01-01,rus.hos
-rus,Ministry of Internal Affairs,rus.min.gndm,rus.min.gndm.exc.01,Minister of Internal Affairs,'02-01-01,rus.hos
-rus,Ministry of Justice,rus.min.jstc,rus.min.jstc.exc.01,Minister of Justice,'02-01-01,rus.hos
-rus,"Ministry of Civil Defense, Emergencies and Disaster Relief",rus.min.gndm.env,rus.min.gndm.env.exc.01,Minister of Emergency Situations,'02-01-01,rus.hos
-rus,Ministry of Finance,rus.min.fisc,rus.min.fisc.exc.01,Minister of Finance,'02-01-01,rus.hos
-rus,Ministry of Economic Development,rus.min.comc,rus.min.comc.exc.01,Minister of Economic Development,'02-01-01,rus.hos
-rus,Ministry of Industry and Trade,rus.min.trde,rus.min.trde.exc.01,Minister of Industry and Trade,'02-01-01,rus.hos
-rus,Ministry of Energy,rus.min.resr.eng,rus.min.resr.eng.exc.01,Minister of Energy,'02-01-01,rus.hos
-rus,Ministry of Science and Higher Education,rus.min.scnc,rus.min.scnc.exc.01,Minister of Science and Higher Education,'02-01-01,rus.hos
-rus,Ministry of Education,rus.min.educ,rus.min.educ.exc.01,Minister of Enlightenment,'02-01-01,rus.hos
-rus,Ministry of Healthcare,rus.min.hlth,rus.min.hlth.exc.01,Minister of Health,'02-01-01,rus.hos
-rus,Ministry of Labour and Social Protection,rus.min.labr,rus.min.labr.exc.01,Minister of Labour and Social Protection,'02-01-01,rus.hos
-rus,Ministry of Agriculture,rus.min.agrc,rus.min.agrc.exc.01,Minister of Agriculture,'02-01-01,rus.hos
-rus,Ministry of Natural Resources and Environment,rus.min.resr,rus.min.resr.exc.01,Minister of Natural Resources and Environment,'02-01-01,rus.hos
-rus,Ministry of Transport,rus.min.infr,rus.min.infr.exc.01,Minister of Transport,'02-01-01,rus.hos
-rus,"Ministry of Construction, Housing and Utilities",rus.min.hous,rus.min.hous.exc.01,"Minister of Construction, Housing and Utilities",'02-01-01,rus.hos
-rus,Ministry of Culture,rus.min.cltr,rus.min.cltr.exc.01,Minister of Culture,'02-01-01,rus.hos
-rus,Ministry of Sport,rus.min.cltr.ath,rus.min.cltr.ath.exc.01,Minister of Sport,'02-01-01,rus.hos
-rus,"Ministry of Digital Development, Communications and Mass Media",rus.min.jstc.dig,rus.min.jstc.dig.exc.01,"Minister of Digital Development, Communications and Mass Media",'02-01-01,rus.hos
-rus,Ministry for the Development of the Russian Far East and Arctic,rus.min.spec.int,rus.min.spec.int.exc.01,Minister for the Development of the Far East and Arctic,'02-01-01,rus.hos
-esp,Office of the Prime Minister,esp.hog,esp.hog,Presiden of the Government of Spain,'01-01-01,esp.hos
-esp,"Ministry of Foreign Affairs, European Union and Cooperation",esp.min.forn,esp.min.forn.exc.01,"Minister of Foreign Affairs, European Union and Cooperation",'02-01-01,esp.hog
-esp,"Ministry of the Presidency, Justice and Parliamentary Relations",esp.min.spec.ops,esp.min.spec.ops.exc.01,"Minister of the Presidency, Justice and Relations with the Cortes",'02-01-01,esp.hog
-esp,Ministry of Defense,esp.min.dfns,esp.min.dfns.exc.01,Minister of Defence,'02-01-01,esp.hog
-esp,Ministry of Home Affairs,esp.min.gndm,esp.min.gndm.exc.01,Minister of the Interior,'02-01-01,esp.hog
-esp,Ministry of Treasury,esp.min.fisc,esp.min.fisc.exc.01,Minister of Finance,'02-01-01,esp.hog
-esp,Ministry of Transport and Sustainable Mobility,esp.min.infr,esp.min.infr.exc.01,Minister of Transport and Sustainable Mobility,'02-01-01,esp.hog
-esp,"Ministry of Education, Vocational Training and Sports",esp.min.educ,esp.min.educ.exc.01,"Minister of Education, Vocational Training and Sports",'02-01-01,esp.hog
-esp,Ministry of Work and Social Economy,esp.min.labr,esp.min.labr.exc.01,Minister of Labour and Social Economy,'02-01-01,esp.hog
-esp,Ministry of Industry and Tourism,esp.min.comc,esp.min.comc.exc.01,Minister of Industry and Tourism,'02-01-01,esp.hog
-esp,"Ministry of Agriculture, Fisheries and Food",esp.min.agrc,esp.min.agrc.exc.01,"Minister of Agriculture, Fisheries and Food",'02-01-01,esp.hog
-esp,Ministry of Territorial Policy and Democratic Memory,esp.min.spec.int,esp.min.spec.int.exc.01,Minister of Territorial Policy and Democratic Memory,'02-01-01,esp.hog
-esp,Ministry of Ecological Transition and Demographic Challenge,esp.min.resr.env,esp.min.resr.env.exc.01,Minister for the Ecological Transition and the Demographic Challenge,'02-01-01,esp.hog
-esp,Ministry of Housing and Urban Agenda,esp.min.hous,esp.min.hous.exc.01,Minister of Housing and Urban Agenda,'02-01-01,esp.hog
-esp,Ministry of Culture,esp.min.cltr,esp.min.cltr.exc.01,Minister of Culture,'02-01-01,esp.hog
-esp,"Ministry of Economy, Trade and Business",esp.min.trde,esp.min.trde.exc.01,"Minister of Economy, Trade and Business",'02-01-01,esp.hog
-esp,Ministry of Health,esp.min.hlth,esp.min.hlth.exc.01,Minister of Health,'02-01-01,esp.hog
-esp,"Ministry of Social Rights, Consumer Affairs and 2030 Agenda",esp.min.labr.soc.01,esp.min.labr.soc.01.exc.01,"Minister of Social Rights, Consumer Affairs and Agenda 2030",'02-01-01,esp.hog
-esp,"Ministry of Science, Innovation and Universities",esp.min.scnc,esp.min.scnc.exc.01,"Minister of Science, Innovation and Universities",'02-01-01,esp.hog
-esp,Ministry of Equality,esp.min.labr.soc.02,esp.min.labr.soc.02.exc.01,Minister of Equality,'02-01-01,esp.hog
-esp,"Ministry of Inclusion, Social Security and Migration",esp.min.labr.psn,esp.min.labr.psn.exc.01,"Minister of Inclusion, Social Security and Migrations",'02-01-01,esp.hog
-esp,Ministry of Digital Transformation and Public Function,esp.min.spec.dig,esp.min.spec.dig.exc.01,Minister of Digital Transformation and of Public Function,'02-01-01,esp.hog
-esp,Ministry of Youth and Children,esp.min.hlth.enf,esp.min.hlth.enf.exc.01,Minister of Youth and Children,'02-01-01,esp.hog
-tur,Presidency,tur.hos,tur.hos,President of the Republic of Turkiye,'00-01-01,
-tur,Ministry of Justice,tur.min.jstc,tur.min.jstc.exc.01,Minister of Justice,'02-01-01,tur.hos
-tur,Ministry of Trade,tur.min.trde,tur.min.trde.exc.01,Minister of Trade,'01-01-0,tur.hos
-tur,Ministry of Transport and Infrastructure,tur.min.infr,tur.min.infr.exc.01,Minister of Transport and Infrastructure,'01-01-01,tur.hos
-tur,Ministry of Family and Social Services,tur.min.labr.soc,tur.min.labr.soc.exc.01,Minister of Family and Social Services,'01-01-01,tur.hos
-tur,Ministry of Labor and Social Security,tur.min.labr,tur.min.labr.exc.01,Minister of Labour and Social Security,'02-01-01,tur.hos
-tur,"Ministry of Environment, Urbanization and Climate Change",tur.min.hous.env,tur.min.hous.env.exc.01,"Minister of Environment, Urbanisation and Climate Change",'02-01-01,tur.hos
-tur,Ministry of Foreign Affairs,tur.min.forn,tur.min.forn.exc.01,Minister of Foreign Affairs,'02-01-01,tur.hos
-tur,Ministry of Energy and Natural Resources,tur.min.resr,tur.min.resr.exc.01,Minister of Energy and Natural Resources,'02-01-01,tur.hos
-tur,Ministry of Youth and Sports,tur.min.cltr.ath,tur.min.cltr.ath.exc.01,Minister of Youth and Sports,'02-01-01,tur.hos
-tur,Ministry of Treasury and Finance,tur.min.fisc,tur.min.fisc.exc.01,Minister of Treasury and Finance,'02-01-01,tur.hos
-tur,Ministry of Interior,tur.min.gndm,tur.min.gndm.exc.01,Minister of Interior,'02-01-01,tur.hos
-tur,Ministry of Culture and Tourism,tur.min.cltr,tur.min.cltr.exc.01,Minister of Culture and Tourism,'02-01-01,tur.hos
-tur,Ministry of National Education,tur.min.educ,tur.min.educ.exc.01,Minister of National Education,'02-01-01,tur.hos
-tur,Ministry of National Defense,tur.min.dfns ,tur.min.dfns .exc.01,Minister of National Defence,'02-01-01,tur.hos
-tur,Ministry of Health,tur.min.hlth,tur.min.hlth.exc.01,Minister of Health,'02-01-01,tur.hos
-tur,Ministry of Industry and Technology,tur.min.comc,tur.min.comc.exc.01,Minister of Industry and Technology,'02-01-01,tur.hos
-tur,Ministry of Agriculture and Forestry,tur.min.agrc,tur.min.agrc.exc.01,Minister of Agriculture and Forestry,'02-01-01,tur.hos
-rus,Office of the President of the Russian Federation,rus.hos,rus.hos.spx,Kremlin Press Secretary,'00-03-01,rus.hos
-nga,Christian Association of Nigeria,nga.org.rlg.xtn.mmb.01,nga.org.rlg.xtn.mmb.01.exc.01,President of the Christian Association of Nigeria,'31-01-01,
-gbr,House of Lords,gbr.uh,gbr.uh.224,"Lord Temporal, House of Lords",'03-01-01,gbr.hos
-usa,New York State Assembly,usa.sbs.nys.lh,usa.sbs.nys.lh.086,"Member, New York State Assembly",'14-01-01,
-aus,eSafety Commission,aus.min.infr.cms.psc,aus.min.infr.cms.psc.exc.01,"Commissioner, eSafety Commission",'02-03-01,aus.min.infr.cms.exc.01
-gbr,Office of the Mayor of London,gbr.cpl,gbr.cpl.exc.01,Mayor of London,'20-01-01,gbr.lh
-ukr,National Security and Defense Council of Ukraine,ukr.hos.dfns.cme,ukr.hos.dfns.cme.exc.01,Secretary of the National Security and Defense Coucil of Ukraine,'00-02-01,ukr.hos
-vat,Bishop of Kontagora,vat.sbs.kdn.knt,vat.sbs.kdn.knt.exc.01,Bishop of Kontagora,'10-01-01,vat.hos
-aus,New South Wales Legislative Council,aus.sbs.nsw.lh,aus.sbs.nsw.lh.040,"Member, New South Wales Legislative Council",'14-01-01,
-bra,Supreme Federal Court of Brazil,bra.jstc.grtc,bra.jstc.grtc.exc.02,Vice President of the Supreme Federal Court of Brazil,'04-01-02,
-bra,Office of the president of the Federative Republic of Brazil,bra.hos,bra.hos,President of the Federative Republic of Brazil,'00-01-01,
-igo,Office of the president of the European Commission,igo..002.exc,igo.002.exc.exc.01,President of the European Commission,'51-01-01,
-gnb,Office of the President of Guinea Bissau,gnb.hos,gnb.hos,President of Guinea Bissau,'00-01-01,
-gnb,Military office of the Presidency,gnb.hos.gndm,gnb.hos.gndm.exc.01,Head of the Military office of the Presidency,'00-05-01,gnb.hos
-usa,Criminal Justice Coordinating Council of Georgia,usa.sbs.geo.jstc.vrbn.cmte,usa.sbs.geo.jstc.vrbn.cmte.exc.01,"Director, Criminal Justice Coordinating Council of Georgia",'13-03-01,usa.sbs.geo.exc.01
-usa,Superior Court of Fulton County,usa.sbs.geo.jstc.grtc.vrbn.60,usa.sbs.geo.jstc.grtc.vrbn.60.mgs.12,"Judge, Superior Court of Fulton County",'13-01-01,
-chn,Hong Kong Fire Services Department,chn.sbs.hkg.ntfd.incd,chn.sbs.hkg.ntfd.incd.exc.01,"Director, Hong Kong Fire Services Department", '25-01-01,chn.sbs.hkg.ntfd.exc.01
-kor,Supreme Court of Korea,kor.jstc.grtc.vrbn,kor.jstc.grtc.vrbn.exc.01,Chief Justice of the Supreme Court of Korea,'04-01-01,
-usa,Department of State,usa.min.forn,usa.min.forn.amb.spc.012,United States Special Envoy for Peace Missions, '02-02-01,
-sgp,Ministry of Manpower,sgp.min.labr,sgp.min.labr.exc.01,Singapore Minister of Manpower, '02-01-01,sgp.hog
-ind,Office of the Prime Minister of India,ind.hog,ind.hog,Prime Minister of India, '01-01-01,
-chn,Office of the President of China,chn.hos,chn.hos,President of China, '00-01-01,chn.ccp.cme.exc.01
-chn,Central Committee of the Chinese Communist Party,chn.ccp.cme,chn.ccp.cme.exc.01,General Secretary of the Chinese Communist Party, '60-01-01,
-chn,Central Military Commission of the Communist Party of China,chn.ccp.dfns.cme,chn.ccp.dfns.cme.exc.01,Chairman of the Central Military Commission of the Communist Party of China, '65-01-01,
-cod,Office of the President of the Democratic Republic of the Congo,cod.hos,cod.hos,President of the Democratic Republic of the Congo, '00-01-01,
-rwa,Office of the President of Rwanda,rwa.hos,rwa.hos,President of Rwanda, '00-01-01,
-isr,Israel National Cyber Directorate,isr.hog.dfns.dig.cme,isr.hog.dfns.dig.cme.exc.01,Director General of the Israel National Cyber Directorate, '05-01-01,isr.hog
-irn,Ministry of Intelligence of the Islamic Republic of Iran,irn.min.intl,irn.min.intl.exc.01,Minister of Intelligence of the Islamic Republic of Iran, '02-01-01,
-sgp,Parliament of Singapore,sgp.lh,sgp.lh.088,"Leader of the Opposition, Singapore", '03-02-01,
-bel,The College of Europe,bel.akd.pvt.005,bel.akd.pvt.005.exc.01,Rector of the College of Europe3,33-01-01,
-tha,Royal Thai Army,tha.dfns.ary,tha.dfns.ary.spx,Spokesman for the Royal Thai Army,'05-01-02,tha.min.dfns.exc.01
-ben,Office of the President of Benin,ben.hos,ben.hos,President of Benin,'00-01-01,
-ven,Office of the President of the Bolivarian Republic of Venezuela,ven.hos,ven.hos,President of the Bolivarian Republic of Venezuela,00-01-01,ven.hos
-ven,Honor Guard of the President of the Bolivarian Republic,ven.hos.gndm,ven.hos.gndm.exc.01,Commander of the Honor Guard of the President of the Bolivarian Republic,00-02-01,
-deu,Office of the Minister President of Saxony,deu.sbs.sxn.hog,deu.sbs.sxn.hog,Minister President of Saxony,10-01-01,
-chn,Office of the Hong Kong Secretary for Security,chn.sbs.hkg.ntfd ,chn.sbs.hkg.ntfd.exc.01,Hong Kong Secretary for Security,16-01-01,chn.sbs.hkg.exc.01
-chn,Office of the Chief Executive of Hong Kong,chn.sbs.hkg,chn.sbs.hkg.exc.01,Chief Executive of Hong Kong,10-01-01,
-usa,Office of the Governor of Georgia,usa.sbs.geo,usa.sbs.geo.exc.01,Governor of Georgia,10-01-01,
-usa,Office of the Mayor of Chicago,usa.sbs.ilo.chi,usa.sbs.ilo.chi.exc.01,Mayor of Chicago,20-01-01,
-isr,Office of the Prime Minister of Israel,isr.hog ,isr.hog ,Prime Minister of Israel,01-01-01,
-tha,Ministry of Defense,tha.min.dfns,tha.min.dfns.exc.01,Minister of Defense,02-01-01,tha.hog
-tha,Office of the Prime Minister of Thailans,tha.hog,tha.hog,Prime Minister of Thailand,01-01-01,
-gbr,Crown of the United Kingdom,gbr.hos,gbr.hos,King of the United Kingdom,00-01-01,
-can,Realm of Canada,can.hos,can.hos,King of Canada,00-01-01,
-aus,Realm of Australia,aus.hos,aus.hos,King of Australia,00-01-01,
-jpn,Chrysanthemum Throne,jpn.hos,jpn.hos,Emperor of Japan,00-01-01,
-esp,Crown of Spain,esp.hos,esp.hos,King of Spain,00-01-01,
-rwa,Office of the Prime Minister of Rwanda,rwa.hog,rwa.hog,Prime Minister of Rwanda,01-01-01,rwa.hos
-rwa,Ministry of Finance and Economic Planning,rwa.min.fisc,rwa.min.fisc.exc.01,Minister of Finance and Economic Planning,02-01-01,rwa.hos
+﻿country_code,institution_name,position_code,position_title,institution_code,hierarchy_level,reports_to_position_code
+usa,Department of State,usa.min.forn.exc.01,Secretary of State,usa.min.forn,'02-01-01,usa.hos
+usa,Department of the Treasury,usa.min.fisc.exc.01,Secretary of the Treasury,usa.min.fisc,02-01-01,usa.hos
+usa,Department of Defense,usa.min.dfns.exc.01,Secretary of Defense,usa.min.dfns,'02-01-01,usa.hos
+usa,Department of Justice,usa.min.jstc.exc.01,Attorney General,usa.min.jstc,'02-01-01,usa.hos
+usa,Department of the Interior,usa.min.resr.exc.01,Secretary of the Interior,usa.min.resr,'02-01-01,usa.hos
+usa,Department of Agriculture,usa.min.agrc.exc.01,Secretary of Agriculture,usa.min.agrc,'02-01-01,usa.hos
+usa,Department of Commerce,usa.min.comc.exc.01,Secretary of Commerce,usa.min.comc,'02-01-01,usa.hos
+usa,Department of Labor,usa.min.labr.exc.01,Secretary of Labor,usa.min.labr,'02-01-01,usa.hos
+usa,Department of Health and Human Services,usa.min.hlth.exc.01,Secretary of Health and Human Services,usa.min.hlth,'02-01-01,usa.hos
+usa,Department of Housing and Urban Development,usa.min.hous.exc.01,Secretary of Housing and Urban Development,usa.min.hous,'02-01-01,usa.hos
+usa,Department of Transportation,usa.min.infr.exc.01,Secretary of Transportation,usa.min.infr,'02-01-01,usa.hos
+usa,Department of Energy,usa.min.scnc.exc.01,Secretary of Energy,usa.min.scnc,'02-01-01,usa.hos
+usa,Department of Education,usa.min.educ.exc.01,Secretary of Education,usa.min.educ,'02-01-01,usa.hos
+usa,Department of Veterans Affairs,usa.min.dfns.vet.exc.01,Secretary of Veterans Affairs,usa.min.dfns.vet,'02-01-01,usa.hos
+usa,Department of Homeland Security,usa.min.gndm.exc.01,Secretary of Homeland Security,usa.min.gndm,'02-01-01,usa.hos
+usa,Environmental Protection Agency (Cabinet-Rank),usa.min.resr.env.exc.01,Administrator of the Environmental Protection Agency,usa.min.resr.env,'02-01-01,usa.hos
+usa,Office of Management and Budget (Cabinet-Rank),usa.hos.fisc.exc.01,Director of the Office of Management and Budget,usa.hos.fisc,'00-02-01,usa.hos
+usa,U.S. Trade Representative (Cabinet-Rank),usa.hos.trde.exc.01,United States Trade Representative,usa.hos.trde,'00-02-01,usa.hos
+usa,Director of National Intelligence (Cabinet-Rank),usa.hos.intl.exc.01,Director of National Intelligence,usa.hos.intl,'00-02-01,usa.hos
+usa,Central Intelligence Agency (Cabinet-Rank),usa.min.intl.exc.01,Director of the Central Intelligence Agency,usa.min.intl,'02-01-01,usa.hos
+usa,UN Ambassador (Cabinet-Rank),usa.amb.igo.001.exc.01,United States Ambassador to the United Nations,usa.amb.igo.001,'00-01-01,usa.hos
+usa,Presidency,usa.hos,President of the United States,usa.hos,'00-01-01,usa.hos
+fra,Office of the Prime Minister,fra.hog,Prime Minister of the Republic,fra.hog,'01-01-01,fra.hos
+fra,Office of the President,fra.hos,President of the Republic,fra.hos,'00-00-01,
+fra,Ministry of Europe and Foreign Affairs,fra.min.forn.exc.01,Minister for Europe and Foreign Affairs,fra.min.forn,'02-01-01,fra.hog
+fra,Ministry of the Interior,fra.min.gndm.exc.01,Minister of the Interior,fra.min.gndm,'02-01-01,fra.hog
+fra,Ministry of the Armed Forces,fra.min.dfns.exc.01,Minister of the Armed Forces,fra.min.dfns,'02-01-01,fra.hog
+fra,Ministry of Economy and Finance,fra.min.fisc.exc.01,Minister of the Economy and Finance,fra.min.fisc,'02-01-01,fra.hog
+fra,Ministry of Justice,fra.min.jstc.exc.01,Minister of Justice,fra.min.jstc,'02-01-01,fra.hog
+fra,Ministry of National Education,fra.min.educ.exc.01,Minister of National Education,fra.min.educ,'02-01-01,fra.hog
+fra,Ministry of Culture,fra.min.cltr.exc.01,Minister of Culture,fra.min.cltr,'02-01-01,fra.hog
+fra,Ministry of Health,fra.min.hlth.exc.01,Minister of Health,fra.min.hlth,'02-01-01,fra.hog
+fra,Ministry of Labor,fra.min.labr.exc.01,Minister of Labour,fra.min.labr,'02-01-01,fra.hog
+fra,Ministry of Ecological Transition and Energy,fra.min.resr.exc.01,Minister for the Ecological Transition and Territorial Cohesion,fra.min.resr,'02-01-01,fra.hog
+fra,Ministry of Agriculture,fra.min.agrc.exc.01,Minister of Agriculture and Food Sovereignty,fra.min.agrc,'02-01-01,fra.hog
+fra,Ministry of Housing,fra.min.hous.exc.01,Minister of Housing,fra.min.hous,'02-01-01,fra.hog
+fra,Ministry of Transport,fra.min.infr.exc.01,Minister of Transport,fra.min.infr,'02-01-01,fra.hog
+fra,Ministry of Higher Education and Research,fra.min.educ.trt.exc.01,Minister of Higher Education and Research,fra.min.educ.trt,'02-01-01,fra.hog
+fra,Ministry of Overseas Territories,fra.min.spec.ext.exc.01,Minister of Overseas Territories,fra.min.spec.ext,'02-01-01,fra.hog
+fra,Ministry of Solidarity and Family,fra.min.hlth.soc.exc.01,Minister of Solidarity and Families,fra.min.hlth.soc,'02-01-01,fra.hog
+fra,Ministry of Sports,fra.min.cltr.ath.exc.01,Minister of Sports and the Olympic and Paralympic Games,fra.min.cltr.ath,'02-02-01,fra.hog
+gbr,Office of the Prime Minister,gbr.hog,Prime Minister of the United Kingdom of Great Britain and Northern Ireland,gbr.hog,'01-01-01,gbr.hos
+gbr,"Foreign, Commonwealth and Development Office",gbr.min.forn.exc.01,"Secretary of State for Foreign, Commonwealth and Development Affairs",gbr.min.forn,'02-01-01,gbr.hog
+gbr,Home Office,gbr.min.gndm.exc.01,Secretary of State for the Home Department,gbr.min.gndm,'02-01-01,gbr.hog
+gbr,HM Treasury,gbr.min.fisc.exc.01,Chancellor of the Exchequer,gbr.min.fisc,'02-01-01,gbr.hog
+gbr,Ministry of Defence,gbr.min.dfns.exc.01,Secretary of State for Defence,gbr.min.dfns,'02-01-01,gbr.hog
+gbr,Ministry of Justice,gbr.min.jstc.exc.01,Secretary of State for Justice,gbr.min.jstc,'02-01-01,gbr.hog
+gbr,Department of Health and Social Care,gbr.min.hlth.exc.01,Secretary of State for Health and Social Care,gbr.min.hlth,'02-01-01,gbr.hog
+gbr,Department for Education,gbr.min.educ.exc.01,Secretary of State for Education,gbr.min.educ,'02-01-01,gbr.hog
+gbr,Department for Business and Trade,gbr.min.comc.exc.01,Secretary of State for Business and Trade,gbr.min.comc,'02-01-01,gbr.hog
+gbr,Department for Energy Security and Net Zero,gbr.min.resr.exc.01,Secretary of State for Energy Security and Net Zero,gbr.min.resr,'02-01-01,gbr.hog
+gbr,"Department for Science, Innovation and Technology",gbr.min.scnc.exc.01,"Secretary of State for Science, Innovation and Technology",gbr.min.scnc,'02-01-01,gbr.hog
+gbr,"Department for Environment, Food and Rural Affairs",gbr.min.agrc.exc.01,"Secretary of State for Environment, Food and Rural Affairs",gbr.min.agrc,'01-01-01,gbr.hog
+gbr,Department for Transport,gbr.min.infr.exc.01,Secretary of State for Transport,gbr.min.infr,'02-01-01,gbr.hog
+gbr,Department for Work and Pensions,gbr.min.labr.exc.01,Secretary of State for Work and Pensions,gbr.min.labr,'02-01-01,gbr.hog
+gbr,"Department for Housing, Communities and Local Government",gbr.min.hous.exc.01,"Secretary of State for Housing, Communities and Local Government",gbr.min.hous,'02-01-01,gbr.hog
+gbr,"Department for Culture, Media and Sport",gbr.min.cltr.exc.01,"Secretary of State for Culture, Media and Sport",gbr.min.cltr,'02-01-01,gbr.hog
+gbr,Northern Ireland Office,gbr.min.spec.int.01.exc.01,Secretary of State for Northern Ireland,gbr.min.spec.int.01,'02-01-01,gbr.hog
+gbr,Scotland Office,gbr.min.spec.int.02.exc.01,Secretary of State for Scotland,gbr.min.spec.int.02,'02-01-01,gbr.hog
+gbr,Wales Office,gbr.min.spec.int.03.exc.01,Secretary of State for Wales,gbr.min.spec.int.03,'02-01-01,gbr.hog
+gbr,Cabinet Office,gbr.hog.ops.exc.01,Chancellor of the Duchy of Lancaster,gbr.hog.ops,'01-02-01,gbr.hog
+gbr,Attorney General's Office,gbr.min.jst.exc.01.exc.01,Attorney General,gbr.min.jst.exc.01,'02-01-01,gbr.hog
+gbr,Lord President of the Council / Leader of the House of Commons,gbr.hog.lh.exc.01.exc.01,Lord President of the Council,gbr.hog.lh.exc.01,'01-02-01,gbr.hog
+gbr,Lord Privy Seal / Leader of the House of Lords,gbr.hog.uh.exc.01.exc.01,Lord Privy Seal,gbr.hog.uh.exc.01,'01-02-01,gbr.hog
+can,Office of the Prime Minister,can.hog,Prime Minister of Canada,can.hog,'01-01-01,can.hos
+can,Minister of Foreign Affairs,can.min.forn.exc.01,Minister of Foreign Affairs,can.min.forn,'02-01-01,can.hog
+can,Minister of Finance and National Revenue,can.min.fisc.exc.01,Minister of Finance,can.min.fisc,'02-01-01,can.hog
+can,Minister of National Defence,can.min.dfns.exc.01,Minister of National Defence,can.min.dfns,'02-01-01,can.hog
+can,Minister of Justice and Attorney General of Canada,can.min.jstc.exc.01,Minister of Justice and Attorney General of Canada,can.min.jstc,'02-01-01,can.hog
+can,Minister of Public Safety,can.min.gndm.exc.01,Minister of Public Safety,can.min.gndm,'02-01-01,can.hog
+can,Minister of Health,can.min.hlth.exc.01,Minister of Health,can.min.hlth,'02-01-01,can.hog
+can,Minister of Indigenous Services,can.min.spec.int.01.exc.01,Minister of Indigenous Services,can.min.spec.int.01,'02-01-01,can.hog
+can,Minister of Crown-Indigenous Relations,can.min.spec.int.02.exc.01,Minister of Crown-Indigenous Relations,can.min.spec.int.02,'02-01-01,can.hog
+can,Minister of Industry,can.min.comc.exc.01,"Minister of Innovation, Science and Industry",can.min.comc,'02-01-01,can.hog
+can,Minister of Agriculture and Agri-Food,can.min.agrc.exc.01,Minister of Agriculture and Agri-Food,can.min.agrc,'02-01-01,can.hog
+can,Minister of Transport and Internal Trade,can.min.infr.exc.01,Minister of Transport,can.min.infr,'02-01-01,can.hog
+can,Minister of Energy and Natural Resources,can.min.resr.eng.exc.01,Minister of Natural Resources,can.min.resr.eng,'02-01-01,can.hog
+can,Minister of Environment and Climate Change,can.min.resr.env.exc.01,Minister of Environment and Climate Change,can.min.resr.env,'02-01-01,can.hog
+can,Minister of Jobs and Families,can.min.labr.exc.01,"Minister of Employment, Workforce Development and Official Languages",can.min.labr,'02-01-01,can.hog
+can,"Minister of Immigration, Refugees and Citizenship",can.min.jstc.img.exc.01,"Minister of Immigration, Refugees and Citizenship",can.min.jstc.img,'02-01-01,can.hog
+can,Minister of Housing and Infrastructure,can.min.hous.exc.01,"Minister of Housing, Infrastructure and Communities",can.min.hous,'02-01-01,can.hog
+can,Minister of Veterans Affairs,can.min.dfns.vet.exc.01,Minister of Veterans Affairs,can.min.dfns.vet,'02-01-01,can.hog
+can,Minister of Fisheries,can.min.agrc.pec.exc.01,"Minister of Fisheries, Oceans and the Canadian Coast Guard",can.min.agrc.pec,'02-01-01,can.hog
+can,Minister of International Trade,can.min.trde.exc.01,"Minister of Export Promotion, International Trade and Economic Development",can.min.trde,'02-01-01,can.hog
+can,Minister of Canadian Identity and Culture,can.min.cltr.exc.01,Minister of Canadian Heritage,can.min.cltr,'02-01-01,can.hog
+can,Minister of Women and Gender Equality,can.min.labr.soc.exc.01,Minister for Women and Gender Equality and Youth,can.min.labr.soc,'02-01-01,can.hog
+can,Minister of Northern and Arctic Affairs,can.min.resr.int.exc.01,Minister of Northern Affairs,can.min.resr.int,'02-01-01,can.hog
+can,Minister of Artificial Intelligence and Digital Innovation,can.min.comc.dig.exc.01,"Minister of Innovation, Science and Industry",can.min.comc.dig,'02-01-01,can.hog
+can,Minister of Emergency Management and Community Resilience,can.min.gndm.ops.exc.01,Minister of Emergency Preparedness,can.min.gndm.ops,'02-01-01,can.hog
+can,"Minister of Government Transformation, Public Works and Procurement",can.min.spec.ops.exc.01,Minister of Public Services and Procurement,can.min.spec.ops,'02-01-01,can.hog
+aus,Office of the Prime Minister,aus.hog,Prime Minister of Australia,aus.hog,'01-01-01,can.hos
+aus,Minister for Foreign Affairs (Cabinet),aus.min.forn.exc.01,Minister for Foreign Affairs,aus.min.forn,'02-01-01,can.hog
+aus,Treasurer (Cabinet),aus.min.fisc.exc.01,Federal Treasurer,aus.min.fisc,'02-01-01,can.hog
+aus,Minister for Defence and Deputy Prime Minister (Cabinet),aus.min.dfns.exc.01,Deputy Prime Minister and Minister for Defence,aus.min.dfns,'02-01-01,can.hog
+aus,Attorney-General (Cabinet),aus.min.jstc.exc.01,Attorney-General,aus.min.jstc,'02-01-01,can.hog
+aus,Minister for Finance (Cabinet),aus.min.fisc.ops.exc.01,Minister for Finance,aus.min.fisc.ops,'02-01-01,can.hog
+aus,Minister for Health and Ageing (Cabinet),aus.min.hlth.exc.01,Minister for Health and Aged Care,aus.min.hlth,'02-01-01,can.hog
+aus,Minister for Disability and NDIS (Cabinet),aus.min.hlth.soc.exc.01,Minister for the National Disability Insurance Scheme,aus.min.hlth.soc,'02-01-01,can.hog
+aus,Minister for Home Affairs (Cabinet),aus.min.gndm.exc.01,Minister for Home Affairs,aus.min.gndm,'02-01-01,can.hog
+aus,Minister for Immigration and Citizenship (Cabinet),aus.min.jstc.img.exc.01,"Minister for Immigration, Citizenship and Multicultural Affairs",aus.min.jstc.img,'02-01-01,can.hog
+aus,Minister for Cyber Security (Cabinet),aus.min.gndm.dig.exc.01,Minister for Cyber Security,aus.min.gndm.dig,'02-01-01,can.hog
+aus,Minister for the Arts (Cabinet),aus.min.cltr.kns.exc.01,Minister for the Arts,aus.min.cltr.kns,'02-01-01,can.hog
+aus,Minister for Climate Change and Energy (Cabinet),aus.min.resr.eng.exc.01,Minister for Climate Change and Energy,aus.min.resr.eng,'02-01-01,can.hog
+aus,Minister for Education (Cabinet),aus.min.educ.exc.01,Minister for Education,aus.min.educ,'02-01-01,can.hog
+aus,"Minister for Infrastructure, Transport, Regional Development and Local Government (Cabinet)",aus.min.infr.exc.01,"Minister for Infrastructure, Transport, Regional Development and Local Government",aus.min.infr,'02-01-01,can.hog
+aus,Minister for Communications,aus.min.infr.cms.exc.01,Minister for Communications,aus.min.infr.cms,'02-01-01,can.hog
+aus,Minister for Environment and Water (Cabinet),aus.min.resr.env.exc.01,Minister for the Environment and Water,aus.min.resr.env,'02-01-01,can.hog
+aus,Minister for Social Services (Cabinet),aus.min.labr.psn.exc.01,Minister for Social Services,aus.min.labr.psn,'02-01-01,can.hog
+aus,Minister for Employment and Workplace Relations (Cabinet),aus.min.labr.exc.01,Minister for Employment and Workplace Relations,aus.min.labr,'02-01-01,can.hog
+aus,Minister for Indigenous Australians (Cabinet),aus.min.spec.int.exc.01,Minister for Indigenous Australians,aus.min.spec.int,'02-01-01,can.hog
+aus,"Minister for Housing, Homelessness and Cities (Cabinet)",aus.min.hous.exc.01,Minister for Housing,aus.min.hous,'02-01-01,can.hog
+aus,"Minister for Agriculture, Fisheries and Forestry (Cabinet)",aus.min.agrc.exc.01,"Minister for Agriculture, Fisheries and Forestry",aus.min.agrc,'02-01-01,can.hog
+aus,Minister for Industry and Innovation (Cabinet),aus.min.comc.exc.01,Minister for Industry and Science,aus.min.comc,'02-01-01,can.hog
+aus,Minister for Science (Cabinet),aus.min.scnc.exc.01,Minister for Industry and Science,aus.min.scnc,'02-02-01,can.hog
+aus,Minister for Trade and Tourism (Cabinet),aus.min.trde.exc.01,Minister for Trade and Tourism,aus.min.trde,'02-01-01,can.hog
+jpn,Office of the Prime Minister,jpn.hog,Prime Minister of Japan,jpn.hog,'01-01-01,jpn.hos
+jpn,Minister for Foreign Affairs,jpn.min.forn.exc.01,Minister for Foreign Affairs,jpn.min.forn,'02-01-01,jpn.hog
+jpn,Minister of Finance,jpn.min.fisc.exc.01,Minister of Finance,jpn.min.fisc,'02-01-01,jpn.hog
+jpn,Minister of Defense,jpn.min.dfns.exc.01,Minister of Defense,jpn.min.dfns,'02-01-01,jpn.hog
+jpn,Minister of Justice,jpn.min.jstc.exc.01,Minister of Justice,jpn.min.jstc,'02-01-01,jpn.hog
+jpn,Minister of Internal Affairs and Communications,jpn.min.spec.int.ops.exc.01,Minister of Internal Affairs and Communications,jpn.min.spec.int.ops,'02-01-01,jpn.hog
+jpn,"Minister of Economy, Trade and Industry",jpn.min.comc.exc.01,"Minister of Economy, Trade and Industry",jpn.min.comc,'02-01-01,jpn.hog
+jpn,"Minister of Health, Labour and Welfare",jpn.min.hlth.exc.01,"Minister of Health, Labour and Welfare",jpn.min.hlth,'02-01-01,jpn.hog
+jpn,Minister of Education,jpn.min.educ.exc.01,"Minister of Education, Culture, Sports, Science and Technology",jpn.min.educ,'02-01-01,jpn.hog
+jpn,"Minister of Agriculture, Forestry and Fisheries",jpn.min.agrc.exc.01,"Minister of Agriculture, Forestry and Fisheries",jpn.min.agrc,'02-01-01,jpn.hog
+jpn,"Minister of Land, Infrastructure, Transport and Tourism",jpn.min.infr.exc.01,"Minister of Land, Infrastructure, Transport and Tourism",jpn.min.infr,'02-01-01,jpn.hog
+jpn,Minister of the Environment,jpn.min.resr.env.exc.01,Minister of the Environment,jpn.min.resr.env,'02-01-01,jpn.hog
+jpn,Minister for Reconstruction,jpn.min.spec.int.exi.01.exc.01,Minister for Reconstruction,jpn.min.spec.int.exi.01,'02-01-01,jpn.hog
+jpn,Chief Cabinet Secretary,jpn.min.hog.ops.exc.01,Chief Cabinet Secretary,jpn.min.hog.ops,'02-01-01,jpn.hog
+jpn,Minister for Digital Transformation,jpn.min.comc.dig.exc.01,Minister for Digital Transformation,jpn.min.comc.dig,'02-01-01,jpn.hog
+jpn,Minister of State for Economic and Fiscal Policy,jpn.min.hog.fisc.chm.exc.01,Minister of State for Economic and Fiscal Policy,jpn.min.hog.fisc.chm,'02-01-01,jpn.hog
+jpn,Minister of State for Policies Related to Children,jpn.hog.hlth.enf.chm.exc.01,Minister of State for Children's Policies and Measures for Declining Birthrate,jpn.hog.hlth.enf.chm,'01-02-01,jpn.hog
+jpn,Minister of State for Economic Security,jpn.hog.dfns.eco.chm.exc.01,Minister of State for Economic Security,jpn.hog.dfns.eco.chm,'01-02-01,jpn.hog
+jpn,Minister of State for Disaster Management,jpn.hog.gndm.env.chm.exc.01,Minister of State for Disaster Management,jpn.hog.gndm.env.chm,'01-02-01,jpn.hog
+jpn,"Minister of State for Cool Japan Strategy, Intellectual Property, Science and Technology, Space Policy, AI Strategy",jpn.hog.cltr.eco.chm.exc.01,"Minister of State for Cool Japan Strategy, Intellectual Property, Science and Technology, Space Policy, and AI Strategy",jpn.hog.cltr.eco.chm,'01-02-01,jpn.hog
+jpn,"Minister of State for Okinawa and Northern Territories Affairs, Consumer Affairs, Regional Revitalization, Ainu Policies, World Expo 2025",jpn.hog.int.chm.exc.01,"Minister of State for Okinawa and Northern Territories Affairs, Consumer Affairs, Regional Revitalization, Ainu Policies, and World Expo 2025",jpn.hog.int.chm,'01-02-01,jpn.hog
+deu,Federal Chancellery,deu.hog,Federal Chancellor of the Federal Republic of Germany,deu.hog,'01-01-01,deu.hos
+deu,Federal Foreign Office,deu.min.forn.exc.01,Federal Minister for Foreign Affairs,deu.min.forn,'02-01-01,deu.hog
+deu,Federal Ministry of the Interior and Sport,deu.min.gndm.exc.01,Federal Minister of the Interior and for Community,deu.min.gndm,'02-01-01,deu.hog
+deu,Federal Ministry of Justice,deu.min.jstc.exc.01,Federal Minister of Justice,deu.min.jstc,'02-01-01,deu.hog
+deu,Federal Ministry of Finance,deu.min.fisc.exc.01,Federal Minister of Finance,deu.min.fisc,'02-01-01,deu.hog
+deu,Federal Ministry for Economy and Climate Protection,deu.min.comc.exc.01,Federal Minister for Economic Affairs and Climate Action,deu.min.comc,'02-01-01,deu.hog
+deu,Federal Ministry of Labor and Social Affairs,deu.min.labr.exc.01,Federal Minister of Labour and Social Affairs,deu.min.labr,'02-01-01,deu.hog
+deu,Federal Ministry of Defense,deu.min.dfns.exc.01,Federal Minister of Defence,deu.min.dfns,'02-01-01,deu.hog
+deu,Federal Ministry of Food and Agriculture,deu.min.agrc.exc.01,Federal Minister of Food and Agriculture,deu.min.agrc,'02-01-01,deu.hog
+deu,Federal Ministry of Health,deu.min.hlth.exc.01,Federal Minister of Health,deu.min.hlth,'02-01-01,deu.hog
+deu,Federal Ministry of Transport,deu.min.infr.exc.01,Federal Minister for Digital and Transport,deu.min.infr,'02-01-01,deu.hog
+deu,"Federal Ministry of Environment, Climate Action, Nature Conservation and Nuclear Safety",deu.min.resr.exc.01,"Federal Minister for the Environment, Nature Conservation, Nuclear Safety and Consumer Protection",deu.min.resr,'02-01-01,deu.hog
+deu,"Federal Ministry of Education, Family Affairs, Senior Citizens, Women and Youth",deu.min.labr.soc.exc.01,"Federal Minister for Family Affairs, Senior Citizens, Women and Youth",deu.min.labr.soc,'02-01-01,deu.hog
+deu,"Federal Ministry of Housing, Urban Development and Building",deu.min.hous.exc.01,"Federal Minister for Housing, Urban Development and Building",deu.min.hous,'02-01-01,deu.hog
+deu,Federal Ministry of Economic Cooperation and Development,deu.min.forn.dev.exc.01,Federal Minister for Economic Cooperation and Development,deu.min.forn.dev,'02-01-01,deu.hog
+deu,"Federal Ministry of Research, Technology and Space",deu.min.scnc.exc.01,Federal Minister of Education and Research,deu.min.scnc,'02-01-01,deu.hog
+deu,Federal Ministry of Digital and State Modernisation,deu.min.spec.int.dig.exc.01,Federal Minister for Digital and Transport,deu.min.spec.int.dig,'02-01-01,deu.hog
+deu,Head of Federal Chancellery (Cabinet-Rank),deu.min.hog.ops.exc.01,Head of the Federal Chancellery,deu.min.hog.ops,'02-01-01,deu.hog
+rus,Office of the President of the Russian Federation,rus.hos,President of the Russian Federation,rus.hos,'00-01-01,
+rus,Office of the Prime Minister,rus.hog,Prime Minister of the Russian Federation,rus.hog,'01-01-01,rus.hos
+rus,Ministry of Foreign Affairs,rus.min.forn.exc.01,Minister of Foreign Affairs,rus.min.forn,'02-01-01,rus.hos
+rus,Ministry of Defense,rus.min.dfns.exc.01,Minister of Defense,rus.min.dfns,'02-01-01,rus.hos
+rus,Ministry of Internal Affairs,rus.min.gndm.exc.01,Minister of Internal Affairs,rus.min.gndm,'02-01-01,rus.hos
+rus,Ministry of Justice,rus.min.jstc.exc.01,Minister of Justice,rus.min.jstc,'02-01-01,rus.hos
+rus,"Ministry of Civil Defense, Emergencies and Disaster Relief",rus.min.gndm.env.exc.01,Minister of Emergency Situations,rus.min.gndm.env,'02-01-01,rus.hos
+rus,Ministry of Finance,rus.min.fisc.exc.01,Minister of Finance,rus.min.fisc,'02-01-01,rus.hos
+rus,Ministry of Economic Development,rus.min.comc.exc.01,Minister of Economic Development,rus.min.comc,'02-01-01,rus.hos
+rus,Ministry of Industry and Trade,rus.min.trde.exc.01,Minister of Industry and Trade,rus.min.trde,'02-01-01,rus.hos
+rus,Ministry of Energy,rus.min.resr.eng.exc.01,Minister of Energy,rus.min.resr.eng,'02-01-01,rus.hos
+rus,Ministry of Science and Higher Education,rus.min.scnc.exc.01,Minister of Science and Higher Education,rus.min.scnc,'02-01-01,rus.hos
+rus,Ministry of Education,rus.min.educ.exc.01,Minister of Enlightenment,rus.min.educ,'02-01-01,rus.hos
+rus,Ministry of Healthcare,rus.min.hlth.exc.01,Minister of Health,rus.min.hlth,'02-01-01,rus.hos
+rus,Ministry of Labour and Social Protection,rus.min.labr.exc.01,Minister of Labour and Social Protection,rus.min.labr,'02-01-01,rus.hos
+rus,Ministry of Agriculture,rus.min.agrc.exc.01,Minister of Agriculture,rus.min.agrc,'02-01-01,rus.hos
+rus,Ministry of Natural Resources and Environment,rus.min.resr.exc.01,Minister of Natural Resources and Environment,rus.min.resr,'02-01-01,rus.hos
+rus,Ministry of Transport,rus.min.infr.exc.01,Minister of Transport,rus.min.infr,'02-01-01,rus.hos
+rus,"Ministry of Construction, Housing and Utilities",rus.min.hous.exc.01,"Minister of Construction, Housing and Utilities",rus.min.hous,'02-01-01,rus.hos
+rus,Ministry of Culture,rus.min.cltr.exc.01,Minister of Culture,rus.min.cltr,'02-01-01,rus.hos
+rus,Ministry of Sport,rus.min.cltr.ath.exc.01,Minister of Sport,rus.min.cltr.ath,'02-01-01,rus.hos
+rus,"Ministry of Digital Development, Communications and Mass Media",rus.min.jstc.dig.exc.01,"Minister of Digital Development, Communications and Mass Media",rus.min.jstc.dig,'02-01-01,rus.hos
+rus,Ministry for the Development of the Russian Far East and Arctic,rus.min.spec.int.exc.01,Minister for the Development of the Far East and Arctic,rus.min.spec.int,'02-01-01,rus.hos
+esp,Office of the Prime Minister,esp.hog,Presiden of the Government of Spain,esp.hog,'01-01-01,esp.hos
+esp,"Ministry of Foreign Affairs, European Union and Cooperation",esp.min.forn.exc.01,"Minister of Foreign Affairs, European Union and Cooperation",esp.min.forn,'02-01-01,esp.hog
+esp,"Ministry of the Presidency, Justice and Parliamentary Relations",esp.min.spec.ops.exc.01,"Minister of the Presidency, Justice and Relations with the Cortes",esp.min.spec.ops,'02-01-01,esp.hog
+esp,Ministry of Defense,esp.min.dfns.exc.01,Minister of Defence,esp.min.dfns,'02-01-01,esp.hog
+esp,Ministry of Home Affairs,esp.min.gndm.exc.01,Minister of the Interior,esp.min.gndm,'02-01-01,esp.hog
+esp,Ministry of Treasury,esp.min.fisc.exc.01,Minister of Finance,esp.min.fisc,'02-01-01,esp.hog
+esp,Ministry of Transport and Sustainable Mobility,esp.min.infr.exc.01,Minister of Transport and Sustainable Mobility,esp.min.infr,'02-01-01,esp.hog
+esp,"Ministry of Education, Vocational Training and Sports",esp.min.educ.exc.01,"Minister of Education, Vocational Training and Sports",esp.min.educ,'02-01-01,esp.hog
+esp,Ministry of Work and Social Economy,esp.min.labr.exc.01,Minister of Labour and Social Economy,esp.min.labr,'02-01-01,esp.hog
+esp,Ministry of Industry and Tourism,esp.min.comc.exc.01,Minister of Industry and Tourism,esp.min.comc,'02-01-01,esp.hog
+esp,"Ministry of Agriculture, Fisheries and Food",esp.min.agrc.exc.01,"Minister of Agriculture, Fisheries and Food",esp.min.agrc,'02-01-01,esp.hog
+esp,Ministry of Territorial Policy and Democratic Memory,esp.min.spec.int.exc.01,Minister of Territorial Policy and Democratic Memory,esp.min.spec.int,'02-01-01,esp.hog
+esp,Ministry of Ecological Transition and Demographic Challenge,esp.min.resr.env.exc.01,Minister for the Ecological Transition and the Demographic Challenge,esp.min.resr.env,'02-01-01,esp.hog
+esp,Ministry of Housing and Urban Agenda,esp.min.hous.exc.01,Minister of Housing and Urban Agenda,esp.min.hous,'02-01-01,esp.hog
+esp,Ministry of Culture,esp.min.cltr.exc.01,Minister of Culture,esp.min.cltr,'02-01-01,esp.hog
+esp,"Ministry of Economy, Trade and Business",esp.min.trde.exc.01,"Minister of Economy, Trade and Business",esp.min.trde,'02-01-01,esp.hog
+esp,Ministry of Health,esp.min.hlth.exc.01,Minister of Health,esp.min.hlth,'02-01-01,esp.hog
+esp,"Ministry of Social Rights, Consumer Affairs and 2030 Agenda",esp.min.labr.soc.01.exc.01,"Minister of Social Rights, Consumer Affairs and Agenda 2030",esp.min.labr.soc.01,'02-01-01,esp.hog
+esp,"Ministry of Science, Innovation and Universities",esp.min.scnc.exc.01,"Minister of Science, Innovation and Universities",esp.min.scnc,'02-01-01,esp.hog
+esp,Ministry of Equality,esp.min.labr.soc.02.exc.01,Minister of Equality,esp.min.labr.soc.02,'02-01-01,esp.hog
+esp,"Ministry of Inclusion, Social Security and Migration",esp.min.labr.psn.exc.01,"Minister of Inclusion, Social Security and Migrations",esp.min.labr.psn,'02-01-01,esp.hog
+esp,Ministry of Digital Transformation and Public Function,esp.min.spec.dig.exc.01,Minister of Digital Transformation and of Public Function,esp.min.spec.dig,'02-01-01,esp.hog
+esp,Ministry of Youth and Children,esp.min.hlth.enf.exc.01,Minister of Youth and Children,esp.min.hlth.enf,'02-01-01,esp.hog
+tur,Presidency,tur.hos,President of the Republic of Turkiye,tur.hos,'00-01-01,
+tur,Ministry of Justice,tur.min.jstc.exc.01,Minister of Justice,tur.min.jstc,'02-01-01,tur.hos
+tur,Ministry of Trade,tur.min.trde.exc.01,Minister of Trade,tur.min.trde,'01-01-0,tur.hos
+tur,Ministry of Transport and Infrastructure,tur.min.infr.exc.01,Minister of Transport and Infrastructure,tur.min.infr,'01-01-01,tur.hos
+tur,Ministry of Family and Social Services,tur.min.labr.soc.exc.01,Minister of Family and Social Services,tur.min.labr.soc,'01-01-01,tur.hos
+tur,Ministry of Labor and Social Security,tur.min.labr.exc.01,Minister of Labour and Social Security,tur.min.labr,'02-01-01,tur.hos
+tur,"Ministry of Environment, Urbanization and Climate Change",tur.min.hous.env.exc.01,"Minister of Environment, Urbanisation and Climate Change",tur.min.hous.env,'02-01-01,tur.hos
+tur,Ministry of Foreign Affairs,tur.min.forn.exc.01,Minister of Foreign Affairs,tur.min.forn,'02-01-01,tur.hos
+tur,Ministry of Energy and Natural Resources,tur.min.resr.exc.01,Minister of Energy and Natural Resources,tur.min.resr,'02-01-01,tur.hos
+tur,Ministry of Youth and Sports,tur.min.cltr.ath.exc.01,Minister of Youth and Sports,tur.min.cltr.ath,'02-01-01,tur.hos
+tur,Ministry of Treasury and Finance,tur.min.fisc.exc.01,Minister of Treasury and Finance,tur.min.fisc,'02-01-01,tur.hos
+tur,Ministry of Interior,tur.min.gndm.exc.01,Minister of Interior,tur.min.gndm,'02-01-01,tur.hos
+tur,Ministry of Culture and Tourism,tur.min.cltr.exc.01,Minister of Culture and Tourism,tur.min.cltr,'02-01-01,tur.hos
+tur,Ministry of National Education,tur.min.educ.exc.01,Minister of National Education,tur.min.educ,'02-01-01,tur.hos
+tur,Ministry of National Defense,tur.min.dfns .exc.01,Minister of National Defence,tur.min.dfns ,'02-01-01,tur.hos
+tur,Ministry of Health,tur.min.hlth.exc.01,Minister of Health,tur.min.hlth,'02-01-01,tur.hos
+tur,Ministry of Industry and Technology,tur.min.comc.exc.01,Minister of Industry and Technology,tur.min.comc,'02-01-01,tur.hos
+tur,Ministry of Agriculture and Forestry,tur.min.agrc.exc.01,Minister of Agriculture and Forestry,tur.min.agrc,'02-01-01,tur.hos
+rus,Office of the President of the Russian Federation,rus.hos.spx,Kremlin Press Secretary,rus.hos,'00-03-01,rus.hos
+nga,Christian Association of Nigeria,nga.org.rlg.xtn.mmb.01.exc.01,President of the Christian Association of Nigeria,nga.org.rlg.xtn.mmb.01,'31-01-01,
+gbr,House of Lords,gbr.uh.224,"Lord Temporal, House of Lords",gbr.uh,'03-01-01,gbr.hos
+usa,New York State Assembly,usa.sbs.nys.lh.086,"Member, New York State Assembly",usa.sbs.nys.lh,'14-01-01,
+aus,eSafety Commission,aus.min.infr.cms.psc.exc.01,"Commissioner, eSafety Commission",aus.min.infr.cms.psc,'02-03-01,aus.min.infr.cms.exc.01
+gbr,Office of the Mayor of London,gbr.cpl.exc.01,Mayor of London,gbr.cpl,'20-01-01,gbr.lh
+ukr,National Security and Defense Council of Ukraine,ukr.hos.dfns.cme.exc.01,Secretary of the National Security and Defense Coucil of Ukraine,ukr.hos.dfns.cme,'00-02-01,ukr.hos
+vat,Bishop of Kontagora,vat.sbs.kdn.knt.exc.01,Bishop of Kontagora,vat.sbs.kdn.knt,'10-01-01,vat.hos
+aus,New South Wales Legislative Council,aus.sbs.nsw.lh.040,"Member, New South Wales Legislative Council",aus.sbs.nsw.lh,'14-01-01,
+bra,Supreme Federal Court of Brazil,bra.jstc.grtc.exc.02,Vice President of the Supreme Federal Court of Brazil,bra.jstc.grtc,'04-01-02,
+bra,Office of the president of the Federative Republic of Brazil,bra.hos,President of the Federative Republic of Brazil,bra.hos,'00-01-01,
+igo,Office of the president of the European Commission,igo.002.exc.exc.01,President of the European Commission,igo..002.exc,'51-01-01,
+gnb,Office of the President of Guinea Bissau,gnb.hos,President of Guinea Bissau,gnb.hos,'00-01-01,
+gnb,Military office of the Presidency,gnb.hos.gndm.exc.01,Head of the Military office of the Presidency,gnb.hos.gndm,'00-05-01,gnb.hos
+usa,Criminal Justice Coordinating Council of Georgia,usa.sbs.geo.jstc.vrbn.cmte.exc.01,"Director, Criminal Justice Coordinating Council of Georgia",usa.sbs.geo.jstc.vrbn.cmte,'13-03-01,usa.sbs.geo.exc.01
+usa,Superior Court of Fulton County,usa.sbs.geo.jstc.grtc.vrbn.60.mgs.12,"Judge, Superior Court of Fulton County",usa.sbs.geo.jstc.grtc.vrbn.60,'13-01-01,
+chn,Hong Kong Fire Services Department,chn.sbs.hkg.ntfd.incd.exc.01,"Director, Hong Kong Fire Services Department",chn.sbs.hkg.ntfd.incd, '25-01-01,chn.sbs.hkg.ntfd.exc.01
+kor,Supreme Court of Korea,kor.jstc.grtc.vrbn.exc.01,Chief Justice of the Supreme Court of Korea,kor.jstc.grtc.vrbn,'04-01-01,
+usa,Department of State,usa.min.forn.amb.spc.012,United States Special Envoy for Peace Missions,usa.min.forn, '02-02-01,
+sgp,Ministry of Manpower,sgp.min.labr.exc.01,Singapore Minister of Manpower,sgp.min.labr, '02-01-01,sgp.hog
+ind,Office of the Prime Minister of India,ind.hog,Prime Minister of India,ind.hog, '01-01-01,
+chn,Office of the President of China,chn.hos,President of China,chn.hos, '00-01-01,chn.ccp.cme.exc.01
+chn,Central Committee of the Chinese Communist Party,chn.ccp.cme.exc.01,General Secretary of the Chinese Communist Party,chn.ccp.cme, '60-01-01,
+chn,Central Military Commission of the Communist Party of China,chn.ccp.dfns.cme.exc.01,Chairman of the Central Military Commission of the Communist Party of China,chn.ccp.dfns.cme, '65-01-01,
+cod,Office of the President of the Democratic Republic of the Congo,cod.hos,President of the Democratic Republic of the Congo,cod.hos, '00-01-01,
+rwa,Office of the President of Rwanda,rwa.hos,President of Rwanda,rwa.hos, '00-01-01,
+isr,Israel National Cyber Directorate,isr.hog.dfns.dig.cme.exc.01,Director General of the Israel National Cyber Directorate,isr.hog.dfns.dig.cme, '05-01-01,isr.hog
+irn,Ministry of Intelligence of the Islamic Republic of Iran,irn.min.intl.exc.01,Minister of Intelligence of the Islamic Republic of Iran,irn.min.intl, '02-01-01,
+sgp,Parliament of Singapore,sgp.lh.088,"Leader of the Opposition, Singapore",sgp.lh, '03-02-01,
+bel,The College of Europe,bel.akd.pvt.005.exc.01,Rector of the College of Europe3,bel.akd.pvt.005,33-01-01,
+tha,Royal Thai Army,tha.dfns.ary.spx,Spokesman for the Royal Thai Army,tha.dfns.ary,'05-01-02,tha.min.dfns.exc.01
+ben,Office of the President of Benin,ben.hos,President of Benin,ben.hos,'00-01-01,
+ven,Office of the President of the Bolivarian Republic of Venezuela,ven.hos,President of the Bolivarian Republic of Venezuela,ven.hos,00-01-01,ven.hos
+ven,Honor Guard of the President of the Bolivarian Republic,ven.hos.gndm.exc.01,Commander of the Honor Guard of the President of the Bolivarian Republic,ven.hos.gndm,00-02-01,
+deu,Office of the Minister President of Saxony,deu.sbs.sxn.hog,Minister President of Saxony,deu.sbs.sxn.hog,10-01-01,
+chn,Office of the Hong Kong Secretary for Security,chn.sbs.hkg.ntfd.exc.01,Hong Kong Secretary for Security,chn.sbs.hkg.ntfd ,16-01-01,chn.sbs.hkg.exc.01
+chn,Office of the Chief Executive of Hong Kong,chn.sbs.hkg.exc.01,Chief Executive of Hong Kong,chn.sbs.hkg,10-01-01,
+usa,Office of the Governor of Georgia,usa.sbs.geo.exc.01,Governor of Georgia,usa.sbs.geo,10-01-01,
+usa,Office of the Mayor of Chicago,usa.sbs.ilo.chi.exc.01,Mayor of Chicago,usa.sbs.ilo.chi,20-01-01,
+isr,Office of the Prime Minister of Israel,isr.hog ,Prime Minister of Israel,isr.hog ,01-01-01,
+tha,Ministry of Defense,tha.min.dfns.exc.01,Minister of Defense,tha.min.dfns,02-01-01,tha.hog
+tha,Office of the Prime Minister of Thailans,tha.hog,Prime Minister of Thailand,tha.hog,02-01-01,
+gbr,Crown of the United Kingdom,gbr.hos,King of the United Kingdom,gbr.hos,00-01-01,
+can,Realm of Canada,can.hos,King of Canada,can.hos,00-01-01,
+aus,Realm of Australia,aus.hos,King of Australia,aus.hos,00-01-01,
+jpn,Chrysanthemum Throne,jpn.hos,Emperor of Japan,jpn.hos,00-01-01,
+esp,Crown of Spain,esp.hos,King of Spain,esp.hos,00-01-01,
+rwa,Office of the Prime Minister of Rwanda,rwa.hog,Prime Minister of Rwanda,rwa.hog,01-01-01,rwa.hos
+rwa,Ministry of Finance and Economic Planning,rwa.min.fisc.exc.01,Minister of Finance and Economic Planning,rwa.min.fisc,02-01-01,rwa.hos
+deu,Office of the President of the Federal Republic of Germany,deu.hos,President of the Federal Republic of Germany,deu.hos,00-01-01,
+ukr,Office of the President of Ukraine,ukr.hos ,President of Ukraine,ukr.hos ,00-01-01,
+vat,Papacy,vat.hos,His Holiness the Pope,vat.hos,00-01-01,
+spg,Office of the Prime Minister of Singapore,sgp.hog,Prime Minister of Singapore,sgp.hog,01-01-01,
