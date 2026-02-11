@@ -503,11 +503,37 @@ def _build_hierarchy_data(position, actor_id):
         }
 
     def _get_reports_down(pos, depth, current_position_code):
-        """Recursively get direct reports down to specified depth."""
+        """Recursively get direct reports down to specified depth.
+
+        When a position has more than 4 direct reports, collapse them into
+        a single placeholder node that the frontend renders as a clickable
+        "N Direct Reports" card with a modal list.
+        """
         if depth <= 0:
             return []
+        reports = list(pos.direct_reports)
+        if len(reports) > 4:
+            # Build full list for the modal
+            all_reports = []
+            for report in reports:
+                holder = report.get_current_holder()
+                all_reports.append({
+                    'position_code': report.position_code,
+                    'title': report.position_title,
+                    'holder': holder.get_display_name() if holder else 'Vacant',
+                })
+            return [{
+                'id': pos.position_code + '_placeholder',
+                'title': str(len(reports)) + ' Direct Reports',
+                'holder': 'Click to view all',
+                'position_code': pos.position_code,
+                'is_current': False,
+                'is_placeholder': True,
+                'all_reports': all_reports,
+                'children': []
+            }]
         nodes = []
-        for report in pos.direct_reports:
+        for report in reports:
             is_current = (report.position_code == current_position_code)
             node = _position_node(report, is_current)
             if depth > 1:
@@ -544,11 +570,33 @@ def _build_hierarchy_data(position, actor_id):
 
         # Add peers of current position (other direct reports of immediate parent)
         immediate_parent = ancestors[0]
-        for sibling in immediate_parent.direct_reports:
-            if sibling.position_code == position.position_code:
-                continue  # skip self, added next with children
-            peer_node = _position_node(sibling)
-            parent_node['children'].append(peer_node)
+        peers = [s for s in immediate_parent.direct_reports
+                 if s.position_code != position.position_code]
+
+        if len(peers) > 4:
+            # Collapse peers into a placeholder node
+            all_peer_reports = []
+            for sibling in peers:
+                holder = sibling.get_current_holder()
+                all_peer_reports.append({
+                    'position_code': sibling.position_code,
+                    'title': sibling.position_title,
+                    'holder': holder.get_display_name() if holder else 'Vacant',
+                })
+            parent_node['children'].append({
+                'id': immediate_parent.position_code + '_peers_placeholder',
+                'title': str(len(peers)) + ' Peers',
+                'holder': 'Click to view all',
+                'position_code': immediate_parent.position_code,
+                'is_current': False,
+                'is_placeholder': True,
+                'all_reports': all_peer_reports,
+                'children': []
+            })
+        else:
+            for sibling in peers:
+                peer_node = _position_node(sibling)
+                parent_node['children'].append(peer_node)
 
         # Add current position with its direct reports (2 levels down)
         current_node = _position_node(position, is_current=True)

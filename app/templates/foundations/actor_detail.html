@@ -284,27 +284,109 @@
     var container = document.getElementById('orgchart-container');
     if (!container) return;
 
+    // --- Modal infrastructure ---
+    var modal = document.createElement('div');
+    modal.className = 'hierarchy-modal-overlay';
+    modal.style.display = 'none';
+    modal.innerHTML =
+        '<div class="hierarchy-modal">' +
+            '<div class="hierarchy-modal-header">' +
+                '<h3 class="hierarchy-modal-title"></h3>' +
+                '<button class="hierarchy-modal-close">&times;</button>' +
+            '</div>' +
+            '<div class="hierarchy-modal-body"></div>' +
+        '</div>';
+    document.body.appendChild(modal);
+
+    var modalTitle = modal.querySelector('.hierarchy-modal-title');
+    var modalBody = modal.querySelector('.hierarchy-modal-body');
+    var modalClose = modal.querySelector('.hierarchy-modal-close');
+
+    function closeModal() { modal.style.display = 'none'; }
+    modalClose.addEventListener('click', closeModal);
+    modal.addEventListener('click', function(e) {
+        if (e.target === modal) closeModal();
+    });
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') closeModal();
+    });
+
+    function openReportsModal(title, reports) {
+        modalTitle.textContent = title;
+        modalBody.innerHTML = '';
+        var table = document.createElement('table');
+        table.className = 'hierarchy-modal-table';
+        var thead = document.createElement('thead');
+        thead.innerHTML = '<tr><th>Position Code</th><th>Title</th><th>Holder</th></tr>';
+        table.appendChild(thead);
+        var tbody = document.createElement('tbody');
+        for (var i = 0; i < reports.length; i++) {
+            var r = reports[i];
+            var tr = document.createElement('tr');
+            var tdCode = document.createElement('td');
+            var codeLink = document.createElement('a');
+            codeLink.href = '/positions/' + encodeURIComponent(r.position_code);
+            codeLink.textContent = r.position_code;
+            codeLink.className = 'hierarchy-modal-link';
+            tdCode.appendChild(codeLink);
+            var tdTitle = document.createElement('td');
+            tdTitle.textContent = r.title;
+            var tdHolder = document.createElement('td');
+            tdHolder.textContent = r.holder;
+            tr.appendChild(tdCode);
+            tr.appendChild(tdTitle);
+            tr.appendChild(tdHolder);
+            tbody.appendChild(tr);
+        }
+        table.appendChild(tbody);
+        modalBody.appendChild(table);
+        modal.style.display = 'flex';
+    }
+
+    // --- Tree builder ---
     function buildNode(node) {
         var li = document.createElement('li');
-
         var nodeDiv = document.createElement('div');
-        nodeDiv.className = 'orgchart-node' + (node.is_current ? ' orgchart-node--current' : '');
 
-        var link = document.createElement('a');
-        link.href = '/positions/' + encodeURIComponent(node.position_code);
-        link.className = 'orgchart-node-link';
+        if (node.is_placeholder) {
+            nodeDiv.className = 'orgchart-node orgchart-node--placeholder';
+            var btn = document.createElement('button');
+            btn.className = 'orgchart-node-link orgchart-placeholder-btn';
+            btn.type = 'button';
 
-        var titleEl = document.createElement('div');
-        titleEl.className = 'orgchart-node-title';
-        titleEl.textContent = node.title;
+            var titleEl = document.createElement('div');
+            titleEl.className = 'orgchart-node-title';
+            titleEl.textContent = node.title;
 
-        var holderEl = document.createElement('div');
-        holderEl.className = 'orgchart-node-holder';
-        holderEl.textContent = node.holder;
+            var holderEl = document.createElement('div');
+            holderEl.className = 'orgchart-node-holder';
+            holderEl.textContent = node.holder;
 
-        link.appendChild(titleEl);
-        link.appendChild(holderEl);
-        nodeDiv.appendChild(link);
+            btn.appendChild(titleEl);
+            btn.appendChild(holderEl);
+            btn.addEventListener('click', (function(n) {
+                return function() { openReportsModal(n.title, n.all_reports); };
+            })(node));
+            nodeDiv.appendChild(btn);
+        } else {
+            nodeDiv.className = 'orgchart-node' + (node.is_current ? ' orgchart-node--current' : '');
+            var link = document.createElement('a');
+            link.href = '/positions/' + encodeURIComponent(node.position_code);
+            link.className = 'orgchart-node-link';
+
+            var titleEl = document.createElement('div');
+            titleEl.className = 'orgchart-node-title';
+            titleEl.textContent = node.title;
+
+            var holderEl = document.createElement('div');
+            holderEl.className = 'orgchart-node-holder';
+            holderEl.textContent = node.holder;
+
+            link.appendChild(titleEl);
+            link.appendChild(holderEl);
+            nodeDiv.appendChild(link);
+        }
+
         li.appendChild(nodeDiv);
 
         if (node.children && node.children.length > 0) {
