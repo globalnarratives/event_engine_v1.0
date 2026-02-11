@@ -1,271 +1,271 @@
 ﻿actor_id,position_code,tenure_start,tenure_end,notes
-usa.1971.001,usa.min.forn.exc.01,21-01-25,,Trump IV
-usa.1962.001,usa.min.fisc.exc.01,28-01-25,,Trump IV
-usa.1980.001,usa.min.dfns.exc.01,25-01-25,,Trump IV
-usa.1965.001,usa.min.jstc.exc.01,02-05-25,,Trump IV
-usa.1948.001,usa.min.educ.exc.01,03-03-25,,Trump IV
-usa.1954.001,usa.min.hlth.exc.01,13-02-25,,Trump IV
-usa.1956.001,usa.min.resr.exc.01,02-01-25,,Trump IV
-usa.1961.001,usa.min.comc.exc.01,21-02-25,,Trump IV
-usa.1965.002,usa.min.scnc.exc.01,02-03-25,,Trump IV
-usa.1965.003,usa.min.intl.exc.01,23-01-25,,Trump IV
-usa.1966.001,usa.min.dfns.vet.exc.01,02-05-25,,Trump IV
-usa.1968.001,usa.min.labr.exc.01,03-11-25,,Trump IV
-usa.1971.002,usa.min.infr.exc.01,28-01-25,,Trump IV
-usa.1971.003,usa.min.gndm.exc.01,25-01-25,,Trump IV
-usa.1972.001,usa.min.agrc.exc.01,13-02-25,,Trump IV
-usa.1972.002,usa.min.hous.exc.01,02-05-25,,Trump IV
-usa.1974.001,usa.amb.igo.001.exc.01,21-09-25,,Trump IV
-usa.1976.001,usa.hos.fisc.exc.01,02-07-25,,Trump IV
-usa.1980.002,usa.min.resr.env.exc.01,29-01-25,,Trump IV
-usa.1980.003,usa.hos.trde.exc.01,27-02-25,,Trump IV
-usa.1981.001,usa.hos.intl.exc.01,02-12-25,,Trump IV
-usa.1946.001,usa.hos,20-01-25,,
-fra.1986.001,fra.hog,09-09-25,,
-fra.1977.001,fra.hos,14-05-17,,
-fra.1983.001,fra.min.forn.exc.01,21-09-24,,LeCornu I
-fra.1964.001,fra.min.gndm.exc.01,10-12-25,,LeCornu I
-fra.1960.001,fra.min.dfns.exc.01,10-12-25,,LeCornu I
-fra.1966.001,fra.min.fisc.exc.01,10-05-25,,LeCornu I
-fra.1982.0001,fra.min.jstc.exc.01,23-12-24,,LeCornu I
-fra.1978.001,fra.min.educ.exc.01,10-12-25,,LeCornu I
-fra.1965.001,fra.min.cltr.exc.01,01-11-24,,LeCornu I
-fra.1973.001,fra.min.hlth.exc.01,10-12-25,,LeCornu I
-fra.1957.001,fra.min.labr.exc.01,10-12-25,,LeCornu I
-fra.1956.001,fra.min.resr.exc.01,10-12-25,,LeCornu I
-fra.1956.002,fra.min.agrc.exc.01,21-09-24,,LeCornu I
-fra.1984.001,fra.min.hous.exc.01,10-12-25,,LeCornu I
-fra.1970.001,fra.min.infr.exc.01,23-12-25,,LeCornu I
-fra.1972.001,fra.min.educ.trt.exc.01,10-12-25,,LeCornu I
-fra.1980.001,fra.min.spec.ext.exc.01,10-12-25,,LeCornu I
-fra.1973.002,fra.min.cltr.ath.exc.01,10-05-25,,LeCornu I
-gbr.1962.001,gbr.hog,07-05-24,,
-gbr.1969.001,gbr.min.forn.exc.01,09-05-25,,Starmer II
-gbr.1980.001,gbr.min.gndm.exc.01,09-05-25,,Starmer II
-gbr.1979.001,gbr.min.fisc.exc.01,07-05-24,,Starmer II
-gbr.1960.001,gbr.min.dfns.exc.01,07-05-24,,Starmer II
-gbr.1972.001,gbr.min.jstc.exc.01,09-05-25,,Starmer II
-gbr.1983.001,gbr.min.hlth.exc.01,07-05-24,,Starmer II
-gbr.1983.002,gbr.min.educ.exc.01,07-05-24,,Starmer II
-gbr.1970.001,gbr.min.comc.exc.01,09-05-25,,Starmer II
-gbr.1969.002,gbr.min.resr.exc.01,07-05-24,,Starmer II
-gbr.1971.001,gbr.min.scnc.exc.01,09-05-25,,Starmer II
-gbr.1977.001,gbr.min.agrc.exc.01,09-05-25,,Starmer II
-gbr.1975.001,gbr.min.infr.exc.01,29-11-24,,Starmer II
-gbr.1965.001,gbr.min.labr.exc.01,09-05-25,,Starmer II
-gbr.1963.001,gbr.min.hous.exc.01,09-05-25,,Starmer II
-gbr.1979.002,gbr.min.cltr.exc.01,07-05-24,,Starmer II
-gbr.1953.001,gbr.min.spec.int.01.exc.01,07-05-24,,Starmer II
-gbr.1967.001,gbr.min.spec.int.02.exc.01,09-05-25,,Starmer II
-gbr.1966.001,gbr.min.spec.int.03.exc.01,07-05-24,,Starmer II
-gbr.1986.001,gbr.hog.ops.exc.01,09-05-25,,Starmer II
-gbr.1968.001,gbr.min.jst.exc.01.exc.01,07-05-24,,Starmer II
-gbr.1957.001,gbr.hog.lh.exc.01.exc.01,09-05-25,,Starmer II
-gbr.1959.001,gbr.hog.uh.exc.01.exc.01,07-05-24,,Starmer II
-can.1965.001,can.hog,14-03-25,,
-can.1972.001,can.min.forn.exc.01,13-05-25,,Carney I
-can.1970.001,can.min.fisc.exc.01,14-03-25,,Carney I
-can.1960.001,can.min.dfns.exc.01,13-05-25,,Carney I
-can.1984.001,can.min.jstc.exc.01,13-05-25,,Carney I
-can.1973.001,can.min.gndm.exc.01,13-05-25,,Carney I
-can.1963.001,can.min.hlth.exc.01,13-05-25,,Carney I
-can.1980.001,can.min.spec.int.01.exc.01,13-05-25,,Carney I
-can.1986.001,can.min.spec.int.02.exc.01,13-05-25,,Carney I
-can.1979.001,can.min.comc.exc.01,13-05-25,,Carney I
-can.1976.001,can.min.agrc.exc.01,13-05-25,,Carney I
-can.1966.001,can.min.infr.exc.01,16-09-25,,Carney I
-can.1966.002,can.min.resr.eng.exc.01,13-05-25,,Carney I
-can.1971.001,can.min.resr.env.exc.01,13-05-25,,Carney I
-can.1966.003,can.min.labr.exc.01,13-05-25,,Carney I
-can.1965.002,can.min.jstc.img.exc.01,13-05-25,,Carney I
-can.1964.001,can.min.hous.exc.01,13-05-25,,Carney I
-can.1979.002,can.min.dfns.vet.exc.01,13-05-25,,Carney I
-can.1960.002,can.min.agrc.pec.exc.01,14-03-25,,Carney I
-can.1984.002,can.min.trde.exc.01,13-05-25,,Carney I
-can.1970.002,can.min.cltr.exc.01,14-03-25,,Carney I
-can.1980.002,can.min.labr.soc.exc.01,13-05-25,,Carney I
-can.1983.001,can.min.resr.int.exc.01,13-05-25,,Carney I
-can.1955.001,can.min.gndm.ops.exc.01,13-05-25,,Carney I
-can.1988.001,can.min.spec.ops.exc.01,13-05-25,,Carney I
-aus.1963.001,aus.hog,23-05-22,,
-aus.1978.001,aus.min.forn.exc.01,23-05-22,,Albanese III
-aus.1978.003,aus.min.fisc.exc.01,23-05-22,,Albanese III
-aus.1967.001,aus.min.dfns.exc.01,23-05-22,,Albanese III
-aus.1971.001,aus.min.jstc.exc.01,13-05-25,,Albanese III
-aus.1970.001,aus.min.fisc.ops.exc.01,20-01-25,,Albanese III
-aus.1970.002,aus.min.hlth.exc.01,06-01-22,,Albanese III
-aus.1970.002,aus.min.hlth.soc.exc.01,13-05-25,,Albanese III
-aus.1969.001,aus.min.gndm.exc.01,29-07-24,,Albanese III
-aus.1969.001,aus.min.jstc.img.exc.01,29-07-24,,Albanese III
-aus.1969.001,aus.min.gndm.dig.exc.01,29-07-25,,Albanese III
-aus.1969.001,aus.min.cltr.kns.exc.01,06-01-22,,Albanese III
-aus.1973.001,aus.min.resr.eng.exc.01,06-01-22,,Albanese III
-aus.1972.001,aus.min.educ.exc.01,06-01-22,,Albanese III
-aus.1966.001,aus.min.infr.exc.01,06-01-22,,Albanese III
-aus.1985.001,aus.min.infr.cms.exc.01,13-05-25,,Albanese III
-aus.1973.002,aus.min.resr.env.exc.01,13-05-25,,Albanese III
-aus.1969.002,aus.min.labr.psn.exc.01,13-05-25,,Albanese III
-aus.1978.002,aus.min.labr.exc.01,13-05-25,,Albanese III
-aus.1970.003,aus.min.spec.int.exc.01,29-07-25,,Albanese III
-aus.1980.001,aus.min.hous.exc.01,29-07-24,,Albanese III
-aus.1971.002,aus.min.agrc.exc.01,29-07-24,,Albanese III
-aus.1973.003,aus.min.comc.exc.01,13-05-25,,Albanese III
-aus.1954.001,aus.min.trde.exc.01,06-01-22,,Albanese III
-jpn.1961.003,jpn.hog,21-10-25,,
-jpn.1955.001,jpn.min.forn.exc.01,21-10-25,,Takaichi I
-jpn.1959.001,jpn.min.fisc.exc.01,21-10-25,,Takaichi I
-jpn.1981.001,jpn.min.dfns.exc.01,21-10-25,,Takaichi I
-jpn.1948.001,jpn.min.jstc.exc.01,21-10-25,,Takaichi I
-jpn.1961.001,jpn.min.spec.int.ops.exc.01,21-10-25,,Takaichi I
-jpn.1960.001,jpn.min.comc.exc.01,21-10-25,,Takaichi I
-jpn.1965.001,jpn.min.hlth.exc.01,21-10-25,,Takaichi I
-jpn.1973.001,jpn.min.educ.exc.01,21-10-25,,Takaichi I
-jpn.1982.001,jpn.min.agrc.exc.01,21-10-25,,Takaichi I
-jpn.1961.002,jpn.min.infr.exc.01,21-10-25,,Takaichi I
-jpn.1964.001,jpn.min.resr.env.exc.01,21-10-25,,Takaichi I
-jpn.1959.002,jpn.min.spec.int.exi.01.exc.01,21-10-25,,Takaichi I
-jpn.1969.001,jpn.min.hog.ops.exc.01,21-10-25,,Takaichi I
-jpn.1962.001,jpn.min.comc.dig.exc.01,21-10-25,,Takaichi I
-jpn.1965.002,jpn.min.hog.fisc.chm.exc.01,21-10-25,,Takaichi I
-jpn.1964.002,jpn.hog.hlth.enf.chm.exc.01,21-10-25,,Takaichi I
-jpn.1982.002,jpn.hog.dfns.eco.chm.exc.01,21-10-25,,Takaichi I
-jpn.1965.003,jpn.hog.gndm.env.chm.exc.01,21-10-25,,Takaichi I
-jpn.1969.002,jpn.hog.cltr.eco.chm.exc.01,21-10-25,,Takaichi I
-jpn.1976.001,jpn.hog.int.chm.exc.01,21-10-25,,Takaichi I
-deu.1955.001,deu.hog,05-06-25,,
-deu.1962.001,deu.min.forn.exc.01,05-06-25,,Merz I
-deu.1970.001,deu.min.gndm.exc.01,05-06-25,,Merz I
-deu.1968.001,deu.min.jstc.exc.01,05-06-25,,Merz I
-deu.1978.001,deu.min.fisc.exc.01,05-06-25,,Merz I
-deu.1973.001,deu.min.comc.exc.01,05-06-25,,Merz I
-deu.1968.002,deu.min.labr.exc.01,05-06-25,,Merz I
-deu.1960.001,deu.min.dfns.exc.01,05-06-25,,Merz I
-deu.1965.001,deu.min.agrc.exc.01,05-06-25,,Merz I
-deu.1979.001,deu.min.hlth.exc.01,05-06-25,,Merz I
-deu.1968.003,deu.min.infr.exc.01,05-06-25,,Merz I
-deu.1976.001,deu.min.resr.exc.01,05-06-25,,Merz I
-deu.1975.001,deu.min.labr.soc.exc.01,05-06-25,,Merz I
-deu.1987.001,deu.min.hous.exc.01,05-06-25,,Merz I
-deu.1990.001,deu.min.forn.dev.exc.01,05-06-25,,Merz I
-deu.1978.002,deu.min.scnc.exc.01,05-06-25,,Merz I
-deu.1969.001,deu.min.spec.int.dig.exc.01,05-06-25,,Merz I
-deu.1973.002,deu.min.hog.ops.exc.01,05-06-25,,Merz I
-rus.1952.001,rus.hos,05-07-12,,
-rus.1966.001,rus.hog,16-01-20,,
-rus.1950.001,rus.min.forn.exc.01,03-09-04,,Putin VI
-rus.1959.001,rus.min.dfns.exc.01,14-05-24,,Putin VI
-rus.1961.001,rus.min.gndm.exc.01,21-05-12,,Putin VI
-rus.1965.001,rus.min.jstc.exc.01,21-01-20,,Putin VI
-rus.1972.001,rus.min.gndm.env.exc.01,25-05-22,,Putin VI
-rus.1963.001,rus.min.fisc.exc.01,27-09-11,,Putin VI
-rus.1979.001,rus.min.comc.exc.01,21-01-20,,Putin VI
-rus.1986.001,rus.min.trde.exc.01,14-05-24,,Putin VI
-rus.1961.002,rus.min.resr.eng.exc.01,14-05-24,,Putin VI
-rus.1978.001,rus.min.scnc.exc.01,21-01-20,,Putin VI
-rus.1974.001,rus.min.educ.exc.01,21-01-20,,Putin VI
-rus.1967.001,rus.min.hlth.exc.01,21-01-20,,Putin VI
-rus.1980.001,rus.min.labr.exc.01,21-01-20,,Putin VI
-rus.1979.004,rus.min.agrc.exc.01,14-05-25,,Putin VI
-rus.1981.001,rus.min.resr.exc.01,11-10-20,,Putin VI
-rus.1979.002,rus.min.infr.exc.01,07-08-25,,Putin VI
-rus.1962.001,rus.min.hous.exc.01,11-10-20,,Putin VI
-rus.1980.002,rus.min.cltr.exc.01,21-01-20,,Putin VI
-rus.1981.002,rus.min.cltr.ath.exc.01,14-05-24,,Putin VI
-rus.1979.003,rus.min.jstc.dig.exc.01,21-01-20,,Putin VI
-rus.1980.003,rus.min.spec.int.exc.01,11-10-20,,Putin VI
-esp.1972.002,esp.hog,06-02-18,,
-esp.1972.001,esp.min.forn.exc.01,21-11-23,,Sanchez V
-esp.1970.001,esp.min.spec.ops.exc.01,21-11-23,,Sanchez V
-esp.1956.001,esp.min.dfns.exc.01,21-11-23,,Sanchez V
-esp.1962.001,esp.min.gndm.exc.01,21-11-23,,Sanchez V
-esp.1966.001,esp.min.fisc.exc.01,29-12-23,,Sanchez V
-esp.1968.001,esp.min.infr.exc.01,21-11-23,,Sanchez V
-esp.1977.001,esp.min.educ.exc.01,21-11-23,,Sanchez V
-esp.1971.001,esp.min.labr.exc.01,21-11-23,,Sanchez V
-esp.1965.001,esp.min.comc.exc.01,21-11-23,,Sanchez V
-esp.1957.001,esp.min.agrc.exc.01,21-11-23,,Sanchez V
-esp.1966.002,esp.min.spec.int.exc.01,21-11-23,,Sanchez V
-esp.1976.001,esp.min.resr.env.exc.01,25-11-24,,Sanchez V
-esp.1981.001,esp.min.hous.exc.01,21-11-23,,Sanchez V
-esp.1982.001,esp.min.cltr.exc.01,21-11-23,,Sanchez V
-esp.1985.001,esp.min.trde.exc.01,29-12-23,,Sanchez V
-esp.1974.001,esp.min.hlth.exc.01,21-11-23,,Sanchez V
-esp.1983.001,esp.min.labr.soc.01.exc.01,21-11-23,,Sanchez V
-esp.1980.001,esp.min.scnc.exc.01,21-11-23,,Sanchez V
-esp.1960.001,esp.min.labr.soc.02.exc.01,21-11-23,,Sanchez V
-esp.1975.001,esp.min.labr.psn.exc.01,21-11-23,,Sanchez V
-esp.1971.002,esp.min.spec.dig.exc.01,09-06-24,,Sanchez V
-esp.1973.002,esp.min.hlth.enf.exc.01,21-11-23,,Sanchez V
-tur.1954.001,tur.hos,28-08-14,,
-tur.1971.001,tur.min.jstc.exc.01,06-04-23,,Erdogan IV
-tur.1963.001,tur.min.trde.exc.01,06-04-23,,Erdogan IV
-tur.1966.001,tur.min.infr.exc.01,06-04-23,,Erdogan IV
-tur.1982.001,tur.min.labr.soc.exc.01,06-04-23,,Erdogan IV
-tur.1966.002,tur.min.labr.exc.01,06-04-23,,Erdogan IV
-tur.1976.001,tur.min.hous.env.exc.01,07-02-24,,Erdogan IV
-tur.1968.001,tur.min.forn.exc.01,06-04-23,,Erdogan IV
-tur.1975.001,tur.min.resr.exc.01,06-04-23,,Erdogan IV
-tur.1966.003,tur.min.cltr.ath.exc.01,06-04-23,,Erdogan IV
-tur.1968.002,tur.min.fisc.exc.01,06-04-23,,Erdogan IV
-tur.1970.001,tur.min.gndm.exc.01,06-04-23,,Erdogan IV
-tur.1968.003,tur.min.cltr.exc.01,07-10-18,,Erdogan IV
-tur.1970.002,tur.min.educ.exc.01,06-04-23,,Erdogan IV
-tur.1954.002,tur.min.dfns .exc.01,06-04-23,,Erdogan IV
-tur.1966.004,tur.min.hlth.exc.01,07-02-24,,Erdogan IV
-tur.1984.001,tur.min.comc.exc.01,06-04-23,,Erdogan IV
-tur.1969.001,tur.min.agrc.exc.01,06-04-23,,Erdogan IV
-rus.1967.002,rus.hos.spx,22-05-12,,Putin VI
-nga.1963.001,nga.org.rlg.xtn.mmb.01.exc.01,15-07-22,,Civil Society
-gbr.1949.001,gbr.uh.224,10-11-19,,Upper House
-usa.1991.001,usa.sbs.nys.lh.086,01-01-21,,Subnational Legislature
-aus.1968.001,aus.min.infr.cms.psc.exc.01,15-01-17,,Albanese III
-gbr.1970.002,gbr.cpl.exc.01,05-09-16,,
-ukr.1982.001,ukr.hos.dfns.cme.exc.01,18-07-25,,Zelenskyy II
-nga.1970.001,vat.sbs.kdn.knt.exc.01,04-02-20,,Francis
-fra.1955.001,fra.hos,16-05-07,15-05-12,
-aus.1973.004,aus.sbs.nsw.lh.040,20-04-23,,
-bra.1968.001,bra.jstc.grtc.exc.02,22-03-17,,Temer I
-bra.1955.001,bra.hos,01-01-19,01-01-23,
-deu.1958.001,igo.002.exc.exc.01,12-01-19,,
-gnb.1972.001,gnb.hos,27-02-20,26-11-25,
-gnb.1960.001,gnb.hos,27-11-25,,
-gnb.1960.002,gnb.hos.gndm.exc.01,24-02-21,,
-usa.1956.002,usa.sbs.geo.jstc.vrbn.cmte.exc.01,15-01-18,,
-usa.1988.001,usa.sbs.geo.jstc.grtc.vrbn.60.mgs.12,02-01-23,,
-chn.1968.001,chn.sbs.hkg.ntfd.incd.exc.01,26-03-22,,
-kor.1957.001,kor.jstc.grtc.vrbn.exc.01,12-08-23,,
-usa.1957.001,usa.min.forn.amb.spc.012,07-03-25,,
-sgp.1972.001,sgp.min.labr.exc.01,07-01-25,,
-ind.1950.001,ind.hog,26-05-14,,
-chn.1953.001,chn.hos,14-03-13,,
-chn.1953.001,chn.ccp.cme.exc.01,15-11-12,,
-chn.1953.001,chn.ccp.dfns.cme.exc.01,15-11-12,,
-cod.1963.001,cod.hos,24-01-19,,
-rwa.1957.001,rwa.hos,22-04-00,,
-isr.1975.001,isr.hog.dfns.dig.cme.exc.01,15-05-25,,
-irn.1961.001,irn.min.intl.exc.01,25-08-21,,
-sgp.1976.001,sgp.lh.088,20-08-20,,
-ita.1973.001,bel.akd.pvt.005.exc.01,09-01-20,04-12-25,
-tha.1969.001,tha.dfns.ary.spx,10-03-14,,
-ben.1958.001,ben.hos,04-06-16,,
-ven.1969.001,ven.hos,01-05-26,,
-ven.1962.001,ven.hos,03-05-13,03-01-26,
-ven.1969.002,ven.hos.gndm.exc.01,10-01-24,09-01-26,
-deu.1975.002,deu.sbs.sxn.hog,13-12-17,,
-chn.1965.001,chn.sbs.hkg.ntfd.exc.01,25-06-21,,
-chn.1957.001,chn.sbs.hkg.exc.01,07-01-22,,
-usa.1963.001,usa.sbs.geo.exc.01,14-01-19,,
-usa.1976.001,usa.sbs.ilo.chi.exc.01,15-05-23,,
-isr.1949.001,isr.hog,29-12-22,,
-tha.1966.001,tha.hog,09-07-25,,
-tha.1961.001,tha.min.dfns.exc.01,19-09-25,,
-gbr.1948.001,gbr.hos,09-08-22,,
-gbr.1948.001,can.hos,09-08-22,,
-gbr.1948.001,aus.hos,09-08-22,,
-jpn.1960.002,jpn.hos,05-01-19,,
-esp.1968.002,esp.hos,19-06-14,,
-rwa.1970.001,rwa.hog,25-07-25,,
-deu.1956.001,deu.hos,19-03-17,,
-ukr.1978.001,ukr.hos ,20-05-19,,
-usa.1955.001,vat.hos,08-05-25,,
-sgp.1972.002,sgp.hog,15-05-24,,
+usa.1971.001,usa.min.forn.exc.01,2025-01-21,,Trump IV
+usa.1962.001,usa.min.fisc.exc.01,2025-01-28,,Trump IV
+usa.1980.001,usa.min.dfns.exc.01,2025-01-25,,Trump IV
+usa.1965.001,usa.min.jstc.exc.01,2025-05-02,,Trump IV
+usa.1948.001,usa.min.educ.exc.01,2025-03-03,,Trump IV
+usa.1954.001,usa.min.hlth.exc.01,2025-02-13,,Trump IV
+usa.1956.001,usa.min.resr.exc.01,2025-01-02,,Trump IV
+usa.1961.001,usa.min.comc.exc.01,2025-02-21,,Trump IV
+usa.1965.002,usa.min.scnc.exc.01,2025-03-02,,Trump IV
+usa.1965.003,usa.min.intl.exc.01,2025-01-23,,Trump IV
+usa.1966.001,usa.min.dfns.vet.exc.01,2025-05-02,,Trump IV
+usa.1968.001,usa.min.labr.exc.01,2025-11-03,,Trump IV
+usa.1971.002,usa.min.infr.exc.01,2025-01-28,,Trump IV
+usa.1971.003,usa.min.gndm.exc.01,2025-01-25,,Trump IV
+usa.1972.001,usa.min.agrc.exc.01,2025-02-13,,Trump IV
+usa.1972.002,usa.min.hous.exc.01,2025-05-02,,Trump IV
+usa.1974.001,usa.amb.igo.001.exc.01,2025-09-21,,Trump IV
+usa.1976.001,usa.hos.fisc.exc.01,2025-07-02,,Trump IV
+usa.1980.002,usa.min.resr.env.exc.01,2025-01-29,,Trump IV
+usa.1980.003,usa.hos.trde.exc.01,2025-02-27,,Trump IV
+usa.1981.001,usa.hos.intl.exc.01,2025-12-02,,Trump IV
+usa.1946.001,usa.hos,2025-01-20,,
+fra.1986.001,fra.hog,2025-09-09,,
+fra.1977.001,fra.hos,2017-05-14,,
+fra.1983.001,fra.min.forn.exc.01,2024-09-21,,LeCornu I
+fra.1964.001,fra.min.gndm.exc.01,2025-12-10,,LeCornu I
+fra.1960.001,fra.min.dfns.exc.01,2025-12-10,,LeCornu I
+fra.1966.001,fra.min.fisc.exc.01,2025-05-10,,LeCornu I
+fra.1982.0001,fra.min.jstc.exc.01,2024-12-23,,LeCornu I
+fra.1978.001,fra.min.educ.exc.01,2025-12-10,,LeCornu I
+fra.1965.001,fra.min.cltr.exc.01,2024-11-01,,LeCornu I
+fra.1973.001,fra.min.hlth.exc.01,2025-12-10,,LeCornu I
+fra.1957.001,fra.min.labr.exc.01,2025-12-10,,LeCornu I
+fra.1956.001,fra.min.resr.exc.01,2025-12-10,,LeCornu I
+fra.1956.002,fra.min.agrc.exc.01,2024-09-21,,LeCornu I
+fra.1984.001,fra.min.hous.exc.01,2025-12-10,,LeCornu I
+fra.1970.001,fra.min.infr.exc.01,2025-12-23,,LeCornu I
+fra.1972.001,fra.min.educ.trt.exc.01,2025-12-10,,LeCornu I
+fra.1980.001,fra.min.spec.ext.exc.01,2025-12-10,,LeCornu I
+fra.1973.002,fra.min.cltr.ath.exc.01,2025-05-10,,LeCornu I
+gbr.1962.001,gbr.hog,2024-05-07,,
+gbr.1969.001,gbr.min.forn.exc.01,2025-05-09,,Starmer II
+gbr.1980.001,gbr.min.gndm.exc.01,2025-05-09,,Starmer II
+gbr.1979.001,gbr.min.fisc.exc.01,2024-05-07,,Starmer II
+gbr.1960.001,gbr.min.dfns.exc.01,2024-05-07,,Starmer II
+gbr.1972.001,gbr.min.jstc.exc.01,2025-05-09,,Starmer II
+gbr.1983.001,gbr.min.hlth.exc.01,2024-05-07,,Starmer II
+gbr.1983.002,gbr.min.educ.exc.01,2024-05-07,,Starmer II
+gbr.1970.001,gbr.min.comc.exc.01,2025-05-09,,Starmer II
+gbr.1969.002,gbr.min.resr.exc.01,2024-05-07,,Starmer II
+gbr.1971.001,gbr.min.scnc.exc.01,2025-05-09,,Starmer II
+gbr.1977.001,gbr.min.agrc.exc.01,2025-05-09,,Starmer II
+gbr.1975.001,gbr.min.infr.exc.01,2024-11-29,,Starmer II
+gbr.1965.001,gbr.min.labr.exc.01,2025-05-09,,Starmer II
+gbr.1963.001,gbr.min.hous.exc.01,2025-05-09,,Starmer II
+gbr.1979.002,gbr.min.cltr.exc.01,2024-05-07,,Starmer II
+gbr.1953.001,gbr.min.spec.int.01.exc.01,2024-05-07,,Starmer II
+gbr.1967.001,gbr.min.spec.int.02.exc.01,2025-05-09,,Starmer II
+gbr.1966.001,gbr.min.spec.int.03.exc.01,2024-05-07,,Starmer II
+gbr.1986.001,gbr.hog.ops.exc.01,2025-05-09,,Starmer II
+gbr.1968.001,gbr.min.jst.exc.01.exc.01,2024-05-07,,Starmer II
+gbr.1957.001,gbr.hog.lh.exc.01.exc.01,2025-05-09,,Starmer II
+gbr.1959.001,gbr.hog.uh.exc.01.exc.01,2024-05-07,,Starmer II
+can.1965.001,can.hog,2025-03-14,,
+can.1972.001,can.min.forn.exc.01,2025-05-13,,Carney I
+can.1970.001,can.min.fisc.exc.01,2025-03-14,,Carney I
+can.1960.001,can.min.dfns.exc.01,2025-05-13,,Carney I
+can.1984.001,can.min.jstc.exc.01,2025-05-13,,Carney I
+can.1973.001,can.min.gndm.exc.01,2025-05-13,,Carney I
+can.1963.001,can.min.hlth.exc.01,2025-05-13,,Carney I
+can.1980.001,can.min.spec.int.01.exc.01,2025-05-13,,Carney I
+can.1986.001,can.min.spec.int.02.exc.01,2025-05-13,,Carney I
+can.1979.001,can.min.comc.exc.01,2025-05-13,,Carney I
+can.1976.001,can.min.agrc.exc.01,2025-05-13,,Carney I
+can.1966.001,can.min.infr.exc.01,2025-09-16,,Carney I
+can.1966.002,can.min.resr.eng.exc.01,2025-05-13,,Carney I
+can.1971.001,can.min.resr.env.exc.01,2025-05-13,,Carney I
+can.1966.003,can.min.labr.exc.01,2025-05-13,,Carney I
+can.1965.002,can.min.jstc.img.exc.01,2025-05-13,,Carney I
+can.1964.001,can.min.hous.exc.01,2025-05-13,,Carney I
+can.1979.002,can.min.dfns.vet.exc.01,2025-05-13,,Carney I
+can.1960.002,can.min.agrc.pec.exc.01,2025-03-14,,Carney I
+can.1984.002,can.min.trde.exc.01,2025-05-13,,Carney I
+can.1970.002,can.min.cltr.exc.01,2025-03-14,,Carney I
+can.1980.002,can.min.labr.soc.exc.01,2025-05-13,,Carney I
+can.1983.001,can.min.resr.int.exc.01,2025-05-13,,Carney I
+can.1955.001,can.min.gndm.ops.exc.01,2025-05-13,,Carney I
+can.1988.001,can.min.spec.ops.exc.01,2025-05-13,,Carney I
+aus.1963.001,aus.hog,2022-05-23,,
+aus.1978.001,aus.min.forn.exc.01,2022-05-23,,Albanese III
+aus.1978.003,aus.min.fisc.exc.01,2022-05-23,,Albanese III
+aus.1967.001,aus.min.dfns.exc.01,2022-05-23,,Albanese III
+aus.1971.001,aus.min.jstc.exc.01,2025-05-13,,Albanese III
+aus.1970.001,aus.min.fisc.ops.exc.01,2025-01-20,,Albanese III
+aus.1970.002,aus.min.hlth.exc.01,2022-01-06,,Albanese III
+aus.1970.002,aus.min.hlth.soc.exc.01,2025-05-13,,Albanese III
+aus.1969.001,aus.min.gndm.exc.01,2024-07-29,,Albanese III
+aus.1969.001,aus.min.jstc.img.exc.01,2024-07-29,,Albanese III
+aus.1969.001,aus.min.gndm.dig.exc.01,2025-07-29,,Albanese III
+aus.1969.001,aus.min.cltr.kns.exc.01,2022-01-06,,Albanese III
+aus.1973.001,aus.min.resr.eng.exc.01,2022-01-06,,Albanese III
+aus.1972.001,aus.min.educ.exc.01,2022-01-06,,Albanese III
+aus.1966.001,aus.min.infr.exc.01,2022-01-06,,Albanese III
+aus.1985.001,aus.min.infr.cms.exc.01,2025-05-13,,Albanese III
+aus.1973.002,aus.min.resr.env.exc.01,2025-05-13,,Albanese III
+aus.1969.002,aus.min.labr.psn.exc.01,2025-05-13,,Albanese III
+aus.1978.002,aus.min.labr.exc.01,2025-05-13,,Albanese III
+aus.1970.003,aus.min.spec.int.exc.01,2025-07-29,,Albanese III
+aus.1980.001,aus.min.hous.exc.01,2024-07-29,,Albanese III
+aus.1971.002,aus.min.agrc.exc.01,2024-07-29,,Albanese III
+aus.1973.003,aus.min.comc.exc.01,2025-05-13,,Albanese III
+aus.1954.001,aus.min.trde.exc.01,2022-01-06,,Albanese III
+jpn.1961.003,jpn.hog,2025-10-21,,
+jpn.1955.001,jpn.min.forn.exc.01,2025-10-21,,Takaichi I
+jpn.1959.001,jpn.min.fisc.exc.01,2025-10-21,,Takaichi I
+jpn.1981.001,jpn.min.dfns.exc.01,2025-10-21,,Takaichi I
+jpn.1948.001,jpn.min.jstc.exc.01,2025-10-21,,Takaichi I
+jpn.1961.001,jpn.min.spec.int.ops.exc.01,2025-10-21,,Takaichi I
+jpn.1960.001,jpn.min.comc.exc.01,2025-10-21,,Takaichi I
+jpn.1965.001,jpn.min.hlth.exc.01,2025-10-21,,Takaichi I
+jpn.1973.001,jpn.min.educ.exc.01,2025-10-21,,Takaichi I
+jpn.1982.001,jpn.min.agrc.exc.01,2025-10-21,,Takaichi I
+jpn.1961.002,jpn.min.infr.exc.01,2025-10-21,,Takaichi I
+jpn.1964.001,jpn.min.resr.env.exc.01,2025-10-21,,Takaichi I
+jpn.1959.002,jpn.min.spec.int.exi.01.exc.01,2025-10-21,,Takaichi I
+jpn.1969.001,jpn.min.hog.ops.exc.01,2025-10-21,,Takaichi I
+jpn.1962.001,jpn.min.comc.dig.exc.01,2025-10-21,,Takaichi I
+jpn.1965.002,jpn.min.hog.fisc.chm.exc.01,2025-10-21,,Takaichi I
+jpn.1964.002,jpn.hog.hlth.enf.chm.exc.01,2025-10-21,,Takaichi I
+jpn.1982.002,jpn.hog.dfns.eco.chm.exc.01,2025-10-21,,Takaichi I
+jpn.1965.003,jpn.hog.gndm.env.chm.exc.01,2025-10-21,,Takaichi I
+jpn.1969.002,jpn.hog.cltr.eco.chm.exc.01,2025-10-21,,Takaichi I
+jpn.1976.001,jpn.hog.int.chm.exc.01,2025-10-21,,Takaichi I
+deu.1955.001,deu.hog,2025-06-05,,
+deu.1962.001,deu.min.forn.exc.01,2025-06-05,,Merz I
+deu.1970.001,deu.min.gndm.exc.01,2025-06-05,,Merz I
+deu.1968.001,deu.min.jstc.exc.01,2025-06-05,,Merz I
+deu.1978.001,deu.min.fisc.exc.01,2025-06-05,,Merz I
+deu.1973.001,deu.min.comc.exc.01,2025-06-05,,Merz I
+deu.1968.002,deu.min.labr.exc.01,2025-06-05,,Merz I
+deu.1960.001,deu.min.dfns.exc.01,2025-06-05,,Merz I
+deu.1965.001,deu.min.agrc.exc.01,2025-06-05,,Merz I
+deu.1979.001,deu.min.hlth.exc.01,2025-06-05,,Merz I
+deu.1968.003,deu.min.infr.exc.01,2025-06-05,,Merz I
+deu.1976.001,deu.min.resr.exc.01,2025-06-05,,Merz I
+deu.1975.001,deu.min.labr.soc.exc.01,2025-06-05,,Merz I
+deu.1987.001,deu.min.hous.exc.01,2025-06-05,,Merz I
+deu.1990.001,deu.min.forn.dev.exc.01,2025-06-05,,Merz I
+deu.1978.002,deu.min.scnc.exc.01,2025-06-05,,Merz I
+deu.1969.001,deu.min.spec.int.dig.exc.01,2025-06-05,,Merz I
+deu.1973.002,deu.min.hog.ops.exc.01,2025-06-05,,Merz I
+rus.1952.001,rus.hos,2012-07-05,,
+rus.1966.001,rus.hog,2020-01-16,,
+rus.1950.001,rus.min.forn.exc.01,2004-09-03,,Putin VI
+rus.1959.001,rus.min.dfns.exc.01,2024-05-14,,Putin VI
+rus.1961.001,rus.min.gndm.exc.01,2012-05-21,,Putin VI
+rus.1965.001,rus.min.jstc.exc.01,2020-01-21,,Putin VI
+rus.1972.001,rus.min.gndm.env.exc.01,2022-05-25,,Putin VI
+rus.1963.001,rus.min.fisc.exc.01,2011-09-27,,Putin VI
+rus.1979.001,rus.min.comc.exc.01,2020-01-21,,Putin VI
+rus.1986.001,rus.min.trde.exc.01,2024-05-14,,Putin VI
+rus.1961.002,rus.min.resr.eng.exc.01,2024-05-14,,Putin VI
+rus.1978.001,rus.min.scnc.exc.01,2020-01-21,,Putin VI
+rus.1974.001,rus.min.educ.exc.01,2020-01-21,,Putin VI
+rus.1967.001,rus.min.hlth.exc.01,2020-01-21,,Putin VI
+rus.1980.001,rus.min.labr.exc.01,2020-01-21,,Putin VI
+rus.1979.004,rus.min.agrc.exc.01,2025-05-14,,Putin VI
+rus.1981.001,rus.min.resr.exc.01,2020-10-11,,Putin VI
+rus.1979.002,rus.min.infr.exc.01,2025-08-07,,Putin VI
+rus.1962.001,rus.min.hous.exc.01,2020-10-11,,Putin VI
+rus.1980.002,rus.min.cltr.exc.01,2020-01-21,,Putin VI
+rus.1981.002,rus.min.cltr.ath.exc.01,2024-05-14,,Putin VI
+rus.1979.003,rus.min.jstc.dig.exc.01,2020-01-21,,Putin VI
+rus.1980.003,rus.min.spec.int.exc.01,2020-10-11,,Putin VI
+esp.1972.002,esp.hog,2018-02-06,,
+esp.1972.001,esp.min.forn.exc.01,2023-11-21,,Sanchez V
+esp.1970.001,esp.min.spec.ops.exc.01,2023-11-21,,Sanchez V
+esp.1956.001,esp.min.dfns.exc.01,2023-11-21,,Sanchez V
+esp.1962.001,esp.min.gndm.exc.01,2023-11-21,,Sanchez V
+esp.1966.001,esp.min.fisc.exc.01,2023-12-29,,Sanchez V
+esp.1968.001,esp.min.infr.exc.01,2023-11-21,,Sanchez V
+esp.1977.001,esp.min.educ.exc.01,2023-11-21,,Sanchez V
+esp.1971.001,esp.min.labr.exc.01,2023-11-21,,Sanchez V
+esp.1965.001,esp.min.comc.exc.01,2023-11-21,,Sanchez V
+esp.1957.001,esp.min.agrc.exc.01,2023-11-21,,Sanchez V
+esp.1966.002,esp.min.spec.int.exc.01,2023-11-21,,Sanchez V
+esp.1976.001,esp.min.resr.env.exc.01,2024-11-25,,Sanchez V
+esp.1981.001,esp.min.hous.exc.01,2023-11-21,,Sanchez V
+esp.1982.001,esp.min.cltr.exc.01,2023-11-21,,Sanchez V
+esp.1985.001,esp.min.trde.exc.01,2023-12-29,,Sanchez V
+esp.1974.001,esp.min.hlth.exc.01,2023-11-21,,Sanchez V
+esp.1983.001,esp.min.labr.soc.01.exc.01,2023-11-21,,Sanchez V
+esp.1980.001,esp.min.scnc.exc.01,2023-11-21,,Sanchez V
+esp.1960.001,esp.min.labr.soc.02.exc.01,2023-11-21,,Sanchez V
+esp.1975.001,esp.min.labr.psn.exc.01,2023-11-21,,Sanchez V
+esp.1971.002,esp.min.spec.dig.exc.01,2024-06-09,,Sanchez V
+esp.1973.002,esp.min.hlth.enf.exc.01,2023-11-21,,Sanchez V
+tur.1954.001,tur.hos,2014-08-28,,
+tur.1971.001,tur.min.jstc.exc.01,2023-04-06,,Erdogan IV
+tur.1963.001,tur.min.trde.exc.01,2023-04-06,,Erdogan IV
+tur.1966.001,tur.min.infr.exc.01,2023-04-06,,Erdogan IV
+tur.1982.001,tur.min.labr.soc.exc.01,2023-04-06,,Erdogan IV
+tur.1966.002,tur.min.labr.exc.01,2023-04-06,,Erdogan IV
+tur.1976.001,tur.min.hous.env.exc.01,2024-02-07,,Erdogan IV
+tur.1968.001,tur.min.forn.exc.01,2023-04-06,,Erdogan IV
+tur.1975.001,tur.min.resr.exc.01,2023-04-06,,Erdogan IV
+tur.1966.003,tur.min.cltr.ath.exc.01,2023-04-06,,Erdogan IV
+tur.1968.002,tur.min.fisc.exc.01,2023-04-06,,Erdogan IV
+tur.1970.001,tur.min.gndm.exc.01,2023-04-06,,Erdogan IV
+tur.1968.003,tur.min.cltr.exc.01,2018-10-07,,Erdogan IV
+tur.1970.002,tur.min.educ.exc.01,2023-04-06,,Erdogan IV
+tur.1954.002,tur.min.dfns .exc.01,2023-04-06,,Erdogan IV
+tur.1966.004,tur.min.hlth.exc.01,2024-02-07,,Erdogan IV
+tur.1984.001,tur.min.comc.exc.01,2023-04-06,,Erdogan IV
+tur.1969.001,tur.min.agrc.exc.01,2023-04-06,,Erdogan IV
+rus.1967.002,rus.hos.spx,2012-05-22,,Putin VI
+nga.1963.001,nga.org.rlg.xtn.mmb.01.exc.01,2022-07-15,,Civil Society
+gbr.1949.001,gbr.uh.224,2019-11-10,,Upper House
+usa.1991.001,usa.sbs.nys.lh.086,2021-01-01,,Subnational Legislature
+aus.1968.001,aus.min.infr.cms.psc.exc.01,2017-01-15,,Albanese III
+gbr.1970.002,gbr.cpl.exc.01,2016-09-05,,
+ukr.1982.001,ukr.hos.dfns.cme.exc.01,2025-07-18,,Zelenskyy II
+nga.1970.001,vat.sbs.kdn.knt.exc.01,2020-02-04,,Francis
+fra.1955.001,fra.hos,2007-05-16,2012-05-15,
+aus.1973.004,aus.sbs.nsw.lh.040,2023-04-20,,
+bra.1968.001,bra.jstc.grtc.exc.02,2017-03-22,,Temer I
+bra.1955.001,bra.hos,2019-01-01,2023-01-01,
+deu.1958.001,igo.002.exc.exc.01,2019-01-12,,
+gnb.1972.001,gnb.hos,2020-02-27,2025-11-26,
+gnb.1960.001,gnb.hos,2025-11-27,,
+gnb.1960.002,gnb.hos.gndm.exc.01,2021-02-24,,
+usa.1956.002,usa.sbs.geo.jstc.vrbn.cmte.exc.01,2018-01-15,,
+usa.1988.001,usa.sbs.geo.jstc.grtc.vrbn.60.mgs.12,2023-01-02,,
+chn.1968.001,chn.sbs.hkg.ntfd.incd.exc.01,2022-03-26,,
+kor.1957.001,kor.jstc.grtc.vrbn.exc.01,2023-08-12,,
+usa.1957.001,usa.min.forn.amb.spc.012,2025-03-07,,
+sgp.1972.001,sgp.min.labr.exc.01,2025-01-07,,
+ind.1950.001,ind.hog,2014-05-26,,
+chn.1953.001,chn.hos,2013-03-14,,
+chn.1953.001,chn.ccp.cme.exc.01,2012-11-15,,
+chn.1953.001,chn.ccp.dfns.cme.exc.01,2012-11-15,,
+cod.1963.001,cod.hos,2019-01-24,,
+rwa.1957.001,rwa.hos,2000-04-22,,
+isr.1975.001,isr.hog.dfns.dig.cme.exc.01,2025-05-15,,
+irn.1961.001,irn.min.intl.exc.01,2021-08-25,,
+sgp.1976.001,sgp.lh.088,2020-08-20,,
+ita.1973.001,bel.akd.pvt.005.exc.01,2020-01-09,2025-12-04,
+tha.1969.001,tha.dfns.ary.spx,2014-03-10,,
+ben.1958.001,ben.hos,2016-06-04,,
+ven.1969.001,ven.hos,2026-05-01,,
+ven.1962.001,ven.hos,2013-05-03,2026-01-03,
+ven.1969.002,ven.hos.gndm.exc.01,2024-01-10,2026-01-09,
+deu.1975.002,deu.sbs.sxn.hog,2017-12-13,,
+chn.1965.001,chn.sbs.hkg.ntfd.exc.01,2021-06-25,,
+chn.1957.001,chn.sbs.hkg.exc.01,2022-01-07,,
+usa.1963.001,usa.sbs.geo.exc.01,2019-01-14,,
+usa.1976.001,usa.sbs.ilo.chi.exc.01,2023-05-15,,
+isr.1949.001,isr.hog,2022-12-29,,
+tha.1966.001,tha.hog,2025-07-09,,
+tha.1961.001,tha.min.dfns.exc.01,2025-09-19,,
+gbr.1948.001,gbr.hos,2022-08-09,,
+gbr.1948.001,can.hos,2022-08-09,,
+gbr.1948.001,aus.hos,2022-08-09,,
+jpn.1960.002,jpn.hos,2019-01-05,,
+esp.1968.002,esp.hos,2014-06-19,,
+rwa.1970.001,rwa.hog,2025-07-25,,
+deu.1956.001,deu.hos,2017-03-19,,
+ukr.1978.001,ukr.hos ,2019-05-20,,
+usa.1955.001,vat.hos,2025-05-08,,
+sgp.1972.002,sgp.hog,2024-05-15,,
