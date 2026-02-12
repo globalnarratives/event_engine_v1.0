@@ -222,7 +222,7 @@ nga,Christian Association of Nigeria,nga.org.rlg.xtn.mmb.01.exc.01,President of 
 gbr,House of Lords,gbr.uh.224,"Lord Temporal, House of Lords",gbr.uh,'03-01-01,gbr.hos
 usa,New York State Assembly,usa.sbs.nys.lh.086,"Member, New York State Assembly",usa.sbs.nys.lh,'14-01-01,
 aus,eSafety Commission,aus.min.infr.cms.psc.exc.01,"Commissioner, eSafety Commission",aus.min.infr.cms.psc,'02-03-01,aus.min.infr.cms.exc.01
-gbr,Office of the Mayor of London,gbr.cpl.exc.01,Mayor of London,gbr.cpl,'20-01-01,gbr.lh
+gbr,Office of the Mayor of London,gbr.cpl.exc.01,Mayor of London,gbr.cpl,'20-01-01,
 ukr,National Security and Defense Council of Ukraine,ukr.hos.dfns.cme.exc.01,Secretary of the National Security and Defense Coucil of Ukraine,ukr.hos.dfns.cme,'00-02-01,ukr.hos
 vat,Bishop of Kontagora,vat.sbs.kdn.knt.exc.01,Bishop of Kontagora,vat.sbs.kdn.knt,'10-01-01,vat.hos
 aus,New South Wales Legislative Council,aus.sbs.nsw.lh.040,"Member, New South Wales Legislative Council",aus.sbs.nsw.lh,'14-01-01,
@@ -251,22 +251,22 @@ tha,Royal Thai Army,tha.dfns.ary.spx,Spokesman for the Royal Thai Army,tha.dfns.
 ben,Office of the President of Benin,ben.hos,President of Benin,ben.hos,'00-01-01,
 ven,Office of the President of the Bolivarian Republic of Venezuela,ven.hos,President of the Bolivarian Republic of Venezuela,ven.hos,00-01-01,ven.hos
 ven,Honor Guard of the President of the Bolivarian Republic,ven.hos.gndm.exc.01,Commander of the Honor Guard of the President of the Bolivarian Republic,ven.hos.gndm,00-02-01,
-deu,Office of the Minister President of Saxony,deu.sbs.sxn.hog,Minister President of Saxony,deu.sbs.sxn.hog,10/1/2001,
+deu,Office of the Minister President of Saxony,deu.sbs.sxn.hog,Minister President of Saxony,deu.sbs.sxn.hog,'10-01-01,
 chn,Office of the Hong Kong Secretary for Security,chn.sbs.hkg.ntfd.exc.01,Hong Kong Secretary for Security,chn.sbs.hkg.ntfd ,16-01-01,chn.sbs.hkg.exc.01
-chn,Office of the Chief Executive of Hong Kong,chn.sbs.hkg.exc.01,Chief Executive of Hong Kong,chn.sbs.hkg,10/1/2001,
-usa,Office of the Governor of Georgia,usa.sbs.geo.exc.01,Governor of Georgia,usa.sbs.geo,10/1/2001,
+chn,Office of the Chief Executive of Hong Kong,chn.sbs.hkg.exc.01,Chief Executive of Hong Kong,chn.sbs.hkg,'10-01-01,
+usa,Office of the Governor of Georgia,usa.sbs.geo.exc.01,Governor of Georgia,usa.sbs.geo,'10-01-01,
 usa,Office of the Mayor of Chicago,usa.sbs.ilo.chi.exc.01,Mayor of Chicago,usa.sbs.ilo.chi,20-01-01,
-isr,Office of the Prime Minister of Israel,isr.hog ,Prime Minister of Israel,isr.hog ,1/1/2001,
-tha,Ministry of Defense,tha.min.dfns.exc.01,Minister of Defense,tha.min.dfns,2/1/2001,tha.hog
-tha,Office of the Prime Minister of Thailans,tha.hog,Prime Minister of Thailand,tha.hog,2/1/2001,
+isr,Office of the Prime Minister of Israel,isr.hog,Prime Minister of Israel,isr.hog ,'01-01-01,
+tha,Ministry of Defense,tha.min.dfns.exc.01,Minister of Defense,tha.min.dfns,'02-01-01,tha.hog
+tha,Office of the Prime Minister of Thailans,tha.hog,Prime Minister of Thailand,tha.hog,'01-01-01,
 gbr,Crown of the United Kingdom,gbr.hos,King of the United Kingdom,gbr.hos,00-01-01,
 can,Realm of Canada,can.hos,King of Canada,can.hos,00-01-01,
 aus,Realm of Australia,aus.hos,King of Australia,aus.hos,00-01-01,
 jpn,Chrysanthemum Throne,jpn.hos,Emperor of Japan,jpn.hos,00-01-01,
 esp,Crown of Spain,esp.hos,King of Spain,esp.hos,00-01-01,
-rwa,Office of the Prime Minister of Rwanda,rwa.hog,Prime Minister of Rwanda,rwa.hog,1/1/2001,rwa.hos
-rwa,Ministry of Finance and Economic Planning,rwa.min.fisc.exc.01,Minister of Finance and Economic Planning,rwa.min.fisc,2/1/2001,rwa.hos
+rwa,Office of the Prime Minister of Rwanda,rwa.hog,Prime Minister of Rwanda,rwa.hog,'01-01-01,rwa.hos
+rwa,Ministry of Finance and Economic Planning,rwa.min.fisc.exc.01,Minister of Finance and Economic Planning,rwa.min.fisc,'01-01-01,rwa.hos
 deu,Office of the President of the Federal Republic of Germany,deu.hos,President of the Federal Republic of Germany,deu.hos,00-01-01,
-ukr,Office of the President of Ukraine,ukr.hos ,President of Ukraine,ukr.hos ,00-01-01,
+ukr,Office of the President of Ukraine,ukr.hos,President of Ukraine,ukr.hos ,00-01-01,
 vat,Papacy,vat.hos,His Holiness the Pope,vat.hos,00-01-01,
-spg,Office of the Prime Minister of Singapore,sgp.hog,Prime Minister of Singapore,sgp.hog,1/1/2001,
+spg,Office of the Prime Minister of Singapore,sgp.hog,Prime Minister of Singapore,sgp.hog,'01-01-01,

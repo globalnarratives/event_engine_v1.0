@@ -272,9 +272,9 @@ deu.sbs.sxn.hog,Office of the Minister-President of Saxony,Subnational,10-01,Exe
 chn.sbs.hkg.ntfd ,Office of the Hong Kong Secretary for Security,Subnational,16-01,Emergency Services,chn,chn.sbs.hkg 
 chn.sbs.hkg,Office of the Chief Executive of Hong Kong,Subnational,10-01,Executive,chn,
 usa.sbs.geo,Office of the Governor of Georgia,Subnational,10-01,Executive,usa,
-usa.sbs.ilo.chi ,Office of the Mayor of Chicago,Municipal,20-01,Executive,usa,
+usa.sbs.ilo.chi,Office of the Mayor of Chicago,Municipal,20-01,Executive,usa,
 igo.002.lh,European Parliament,Legislative,52-01,Intergovernmental,igo,
-isr.hog ,Office of the Prime Minister of Israel,Premiership,01-01,,isr,
+isr.hog,Office of the Prime Minister of Israel,Premiership,01-01,,isr,
 tha.min.dfns,Ministry of Defense,Defense,02-01,,tha,tha.hog
 tha.hog,Office of the Prime Minister of Thailand,Premiership,01-01,,tha,
 gbr.hos,Crown of the United Kingdom,Monarch,00-01,,gbr,
@@ -285,6 +285,6 @@ esp.hos,Crown of Spain,Monarch,00-01,,esp,
 rwa.hog,Office of the Prime Minister of Rwanda,Premiership,01-01,,rwa,rwa.hos
 rwa.min.fisc,Ministry of Finance and Economic Planning,Fiscal Management,02-01,,rwa,rwa.hos
 deu.hos,Office of the President of the Federal Republic of Germany,Presidency,00-01,,deu,
-ukr.hos ,Office of the President of Ukraine,Presidency,00-01,,ukr,
+ukr.hos,Office of the President of Ukraine,Presidency,00-01,,ukr,
 vat.hos,Papacy,Monarch,00-01,,vat,
 sgp.hog,Office of the Prime Minister of Singapore,Premiership,01-01,,sgp,
