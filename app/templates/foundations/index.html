@@ -58,6 +58,8 @@
                                             <div class="entity-code-large">
                                                     {% if active_tab == 'actors' %}
                                                         <a href="{{ url_for('foundations.actor_detail', actor_id=entity.code) }}">{{ entity.code }}</a>
+                                                    {% elif active_tab == 'institutions' %}
+                                                        <a href="{{ url_for('foundations.institution_detail', institution_code=entity.code) }}">{{ entity.code }}</a>
                                                     {% else %}
                                                         {{ entity.code }}
                                                     {% endif %}
@@ -165,7 +167,7 @@
                     <div class="expanded-details">
                         {% for detail in position.expanded_details %}
                         <div class="event-detail">
-                            <a href="{{ url_for('events.detail', event_code=detail.event_code) }}">
+                            <a href="{{ url_for('events.detail_cf_route', event_code=detail.event_code) }}">
                                 {{ detail.event_code }}
                             </a>
                             <span>{{ detail.action_code }}</span>
@@ -199,7 +201,7 @@
                     <div class="expanded-details">
                         {% for detail in institution.expanded_details %}
                         <div class="event-detail">
-                            <a href="{{ url_for('events.detail', event_code=detail.event_code) }}">
+                            <a href="{{ url_for('events.detail_cf_route', event_code=detail.event_code) }}">
                                 {{ detail.event_code }}
                             </a>
                             <span>{{ detail.action_code }}</span>
@@ -233,7 +235,7 @@
                     <div class="expanded-details">
                         {% for detail in actor.expanded_details %}
                         <div class="event-detail">
-                            <a href="{{ url_for('events.detail', event_code=detail.event_code) }}">
+                            <a href="{{ url_for('events.detail_cf_route', event_code=detail.event_code) }}">
                                 {{ detail.event_code }}
                             </a>
                             <span>{{ detail.action_code }}</span>

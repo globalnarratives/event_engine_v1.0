@@ -1,0 +1,253 @@
+{% extends "base.html" %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="actor-detail-container">
+    <!-- Left Sidebar: Named Scenarios -->
+    <div class="left-sidebar">
+        <div class="card">
+            <div class="card-header">
+                <h2>Named Scenarios</h2>
+            </div>
+            <div class="card-body">
+                {% if named_scenarios %}
+                    <div class="scenario-list">
+                        {% for scenario in named_scenarios %}
+                        <div class="scenario-item">
+                            <a href="{{ url_for('scenarios.detail', scenario_id=scenario.id) }}">
+                                {{ scenario.scenario_code }}
+                            </a>
+                            <div class="scenario-title">{{ scenario.title }}</div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <p class="empty-state">No scenarios naming this institution</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Center Column: Main Institution Information -->
+    <div class="center-column">
+        <!-- Header Section -->
+        <div class="card actor-header">
+            <div class="card-body">
+                <div class="actor-header-content">
+                    <div class="actor-photo-placeholder">
+                        <div class="photo-circle">
+                            {{ institution.institution_name[:2]|upper }}
+                        </div>
+                    </div>
+                    <div class="actor-basic-info">
+                        <h1 class="actor-name">{{ institution.institution_name }}</h1>
+                        <div class="actor-meta">
+                            <span class="actor-id">{{ institution.institution_code }}</span>
+                            {% if institution.institution_layer %}
+                            <span class="actor-age">Layer {{ institution.institution_layer.lstrip("'") }}</span>
+                            {% endif %}
+                        </div>
+                        <div class="current-positions">
+                            {% if institution.institution_type %}
+                            <div class="current-position">
+                                {{ institution.institution_type }}{% if institution.institution_subtype %} / {{ institution.institution_subtype }}{% endif %}
+                            </div>
+                            {% endif %}
+                            {% if institution.country_code %}
+                            <div class="current-position">
+                                <span class="position-institution">Country: {{ institution.country_code }}</span>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Current Leadership Section -->
+        <div class="card tenure-history">
+            <div class="card-header">
+                <h2>Current Leadership</h2>
+            </div>
+            <div class="card-body">
+                {% if positions_data %}
+                <table class="tenure-table">
+                    <thead>
+                        <tr>
+                            <th>Position</th>
+                            <th>Code</th>
+                            <th>Current Holder</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for pos in positions_data %}
+                        <tr>
+                            <td>
+                                <div class="position-title">{{ pos.position_title }}</div>
+                            </td>
+                            <td>
+                                <a href="{{ url_for('foundations.index', tab='positions') }}" class="position-code" style="color: var(--primary); text-decoration: none;">
+                                    {{ pos.position_code }}
+                                </a>
+                            </td>
+                            <td>
+                                {% if pos.holder_name %}
+                                    <a href="{{ url_for('foundations.actor_detail', actor_id=pos.holder_id) }}" style="color: var(--primary); text-decoration: none; font-weight: 500;">
+                                        {{ pos.holder_name }}
+                                    </a>
+                                {% else %}
+                                    <span style="color: var(--text-tertiary); font-style: italic;">Vacant</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                <p class="empty-state">No executive positions found for this institution</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Right Sidebar: Recent Events -->
+    <div class="right-sidebar">
+        <div class="card">
+            <div class="card-header">
+                <h2>Recent Events</h2>
+            </div>
+            <div class="card-body">
+                <!-- As Subject -->
+                {% if events_as_subject %}
+                <div class="event-category">
+                    <h3>As Subj</h3>
+                    <div class="event-list">
+                        {% for event in events_as_subject[:5] %}
+                        <div class="event-item">
+                            <a href="{{ url_for('events.detail_cf_route', event_code=event.event_code) }}">
+                                {{ event.event_code }}
+                            </a>
+                            <div class="event-meta">
+                                <span class="action-code">{{ event.action_code }}</span>
+                                <span class="event-date">{{ event.rec_timestamp.strftime('%Y-%m-%d') }}</span>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+
+                <!-- As Object -->
+                {% if events_as_object %}
+                <div class="event-category">
+                    <h3>As Obj</h3>
+                    <div class="event-list">
+                        {% for event in events_as_object[:5] %}
+                        <div class="event-item">
+                            <a href="{{ url_for('events.detail_cf_route', event_code=event.event_code) }}">
+                                {{ event.event_code }}
+                            </a>
+                            <div class="event-meta">
+                                <span class="action-code">{{ event.action_code }}</span>
+                                <span class="event-date">{{ event.rec_timestamp.strftime('%Y-%m-%d') }}</span>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+
+                {% if not events_as_subject and not events_as_object %}
+                <p class="empty-state">No recent events (last 30 days)</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Full-Width Organizational Structure (below 3-column layout) -->
+<div style="max-width: 1600px; margin: var(--space-lg) auto 0;">
+    <div class="card">
+        <div class="card-header">
+            <h2>Organizational Structure</h2>
+        </div>
+        <div class="card-body">
+            {% if hierarchy_json and hierarchy_json != 'null' %}
+            <div class="orgchart-wrapper">
+                <div id="orgchart-container"></div>
+            </div>
+            {% else %}
+            <div class="hierarchy-placeholder">
+                <p>No organizational hierarchy data available</p>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+{% if hierarchy_json and hierarchy_json != 'null' %}
+<script>
+(function() {
+    var data = {{ hierarchy_json|safe }};
+    if (!data) return;
+
+    var container = document.getElementById('orgchart-container');
+    if (!container) return;
+
+    // --- Tree builder for institution hierarchy ---
+    function buildNode(node) {
+        var li = document.createElement('li');
+        var nodeDiv = document.createElement('div');
+        nodeDiv.className = 'orgchart-node' + (node.is_current ? ' orgchart-node--current' : '');
+
+        var link = document.createElement('a');
+        link.href = '/foundations/institution/' + encodeURIComponent(node.code);
+        link.className = 'orgchart-node-link';
+
+        var nameEl = document.createElement('div');
+        nameEl.className = 'orgchart-node-title';
+        nameEl.textContent = node.name;
+
+        var codeEl = document.createElement('div');
+        codeEl.className = 'orgchart-node-holder';
+        codeEl.textContent = node.code;
+
+        var leaderEl = document.createElement('div');
+        leaderEl.className = 'orgchart-node-holder';
+        leaderEl.style.marginTop = '2px';
+        leaderEl.style.fontStyle = 'italic';
+        leaderEl.textContent = node.leader;
+
+        link.appendChild(nameEl);
+        link.appendChild(codeEl);
+        link.appendChild(leaderEl);
+        nodeDiv.appendChild(link);
+        li.appendChild(nodeDiv);
+
+        if (node.children && node.children.length > 0) {
+            var childUl = document.createElement('ul');
+            for (var i = 0; i < node.children.length; i++) {
+                childUl.appendChild(buildNode(node.children[i]));
+            }
+            li.appendChild(childUl);
+        }
+
+        return li;
+    }
+
+    var tree = document.createElement('div');
+    tree.className = 'orgchart-tree';
+
+    var rootUl = document.createElement('ul');
+    rootUl.appendChild(buildNode(data));
+    tree.appendChild(rootUl);
+    container.appendChild(tree);
+})();
+</script>
+{% endif %}
+{% endblock %}

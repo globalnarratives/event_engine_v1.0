@@ -212,7 +212,7 @@
                     <div class="event-list">
                         {% for event in events_as_actor[:5] %}
                         <div class="event-item">
-                            <a href="{{ url_for('events.detail', event_code=event.event_code) }}">
+                            <a href="{{ url_for('events.detail_cf_route', event_code=event.event_code) }}">
                                 {{ event.event_code }}
                             </a>
                             <div class="event-meta">
@@ -232,7 +232,7 @@
                     <div class="event-list">
                         {% for event in events_as_subject[:5] %}
                         <div class="event-item">
-                            <a href="{{ url_for('events.detail', event_code=event.event_code) }}">
+                            <a href="{{ url_for('events.detail_cf_route', event_code=event.event_code) }}">
                                 {{ event.event_code }}
                             </a>
                             <div class="event-meta">
@@ -252,7 +252,7 @@
                     <div class="event-list">
                         {% for event in events_as_object[:5] %}
                         <div class="event-item">
-                            <a href="{{ url_for('events.detail', event_code=event.event_code) }}">
+                            <a href="{{ url_for('events.detail_cf_route', event_code=event.event_code) }}">
                                 {{ event.event_code }}
                             </a>
                             <div class="event-meta">

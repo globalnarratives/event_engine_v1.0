@@ -81,6 +81,7 @@ def load_institutions():
         return
     
     count = 0
+    parent_map = {}  # institution_code -> parent_institution_code
     with open(filepath, 'r', encoding='utf-8-sig') as f:
         reader = csv.DictReader(f)
         for row in reader:
@@ -93,10 +94,30 @@ def load_institutions():
                 institution_subtype=row.get('institution_subtype', '')
             )
             db.session.add(institution)
+            # Store parent mapping for second pass
+            parent_code = row.get('parent_institution_code', '').strip()
+            if parent_code:
+                parent_map[row['institution_code']] = parent_code
             count += 1
-    
+
     db.session.commit()
-    print(f"✓ Loaded {count} institutions")
+
+    # Second pass: set parent_institution_code now that all institutions exist
+    updated = 0
+    for inst_code, parent_code in parent_map.items():
+        # Skip self-references
+        if inst_code == parent_code:
+            continue
+        # Only set if parent exists in DB
+        parent = Institution.query.filter_by(institution_code=parent_code).first()
+        if parent:
+            inst = Institution.query.filter_by(institution_code=inst_code).first()
+            if inst:
+                inst.parent_institution_code = parent_code
+                updated += 1
+
+    db.session.commit()
+    print(f"✓ Loaded {count} institutions ({updated} with parent links)")
 
 
 def load_positions():
@@ -112,6 +133,7 @@ def load_positions():
         return
     
     count = 0
+    reports_map = {}  # position_code -> reports_to_position_code
     with open(filepath, 'r', encoding='utf-8-sig') as f:
         reader = csv.DictReader(f)
         for row in reader:
@@ -124,10 +146,30 @@ def load_positions():
                 hierarchy_level=row.get('hierarchy_level', '')
             )
             db.session.add(position)
+            # Store reports_to mapping for second pass
+            reports_to = row.get('reports_to_position_code', '').strip()
+            if reports_to:
+                reports_map[row['position_code']] = reports_to
             count += 1
-    
+
     db.session.commit()
-    print(f"✓ Loaded {count} positions")
+
+    # Second pass: set reports_to_position_code now that all positions exist
+    updated = 0
+    for pos_code, reports_to in reports_map.items():
+        # Skip self-references
+        if pos_code == reports_to:
+            continue
+        # Only set if target position exists in DB
+        target = Position.query.filter_by(position_code=reports_to).first()
+        if target:
+            pos = Position.query.filter_by(position_code=pos_code).first()
+            if pos:
+                pos.reports_to_position_code = reports_to
+                updated += 1
+
+    db.session.commit()
+    print(f"✓ Loaded {count} positions ({updated} with reporting links)")
 
 
 def load_tenures():

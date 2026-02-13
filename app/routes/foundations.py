@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, url_for, flash
+from flask import Blueprint, render_template, request, redirect, url_for, flash, abort
 from flask_login import login_required, current_user
 from app.models import db, Actor, Institution, Tenure, Scenario, Position, ControlFrame, ScenarioEvent, TrackedActor, TrackedInstitution, TrackedPosition
 from datetime import datetime, timedelta
@@ -610,6 +610,94 @@ def _build_hierarchy_data(position, actor_id):
 
     return root
 
+def _build_institution_hierarchy_data(institution_code):
+    """Build institutional hierarchy data: 2 levels up, current institution, peers, 2 levels down.
+
+    Returns a nested dict suitable for JSON serialization for the org chart,
+    or None if institution not found.
+    """
+    institution = Institution.query.filter_by(institution_code=institution_code).first()
+    if not institution:
+        return None
+
+    def _institution_node(inst, is_current=False):
+        """Create a node dict for an institution."""
+        # Get current leader: holder of {institution_code}.exc.01
+        leader_name = None
+        leader_position_code = f"{inst.institution_code}.exc.01"
+        leader_tenure = Tenure.query.filter_by(
+            position_code=leader_position_code,
+            tenure_end=None
+        ).first()
+        if leader_tenure and leader_tenure.actor:
+            leader_name = leader_tenure.actor.get_display_name()
+
+        return {
+            'id': inst.institution_code,
+            'name': inst.institution_name,
+            'code': inst.institution_code,
+            'leader': leader_name or 'No Leader',
+            'is_current': is_current,
+            'children': []
+        }
+
+    def _get_subs_down(inst, depth, current_code):
+        """Recursively get sub-institutions down to specified depth."""
+        if depth <= 0:
+            return []
+        subs = list(inst.sub_institutions)
+        nodes = []
+        for sub in subs:
+            is_current = (sub.institution_code == current_code)
+            node = _institution_node(sub, is_current)
+            if depth > 1:
+                node['children'] = _get_subs_down(sub, depth - 1, current_code)
+            nodes.append(node)
+        return nodes
+
+    # Walk up the chain: collect ancestors (up to 2 levels)
+    ancestors = []
+    current = institution
+    for _ in range(2):
+        parent = current.parent_institution
+        if parent is None:
+            break
+        ancestors.append(parent)
+        current = parent
+
+    # Build tree from topmost ancestor down
+    if ancestors:
+        top = ancestors[-1]  # highest ancestor
+        root = _institution_node(top)
+
+        # Build chain downward through ancestors
+        parent_node = root
+        for i in range(len(ancestors) - 2, -1, -1):
+            anc = ancestors[i]
+            anc_node = _institution_node(anc)
+            parent_node['children'].append(anc_node)
+            parent_node = anc_node
+
+        # Add peers (other sub-institutions of immediate parent)
+        immediate_parent = ancestors[0]
+        peers = [s for s in immediate_parent.sub_institutions
+                 if s.institution_code != institution.institution_code]
+        for sibling in peers:
+            peer_node = _institution_node(sibling)
+            parent_node['children'].append(peer_node)
+
+        # Add current institution with its sub-institutions (2 levels down)
+        current_node = _institution_node(institution, is_current=True)
+        current_node['children'] = _get_subs_down(institution, 2, institution.institution_code)
+        parent_node['children'].append(current_node)
+
+    else:
+        # Current institution is at the top (no ancestors found)
+        root = _institution_node(institution, is_current=True)
+        root['children'] = _get_subs_down(institution, 2, institution.institution_code)
+
+    return root
+
 
 @bp.route('/actor/<actor_id>')
 @login_required
@@ -693,6 +781,72 @@ def actor_detail(actor_id):
                          named_scenarios=named_scenarios,
                          hierarchy_json=hierarchy_json)
 
+@bp.route('/institution/<institution_code>')
+@login_required
+def institution_detail(institution_code):
+    """Display detailed information for a specific institution"""
+    institution = Institution.query.filter_by(
+        institution_code=institution_code
+    ).first_or_404()
+
+    # Get top 2 executive positions
+    positions_data = []
+    for suffix in ['exc.01', 'exc.02']:
+        pos_code = f"{institution_code}.{suffix}"
+        position = Position.query.filter_by(position_code=pos_code).first()
+        if position:
+            current_tenure = Tenure.query.filter_by(
+                position_code=pos_code,
+                tenure_end=None
+            ).first()
+            holder = None
+            holder_id = None
+            if current_tenure and current_tenure.actor:
+                holder = current_tenure.actor.get_display_name()
+                holder_id = current_tenure.actor.actor_id
+            positions_data.append({
+                'position_code': pos_code,
+                'position_title': position.position_title,
+                'holder_name': holder,
+                'holder_id': holder_id
+            })
+
+    # Query scenarios that mention this institution
+    # Scenario model has named_actor but no named_institution field,
+    # so search description for institution code or name
+    named_scenarios = Scenario.query.filter(
+        db.or_(
+            Scenario.description.ilike(f'%{institution_code}%'),
+            Scenario.description.ilike(f'%{institution.institution_name}%')
+        )
+    ).all()
+
+    # Query recent events (last 30 days)
+    cutoff = datetime.now() - timedelta(days=30)
+
+    # Events as subject (JSONB contains)
+    events_as_subject = ControlFrame.query.filter(
+        ControlFrame.identified_subjects.contains([institution_code]),
+        ControlFrame.rec_timestamp >= cutoff
+    ).order_by(ControlFrame.rec_timestamp.desc()).limit(20).all()
+
+    # Events as object (JSONB contains)
+    events_as_object = ControlFrame.query.filter(
+        ControlFrame.identified_objects.contains([institution_code]),
+        ControlFrame.rec_timestamp >= cutoff
+    ).order_by(ControlFrame.rec_timestamp.desc()).limit(20).all()
+
+    # Build institution hierarchy
+    hierarchy_data = _build_institution_hierarchy_data(institution_code)
+    hierarchy_json = json.dumps(hierarchy_data) if hierarchy_data else 'null'
+
+    return render_template('foundations/institution_detail.html',
+                         institution=institution,
+                         positions_data=positions_data,
+                         named_scenarios=named_scenarios,
+                         events_as_subject=events_as_subject,
+                         events_as_object=events_as_object,
+                         hierarchy_json=hierarchy_json)
 
 
 @bp.route('/toggle_track/<entity_type>/<entity_code>', methods=['POST'])
