@@ -849,6 +849,99 @@ def institution_detail(institution_code):
                          hierarchy_json=hierarchy_json)
 
 
+@bp.route('/position/<position_code>')
+@login_required
+def position_detail(position_code):
+    """Display detailed information for a specific position"""
+    # Get position with preloaded relationships
+    position = Position.query.filter_by(position_code=position_code).options(
+        joinedload(Position.tenures).joinedload(Tenure.actor),
+        joinedload(Position.institution)
+    ).first_or_404()
+
+    # Get current holder (tenure with no end date)
+    current_tenure = next((t for t in position.tenures if t.tenure_end is None), None)
+    current_holder = current_tenure.actor if current_tenure else None
+
+    # Get all tenures sorted by start date descending
+    all_tenures = sorted(position.tenures, key=lambda t: t.tenure_start, reverse=True)
+
+    # Calculate duration for each tenure
+    tenures_data = []
+    for tenure in all_tenures:
+        end_date = tenure.tenure_end or datetime.now().date()
+        duration_days = (end_date - tenure.tenure_start).days
+        years = duration_days // 365
+        months = (duration_days % 365) // 30
+        if years > 0:
+            duration_str = f"{years}y {months}m"
+        else:
+            duration_str = f"{months}m"
+        tenures_data.append({
+            'tenure': tenure,
+            'duration': duration_str,
+            'is_current': tenure.tenure_end is None
+        })
+
+    # Organizational context
+    reports_to_position = position.reports_to
+    reports_to_holder = None
+    if reports_to_position:
+        reports_to_holder = reports_to_position.get_current_holder()
+
+    direct_reports = list(position.direct_reports)
+    direct_reports_count = len(direct_reports)
+
+    # Peer positions (same reports_to_position_code)
+    peers = []
+    if position.reports_to_position_code:
+        peers = Position.query.filter(
+            Position.reports_to_position_code == position.reports_to_position_code,
+            Position.position_code != position_code
+        ).all()
+
+    # Query scenarios mentioning this position (search description)
+    named_scenarios = Scenario.query.filter(
+        db.or_(
+            Scenario.description.ilike(f'%{position_code}%'),
+            Scenario.description.ilike(f'%{position.position_title}%')
+        )
+    ).all()
+
+    # Query recent events (last 30 days)
+    cutoff = datetime.now() - timedelta(days=30)
+
+    # Events as subject (JSONB contains)
+    events_as_subject = ControlFrame.query.filter(
+        ControlFrame.identified_subjects.contains([position_code]),
+        ControlFrame.rec_timestamp >= cutoff
+    ).order_by(ControlFrame.rec_timestamp.desc()).limit(20).all()
+
+    # Events as object (JSONB contains)
+    events_as_object = ControlFrame.query.filter(
+        ControlFrame.identified_objects.contains([position_code]),
+        ControlFrame.rec_timestamp >= cutoff
+    ).order_by(ControlFrame.rec_timestamp.desc()).limit(20).all()
+
+    # Build hierarchy data (reuse existing function)
+    hierarchy_data = _build_hierarchy_data(position, None)
+    hierarchy_json = json.dumps(hierarchy_data) if hierarchy_data else 'null'
+
+    return render_template('foundations/position_detail.html',
+                         position=position,
+                         current_tenure=current_tenure,
+                         current_holder=current_holder,
+                         tenures_data=tenures_data,
+                         reports_to_position=reports_to_position,
+                         reports_to_holder=reports_to_holder,
+                         direct_reports_count=direct_reports_count,
+                         peers=peers,
+                         named_scenarios=named_scenarios,
+                         events_as_subject=events_as_subject,
+                         events_as_object=events_as_object,
+                         hierarchy_json=hierarchy_json)
+
+
 @bp.route('/toggle_track/<entity_type>/<entity_code>', methods=['POST'])
 @login_required
 def toggle_track(entity_type, entity_code):

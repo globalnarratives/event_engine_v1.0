@@ -6,11 +6,11 @@
 
 {% block content %}
 <div class="actor-detail-container">
-    <!-- Left Sidebar: Named Actor Scenarios -->
+    <!-- Left Sidebar: Named Scenarios -->
     <div class="left-sidebar">
         <div class="card">
             <div class="card-header">
-                <h2>Named Actor Scenarios</h2>
+                <h2>Named Scenarios</h2>
             </div>
             <div class="card-body">
                 {% if named_scenarios %}
@@ -25,87 +25,114 @@
                         {% endfor %}
                     </div>
                 {% else %}
-                    <p class="empty-state">No scenarios naming this actor</p>
+                    <p class="empty-state">No scenarios naming this position</p>
                 {% endif %}
             </div>
         </div>
     </div>
 
-    <!-- Center Column: Main Actor Information -->
+    <!-- Center Column: Main Position Information -->
     <div class="center-column">
         <!-- Header Section -->
         <div class="card actor-header">
             <div class="card-body">
                 <div class="actor-header-content">
                     <div class="actor-photo-placeholder">
-                        {% set photo_path = 'images/actors/' ~ actor.actor_id|lower ~ '.jpg' %}
-                        {% if photo_path %}
-                            <img src="{{ url_for('static', filename=photo_path) }}" 
-                                alt="{{ actor.get_display_name() }}" 
-                                class="actor-photo"
-                                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                            <div class="photo-circle" style="display:none;">
-                                {{ actor.surname[0] }}{{ actor.given_name[0] }}
-                            </div>
-                        {% else %}
-                            <div class="photo-circle">
-                                {{ actor.surname[0] }}{{ actor.given_name[0] }}
-                            </div>
-                        {% endif %}
+                        <div class="photo-circle">
+                            {{ position.position_title[:2]|upper }}
+                        </div>
                     </div>
                     <div class="actor-basic-info">
-                        <h1 class="actor-name">{{ actor.surname }}, {{ actor.given_name }}</h1>
+                        <h1 class="actor-name">{{ position.position_title }}</h1>
                         <div class="actor-meta">
-                            <span class="actor-id">{{ actor.actor_id }}</span>
-                            {% if actor.birth_year %}
-                            <span class="actor-age">Born {{ actor.birth_year }} (Age: {{ 2026 - actor.birth_year }})</span>
+                            <span class="actor-id">{{ position.position_code }}</span>
+                            {% if position.hierarchy_level %}
+                            <span class="actor-age">Level: {{ position.hierarchy_level }}</span>
                             {% endif %}
                         </div>
                         <div class="current-positions">
-                            {% for tenure in actor.tenures if not tenure.tenure_end %}
                             <div class="current-position">
-                                {{ tenure.position.position_title }}
-                                <span class="position-institution">({{ tenure.position.institution.institution_name }})</span>
+                                <a href="{{ url_for('foundations.institution_detail', institution_code=position.institution_code) }}" style="color: var(--primary); text-decoration: none;">
+                                    {{ position.institution.institution_name }}
+                                </a>
                             </div>
-                            {% endfor %}
-                        </div>
-                        <div class="relationships-link">
-                            <a href="#family-associates">Family & Professional Associates →</a>
+                            <div class="current-position">
+                                {% if current_holder %}
+                                    <span class="status-badge" style="background: rgba(34, 197, 94, 0.15); color: #22c55e; padding: 2px 8px; border-radius: 4px; font-size: 0.85rem;">Occupied</span>
+                                {% else %}
+                                    <span class="status-badge" style="background: rgba(239, 68, 68, 0.15); color: #ef4444; padding: 2px 8px; border-radius: 4px; font-size: 0.85rem;">Vacant</span>
+                                {% endif %}
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Tenure History Section -->
+        <!-- Current Holder Card -->
+        <div class="card tenure-history">
+            <div class="card-header">
+                <h2>Current Holder</h2>
+            </div>
+            <div class="card-body">
+                {% if current_holder %}
+                <div style="display: flex; align-items: center; gap: var(--space-md);">
+                    <div class="actor-photo-placeholder">
+                        {% set photo_path = 'images/actors/' ~ current_holder.actor_id|lower ~ '.jpg' %}
+                        <img src="{{ url_for('static', filename=photo_path) }}"
+                            alt="{{ current_holder.get_display_name() }}"
+                            class="actor-photo"
+                            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="photo-circle" style="display:none;">
+                            {{ current_holder.surname[0] }}{{ current_holder.given_name[0] }}
+                        </div>
+                    </div>
+                    <div>
+                        <div style="font-weight: 500;">
+                            <a href="{{ url_for('foundations.actor_detail', actor_id=current_holder.actor_id) }}" style="color: var(--primary); text-decoration: none;">
+                                {{ current_holder.get_display_name() }}
+                            </a>
+                        </div>
+                        {% if current_tenure %}
+                        <div style="color: var(--text-secondary); font-size: 0.85rem; margin-top: 4px;">
+                            Since {{ current_tenure.tenure_start.strftime('%Y-%m-%d') }}
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+                {% else %}
+                <p class="empty-state">Position currently vacant</p>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Tenure History Table -->
         <div class="card tenure-history">
             <div class="card-header">
                 <h2>Tenure History</h2>
             </div>
             <div class="card-body">
-                {% if actor.tenures %}
+                {% if tenures_data %}
                 <table class="tenure-table">
                     <thead>
                         <tr>
-                            <th>Position</th>
-                            <th>Start</th>
-                            <th>End</th>
-                            <th>Related Events</th>
+                            <th>Actor</th>
+                            <th>Start Date</th>
+                            <th>End Date</th>
+                            <th>Duration</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {% for tenure in actor.tenures|sort(attribute='tenure_start', reverse=True) %}
-                        <tr class="{% if not tenure.tenure_end %}current-tenure{% endif %}">
+                        {% for td in tenures_data %}
+                        <tr class="{% if td.is_current %}current-tenure{% endif %}">
                             <td>
-                                <div class="position-title">{{ tenure.position.position_title }}</div>
-                                <div class="position-code">{{ tenure.position.position_code }}</div>
+                                <a href="{{ url_for('foundations.actor_detail', actor_id=td.tenure.actor.actor_id) }}" style="color: var(--primary); text-decoration: none;">
+                                    {{ td.tenure.actor.get_display_name() }}
+                                </a>
                             </td>
-                            <td>{{ tenure.tenure_start.strftime('%Y-%m-%d') }}</td>
-                            <td>{{ tenure.tenure_end.strftime('%Y-%m-%d') if tenure.tenure_end else 'Present' }}</td>
-                            <td>
-                                <!-- Placeholder for event count during this tenure -->
-                                <span class="event-count-placeholder">—</span>
-                            </td>
+                            <td>{{ td.tenure.tenure_start.strftime('%Y-%m-%d') }}</td>
+                            <td>{{ td.tenure.tenure_end.strftime('%Y-%m-%d') if td.tenure.tenure_end else 'Present' }}</td>
+                            <td>{{ td.duration }}</td>
                         </tr>
                         {% endfor %}
                     </tbody>
@@ -116,83 +143,58 @@
             </div>
         </div>
 
-        <!-- Current Hierarchy Section -->
-        <div class="card current-hierarchy" id="family-associates">
+        <!-- Organizational Context Card -->
+        <div class="card tenure-history">
             <div class="card-header">
-                <h2>Current Hierarchy</h2>
+                <h2>Organizational Context</h2>
             </div>
             <div class="card-body">
-                {% if hierarchy_json and hierarchy_json != 'null' %}
-                <div class="orgchart-wrapper">
-                    <div id="orgchart-container"></div>
-                </div>
-                {% else %}
-                <div class="hierarchy-placeholder">
-                    <p>No current position found for hierarchy display</p>
-                </div>
-                {% endif %}
-            </div>
-        </div>
-
-        <!-- Family & Professional Associates Section -->
-        <div class="card relationships-section">
-            <div class="card-header">
-                <h2>Family & Professional Associates</h2>
-            </div>
-            <div class="card-body">
-                {% if family_relationships or professional_relationships %}
-                    {% if family_relationships %}
-                    <div class="relationship-category">
-                        <h3>Family</h3>
-                        <div class="relationship-list">
-                            {% for rel in family_relationships %}
-                            <div class="relationship-item">
-                                <span class="relationship-label">{{ rel.label }}</span>
-                                <a href="{{ url_for('foundations.actor_detail', actor_id=rel.actor_id) }}" class="relationship-actor">
-                                    {{ rel.display_name }}
-                                </a>
-                                {% if rel.notes %}
-                                <span class="relationship-notes">{{ rel.notes }}</span>
-                                {% endif %}
-                            </div>
-                            {% endfor %}
+                <div style="display: flex; flex-direction: column; gap: var(--space-md);">
+                    <!-- Reports To -->
+                    <div>
+                        <div style="color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 4px;">Reports To</div>
+                        {% if reports_to_position %}
+                        <div style="display: flex; align-items: center; gap: var(--space-sm);">
+                            <a href="{{ url_for('foundations.position_detail', position_code=reports_to_position.position_code) }}" style="color: var(--primary); text-decoration: none;">
+                                {{ reports_to_position.position_title }}
+                            </a>
+                            <span style="color: var(--text-tertiary); font-size: 0.8rem;">({{ reports_to_position.position_code }})</span>
+                            {% if reports_to_holder %}
+                            <span style="color: var(--text-secondary); font-size: 0.85rem;">- {{ reports_to_holder.get_display_name() }}</span>
+                            {% endif %}
                         </div>
+                        {% else %}
+                        <div style="color: var(--text-tertiary); font-style: italic;">Top-level position (no superior)</div>
+                        {% endif %}
                     </div>
-                    {% endif %}
 
-                    {% if professional_relationships %}
-                    <div class="relationship-category">
-                        <h3>Professional</h3>
-                        <div class="relationship-list">
-                            {% for rel in professional_relationships %}
-                            <div class="relationship-item">
-                                <span class="relationship-label">{{ rel.label }}</span>
-                                <a href="{{ url_for('foundations.actor_detail', actor_id=rel.actor_id) }}" class="relationship-actor">
-                                    {{ rel.display_name }}
-                                </a>
-                                {% if rel.notes %}
-                                <span class="relationship-notes">{{ rel.notes }}</span>
-                                {% endif %}
-                            </div>
-                            {% endfor %}
+                    <!-- Direct Reports -->
+                    <div>
+                        <div style="color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 4px;">Direct Reports</div>
+                        {% if direct_reports_count > 0 %}
+                        <div>
+                            <a href="#hierarchy-section" style="color: var(--primary); text-decoration: none;">
+                                {{ direct_reports_count }} position{{ 's' if direct_reports_count != 1 else '' }}
+                            </a>
                         </div>
+                        {% else %}
+                        <div style="color: var(--text-tertiary); font-style: italic;">No direct reports</div>
+                        {% endif %}
                     </div>
-                    {% endif %}
-                {% else %}
-                    <p class="empty-state">No relationships recorded</p>
-                {% endif %}
-            </div>
-        </div>
 
-        <!-- Event Metrics Section (Placeholder) -->
-        <div class="card event-metrics">
-            <div class="card-header">
-                <h2>Event Metrics</h2>
-            </div>
-            <div class="card-body">
-                <div class="metrics-placeholder">
-                    <p>Event frequency and action type distribution table will be rendered here</p>
-                    <p class="placeholder-note">(Rows: as subj / as obj / as actor × Columns: medium/short timeframes)</p>
+                    <!-- Peer Positions -->
+                    <div>
+                        <div style="color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 4px;">Peer Positions</div>
+                        {% if peers %}
+                        <div>
+                            <a href="#hierarchy-section" style="color: var(--primary); text-decoration: none;">
+                                {{ peers|length }} peer{{ 's' if peers|length != 1 else '' }}
+                            </a>
+                        </div>
+                        {% else %}
+                        <div style="color: var(--text-tertiary); font-style: italic;">No peer positions</div>
+                        {% endif %}
+                    </div>
                 </div>
             </div>
         </div>
@@ -205,26 +207,6 @@
                 <h2>Recent Events</h2>
             </div>
             <div class="card-body">
-                <!-- As Actor -->
-                {% if events_as_actor %}
-                <div class="event-category">
-                    <h3>As Actor</h3>
-                    <div class="event-list">
-                        {% for event in events_as_actor[:5] %}
-                        <div class="event-item">
-                            <a href="{{ url_for('events.detail_cf_route', event_code=event.event_code) }}">
-                                {{ event.event_code }}
-                            </a>
-                            <div class="event-meta">
-                                <span class="action-code">{{ event.action_code }}</span>
-                                <span class="event-date">{{ event.rec_timestamp.strftime('%Y-%m-%d') }}</span>
-                            </div>
-                        </div>
-                        {% endfor %}
-                    </div>
-                </div>
-                {% endif %}
-
                 <!-- As Subject -->
                 {% if events_as_subject %}
                 <div class="event-category">
@@ -265,10 +247,30 @@
                 </div>
                 {% endif %}
 
-                {% if not events_as_actor and not events_as_subject and not events_as_object %}
+                {% if not events_as_subject and not events_as_object %}
                 <p class="empty-state">No recent events (last 30 days)</p>
                 {% endif %}
             </div>
+        </div>
+    </div>
+</div>
+
+<!-- Full-Width Position Hierarchy (below 3-column layout) -->
+<div style="max-width: 1600px; margin: var(--space-lg) auto 0;" id="hierarchy-section">
+    <div class="card">
+        <div class="card-header">
+            <h2>Position Hierarchy</h2>
+        </div>
+        <div class="card-body">
+            {% if hierarchy_json and hierarchy_json != 'null' %}
+            <div class="orgchart-wrapper">
+                <div id="orgchart-container"></div>
+            </div>
+            {% else %}
+            <div class="hierarchy-placeholder">
+                <p>No hierarchy data available for this position</p>
+            </div>
+            {% endif %}
         </div>
     </div>
 </div>

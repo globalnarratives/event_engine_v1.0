@@ -61,7 +61,7 @@
                                                     {% elif active_tab == 'institutions' %}
                                                         <a href="{{ url_for('foundations.institution_detail', institution_code=entity.code) }}">{{ entity.code }}</a>
                                                     {% else %}
-                                                        {{ entity.code }}
+                                                        <a href="{{ url_for('foundations.position_detail', position_code=entity.code) }}">{{ entity.code }}</a>
                                                     {% endif %}
                                                 </div>
                                                 <div class="entity-name-full">

@@ -89,7 +89,7 @@
                                 <div class="position-title">{{ pos.position_title }}</div>
                             </td>
                             <td>
-                                <a href="{{ url_for('foundations.index', tab='positions') }}" class="position-code" style="color: var(--primary); text-decoration: none;">
+                                <a href="{{ url_for('foundations.position_detail', position_code=pos.position_code) }}" class="position-code" style="color: var(--primary); text-decoration: none;">
                                     {{ pos.position_code }}
                                 </a>
                             </td>
