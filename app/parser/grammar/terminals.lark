@@ -176,6 +176,7 @@ FACET_8N: /[0-9]{8}/
 POSITION_CODE.2: COUNTRY_CODE "." INS_TOP "." MIN_FACET_01 ("." MIN_FACET_02)* ("." FACET_2N)? ("." RANK) ("." (FACET_2N | FACET_3N))?
              | COUNTRY_CODE "." INS_TOP "." MIN_FACET_01 ".delg"
              | COUNTRY_CODE "." ("hos" | "hog" )
+             | COUNTRY_CODE ".cpl" ("." RANK) ("." FACET_2N)
              | "*.exc.01"
 
 ACTOR_CODE: COUNTRY_CODE "." FACET_YEAR "." FACET_3N
