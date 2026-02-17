@@ -189,7 +189,7 @@ INSTITUTION_CODE: COUNTRY_CODE "." INS_TOP "." MIN_FACET_01 ("." MIN_FACET_02)* 
                 | "igo" ("." REGION_CODE)? "." FACET_3N "." MIN_FACET_01 ("." MIN_FACET_02)*
 
 MISC_ENTITY: "indv.und"
-            | COUNTRY_CODE ".prl" "." FACET_YEAR "." FACET_3N ".lex"
+            | COUNTRY_CODE (".uh" | ".lh") "." FACET_3N "-" FACET_YEAR "-" FACET_2N ".lex"
             | "sbs" "." MIN_FACET_02 ".lex"
             | "unk" "." ( QTY_FACET | "com" | "indv" )
             | "(" (MIN_FACET_01 | MIN_FACET_02) ")"
