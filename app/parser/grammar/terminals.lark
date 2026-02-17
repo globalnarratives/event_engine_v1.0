@@ -213,6 +213,7 @@ QUANTITY: (FACET_2N "." QTY_FACET) | (FACET_3N "." QTY_FACET)
 LOCATION : COUNTRY_CODE ".cpl"
          | COUNTRY_CODE ".sbs" "." SUBSTATE ("." SUBSTATE)* ".cpl"?
          | "*.loc"
+         | "("COUNTRY_CODE":"COUNTRY_CODE")"".fron"
 
         // *.loc as placeholder before resolution of anaphoric asterisk
 
