@@ -2,29 +2,17 @@ from flask_wtf import FlaskForm # type: ignore
 from wtforms import StringField, TextAreaField, DateField, SelectField, SelectMultipleField, HiddenField # type:ignore
 from wtforms.validators import DataRequired, Length, Optional, ValidationError, Regexp # type: ignore
 from datetime import date
+from app.reference_data import COUNTRY_REGIONS
+from app.reference_data import REGION_NAMES
 import re
 
-# Define regions once - DRY principle
 REGION_CHOICES = [
-    ('weu', 'Western Europe'),
-    ('eeu', 'Eastern Europe'),
-    ('nam', 'North America'),
-    ('sam', 'South America'),
-    ('cmb', 'Central America & Caribbean'),
-    ('nea', 'Northeast Asia'),
-    ('sea', 'Southeast Asia'),
-    ('oce', 'Oceania'),
-    ('sas', 'South and Central Asia'),
-    ('mea', 'Middle East and North Africa'),
-    ('eaf', 'East Africa'),
-    ('caf', 'Central Africa'),
-    ('saf', 'Southern Africa'),
-    ('waf', 'West Africa')
+    (code.lower(), name) 
+    for code, name in sorted(REGION_NAMES.items(), key=lambda x: x[1])
 ]
 
 # For search forms that need an "All" option
 REGION_CHOICES_WITH_ALL = [('', 'All Regions')] + REGION_CHOICES
-
 
 class EventCFCreationForm(FlaskForm):
     """Control Frame form for creating CIE-coded events with parser integration"""
@@ -90,12 +78,28 @@ class EventCFCreationForm(FlaskForm):
             raise ValidationError('Event date cannot be in the future')
     
     def validate_event_actor(self, field):
-        """Basic validation of event actor code format"""
-        # Should match pattern like: xxx.yyy.zzz or xxx.yyy.zzz.nnn
-        # We'll do database validation in the route
-        if not re.match(r'^[a-z]{3}(\.[a-z]{3,4})+(\.\d{2})?$', field.data.lower()):
-            raise ValidationError('Event actor must be a valid CIE code (e.g., rus.hos.spx)')
-
+        """Validate event actor code format - accepts both position codes and actor codes"""
+        value = field.data.lower()
+        
+        # Pattern 1: Position code (e.g., rus.hos.spx or rus.hos.spx.01)
+        position_pattern = r'^[a-z]{3}(\.[a-z]{3,4})+(\.\d{2})?$'
+        
+        # Pattern 2: Actor code (e.g., usa.2024.001)
+        actor_pattern = r'^([a-z]{3})\.(\d{4})\.(\d{3})$'
+        
+        # Check if it matches position pattern
+        if re.match(position_pattern, value):
+            return  # Valid position code
+        
+        # Check if it matches actor pattern
+        actor_match = re.match(actor_pattern, value)
+        if actor_match:
+            country_code = actor_match.group(1)
+            # Validate that country code exists in reference data
+            if country_code in COUNTRY_REGIONS:
+                return  # Valid actor code
+            else:
+                raise ValidationError(f'Invalid country code: {country_code}')
 
 class EventCreationForm(FlaskForm):
     """Form for creating CIE-coded events from articles"""

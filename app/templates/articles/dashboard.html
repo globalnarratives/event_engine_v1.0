@@ -68,6 +68,9 @@
                 <table class="table">
                     <thead>
                         <tr>
+                            <th style="width: 40px;">
+                                <input type="checkbox" id="select-all" style="cursor: pointer;">
+                            </th>
                             <th>Headline</th>
                             <th>Source</th>
                             <th>Published</th>
@@ -78,6 +81,9 @@
                     <tbody>
                         {% for article in articles.items %}
                         <tr>
+                            <td>
+                                <input type="checkbox" class="article-checkbox" value="{{ article.article_id }}" style="cursor: pointer;">
+                            </td>
                             <td>
                                 <a href="{{ article.url }}" target="_blank" class="text-accent">
                                     {{ article.headline }}
@@ -93,7 +99,7 @@
                                         <button type="submit" class="btn btn-secondary" style="font-size: 0.75rem; padding: 0.25rem 0.75rem;">Mark Processed</button>
                                     </form>
                                     <form method="POST" action="{{ url_for('articles.mark_junk', article_id=article.article_id) }}" style="display: inline;">
-                                        <button type="submit" class="btn btn-warning" style="font-size: 0.75rem; padding: 0.25rem 0.75rem;">Mark Junk</button>
+                                        <button type="button" class="btn btn-warning mark-junk-btn" data-article-id="{{ article.article_id }}" style="font-size: 0.75rem; padding: 0.25rem 0.75rem;">Mark Junk</button>
                                     </form>
                                 </div>
                             </td>
@@ -128,45 +134,70 @@
 
 {% block extra_js %}
 <script>
-// Handle Mark Junk buttons with AJAX
 document.addEventListener('DOMContentLoaded', function() {
-    const junkForms = document.querySelectorAll('form[action*="mark_junk"]');
+    const selectAllCheckbox = document.getElementById('select-all');
+    const articleCheckboxes = document.querySelectorAll('.article-checkbox');
+    const markJunkButtons = document.querySelectorAll('.mark-junk-btn');
     
-    junkForms.forEach(form => {
-        form.addEventListener('submit', function(e) {
-            e.preventDefault(); // Stop normal form submission
+    // Select/deselect all
+    if (selectAllCheckbox) {
+        selectAllCheckbox.addEventListener('change', function() {
+            articleCheckboxes.forEach(checkbox => {
+                checkbox.checked = this.checked;
+            });
+        });
+    }
+    
+    // Handle Mark Junk clicks
+    markJunkButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            // Get selected checkboxes
+            const selectedIds = Array.from(articleCheckboxes)
+                .filter(cb => cb.checked)
+                .map(cb => cb.value);
             
-            const row = this.closest('tr');
-            const url = this.action;
+            // If checkboxes are selected, mark those as junk
+            // Otherwise, mark just the clicked article as junk
+            const idsToMark = selectedIds.length > 0 ? selectedIds : [this.dataset.articleId];
             
-            // Make AJAX request
-            fetch(url, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                }
-            })
-            .then(response => {
-                if (response.ok) {
-                    // Fade out and remove the row
-                    row.style.transition = 'opacity 0.3s ease';
-                    row.style.opacity = '0';
-                    setTimeout(() => row.remove(), 300);
-                    
-                    // Show success message (optional - creates a temporary message)
-                    showMessage('Article marked as junk', 'success');
-                } else {
-                    showMessage('Failed to mark article as junk', 'error');
-                }
+            const confirmMsg = idsToMark.length > 1 
+                ? `Mark ${idsToMark.length} articles as junk?`
+                : 'Mark this article as junk?';
+            
+            if (!confirm(confirmMsg)) return;
+            
+            // Mark each article as junk
+            Promise.all(idsToMark.map(id => 
+                fetch(`/articles/mark-junk/${id}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+                })
+            ))
+            .then(responses => {
+                // Remove rows for successfully marked articles
+                idsToMark.forEach(id => {
+                    const checkbox = document.querySelector(`.article-checkbox[value="${id}"]`);
+                    if (checkbox) {
+                        const row = checkbox.closest('tr');
+                        row.style.transition = 'opacity 0.3s ease';
+                        row.style.opacity = '0';
+                        setTimeout(() => row.remove(), 300);
+                    }
+                });
+                
+                showMessage(`${idsToMark.length} article(s) marked as junk`, 'success');
+                
+                // Uncheck select-all
+                if (selectAllCheckbox) selectAllCheckbox.checked = false;
             })
             .catch(error => {
                 console.error('Error:', error);
-                showMessage('Error marking article as junk', 'error');
+                showMessage('Error marking articles as junk', 'error');
             });
         });
     });
     
-    // Do the same for Mark Processed buttons
+    // Also handle Mark Processed with same multi-select logic
     const processedForms = document.querySelectorAll('form[action*="mark_processed"]');
     
     processedForms.forEach(form => {
@@ -178,9 +209,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             fetch(url, {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                }
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
             })
             .then(response => {
                 if (response.ok) {
@@ -201,7 +230,6 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Helper function to show temporary messages
     function showMessage(text, type) {
-        const container = document.querySelector('.container');
         const message = document.createElement('div');
         message.className = 'card';
         message.style.cssText = `
