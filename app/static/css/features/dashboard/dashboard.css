@@ -1,0 +1,226 @@
+/* ============================================
+   DASHBOARD - 3 Column Command Center Layout
+   ============================================ */
+
+/* Page Title */
+.dashboard-title {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: var(--space-lg) var(--space-xl) 0;
+}
+
+.dashboard-title h1 {
+    color: var(--color-accent-primary);
+}
+
+.dashboard-container {
+    display: grid;
+    grid-template-columns: 280px 1fr 350px;
+    gap: var(--space-lg);
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: var(--space-lg) var(--space-xl);
+    align-items: start;
+}
+
+/* Column Layouts */
+.dashboard-left-column,
+.dashboard-center-column,
+.dashboard-right-column {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+}
+
+/* ========================================
+   Build & Create - Action Links
+   ======================================== */
+
+.dashboard-action-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.dashboard-action-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-sm) var(--space-md);
+    font-family: var(--font-ui);
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    background: var(--color-bg-elevated);
+    transition: all 0.2s ease;
+}
+
+.dashboard-action-link:hover {
+    border-color: var(--color-accent-primary);
+    color: var(--color-accent-primary);
+    background: rgba(51, 245, 255, 0.05);
+    box-shadow: var(--shadow-glow);
+}
+
+.dashboard-action-link.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+/* Unprocessed articles badge */
+.dashboard-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 20px;
+    height: 20px;
+    padding: 0 6px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    font-family: var(--font-body);
+    color: var(--color-bg-primary);
+    background: var(--color-accent-primary);
+    border-radius: 10px;
+}
+
+/* ========================================
+   Foundations - Tracked Entities
+   ======================================== */
+
+/* Foundations cycling header */
+.foundations-cycle-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: var(--space-sm);
+    margin-bottom: var(--space-sm);
+    border-bottom: 1px solid rgba(51, 245, 255, 0.2);
+}
+
+.foundations-cycle-label {
+    font-family: var(--font-ui);
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-accent-primary);
+}
+
+.foundations-cycle-btn {
+    background: none;
+    border: 1px solid var(--color-border);
+    color: var(--color-accent-primary);
+    font-size: 0.85rem;
+    padding: 2px 8px;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.foundations-cycle-btn:hover {
+    border-color: var(--color-accent-primary);
+    background: rgba(51, 245, 255, 0.1);
+    box-shadow: var(--shadow-glow);
+}
+
+/* Foundations tab content */
+.foundations-tab-content {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+/* Tracked entity compact display */
+.tracked-entity-compact {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: var(--space-sm);
+    border-bottom: 1px solid var(--color-border);
+    transition: background 0.2s ease;
+}
+
+.tracked-entity-compact:last-child {
+    border-bottom: none;
+}
+
+.tracked-entity-compact:hover {
+    background: rgba(51, 245, 255, 0.05);
+}
+
+.entity-name-compact {
+    font-size: 0.85rem;
+    color: var(--color-text-dim);
+}
+
+/* ========================================
+   Placeholder Section
+   ======================================== */
+
+.dashboard-placeholder {
+    padding: var(--space-xl);
+    background: rgba(51, 245, 255, 0.03);
+    border: 1px dashed rgba(51, 245, 255, 0.2);
+    border-radius: 4px;
+    text-align: center;
+}
+
+.dashboard-placeholder p {
+    color: var(--color-text-secondary);
+    margin: 0;
+}
+
+.dashboard-placeholder .placeholder-note {
+    color: var(--color-text-dim);
+    font-size: 0.9rem;
+    margin-top: var(--space-sm);
+}
+
+/* ========================================
+   Text Helpers
+   ======================================== */
+
+.dashboard-empty-state {
+    color: var(--color-text-dim);
+    font-size: 0.9rem;
+    padding: var(--space-md) 0;
+}
+
+.dashboard-empty-state a {
+    color: var(--color-accent-primary);
+    text-decoration: none;
+}
+
+.dashboard-empty-state a:hover {
+    text-decoration: underline;
+}
+
+/* ========================================
+   Right Column - Scrollable Events Feed
+   ======================================== */
+
+.dashboard-right-column .events-list-container {
+    max-height: calc(100vh - 250px);
+    overflow-y: auto;
+}
+
+/* ========================================
+   Responsive
+   ======================================== */
+
+@media (max-width: 1200px) {
+    .dashboard-container {
+        grid-template-columns: 250px 1fr 300px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .dashboard-container {
+        grid-template-columns: 1fr;
+    }
+}

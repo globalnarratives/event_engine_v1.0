@@ -1,123 +1,216 @@
 {% extends 'base.html' %}
+{% from 'components/event_card.html' import event_card %}
 
 {% block title %}Dashboard - Global Narratives{% endblock %}
 
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+{% endblock %}
+
 {% block content %}
-<div class="grid grid-cols-2" style="margin-top: 2rem;">
-    <!-- Left Column -->
-    <div style="display: flex; flex-direction: column; gap: 1.5rem;">
-        <!-- Events Hub -->
+<div class="dashboard-title">
+    <h1>MY DASHBOARD</h1>
+</div>
+<div class="dashboard-container">
+
+    <!-- LEFT COLUMN -->
+    <div class="dashboard-left-column">
+
+        <!-- Build & Create Card -->
         <div class="card">
             <div class="card-header">
-                <h2 class="card-title">Events Hub</h2>
+                <h2 class="card-title">Build & Create</h2>
             </div>
             <div class="card-body">
-                <a href="{{ url_for('events.create_cf_route') }}" class="btn btn-primary btn-block">Create Event</a>
+                <div class="dashboard-action-list">
+                    <span class="dashboard-action-link disabled">
+                        Create Narrative
+                    </span>
+                    <a href="{{ url_for('scenarios.create') }}" class="dashboard-action-link">
+                        Create Scenario
+                    </a>
+                    <a href="{{ url_for('events.create_cf_route') }}" class="dashboard-action-link">
+                        Create Event
+                    </a>
+                    <a href="{{ url_for('articles.dashboard') }}" class="dashboard-action-link">
+                        Input Feed
+                        {% if unprocessed_articles > 0 %}
+                        <span class="dashboard-badge">{{ unprocessed_articles }}</span>
+                        {% endif %}
+                    </a>
+                </div>
             </div>
         </div>
 
-        <!-- Add this to your dashboard/home.html after the Events Hub section -->
-
+        <!-- Foundations Card -->
         <div class="card">
             <div class="card-header">
-                <h2 class="card-title">SCENARIOS HUB</h2>
+                <h2 class="card-title">Tracked Elements</h2>
+                <a href="{{ url_for('foundations.index') }}" class="btn btn-small btn-secondary">View All</a>
             </div>
             <div class="card-body">
-                <a href="{{ url_for('scenarios.create') }}" class="btn btn-primary btn-block">
-                    CREATE SCENARIO
-                </a>
-            </div>
-        </div>
+                <!-- Cycling category selector -->
+                <div class="foundations-cycle-header">
+                    <span class="foundations-cycle-label" id="foundations-cycle-label">Actors</span>
+                    <button class="foundations-cycle-btn" id="foundations-cycle-btn" type="button" title="Next category">&#9654;</button>
+                </div>
 
-        <div class="card mt-lg">
-            <div class="card-header">
-                <h2 class="card-title">RECENT SCENARIOS</h2>
-            </div>
-            <div class="card-body">
-                {% if recent_scenarios %}
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Code</th>
-                                <th>Proposition</th>
-                                <th>Close Date</th>
-                                <th>Assessments</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for scenario in recent_scenarios %}
-                            <tr>
-                                <td>
-                                    <a href="{{ url_for('scenarios.detail', scenario_id=scenario.id) }}" 
-                                    style="color: var(--color-accent-primary); font-family: var(--font-body);">
-                                        {{ scenario.scenario_code }}
-                                    </a>
-                                </td>
-                                <td>{{ scenario.title }}</td>
-                                <td>{{ scenario.close_date.strftime('%Y-%m-%d') if scenario.close_date else 'N/A' }}</td>
-                                <td>{{ scenario.marked_scenarios|length }}</td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                {% else %}
-                    <p style="color: var(--color-text-dim); text-align: center; padding: 2rem 0;">
-                        No scenarios yet. Create your first scenario to begin tracking assessments.
-                    </p>
-                {% endif %}
-            </div>
-        </div>
+                <!-- Actors tab -->
+                <div class="foundations-tab-content active" id="tab-actors">
+                    {% if tracked_actors %}
+                        {% for actor in tracked_actors %}
+                        <div class="tracked-entity-compact">
+                            <a href="{{ url_for('foundations.actor_detail', actor_id=actor.code) }}" class="code-link">{{ actor.code }}</a>
+                            <span class="entity-name-compact">{{ actor.display_name }}</span>
+                        </div>
+                        {% endfor %}
+                    {% else %}
+                        <p class="dashboard-empty-state">No tracked actors. <a href="{{ url_for('foundations.index', tab='actors') }}">Browse actors</a></p>
+                    {% endif %}
+                </div>
 
-        <!-- Directory -->
-        <div class="card">
-            <div class="card-header">
-                <h2 class="card-title">Directory</h2>
-            </div>
-            <div class="card-body" style="display: flex; flex-direction: column; gap: 0.75rem;">
-                <a href="{{ url_for('positions.index') }}" class="btn btn-secondary btn-block">Positions</a>
-                <a href="{{ url_for('actors.index') }}" class="btn btn-secondary btn-block">Actors</a>
-                <a href="{{ url_for('institutions.index') }}" class="btn btn-secondary btn-block">Institutions</a>
+                <!-- Institutions tab -->
+                <div class="foundations-tab-content" id="tab-institutions" style="display: none;">
+                    {% if tracked_institutions %}
+                        {% for inst in tracked_institutions %}
+                        <div class="tracked-entity-compact">
+                            <a href="{{ url_for('foundations.institution_detail', institution_code=inst.code) }}" class="code-link">{{ inst.code }}</a>
+                            <span class="entity-name-compact">{{ inst.display_name }}</span>
+                        </div>
+                        {% endfor %}
+                    {% else %}
+                        <p class="dashboard-empty-state">No tracked institutions. <a href="{{ url_for('foundations.index', tab='institutions') }}">Browse institutions</a></p>
+                    {% endif %}
+                </div>
+
+                <!-- Positions tab -->
+                <div class="foundations-tab-content" id="tab-positions" style="display: none;">
+                    {% if tracked_positions %}
+                        {% for pos in tracked_positions %}
+                        <div class="tracked-entity-compact">
+                            <a href="{{ url_for('foundations.position_detail', position_code=pos.code) }}" class="code-link">{{ pos.code }}</a>
+                            <span class="entity-name-compact">{{ pos.display_name }}</span>
+                        </div>
+                        {% endfor %}
+                    {% else %}
+                        <p class="dashboard-empty-state">No tracked positions. <a href="{{ url_for('foundations.index', tab='positions') }}">Browse positions</a></p>
+                    {% endif %}
+                </div>
             </div>
         </div>
     </div>
-    <!-- Right Column -->
-    <div style="display: flex; flex-direction: column; gap: 1.5rem;">
-        <!-- Recent Events -->
+
+    <!-- CENTER COLUMN -->
+    <div class="dashboard-center-column">
+
+        <!-- Tracked Narratives Placeholder -->
         <div class="card">
             <div class="card-header">
-                <h2 class="card-title">Recent Events</h2>
+                <h2 class="card-title">Tracked Narratives</h2>
             </div>
             <div class="card-body">
-                {% if recent_events %}
-                    {% for event in recent_events %}
-                        <div style="padding: 0.75rem 0; border-bottom: 1px solid var(--color-border);">
-                            <a href="{{ url_for('events.detail_cf_route', event_code=event.event_code) }}" style="color: var(--color-accent-primary); text-decoration: none;">
-                                {{ event.event_code }}
-                            </a>
-                            <span style="color: var(--color-text-dim); margin-left: 1rem; font-size: 0.875rem;">
-                                {{ event.rec_timestamp.strftime('%Y-%m-%d') }}
-                            </span>
-                        </div>
-                    {% endfor %}
-                {% else %}
-                    <p style="color: var(--color-text-dim); font-style: italic;">No events yet</p>
-                {% endif %}
+                <div class="dashboard-placeholder">
+                    <p>No narratives tracked yet. Create your first narrative to begin tracking assessments.</p>
+                </div>
             </div>
         </div>
 
-        <!-- Articles -->
+        <!-- Tracked Scenarios -->
         <div class="card">
             <div class="card-header">
-                <h2 class="card-title">Articles</h2>
+                <h2 class="card-title">Tracked Scenarios</h2>
+                <a href="{{ url_for('scenarios.index') }}" class="btn btn-small btn-secondary">View All</a>
             </div>
             <div class="card-body">
-                <p style="margin-bottom: 1rem;">
-                    <span style="color: var(--color-accent-primary); font-weight: 600; font-size: 1.5rem;">{{ unprocessed_articles }}</span>
-                    <span style="color: var(--color-text-secondary);"> unprocessed articles</span>
-                </p>
-                <a href="{{ url_for('articles.dashboard') }}" class="btn btn-secondary btn-block">View Articles Dashboard</a>
+                {% if my_marked_with_metrics %}
+                <table class="marked-table">
+                    <thead>
+                        <tr>
+                            <th>Scenario</th>
+                            <th>P<sub>i</sub></th>
+                            <th>P<sub>c</sub></th>
+                            <th>Vol</th>
+                            <th>Vel</th>
+                            <th>Count</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in my_marked_with_metrics %}
+                        <tr>
+                            <td>
+                                <a href="{{ url_for('scenarios.marked_detail', marked_id=item.marked.id) }}" class="code-link">
+                                    {{ item.marked.scenario.scenario_code }}
+                                </a>
+                            </td>
+                            <td class="metric-cell">{{ (item.pi * 100)|round(1) }}</td>
+                            <td class="metric-cell metric-current">{{ (item.pc * 100)|round(1) }}</td>
+                            <td class="metric-cell">{{ item.volatility|round(1) }}</td>
+                            <td class="metric-cell">{{ item.velocity|round(1) }}</td>
+                            <td class="metric-cell">{{ item.event_count }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                <p class="dashboard-empty-state">No marked scenarios yet. <a href="{{ url_for('scenarios.index') }}">Mark a scenario</a> to begin tracking.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <!-- RIGHT COLUMN -->
+    <div class="dashboard-right-column">
+        <div class="card">
+            <div class="card-header">
+                <h2 class="card-title">Events Feed</h2>
+                <a href="{{ url_for('events.index') }}" class="btn btn-small btn-secondary">View All</a>
+            </div>
+            <div class="card-body">
+                {% if recent_events %}
+                <div class="events-list-container">
+                    {% for region, events in events_by_region.items()|sort %}
+                    <div class="event-region-header">
+                        {{ region|upper }}
+                    </div>
+                    {% for event in events %}
+                        {{ event_card(event, selectable=false) }}
+                    {% endfor %}
+                    {% endfor %}
+                </div>
+                {% else %}
+                <p class="dashboard-empty-state">No events yet.</p>
+                {% endif %}
             </div>
         </div>
     </div>
 </div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+// Foundations category cycling
+(function() {
+    var tabs = ['actors', 'institutions', 'positions'];
+    var labels = ['Actors', 'Institutions', 'Positions'];
+    var currentIdx = 0;
+    var labelEl = document.getElementById('foundations-cycle-label');
+    var btn = document.getElementById('foundations-cycle-btn');
+
+    function showTab(idx) {
+        // Hide all
+        document.querySelectorAll('.foundations-tab-content').forEach(function(c) {
+            c.style.display = 'none';
+        });
+        // Show selected
+        var target = document.getElementById('tab-' + tabs[idx]);
+        if (target) target.style.display = 'block';
+        labelEl.textContent = labels[idx];
+    }
+
+    btn.addEventListener('click', function() {
+        currentIdx = (currentIdx + 1) % tabs.length;
+        showTab(currentIdx);
+    });
+})();
+</script>
 {% endblock %}

@@ -35,6 +35,7 @@
 @import url('features/cie-syntax.css');
 @import url('features/scenarios/scenarios.css');
 @import url('features/foundations/foundations.css');
+@import url('features/dashboard/dashboard.css');
 
 /* Utility Classes */
 @import url('utilities/colors.css');
