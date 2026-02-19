@@ -2,55 +2,40 @@
    CIE SYNTAX HIGHLIGHTING - IDE STYLE
    ============================================ */
 .cf-symbol {
-  color: var(--color-accent-primary);
+  color: #5fafcf;
   font-weight: bold;
 }
-
 .cf-bullet {
-  color: var(--color-accent-primary);
+  color: #4a9e8e;
   font-weight: bold;
 }
-
 .cf-entity {
-  color: #FF6B9D;
+  color: #df34c2;
   font-weight: 500;
 }
-
 .cf-action {
-  color: #FFD93D;
+  color: #8fb870;
   font-weight: 600;
 }
-
 .cf-bracket {
-  color: #FFD93D;
+  color: #2e78da;
   font-weight: 600;
 }
-
 .cf-operator {
-  color: var(--color-accent-primary);
+  color: #c47a6a;
   font-weight: bold;
   margin: 0 0.25rem;
 }
-
 .cf-relation-op {
-  color: #6BCF7F;
+  color: #c47a6a;
   font-weight: 600;
 }
-
-.weight-positive {
-  font-weight: 600;
-  font-family: var(--font-body);
-  color: var(--color-accent-secondary);
+.cf-location-op {
+  color: #e07537;
+  font-weight: bold;
+  margin: 0 0.25rem;
 }
-
-.weight-negative {
-  font-weight: 600;
-  font-family: var(--font-body);
-  color: var(--color-accent-warning);
-}
-
-.weight-neutral {
-  font-weight: 600;
-  font-family: var(--font-body);
-  color: var(--color-text-primary);
+.cf-country {
+  color: #f5dc50;  /* Same steel blue as entities */
+  font-weight: 500; /* Optional: distinguish from full entity codes */
 }

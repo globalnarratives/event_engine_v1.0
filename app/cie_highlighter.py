@@ -122,7 +122,11 @@ def highlight_line(line):
         # Entity codes (xxx.yyy.zzz or xxx.yyy)
         elif char.isalpha() or char.isdigit():
             i = handle_entity_or_text(line, i, result)
-        
+
+        elif char == '@':
+            result.append('<span class="cf-location-op">@</span>')
+            i += 1
+                
         # Whitespace and other characters
         else:
             result.append(escape(char))
@@ -148,17 +152,18 @@ def handle_entity_or_text(line, start, result):
     
     # Check if it's an entity code (has at least one dot)
     if '.' in token_str:
-        # Check if it matches entity pattern (xxx.yyy or xxx.yyy.zzz)
         parts = token_str.split('.')
         if len(parts) >= 2 and all(part.isalnum() for part in parts):
             result.append(f'<span class="cf-entity">{escape(token_str)}</span>')
         else:
-            # Not a valid entity, render as plain text
             result.append(escape(token_str))
+    # Check if it's a 3-letter code (country code or institution)
+    elif len(token_str) == 3 and token_str.isalpha() and token_str.islower():
+        result.append(f'<span class="cf-country">{escape(token_str)}</span>')
     else:
         # Plain text/word
         result.append(escape(token_str))
-    
+        
     return i
 
 
