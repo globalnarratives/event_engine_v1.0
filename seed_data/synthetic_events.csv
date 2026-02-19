@@ -1,261 +1,261 @@
-event_code,rec_timestamp,event_actor,action_code,action_type,rel_cred,cie_body,identified_subjects,identified_objects,source_article_id
-e.11012026.waf.001,2026-01-12 16:33:13,deu.min.spec.int.dig.exc.01,sn,Political-Diplomatic,6-C,"$ usa.hos {s-pr} / rus<>ukr
-  ▪ {s-st} rus.hos x[rv] {s-pr}",usa.hos,rus.hos,
-e.23122025.nea.001,2025-12-23 09:34:02,usa.1968.001,ki,Legal-Juridical,1-D,"$ usa.hos {s-pr} / rus<>ukr
-  ▪ {s-st} rus.hos x[rv] {s-pr}",usa.hos,rus.hos,
-e.10012026.eeu.001,2026-01-10 09:56:27,tur.1975.001,rg,Legal-Juridical,3-E,"$ usa.hos {s-pr} / rus<>ukr
-  ▪ {s-st} rus.hos x[rv] {s-pr}",usa.hos,rus.hos,
-e.05122025.eaf.001,2025-12-05 04:09:03,fra.1965.001,r-po,Report Release,4-F,"$ usa.hos {s-pr} / rus<>ukr
-  ▪ {s-st} rus.hos x[rv] {s-pr}",usa.hos,rus.hos,
-e.06012026.eeu.001,2026-01-07 11:24:09,rus.min.spec.int.exc.01,wn,Political-Popular,6-B,"$ usa.hos {s-pr} / rus<>ukr
-  ▪ {s-st} rus.hos x[rv] {s-pr}",usa.hos,rus.hos,
-e.27012026.caf.001,2026-01-28 02:38:06,aus.1978.003,dp,Military-Kinetic,1-B,"$ usa.hos {s-pr} / rus<>ukr
-  ▪ {s-st} rus.hos x[rv] {s-pr}",usa.hos,rus.hos,
-e.21012026.eeu.001,2026-01-22 21:58:36,aus.min.labr.exc.01,nt,Legal-Legislative,1-B,"$ usa.hos {s-pr} / rus<>ukr
-  ▪ {s-st} rus.hos x[rv] {s-pr}",usa.hos,rus.hos,
-e.20122025.mea.001,2025-12-21 04:47:47,esp.min.spec.ops.exc.01,c-or,Claim-Rumor,4-B,"$ usa.hos {s-pr} / rus<>ukr
-  ▪ {s-st} rus.hos x[rv] {s-pr}",usa.hos,rus.hos,
-e.25012026.nam.001,2026-01-26 22:36:53,deu.1987.001,bg,Political-Operational,1-F,"$ usa.hos {s-pr} / rus<>ukr
-  ▪ {s-st} rus.hos x[rv] {s-pr}",usa.hos,rus.hos,
-e.30122025.mea.001,2025-12-30 16:14:01,deu.min.jstc.exc.01,ts,Legal-Legislative,3-A,"$ usa.hos {s-pr} / rus<>ukr
-  ▪ {s-st} rus.hos x[rv] {s-pr}",usa.hos,rus.hos,
-e.04012026.eaf.001,2026-01-05 15:44:17,aus.1973.004,dv,Military-Kinetic,2-C,"$ usa.hos {s-pr} / rus<>ukr
-  ▪ {s-st} rus.hos x[rv] {s-pr}",usa.hos,rus.hos,
-e.11112025.eaf.001,2025-11-12 06:52:22,gnb.hos,mg,Commercial-Operational,5-B,"$ usa.hos {s-pr} / rus<>ukr
-  ▪ {s-st} rus.hos x[rv] {s-pr}",usa.hos,rus.hos,
-e.13012026.sas.001,2026-01-14 10:22:24,deu.1973.002,dt,Miscellaneous-General,5-B,"$ usa.hos {s-pr} / rus<>ukr
-  ▪ {s-st} rus.hos x[rv] {s-pr}",usa.hos,rus.hos,
-e.19012026.nam.001,2026-01-21 00:09:58,aus.min.fisc.exc.01,sp,Political-Diplomatic,2-D,"$ usa.hos {s-pr} / rus<>ukr
-  ▪ {s-st} rus.hos x[rv] {s-pr}",usa.hos,rus.hos,
-e.22112025.weu.001,2025-11-22 10:58:10,rus.1952.001,c-or,Claim-Rumor,1-B,"$ usa.hos {s-pr} / rus<>ukr
-  ▪ {s-st} rus.hos x[rv] {s-pr}",usa.hos,rus.hos,
-e.02112025.weu.001,2025-11-02 11:35:25,gbr.1980.001,s-al,Statement-Inflected,2-D,"$ usa.hos {s-pr} / rus<>ukr
-  ▪ {s-st} rus.hos x[rv] {s-pr}",usa.hos,rus.hos,
-e.09012026.oce.001,2026-01-09 01:06:11,usa.min.gndm.exc.01,r-dt,Report Release,4-E,"$ usa.hos {s-pr} / rus<>ukr
-  ▪ {s-st} rus.hos x[rv] {s-pr}",usa.hos,rus.hos,
-e.28012026.saf.001,2026-01-29 06:50:54,fra.min.hlth.exc.01,s-pr,Statement,5-E,"$ usa.hos {s-pr} / rus<>ukr
-  ▪ {s-st} rus.hos x[rv] {s-pr}",usa.hos,rus.hos,
-e.23012026.sea.001,2026-01-24 18:13:05,fra.hos,rf,Legal-Juridical,6-B,"$ usa.hos {s-pr} / rus<>ukr
-  ▪ {s-st} rus.hos x[rv] {s-pr}",usa.hos,rus.hos,
-e.05112025.nea.001,2025-11-06 16:13:19,can.min.trde.exc.01,sl,Commercial-Operational,6-E,"$ usa.hos {s-pr} / rus<>ukr
-  ▪ {s-st} rus.hos x[rv] {s-pr}",usa.hos,rus.hos,
-e.05112025.sam.001,2025-11-06 11:59:40,esp.min.labr.exc.01,s-rb,Statement-Inflected,4-A,"$ jpn.com.soe.55105050.001 {nv}
-  ▪ jpn.min.fisc.exc.01 [a-in] $ {nt}",jpn.com.soe,jpn.min.fisc.exc.01,
-e.15012026.waf.001,2026-01-16 09:53:27,jpn.1969.002,s-ps,Statement,2-D,"$ jpn.com.soe.55105050.001 {nv}
-  ▪ jpn.min.fisc.exc.01 [a-in] $ {nt}",jpn.com.soe,jpn.min.fisc.exc.01,
-e.14012026.nam.001,2026-01-15 14:50:53,usa.1991.001,c-mo,Claim-Rumor,3-C,"$ jpn.com.soe.55105050.001 {nv}
-  ▪ jpn.min.fisc.exc.01 [a-in] $ {nt}",jpn.com.soe,jpn.min.fisc.exc.01,
-e.17122025.eeu.001,2025-12-17 08:55:14,jpn.min.jstc.exc.01,s-op,Statement-Inflected,2-C,"$ jpn.com.soe.55105050.001 {nv}
-  ▪ jpn.min.fisc.exc.01 [a-in] $ {nt}",jpn.com.soe,jpn.min.fisc.exc.01,
-e.11012026.eaf.001,2026-01-12 23:06:36,gnb.hos.gndm.exc.01,a-mt,Announcement,2-E,"$ jpn.com.soe.55105050.001 {nv}
-  ▪ jpn.min.fisc.exc.01 [a-in] $ {nt}",jpn.com.soe,jpn.min.fisc.exc.01,
-e.04012026.nam.001,2026-01-04 21:59:51,esp.1985.001,s-rs,Statement,6-B,"$ jpn.com.soe.55105050.001 {nv}
-  ▪ jpn.min.fisc.exc.01 [a-in] $ {nt}",jpn.com.soe,jpn.min.fisc.exc.01,
-e.08112025.waf.001,2025-11-09 18:16:50,gbr.1986.001,on,Commercial-Operational,6-A,"$ jpn.com.soe.55105050.001 {nv}
-  ▪ jpn.min.fisc.exc.01 [a-in] $ {nt}",jpn.com.soe,jpn.min.fisc.exc.01,
-e.17012026.saf.001,2026-01-18 04:09:18,gbr.1979.002,s-ps,Statement,3-D,"$ jpn.com.soe.55105050.001 {nv}
-  ▪ jpn.min.fisc.exc.01 [a-in] $ {nt}",jpn.com.soe,jpn.min.fisc.exc.01,
-e.30012026.nea.001,2026-01-30 22:29:52,can.min.comc.exc.01,ud,Political-Operational,2-B,"$ jpn.com.soe.55105050.001 {nv}
-  ▪ jpn.min.fisc.exc.01 [a-in] $ {nt}",jpn.com.soe,jpn.min.fisc.exc.01,
-e.05112025.oce.001,2025-11-05 21:01:30,deu.min.labr.soc.exc.01,wn,Political-Popular,1-B,"$ jpn.com.soe.55105050.001 {nv}
-  ▪ jpn.min.fisc.exc.01 [a-in] $ {nt}",jpn.com.soe,jpn.min.fisc.exc.01,
-e.15012026.cmb.001,2026-01-15 08:57:49,rus.1981.001,s-rp,Statement,2-C,"$ jpn.com.soe.55105050.001 {nv}
-  ▪ jpn.min.fisc.exc.01 [a-in] $ {nt}",jpn.com.soe,jpn.min.fisc.exc.01,
-e.16012026.nea.001,2026-01-17 20:58:10,fra.1977.001,r-in,Report Release,1-D,"$ jpn.com.soe.55105050.001 {nv}
-  ▪ jpn.min.fisc.exc.01 [a-in] $ {nt}",jpn.com.soe,jpn.min.fisc.exc.01,
-e.29012026.eeu.001,2026-01-30 23:55:30,aus.min.agrc.exc.01,nl,Legal-Legislative,6-D,"$ jpn.com.soe.55105050.001 {nv}
-  ▪ jpn.min.fisc.exc.01 [a-in] $ {nt}",jpn.com.soe,jpn.min.fisc.exc.01,
-e.13012026.weu.001,2026-01-14 07:47:41,usa.1957.001,nl,Legal-Legislative,2-A,"$ jpn.com.soe.55105050.001 {nv}
-  ▪ jpn.min.fisc.exc.01 [a-in] $ {nt}",jpn.com.soe,jpn.min.fisc.exc.01,
-e.24122025.oce.001,2025-12-25 08:18:08,gbr.uh.224,sz,Legal-Juridical,2-C,"$ jpn.com.soe.55105050.001 {nv}
-  ▪ jpn.min.fisc.exc.01 [a-in] $ {nt}",jpn.com.soe,jpn.min.fisc.exc.01,
-e.22122025.caf.001,2025-12-23 00:06:02,jpn.min.comc.dig.exc.01,xr,Military-Operational,5-D,"$ jpn.com.soe.55105050.001 {nv}
-  ▪ jpn.min.fisc.exc.01 [a-in] $ {nt}",jpn.com.soe,jpn.min.fisc.exc.01,
-e.07112025.sas.001,2025-11-07 02:45:03,tur.1982.001,wn,Political-Popular,6-A,"$ jpn.com.soe.55105050.001 {nv}
-  ▪ jpn.min.fisc.exc.01 [a-in] $ {nt}",jpn.com.soe,jpn.min.fisc.exc.01,
-e.23012026.mea.001,2026-01-24 09:45:13,can.1983.001,cl,Commercial-Operational,1-F,"$ jpn.com.soe.55105050.001 {nv}
-  ▪ jpn.min.fisc.exc.01 [a-in] $ {nt}",jpn.com.soe,jpn.min.fisc.exc.01,
-e.07012026.nam.001,2026-01-08 18:34:15,jpn.hog.dfns.eco.chm.exc.01,ki,Legal-Juridical,3-C,"$ jpn.com.soe.55105050.001 {nv}
-  ▪ jpn.min.fisc.exc.01 [a-in] $ {nt}",jpn.com.soe,jpn.min.fisc.exc.01,
-e.18122025.saf.001,2025-12-18 16:30:01,usa.1976.001,rg,Legal-Juridical,1-B,"$ jpn.com.soe.55105050.001 {nv}
-  ▪ jpn.min.fisc.exc.01 [a-in] $ {nt}",jpn.com.soe,jpn.min.fisc.exc.01,
-e.09122025.weu.001,2025-12-10 16:43:41,aus.1970.002,mt,Political-Diplomatic,1-E,"$ e.21112025.waf.001
-  ▪ nga.org.rlg.xtn.mmb.001 [s-es] $ {ab} / qty",,nga.org.rlg.xtn.mmb.001,
-e.18122025.sea.001,2025-12-19 01:33:27,esp.min.comc.exc.01,s-dn,Statement,4-B,"$ e.21112025.waf.001
-  ▪ nga.org.rlg.xtn.mmb.001 [s-es] $ {ab} / qty",,nga.org.rlg.xtn.mmb.001,
-e.01012026.weu.001,2026-01-01 07:55:59,can.min.agrc.exc.01,qt,Miscellaneous-General,3-B,"$ e.21112025.waf.001
-  ▪ nga.org.rlg.xtn.mmb.001 [s-es] $ {ab} / qty",,nga.org.rlg.xtn.mmb.001,
-e.15122025.waf.001,2025-12-16 10:31:48,usa.min.labr.exc.01,dv,Military-Kinetic,6-F,"$ e.21112025.waf.001
-  ▪ nga.org.rlg.xtn.mmb.001 [s-es] $ {ab} / qty",,nga.org.rlg.xtn.mmb.001,
-e.30122025.waf.001,2025-12-31 19:35:00,gbr.1960.001,s-cf,Statement,2-D,"$ e.21112025.waf.001
-  ▪ nga.org.rlg.xtn.mmb.001 [s-es] $ {ab} / qty",,nga.org.rlg.xtn.mmb.001,
-e.22112025.cmb.001,2025-11-22 08:57:58,can.min.dfns.exc.01,re,Legal-Juridical,3-A,"$ e.21112025.waf.001
-  ▪ nga.org.rlg.xtn.mmb.001 [s-es] $ {ab} / qty",,nga.org.rlg.xtn.mmb.001,
-e.03112025.cas.001,2025-11-03 18:26:25,usa.hos.intl.exc.01,ch,Military-Kinetic,5-B,"$ e.21112025.waf.001
-  ▪ nga.org.rlg.xtn.mmb.001 [s-es] $ {ab} / qty",,nga.org.rlg.xtn.mmb.001,
-e.29122025.mea.001,2025-12-30 14:12:37,can.1965.002,s-es,Statement,1-D,"$ e.21112025.waf.001
-  ▪ nga.org.rlg.xtn.mmb.001 [s-es] $ {ab} / qty",,nga.org.rlg.xtn.mmb.001,
-e.25122025.cmb.001,2025-12-26 05:58:43,rus.1980.001,s-cf,Statement,1-D,"$ e.21112025.waf.001
-  ▪ nga.org.rlg.xtn.mmb.001 [s-es] $ {ab} / qty",,nga.org.rlg.xtn.mmb.001,
-e.13122025.eeu.001,2025-12-14 16:24:34,esp.min.labr.psn.exc.01,sb,Legal-Legislative,4-D,"$ e.21112025.waf.001
-  ▪ nga.org.rlg.xtn.mmb.001 [s-es] $ {ab} / qty",,nga.org.rlg.xtn.mmb.001,
-e.14112025.waf.001,2025-11-14 18:34:05,deu.1973.001,mg,Commercial-Operational,1-D,"$ e.21112025.waf.001
-  ▪ nga.org.rlg.xtn.mmb.001 [s-es] $ {ab} / qty",,nga.org.rlg.xtn.mmb.001,
-e.27122025.sea.001,2025-12-28 02:51:49,aus.min.infr.cms.exc.01,mg,Commercial-Operational,5-C,"$ e.21112025.waf.001
-  ▪ nga.org.rlg.xtn.mmb.001 [s-es] $ {ab} / qty",,nga.org.rlg.xtn.mmb.001,
-e.17112025.sam.001,2025-11-17 05:47:18,irn.min.intl.exc.01,sc,Legal-Juridical,4-D,"$ e.21112025.waf.001
-  ▪ nga.org.rlg.xtn.mmb.001 [s-es] $ {ab} / qty",,nga.org.rlg.xtn.mmb.001,
-e.23112025.weu.001,2025-11-24 07:28:30,deu.1965.001,c-st,Claim-Rumor,3-C,"$ e.21112025.waf.001
-  ▪ nga.org.rlg.xtn.mmb.001 [s-es] $ {ab} / qty",,nga.org.rlg.xtn.mmb.001,
-e.18012026.saf.001,2026-01-18 04:49:23,bra.1968.001,go,Miscellaneous-General,3-F,"$ e.21112025.waf.001
-  ▪ nga.org.rlg.xtn.mmb.001 [s-es] $ {ab} / qty",,nga.org.rlg.xtn.mmb.001,
-e.02012026.eaf.001,2026-01-03 11:48:25,can.min.agrc.exc.01,r-in,Report Release,5-D,"$ e.21112025.waf.001
-  ▪ nga.org.rlg.xtn.mmb.001 [s-es] $ {ab} / qty",,nga.org.rlg.xtn.mmb.001,
-e.13122025.cas.001,2025-12-14 16:41:09,tur.min.forn.exc.01,rc,Political-Diplomatic,2-B,"$ e.21112025.waf.001
-  ▪ nga.org.rlg.xtn.mmb.001 [s-es] $ {ab} / qty",,nga.org.rlg.xtn.mmb.001,
-e.10122025.saf.001,2025-12-11 08:19:05,gbr.min.spec.int.01.exc.01,rc,Political-Diplomatic,6-B,"$ e.21112025.waf.001
-  ▪ nga.org.rlg.xtn.mmb.001 [s-es] $ {ab} / qty",,nga.org.rlg.xtn.mmb.001,
-e.25112025.eaf.001,2025-11-25 11:22:14,rus.1959.001,nl,Legal-Legislative,6-B,"$ e.21112025.waf.001
-  ▪ nga.org.rlg.xtn.mmb.001 [s-es] $ {ab} / qty",,nga.org.rlg.xtn.mmb.001,
-e.02122025.sam.001,2025-12-03 09:53:22,gbr.min.jstc.exc.01,s-ds,Statement,6-E,"$ e.21112025.waf.001
-  ▪ nga.org.rlg.xtn.mmb.001 [s-es] $ {ab} / qty",,nga.org.rlg.xtn.mmb.001,
-e.28012026.nam.001,2026-01-29 21:07:19,deu.min.jstc.exc.01,mg,Commercial-Operational,1-E,$ gnb.min.dfns.ary {rm} gnb.1972.001 ! gnb.hos,gnb.min.dfns.ary,gnb.hos,
-e.20122025.mea.002,2025-12-21 00:25:18,fra.min.forn.exc.01,lo,Commercial-Operational,1-D,$ gnb.min.dfns.ary {rm} gnb.1972.001 ! gnb.hos,gnb.min.dfns.ary,gnb.hos,
-e.26122025.eeu.001,2025-12-27 00:12:08,deu.min.hous.exc.01,s-dn,Statement,6-F,$ gnb.min.dfns.ary {rm} gnb.1972.001 ! gnb.hos,gnb.min.dfns.ary,gnb.hos,
-e.15012026.eeu.001,2026-01-16 03:09:48,usa.min.dfns.exc.01,a-po,Announcement,6-F,$ gnb.min.dfns.ary {rm} gnb.1972.001 ! gnb.hos,gnb.min.dfns.ary,gnb.hos,
-e.02012026.sas.001,2026-01-03 13:01:10,usa.1968.001,sl,Commercial-Operational,2-F,$ gnb.min.dfns.ary {rm} gnb.1972.001 ! gnb.hos,gnb.min.dfns.ary,gnb.hos,
-e.24112025.nea.001,2025-11-24 13:57:28,rus.min.dfns.exc.01,sr,Miscellaneous-General,3-C,$ gnb.min.dfns.ary {rm} gnb.1972.001 ! gnb.hos,gnb.min.dfns.ary,gnb.hos,
-e.23122025.caf.001,2025-12-24 19:26:00,aus.1973.004,dn,Legal-Juridical,1-C,$ gnb.min.dfns.ary {rm} gnb.1972.001 ! gnb.hos,gnb.min.dfns.ary,gnb.hos,
-e.16012026.eeu.001,2026-01-16 21:06:37,usa.min.forn.exc.01,r-po,Report Release,5-E,$ gnb.min.dfns.ary {rm} gnb.1972.001 ! gnb.hos,gnb.min.dfns.ary,gnb.hos,
-e.03122025.waf.001,2025-12-04 23:08:48,rus.1980.001,a-tr,Announcement,2-D,$ gnb.min.dfns.ary {rm} gnb.1972.001 ! gnb.hos,gnb.min.dfns.ary,gnb.hos,
-e.03012026.cmb.001,2026-01-03 14:26:03,can.min.labr.exc.01,dy,Military-Operational,2-B,$ gnb.min.dfns.ary {rm} gnb.1972.001 ! gnb.hos,gnb.min.dfns.ary,gnb.hos,
-e.07012026.weu.001,2026-01-07 07:06:13,can.min.resr.env.exc.01,s-dn,Statement,6-A,$ gnb.min.dfns.ary {rm} gnb.1972.001 ! gnb.hos,gnb.min.dfns.ary,gnb.hos,
-e.08012026.sas.001,2026-01-09 04:09:32,fra.hog,wd,Legal-Legislative,1-B,$ gnb.min.dfns.ary {rm} gnb.1972.001 ! gnb.hos,gnb.min.dfns.ary,gnb.hos,
-e.29112025.eeu.001,2025-11-29 13:16:09,tur.min.forn.exc.01,sn,Political-Diplomatic,2-D,$ gnb.min.dfns.ary {rm} gnb.1972.001 ! gnb.hos,gnb.min.dfns.ary,gnb.hos,
-e.10112025.weu.001,2025-11-10 22:45:17,tur.1966.003,nm,Political-Operational,1-E,$ gnb.min.dfns.ary {rm} gnb.1972.001 ! gnb.hos,gnb.min.dfns.ary,gnb.hos,
-e.01112025.caf.001,2025-11-01 14:03:53,usa.min.intl.exc.01,ar,Legal-Juridical,5-E,$ gnb.min.dfns.ary {rm} gnb.1972.001 ! gnb.hos,gnb.min.dfns.ary,gnb.hos,
-e.12122025.sea.001,2025-12-13 02:48:39,esp.1985.001,c-st,Claim-Rumor,1-B,$ gnb.min.dfns.ary {rm} gnb.1972.001 ! gnb.hos,gnb.min.dfns.ary,gnb.hos,
-e.27012026.eaf.001,2026-01-28 19:29:56,rus.1980.003,wd,Legal-Legislative,5-B,$ gnb.min.dfns.ary {rm} gnb.1972.001 ! gnb.hos,gnb.min.dfns.ary,gnb.hos,
-e.07122025.sam.001,2025-12-08 16:58:12,can.1970.001,xd,Legal-Juridical,3-F,$ gnb.min.dfns.ary {rm} gnb.1972.001 ! gnb.hos,gnb.min.dfns.ary,gnb.hos,
-e.20122025.nea.001,2025-12-21 16:59:55,aus.min.infr.exc.01,s-cf,Statement,3-E,$ gnb.min.dfns.ary {rm} gnb.1972.001 ! gnb.hos,gnb.min.dfns.ary,gnb.hos,
-e.31122025.mea.001,2025-12-31 09:09:40,can.min.labr.soc.exc.01,rg,Legal-Juridical,4-A,$ gnb.min.dfns.ary {rm} gnb.1972.001 ! gnb.hos,gnb.min.dfns.ary,gnb.hos,
-e.06122025.nam.001,2025-12-07 04:29:37,esp.min.comc.exc.01,dn,Legal-Juridical,3-D,"$ {ak} # (dig) @ isr.com.ind.50202010
-  ▪ [s-as] $ {ak} / irn.min.intl",isr.com.ind,irn.min.intl,
-e.22112025.nam.001,2025-11-22 10:39:47,gbr.min.cltr.exc.01,xr,Military-Operational,3-E,"$ {ak} # (dig) @ isr.com.ind.50202010
-  ▪ [s-as] $ {ak} / irn.min.intl",isr.com.ind,irn.min.intl,
-e.20112025.sea.001,2025-11-21 09:49:31,rus.1979.003,c-mo,Claim-Rumor,2-E,"$ {ak} # (dig) @ isr.com.ind.50202010
-  ▪ [s-as] $ {ak} / irn.min.intl",isr.com.ind,irn.min.intl,
-e.29122025.oce.001,2025-12-29 15:04:15,aus.min.labr.psn.exc.01,s-pr,Statement,1-F,"$ {ak} # (dig) @ isr.com.ind.50202010
-  ▪ [s-as] $ {ak} / irn.min.intl",isr.com.ind,irn.min.intl,
-e.18112025.waf.001,2025-11-19 18:38:40,esp.1982.001,vd,Legal-Legislative,2-F,"$ {ak} # (dig) @ isr.com.ind.50202010
-  ▪ [s-as] $ {ak} / irn.min.intl",isr.com.ind,irn.min.intl,
-e.04122025.cmb.001,2025-12-05 16:21:38,esp.min.educ.exc.01,on,Commercial-Operational,1-B,"$ {ak} # (dig) @ isr.com.ind.50202010
-  ▪ [s-as] $ {ak} / irn.min.intl",isr.com.ind,irn.min.intl,
-e.20012026.cas.001,2026-01-21 19:33:17,rus.1952.001,nm,Political-Operational,4-B,"$ {ak} # (dig) @ isr.com.ind.50202010
-  ▪ [s-as] $ {ak} / irn.min.intl",isr.com.ind,irn.min.intl,
-e.29122025.waf.001,2025-12-29 10:20:38,fra.1978.001,r-po,Report Release,1-C,"$ {ak} # (dig) @ isr.com.ind.50202010
-  ▪ [s-as] $ {ak} / irn.min.intl",isr.com.ind,irn.min.intl,
-e.02122025.eaf.001,2025-12-03 14:01:14,gbr.min.jstc.exc.01,xr,Military-Operational,5-B,"$ {ak} # (dig) @ isr.com.ind.50202010
-  ▪ [s-as] $ {ak} / irn.min.intl",isr.com.ind,irn.min.intl,
-e.09112025.weu.001,2025-11-10 08:39:30,esp.1980.001,sn,Political-Diplomatic,2-A,"$ {ak} # (dig) @ isr.com.ind.50202010
-  ▪ [s-as] $ {ak} / irn.min.intl",isr.com.ind,irn.min.intl,
-e.02122025.eeu.001,2025-12-02 02:26:59,fra.min.gndm.exc.01,ts,Legal-Legislative,3-A,"$ {ak} # (dig) @ isr.com.ind.50202010
-  ▪ [s-as] $ {ak} / irn.min.intl",isr.com.ind,irn.min.intl,
-e.30012026.eaf.001,2026-01-30 14:13:59,aus.min.educ.exc.01,di,Miscellaneous-General,3-C,"$ {ak} # (dig) @ isr.com.ind.50202010
-  ▪ [s-as] $ {ak} / irn.min.intl",isr.com.ind,irn.min.intl,
-e.04122025.nea.001,2025-12-04 06:03:08,usa.1972.002,dg,Miscellaneous-General,6-B,"$ {ak} # (dig) @ isr.com.ind.50202010
-  ▪ [s-as] $ {ak} / irn.min.intl",isr.com.ind,irn.min.intl,
-e.16122025.eeu.001,2025-12-17 05:15:54,tur.min.jstc.exc.01,s-as,Statement-Inflected,1-F,"$ {ak} # (dig) @ isr.com.ind.50202010
-  ▪ [s-as] $ {ak} / irn.min.intl",isr.com.ind,irn.min.intl,
-e.06112025.nea.001,2025-11-06 21:14:36,gbr.1979.001,nt,Legal-Legislative,3-D,"$ {ak} # (dig) @ isr.com.ind.50202010
-  ▪ [s-as] $ {ak} / irn.min.intl",isr.com.ind,irn.min.intl,
-e.10112025.eeu.001,2025-11-10 21:38:02,kor.1957.001,sn,Political-Diplomatic,4-B,"$ {ak} # (dig) @ isr.com.ind.50202010
-  ▪ [s-as] $ {ak} / irn.min.intl",isr.com.ind,irn.min.intl,
-e.27012026.caf.002,2026-01-28 18:41:00,usa.1971.002,se,Legal-Legislative,5-D,"$ {ak} # (dig) @ isr.com.ind.50202010
-  ▪ [s-as] $ {ak} / irn.min.intl",isr.com.ind,irn.min.intl,
-e.08012026.cmb.001,2026-01-08 09:02:06,aus.min.infr.exc.01,s-cr,Statement-Inflected,2-D,"$ {ak} # (dig) @ isr.com.ind.50202010
-  ▪ [s-as] $ {ak} / irn.min.intl",isr.com.ind,irn.min.intl,
-e.28122025.caf.001,2025-12-29 08:20:22,esp.min.comc.exc.01,c-uv,Claim-Rumor,4-A,"$ {ak} # (dig) @ isr.com.ind.50202010
-  ▪ [s-as] $ {ak} / irn.min.intl",isr.com.ind,irn.min.intl,
-e.11012026.nea.001,2026-01-11 05:34:29,jpn.hog.dfns.eco.chm.exc.01,vs,Commercial-Operational,3-A,"$ {ak} # (dig) @ isr.com.ind.50202010
-  ▪ [s-as] $ {ak} / irn.min.intl",isr.com.ind,irn.min.intl,
-e.04012026.caf.001,2026-01-05 00:58:29,tur.1976.001,en,Legal-Legislative,3-B,"$ rwa.hos <{mt}> cod.hos @ usa.cpl
-  ▪ {s-rp} rwa.hos [ag] cod.hos",rwa.hos,"cod.hos,usa.cpl",
-e.31012026.eeu.001,2026-01-31 19:43:31,gbr.min.dfns.exc.01,s-bk,Statement-Inflected,4-D,"$ rwa.hos <{mt}> cod.hos @ usa.cpl
-  ▪ {s-rp} rwa.hos [ag] cod.hos",rwa.hos,"cod.hos,usa.cpl",
-e.08122025.waf.001,2025-12-08 07:31:00,usa.min.scnc.exc.01,ij,Miscellaneous-General,5-D,"$ rwa.hos <{mt}> cod.hos @ usa.cpl
-  ▪ {s-rp} rwa.hos [ag] cod.hos",rwa.hos,"cod.hos,usa.cpl",
-e.10012026.mea.001,2026-01-10 10:05:54,usa.min.agrc.exc.01,a-dt,Announcement,1-B,"$ rwa.hos <{mt}> cod.hos @ usa.cpl
-  ▪ {s-rp} rwa.hos [ag] cod.hos",rwa.hos,"cod.hos,usa.cpl",
-e.01012026.sea.001,2026-01-01 11:27:50,aus.1978.001,s-rb,Statement-Inflected,3-B,"$ rwa.hos <{mt}> cod.hos @ usa.cpl
-  ▪ {s-rp} rwa.hos [ag] cod.hos",rwa.hos,"cod.hos,usa.cpl",
-e.03112025.weu.001,2025-11-03 17:20:58,deu.min.agrc.exc.01,es,Political-Operational,6-C,"$ rwa.hos <{mt}> cod.hos @ usa.cpl
-  ▪ {s-rp} rwa.hos [ag] cod.hos",rwa.hos,"cod.hos,usa.cpl",
-e.28112025.saf.001,2025-11-28 10:39:29,jpn.min.spec.int.ops.exc.01,co,Legal-Legislative,5-E,"$ rwa.hos <{mt}> cod.hos @ usa.cpl
-  ▪ {s-rp} rwa.hos [ag] cod.hos",rwa.hos,"cod.hos,usa.cpl",
-e.17012026.waf.001,2026-01-17 16:51:23,esp.min.labr.soc.01.exc.01,s-sp,Statement,3-B,"$ rwa.hos <{mt}> cod.hos @ usa.cpl
-  ▪ {s-rp} rwa.hos [ag] cod.hos",rwa.hos,"cod.hos,usa.cpl",
-e.09012026.cas.001,2026-01-10 11:10:50,jpn.hog.int.chm.exc.01,a-mt,Announcement,6-B,"$ rwa.hos <{mt}> cod.hos @ usa.cpl
-  ▪ {s-rp} rwa.hos [ag] cod.hos",rwa.hos,"cod.hos,usa.cpl",
-e.14012026.nam.002,2026-01-15 15:12:41,deu.1960.001,s-dn,Statement,5-B,"$ rwa.hos <{mt}> cod.hos @ usa.cpl
-  ▪ {s-rp} rwa.hos [ag] cod.hos",rwa.hos,"cod.hos,usa.cpl",
-e.30122025.sea.001,2025-12-31 18:34:34,rus.min.spec.int.exc.01,s-rg,Statement-Inflected,3-F,"$ rwa.hos <{mt}> cod.hos @ usa.cpl
-  ▪ {s-rp} rwa.hos [ag] cod.hos",rwa.hos,"cod.hos,usa.cpl",
-e.19112025.saf.001,2025-11-20 23:16:40,can.min.hlth.exc.01,ar,Legal-Juridical,1-C,"$ rwa.hos <{mt}> cod.hos @ usa.cpl
-  ▪ {s-rp} rwa.hos [ag] cod.hos",rwa.hos,"cod.hos,usa.cpl",
-e.22012026.nam.001,2026-01-23 18:01:30,usa.1957.001,ap,Political-Operational,6-E,"$ rwa.hos <{mt}> cod.hos @ usa.cpl
-  ▪ {s-rp} rwa.hos [ag] cod.hos",rwa.hos,"cod.hos,usa.cpl",
-e.24122025.waf.001,2025-12-25 01:44:38,can.min.infr.exc.01,dv,Military-Kinetic,5-B,"$ rwa.hos <{mt}> cod.hos @ usa.cpl
-  ▪ {s-rp} rwa.hos [ag] cod.hos",rwa.hos,"cod.hos,usa.cpl",
-e.01012026.caf.001,2026-01-02 12:46:44,tur.1954.002,ij,Miscellaneous-General,3-E,"$ rwa.hos <{mt}> cod.hos @ usa.cpl
-  ▪ {s-rp} rwa.hos [ag] cod.hos",rwa.hos,"cod.hos,usa.cpl",
-e.06112025.nea.002,2025-11-07 15:57:03,esp.1972.002,vu,Legal-Legislative,2-F,"$ rwa.hos <{mt}> cod.hos @ usa.cpl
-  ▪ {s-rp} rwa.hos [ag] cod.hos",rwa.hos,"cod.hos,usa.cpl",
-e.17112025.sea.001,2025-11-18 15:18:07,aus.min.jstc.exc.01,sn,Political-Diplomatic,5-E,"$ rwa.hos <{mt}> cod.hos @ usa.cpl
-  ▪ {s-rp} rwa.hos [ag] cod.hos",rwa.hos,"cod.hos,usa.cpl",
-e.12112025.eeu.001,2025-11-12 03:19:19,tur.1968.003,bn,Legal-Legislative,2-C,"$ rwa.hos <{mt}> cod.hos @ usa.cpl
-  ▪ {s-rp} rwa.hos [ag] cod.hos",rwa.hos,"cod.hos,usa.cpl",
-e.29012026.mea.001,2026-01-30 20:24:50,tur.1969.001,a-in,Announcement,2-C,"$ rwa.hos <{mt}> cod.hos @ usa.cpl
-  ▪ {s-rp} rwa.hos [ag] cod.hos",rwa.hos,"cod.hos,usa.cpl",
-e.11122025.nea.001,2025-12-12 20:22:09,fra.min.cltr.ath.exc.01,s-rs,Statement,1-C,"$ rwa.hos <{mt}> cod.hos @ usa.cpl
-  ▪ {s-rp} rwa.hos [ag] cod.hos",rwa.hos,"cod.hos,usa.cpl",
-e.08122025.mea.001,2025-12-09 07:29:50,aus.min.labr.psn.exc.01,sz,Legal-Juridical,2-F,"$ gbr.cpl.exc.01 {ag} gbr.lh.318-2024-26.lex
-  ▪ {s-op} $ sbs.imp.lex",gbr.cpl.exc.01,sbs.imp.lex,
-e.09012026.nea.001,2026-01-09 05:30:43,gbr.1971.001,r-rp,Report Release,6-F,"$ gbr.cpl.exc.01 {ag} gbr.lh.318-2024-26.lex
-  ▪ {s-op} $ sbs.imp.lex",gbr.cpl.exc.01,sbs.imp.lex,
-e.05112025.weu.001,2025-11-06 20:38:39,aus.min.resr.eng.exc.01,ed,Political-Operational,4-C,"$ gbr.cpl.exc.01 {ag} gbr.lh.318-2024-26.lex
-  ▪ {s-op} $ sbs.imp.lex",gbr.cpl.exc.01,sbs.imp.lex,
-e.06122025.sam.001,2025-12-06 04:50:14,bra.1968.001,a-in,Announcement,4-E,"$ gbr.cpl.exc.01 {ag} gbr.lh.318-2024-26.lex
-  ▪ {s-op} $ sbs.imp.lex",gbr.cpl.exc.01,sbs.imp.lex,
-e.25112025.oce.001,2025-11-26 01:58:13,rus.min.jstc.exc.01,c-ns,Claim-Rumor,2-B,"$ gbr.cpl.exc.01 {ag} gbr.lh.318-2024-26.lex
-  ▪ {s-op} $ sbs.imp.lex",gbr.cpl.exc.01,sbs.imp.lex,
-e.29012026.weu.001,2026-01-30 13:03:55,fra.1984.001,c-st,Claim-Rumor,3-A,"$ gbr.cpl.exc.01 {ag} gbr.lh.318-2024-26.lex
-  ▪ {s-op} $ sbs.imp.lex",gbr.cpl.exc.01,sbs.imp.lex,
-e.29122025.cas.001,2025-12-29 19:11:35,jpn.1973.001,sp,Political-Diplomatic,2-A,"$ gbr.cpl.exc.01 {ag} gbr.lh.318-2024-26.lex
-  ▪ {s-op} $ sbs.imp.lex",gbr.cpl.exc.01,sbs.imp.lex,
-e.09112025.caf.001,2025-11-09 18:42:03,fra.1960.001,s-in,Statement,5-A,"$ gbr.cpl.exc.01 {ag} gbr.lh.318-2024-26.lex
-  ▪ {s-op} $ sbs.imp.lex",gbr.cpl.exc.01,sbs.imp.lex,
-e.23012026.sea.002,2026-01-24 08:13:36,gbr.min.scnc.exc.01,s-as,Statement-Inflected,6-B,"$ gbr.cpl.exc.01 {ag} gbr.lh.318-2024-26.lex
-  ▪ {s-op} $ sbs.imp.lex",gbr.cpl.exc.01,sbs.imp.lex,
-e.29012026.nea.001,2026-01-30 14:31:26,rus.1950.001,id,Legal-Juridical,1-B,"$ gbr.cpl.exc.01 {ag} gbr.lh.318-2024-26.lex
-  ▪ {s-op} $ sbs.imp.lex",gbr.cpl.exc.01,sbs.imp.lex,
-e.15112025.sam.001,2025-11-16 16:53:16,nga.org.rlg.xtn.mmb.01.exc.01,sl,Commercial-Operational,5-C,"$ gbr.cpl.exc.01 {ag} gbr.lh.318-2024-26.lex
-  ▪ {s-op} $ sbs.imp.lex",gbr.cpl.exc.01,sbs.imp.lex,
-e.11122025.caf.001,2025-12-11 04:04:35,fra.min.dfns.exc.01,c-st,Claim-Rumor,1-A,"$ gbr.cpl.exc.01 {ag} gbr.lh.318-2024-26.lex
-  ▪ {s-op} $ sbs.imp.lex",gbr.cpl.exc.01,sbs.imp.lex,
-e.06122025.oce.001,2025-12-07 08:27:46,aus.1970.002,sc,Legal-Juridical,1-B,"$ gbr.cpl.exc.01 {ag} gbr.lh.318-2024-26.lex
-  ▪ {s-op} $ sbs.imp.lex",gbr.cpl.exc.01,sbs.imp.lex,
-e.18122025.weu.001,2025-12-19 12:08:02,igo.002.exc.exc.01,bn,Legal-Legislative,1-C,"$ gbr.cpl.exc.01 {ag} gbr.lh.318-2024-26.lex
-  ▪ {s-op} $ sbs.imp.lex",gbr.cpl.exc.01,sbs.imp.lex,
-e.27122025.mea.001,2025-12-27 01:30:11,esp.min.spec.ops.exc.01,sd,Miscellaneous-General,3-E,"$ gbr.cpl.exc.01 {ag} gbr.lh.318-2024-26.lex
-  ▪ {s-op} $ sbs.imp.lex",gbr.cpl.exc.01,sbs.imp.lex,
-e.11112025.eaf.002,2025-11-12 07:17:38,fra.min.hlth.soc.exc.01,s-st,Statement,1-C,"$ gbr.cpl.exc.01 {ag} gbr.lh.318-2024-26.lex
-  ▪ {s-op} $ sbs.imp.lex",gbr.cpl.exc.01,sbs.imp.lex,
-e.30122025.sam.001,2025-12-30 23:27:46,rwa.1957.001,wd,Legal-Legislative,6-C,"$ gbr.cpl.exc.01 {ag} gbr.lh.318-2024-26.lex
-  ▪ {s-op} $ sbs.imp.lex",gbr.cpl.exc.01,sbs.imp.lex,
-e.25012026.cmb.001,2026-01-25 03:19:34,usa.1971.001,hl,Political-Popular,4-F,"$ gbr.cpl.exc.01 {ag} gbr.lh.318-2024-26.lex
-  ▪ {s-op} $ sbs.imp.lex",gbr.cpl.exc.01,sbs.imp.lex,
-e.05012026.oce.001,2026-01-05 11:24:17,ben.1958.001,sp,Political-Diplomatic,2-F,"$ gbr.cpl.exc.01 {ag} gbr.lh.318-2024-26.lex
-  ▪ {s-op} $ sbs.imp.lex",gbr.cpl.exc.01,sbs.imp.lex,
-e.05112025.sea.001,2025-11-05 10:02:58,usa.1946.001,dg,Miscellaneous-General,3-E,"$ gbr.cpl.exc.01 {ag} gbr.lh.318-2024-26.lex
-  ▪ {s-op} $ sbs.imp.lex",gbr.cpl.exc.01,sbs.imp.lex,
+event_code,rec_timestamp,event_actor,action_type,action_code,rel_cred,cie_body,identified_subjects,identified_objects,source_article_id,,
+e.28112025.sas.001,2025-11-29 23:22:04,tur.min.resr.exc.01,Statement-Inflected,s-cr,5-C,"$ usa.hos {s-pr} / rus<>ukr
+  ▪ {s-st} rus.hos x[rv] {s-pr}","[""usa.hos""]","[""rus.hos""]",,,
+e.03122025.sea.001,2025-12-04 10:28:15,can.1984.001,Military-Operational,xr,2-B,"$ usa.hos {s-pr} / rus<>ukr
+  ▪ {s-st} rus.hos x[rv] {s-pr}","[""usa.hos""]","[""rus.hos""]",,,
+e.04112025.oce.001,2025-11-05 05:24:59,can.1980.001,Report Release,r-po,4-B,"$ usa.hos {s-pr} / rus<>ukr
+  ▪ {s-st} rus.hos x[rv] {s-pr}","[""usa.hos""]","[""rus.hos""]",,,
+e.06122025.sea.001,2025-12-07 15:04:46,rus.1950.001,Military-Kinetic,ab,3-E,"$ usa.hos {s-pr} / rus<>ukr
+  ▪ {s-st} rus.hos x[rv] {s-pr}","[""usa.hos""]","[""rus.hos""]",,,
+e.02112025.waf.001,2025-11-03 20:28:41,usa.min.hlth.exc.01,Political-Popular,hl,2-C,"$ usa.hos {s-pr} / rus<>ukr
+  ▪ {s-st} rus.hos x[rv] {s-pr}","[""usa.hos""]","[""rus.hos""]",,,
+e.18012026.sam.001,2026-01-19 10:18:56,irn.1961.001,Statement-Inflected,s-al,2-A,"$ usa.hos {s-pr} / rus<>ukr
+  ▪ {s-st} rus.hos x[rv] {s-pr}","[""usa.hos""]","[""rus.hos""]",,,
+e.07012026.eeu.001,2026-01-08 01:38:43,gbr.min.gndm.exc.01,Statement-Inflected,s-rg,2-B,"$ usa.hos {s-pr} / rus<>ukr
+  ▪ {s-st} rus.hos x[rv] {s-pr}","[""usa.hos""]","[""rus.hos""]",,,
+e.04012026.cas.001,2026-01-05 09:10:21,tur.min.educ.exc.01,Commercial-Operational,by,1-C,"$ usa.hos {s-pr} / rus<>ukr
+  ▪ {s-st} rus.hos x[rv] {s-pr}","[""usa.hos""]","[""rus.hos""]",,,
+e.03122025.eeu.001,2025-12-04 03:04:56,esp.min.forn.exc.01,Statement-Inflected,s-ac,5-A,"$ usa.hos {s-pr} / rus<>ukr
+  ▪ {s-st} rus.hos x[rv] {s-pr}","[""usa.hos""]","[""rus.hos""]",,,
+e.29012026.eaf.001,2026-01-29 05:25:21,esp.1977.001,Military-Operational,xr,3-C,"$ usa.hos {s-pr} / rus<>ukr
+  ▪ {s-st} rus.hos x[rv] {s-pr}","[""usa.hos""]","[""rus.hos""]",,,
+e.20112025.sas.001,2025-11-21 07:50:58,rus.min.trde.exc.01,Military-Kinetic,ch,6-B,"$ usa.hos {s-pr} / rus<>ukr
+  ▪ {s-st} rus.hos x[rv] {s-pr}","[""usa.hos""]","[""rus.hos""]",,,
+e.13112025.sas.001,2025-11-13 16:06:31,tur.1954.001,Announcement,a-mt,4-E,"$ usa.hos {s-pr} / rus<>ukr
+  ▪ {s-st} rus.hos x[rv] {s-pr}","[""usa.hos""]","[""rus.hos""]",,,
+e.30012026.caf.001,2026-01-30 17:25:05,can.min.cltr.exc.01,Report Release,r-rp,4-C,"$ usa.hos {s-pr} / rus<>ukr
+  ▪ {s-st} rus.hos x[rv] {s-pr}","[""usa.hos""]","[""rus.hos""]",,,
+e.21112025.saf.001,2025-11-22 14:33:35,sgp.lh.088,Report Release,r-dt,2-A,"$ usa.hos {s-pr} / rus<>ukr
+  ▪ {s-st} rus.hos x[rv] {s-pr}","[""usa.hos""]","[""rus.hos""]",,,
+e.11122025.cmb.001,2025-12-11 15:55:28,gbr.uh.224,Political-Diplomatic,sn,2-D,"$ usa.hos {s-pr} / rus<>ukr
+  ▪ {s-st} rus.hos x[rv] {s-pr}","[""usa.hos""]","[""rus.hos""]",,,
+e.22112025.cmb.001,2025-11-23 10:06:15,rus.1962.001,Statement,s-sp,3-E,"$ usa.hos {s-pr} / rus<>ukr
+  ▪ {s-st} rus.hos x[rv] {s-pr}","[""usa.hos""]","[""rus.hos""]",,,
+e.08112025.oce.001,2025-11-08 06:59:15,fra.min.infr.exc.01,Legal-Juridical,fi,3-A,"$ usa.hos {s-pr} / rus<>ukr
+  ▪ {s-st} rus.hos x[rv] {s-pr}","[""usa.hos""]","[""rus.hos""]",,,
+e.17012026.eeu.001,2026-01-17 04:21:43,aus.min.jstc.exc.01,Miscellaneous-General,di,2-B,"$ usa.hos {s-pr} / rus<>ukr
+  ▪ {s-st} rus.hos x[rv] {s-pr}","[""usa.hos""]","[""rus.hos""]",,,
+e.15112025.sas.001,2025-11-16 10:02:17,gbr.min.infr.exc.01,Legal-Legislative,en,1-A,"$ usa.hos {s-pr} / rus<>ukr
+  ▪ {s-st} rus.hos x[rv] {s-pr}","[""usa.hos""]","[""rus.hos""]",,,
+e.28112025.eaf.001,2025-11-29 08:05:59,can.min.trde.exc.01,Political-Operational,ap,4-B,"$ usa.hos {s-pr} / rus<>ukr
+  ▪ {s-st} rus.hos x[rv] {s-pr}","[""usa.hos""]","[""rus.hos""]",,,
+e.19012026.nea.001,2026-01-20 18:46:14,deu.min.fisc.exc.01,Political-Operational,nm,1-A,"$ jpn.com.soe.55105050.001 {nv}
+  ▪ jpn.min.fisc.exc.01 [a-in] $ {nt}","[""jpn.com.soe""]","[""jpn.min.fisc.exc.01""]",,,
+e.10122025.saf.001,2025-12-10 01:12:00,usa.1966.001,Announcement,a-tr,4-C,"$ jpn.com.soe.55105050.001 {nv}
+  ▪ jpn.min.fisc.exc.01 [a-in] $ {nt}","[""jpn.com.soe""]","[""jpn.min.fisc.exc.01""]",,,
+e.06012026.mea.001,2026-01-07 16:55:12,deu.min.agrc.exc.01,Political-Diplomatic,sp,3-F,"$ jpn.com.soe.55105050.001 {nv}
+  ▪ jpn.min.fisc.exc.01 [a-in] $ {nt}","[""jpn.com.soe""]","[""jpn.min.fisc.exc.01""]",,,
+e.16122025.caf.001,2025-12-17 12:03:46,usa.1971.003,Legal-Legislative,nt,3-A,"$ jpn.com.soe.55105050.001 {nv}
+  ▪ jpn.min.fisc.exc.01 [a-in] $ {nt}","[""jpn.com.soe""]","[""jpn.min.fisc.exc.01""]",,,
+e.28112025.sea.001,2025-11-29 13:53:42,deu.min.resr.exc.01,Commercial-Operational,cl,1-C,"$ jpn.com.soe.55105050.001 {nv}
+  ▪ jpn.min.fisc.exc.01 [a-in] $ {nt}","[""jpn.com.soe""]","[""jpn.min.fisc.exc.01""]",,,
+e.28112025.sea.002,2025-11-29 02:42:18,rus.min.hous.exc.01,Statement-Inflected,s-tr,1-D,"$ jpn.com.soe.55105050.001 {nv}
+  ▪ jpn.min.fisc.exc.01 [a-in] $ {nt}","[""jpn.com.soe""]","[""jpn.min.fisc.exc.01""]",,,
+e.26122025.weu.001,2025-12-27 14:13:27,deu.1978.001,Statement,s-st,2-F,"$ jpn.com.soe.55105050.001 {nv}
+  ▪ jpn.min.fisc.exc.01 [a-in] $ {nt}","[""jpn.com.soe""]","[""jpn.min.fisc.exc.01""]",,,
+e.14112025.eaf.001,2025-11-14 23:37:52,jpn.min.infr.exc.01,Political-Diplomatic,sp,2-D,"$ jpn.com.soe.55105050.001 {nv}
+  ▪ jpn.min.fisc.exc.01 [a-in] $ {nt}","[""jpn.com.soe""]","[""jpn.min.fisc.exc.01""]",,,
+e.20122025.eaf.001,2025-12-21 04:15:54,jpn.min.dfns.exc.01,Legal-Legislative,vd,5-A,"$ jpn.com.soe.55105050.001 {nv}
+  ▪ jpn.min.fisc.exc.01 [a-in] $ {nt}","[""jpn.com.soe""]","[""jpn.min.fisc.exc.01""]",,,
+e.12122025.caf.001,2025-12-13 21:13:04,rus.1965.001,Legal-Juridical,rt,3-F,"$ jpn.com.soe.55105050.001 {nv}
+  ▪ jpn.min.fisc.exc.01 [a-in] $ {nt}","[""jpn.com.soe""]","[""jpn.min.fisc.exc.01""]",,,
+e.05112025.sam.001,2025-11-06 13:57:47,deu.min.comc.exc.01,Miscellaneous-General,mu,1-B,"$ jpn.com.soe.55105050.001 {nv}
+  ▪ jpn.min.fisc.exc.01 [a-in] $ {nt}","[""jpn.com.soe""]","[""jpn.min.fisc.exc.01""]",,,
+e.14112025.cas.001,2025-11-14 14:26:08,aus.min.cltr.kns.exc.01,Military-Kinetic,dv,5-C,"$ jpn.com.soe.55105050.001 {nv}
+  ▪ jpn.min.fisc.exc.01 [a-in] $ {nt}","[""jpn.com.soe""]","[""jpn.min.fisc.exc.01""]",,,
+e.30112025.sea.001,2025-11-30 15:10:34,gbr.1983.001,Statement,s-cf,1-F,"$ jpn.com.soe.55105050.001 {nv}
+  ▪ jpn.min.fisc.exc.01 [a-in] $ {nt}","[""jpn.com.soe""]","[""jpn.min.fisc.exc.01""]",,,
+e.18012026.sas.001,2026-01-18 08:29:12,jpn.1959.001,Legal-Juridical,ki,5-E,"$ jpn.com.soe.55105050.001 {nv}
+  ▪ jpn.min.fisc.exc.01 [a-in] $ {nt}","[""jpn.com.soe""]","[""jpn.min.fisc.exc.01""]",,,
+e.09122025.nam.001,2025-12-10 22:34:52,fra.1956.002,Legal-Juridical,nv,6-E,"$ jpn.com.soe.55105050.001 {nv}
+  ▪ jpn.min.fisc.exc.01 [a-in] $ {nt}","[""jpn.com.soe""]","[""jpn.min.fisc.exc.01""]",,,
+e.18122025.caf.001,2025-12-19 19:22:26,rus.1963.001,Miscellaneous-General,di,3-B,"$ jpn.com.soe.55105050.001 {nv}
+  ▪ jpn.min.fisc.exc.01 [a-in] $ {nt}","[""jpn.com.soe""]","[""jpn.min.fisc.exc.01""]",,,
+e.26112025.saf.001,2025-11-27 22:53:15,jpn.hog.dfns.eco.chm.exc.01,Statement-Inflected,s-tr,6-A,"$ jpn.com.soe.55105050.001 {nv}
+  ▪ jpn.min.fisc.exc.01 [a-in] $ {nt}","[""jpn.com.soe""]","[""jpn.min.fisc.exc.01""]",,,
+e.16012026.nam.001,2026-01-17 14:43:58,esp.min.trde.exc.01,Statement,s-rs,6-C,"$ jpn.com.soe.55105050.001 {nv}
+  ▪ jpn.min.fisc.exc.01 [a-in] $ {nt}","[""jpn.com.soe""]","[""jpn.min.fisc.exc.01""]",,,
+e.21012026.saf.001,2026-01-22 01:51:53,fra.hog,Miscellaneous-General,rm,4-B,"$ jpn.com.soe.55105050.001 {nv}
+  ▪ jpn.min.fisc.exc.01 [a-in] $ {nt}","[""jpn.com.soe""]","[""jpn.min.fisc.exc.01""]",,,
+e.05112025.sas.001,2025-11-06 12:18:56,deu.1968.003,Miscellaneous-General,mu,5-A,"$ jpn.com.soe.55105050.001 {nv}
+  ▪ jpn.min.fisc.exc.01 [a-in] $ {nt}","[""jpn.com.soe""]","[""jpn.min.fisc.exc.01""]",,,
+e.26112025.saf.002,2025-11-28 00:28:20,fra.1965.001,Statement,s-gp,2-F,"$ e.21112025.waf.001
+  ▪ nga.org.rlg.xtn.mmb.001 [s-es] $ {ab} / qty",[],"[""nga.org.rlg.xtn.mmb.001""]",,,
+e.28122025.nea.001,2025-12-28 02:24:00,chn.1953.001,Commercial-Operational,sl,1-E,"$ e.21112025.waf.001
+  ▪ nga.org.rlg.xtn.mmb.001 [s-es] $ {ab} / qty",[],"[""nga.org.rlg.xtn.mmb.001""]",,,
+e.22112025.sas.001,2025-11-22 22:23:31,deu.1979.001,Report Release,r-in,6-A,"$ e.21112025.waf.001
+  ▪ nga.org.rlg.xtn.mmb.001 [s-es] $ {ab} / qty",[],"[""nga.org.rlg.xtn.mmb.001""]",,,
+e.12012026.sea.001,2026-01-13 07:28:22,usa.1965.002,Military-Kinetic,dv,5-A,"$ e.21112025.waf.001
+  ▪ nga.org.rlg.xtn.mmb.001 [s-es] $ {ab} / qty",[],"[""nga.org.rlg.xtn.mmb.001""]",,,
+e.24112025.nea.001,2025-11-25 14:10:01,ukr.hos.dfns.cme.exc.01,Legal-Juridical,pm,4-A,"$ e.21112025.waf.001
+  ▪ nga.org.rlg.xtn.mmb.001 [s-es] $ {ab} / qty",[],"[""nga.org.rlg.xtn.mmb.001""]",,,
+e.25012026.sas.001,2026-01-26 20:02:17,rus.min.forn.exc.01,Military-Kinetic,nu,2-D,"$ e.21112025.waf.001
+  ▪ nga.org.rlg.xtn.mmb.001 [s-es] $ {ab} / qty",[],"[""nga.org.rlg.xtn.mmb.001""]",,,
+e.24112025.eeu.001,2025-11-25 12:28:30,fra.min.educ.exc.01,Claim-Rumor,c-ns,6-E,"$ e.21112025.waf.001
+  ▪ nga.org.rlg.xtn.mmb.001 [s-es] $ {ab} / qty",[],"[""nga.org.rlg.xtn.mmb.001""]",,,
+e.05122025.waf.001,2025-12-06 13:05:52,jpn.min.educ.exc.01,Legal-Legislative,nl,3-D,"$ e.21112025.waf.001
+  ▪ nga.org.rlg.xtn.mmb.001 [s-es] $ {ab} / qty",[],"[""nga.org.rlg.xtn.mmb.001""]",,,
+e.10112025.caf.001,2025-11-11 06:30:06,usa.min.fisc.exc.01,Miscellaneous-General,rm,6-F,"$ e.21112025.waf.001
+  ▪ nga.org.rlg.xtn.mmb.001 [s-es] $ {ab} / qty",[],"[""nga.org.rlg.xtn.mmb.001""]",,,
+e.11112025.oce.001,2025-11-12 01:49:48,usa.min.jstc.exc.01,Military-Kinetic,cp,1-A,"$ e.21112025.waf.001
+  ▪ nga.org.rlg.xtn.mmb.001 [s-es] $ {ab} / qty",[],"[""nga.org.rlg.xtn.mmb.001""]",,,
+e.29112025.nea.001,2025-11-30 07:39:54,aus.min.scnc.exc.01,Legal-Juridical,id,5-F,"$ e.21112025.waf.001
+  ▪ nga.org.rlg.xtn.mmb.001 [s-es] $ {ab} / qty",[],"[""nga.org.rlg.xtn.mmb.001""]",,,
+e.02122025.eaf.001,2025-12-03 18:22:58,gbr.hog.ops.exc.01,Military-Kinetic,dp,1-F,"$ e.21112025.waf.001
+  ▪ nga.org.rlg.xtn.mmb.001 [s-es] $ {ab} / qty",[],"[""nga.org.rlg.xtn.mmb.001""]",,,
+e.30112025.cas.001,2025-11-30 10:44:53,fra.min.hlth.soc.exc.01,Political-Diplomatic,sn,2-A,"$ e.21112025.waf.001
+  ▪ nga.org.rlg.xtn.mmb.001 [s-es] $ {ab} / qty",[],"[""nga.org.rlg.xtn.mmb.001""]",,,
+e.13122025.eaf.001,2025-12-14 09:18:21,rus.min.jstc.dig.exc.01,Legal-Juridical,dn,3-B,"$ e.21112025.waf.001
+  ▪ nga.org.rlg.xtn.mmb.001 [s-es] $ {ab} / qty",[],"[""nga.org.rlg.xtn.mmb.001""]",,,
+e.25012026.eaf.001,2026-01-27 00:17:11,aus.min.infr.exc.01,Miscellaneous-General,mu,3-C,"$ e.21112025.waf.001
+  ▪ nga.org.rlg.xtn.mmb.001 [s-es] $ {ab} / qty",[],"[""nga.org.rlg.xtn.mmb.001""]",,,
+e.06122025.eaf.001,2025-12-07 23:24:28,rus.min.hlth.exc.01,Legal-Legislative,nt,4-A,"$ e.21112025.waf.001
+  ▪ nga.org.rlg.xtn.mmb.001 [s-es] $ {ab} / qty",[],"[""nga.org.rlg.xtn.mmb.001""]",,,
+e.28112025.sea.003,2025-11-28 12:44:51,rus.1979.001,Statement,s-st,1-B,"$ e.21112025.waf.001
+  ▪ nga.org.rlg.xtn.mmb.001 [s-es] $ {ab} / qty",[],"[""nga.org.rlg.xtn.mmb.001""]",,,
+e.02012026.weu.001,2026-01-02 05:40:38,can.1973.001,Announcement,a-tr,3-A,"$ e.21112025.waf.001
+  ▪ nga.org.rlg.xtn.mmb.001 [s-es] $ {ab} / qty",[],"[""nga.org.rlg.xtn.mmb.001""]",,,
+e.18012026.oce.001,2026-01-18 12:49:20,usa.1991.001,Political-Diplomatic,sp,4-C,"$ e.21112025.waf.001
+  ▪ nga.org.rlg.xtn.mmb.001 [s-es] $ {ab} / qty",[],"[""nga.org.rlg.xtn.mmb.001""]",,,
+e.15112025.oce.001,2025-11-16 08:55:50,bel.akd.pvt.005.exc.01,Legal-Juridical,sz,6-D,"$ e.21112025.waf.001
+  ▪ nga.org.rlg.xtn.mmb.001 [s-es] $ {ab} / qty",[],"[""nga.org.rlg.xtn.mmb.001""]",,,
+e.20012026.sas.001,2026-01-20 15:10:09,fra.1977.001,Legal-Juridical,rf,4-F,$ gnb.min.dfns.ary {rm} gnb.1972.001 ! gnb.hos,"[""gnb.min.dfns.ary""]","[""gnb.hos""]",,,
+e.20012026.weu.001,2026-01-20 15:20:14,ukr.1982.001,Commercial-Operational,mg,4-D,$ gnb.min.dfns.ary {rm} gnb.1972.001 ! gnb.hos,"[""gnb.min.dfns.ary""]","[""gnb.hos""]",,,
+e.09122025.nea.001,2025-12-10 02:34:42,aus.1985.001,Statement,s-rs,4-D,$ gnb.min.dfns.ary {rm} gnb.1972.001 ! gnb.hos,"[""gnb.min.dfns.ary""]","[""gnb.hos""]",,,
+e.04112025.eaf.001,2025-11-04 15:36:55,usa.min.infr.exc.01,Political-Diplomatic,rc,1-B,$ gnb.min.dfns.ary {rm} gnb.1972.001 ! gnb.hos,"[""gnb.min.dfns.ary""]","[""gnb.hos""]",,,
+e.24122025.mea.001,2025-12-25 16:29:39,fra.1984.001,Statement-Inflected,s-rb,1-D,$ gnb.min.dfns.ary {rm} gnb.1972.001 ! gnb.hos,"[""gnb.min.dfns.ary""]","[""gnb.hos""]",,,
+e.24122025.mea.002,2025-12-25 18:31:33,jpn.1962.001,Statement-Inflected,s-rb,5-E,$ gnb.min.dfns.ary {rm} gnb.1972.001 ! gnb.hos,"[""gnb.min.dfns.ary""]","[""gnb.hos""]",,,
+e.05122025.oce.001,2025-12-05 19:36:15,fra.min.jstc.exc.01,Legal-Juridical,rl,6-B,$ gnb.min.dfns.ary {rm} gnb.1972.001 ! gnb.hos,"[""gnb.min.dfns.ary""]","[""gnb.hos""]",,,
+e.07112025.nam.001,2025-11-07 10:14:59,aus.1985.001,Legal-Juridical,ad,1-F,$ gnb.min.dfns.ary {rm} gnb.1972.001 ! gnb.hos,"[""gnb.min.dfns.ary""]","[""gnb.hos""]",,,
+e.22112025.saf.001,2025-11-22 11:53:42,jpn.1961.003,Political-Operational,nm,5-E,$ gnb.min.dfns.ary {rm} gnb.1972.001 ! gnb.hos,"[""gnb.min.dfns.ary""]","[""gnb.hos""]",,,
+e.22112025.sam.001,2025-11-23 14:10:24,aus.min.educ.exc.01,Legal-Legislative,vd,5-D,$ gnb.min.dfns.ary {rm} gnb.1972.001 ! gnb.hos,"[""gnb.min.dfns.ary""]","[""gnb.hos""]",,,
+e.13122025.oce.001,2025-12-14 17:59:52,fra.min.hlth.exc.01,Legal-Juridical,nv,5-B,$ gnb.min.dfns.ary {rm} gnb.1972.001 ! gnb.hos,"[""gnb.min.dfns.ary""]","[""gnb.hos""]",,,
+e.28112025.eaf.002,2025-11-29 12:06:10,aus.min.hous.exc.01,Statement-Inflected,s-op,3-E,$ gnb.min.dfns.ary {rm} gnb.1972.001 ! gnb.hos,"[""gnb.min.dfns.ary""]","[""gnb.hos""]",,,
+e.22122025.mea.001,2025-12-23 23:17:01,can.1960.001,Political-Operational,ed,4-A,$ gnb.min.dfns.ary {rm} gnb.1972.001 ! gnb.hos,"[""gnb.min.dfns.ary""]","[""gnb.hos""]",,,
+e.27112025.waf.001,2025-11-28 23:55:17,gbr.1972.001,Commercial-Operational,lo,6-A,$ gnb.min.dfns.ary {rm} gnb.1972.001 ! gnb.hos,"[""gnb.min.dfns.ary""]","[""gnb.hos""]",,,
+e.08122025.sam.001,2025-12-09 12:50:08,aus.1973.004,Political-Diplomatic,sn,5-B,$ gnb.min.dfns.ary {rm} gnb.1972.001 ! gnb.hos,"[""gnb.min.dfns.ary""]","[""gnb.hos""]",,,
+e.31012026.sea.001,2026-01-31 15:38:09,gbr.1967.001,Military-Kinetic,dv,4-E,$ gnb.min.dfns.ary {rm} gnb.1972.001 ! gnb.hos,"[""gnb.min.dfns.ary""]","[""gnb.hos""]",,,
+e.06112025.weu.001,2025-11-06 10:23:00,esp.min.dfns.exc.01,Legal-Juridical,re,5-C,$ gnb.min.dfns.ary {rm} gnb.1972.001 ! gnb.hos,"[""gnb.min.dfns.ary""]","[""gnb.hos""]",,,
+e.19012026.sas.001,2026-01-19 14:48:43,esp.1983.001,Report Release,r-rp,6-B,$ gnb.min.dfns.ary {rm} gnb.1972.001 ! gnb.hos,"[""gnb.min.dfns.ary""]","[""gnb.hos""]",,,
+e.11122025.cas.001,2025-12-11 12:14:23,jpn.min.comc.dig.exc.01,Military-Kinetic,cp,1-D,$ gnb.min.dfns.ary {rm} gnb.1972.001 ! gnb.hos,"[""gnb.min.dfns.ary""]","[""gnb.hos""]",,,
+e.23112025.eeu.001,2025-11-24 21:55:49,aus.1973.003,Military-Kinetic,dp,5-C,$ gnb.min.dfns.ary {rm} gnb.1972.001 ! gnb.hos,"[""gnb.min.dfns.ary""]","[""gnb.hos""]",,,
+e.24112025.cas.001,2025-11-25 07:46:27,can.min.forn.exc.01,Miscellaneous-General,dg,4-D,"$ {ak} # (dig) @ isr.com.ind.50202010
+  ▪ [s-as] $ {ak} / irn.min.intl","[""isr.com.ind""]","[""irn.min.intl""]",,,
+e.03112025.saf.001,2025-11-04 19:47:18,usa.sbs.geo.jstc.grtc.vrbn.60.mgs.12,Statement-Inflected,s-bk,1-A,"$ {ak} # (dig) @ isr.com.ind.50202010
+  ▪ [s-as] $ {ak} / irn.min.intl","[""isr.com.ind""]","[""irn.min.intl""]",,,
+e.11012026.sea.001,2026-01-11 20:34:48,can.1966.003,Political-Diplomatic,ag,4-F,"$ {ak} # (dig) @ isr.com.ind.50202010
+  ▪ [s-as] $ {ak} / irn.min.intl","[""isr.com.ind""]","[""irn.min.intl""]",,,
+e.06112025.caf.001,2025-11-07 21:03:31,esp.min.spec.ops.exc.01,Miscellaneous-General,cn,3-F,"$ {ak} # (dig) @ isr.com.ind.50202010
+  ▪ [s-as] $ {ak} / irn.min.intl","[""isr.com.ind""]","[""irn.min.intl""]",,,
+e.08012026.cas.001,2026-01-08 17:58:34,can.min.agrc.pec.exc.01,Legal-Legislative,bn,6-D,"$ {ak} # (dig) @ isr.com.ind.50202010
+  ▪ [s-as] $ {ak} / irn.min.intl","[""isr.com.ind""]","[""irn.min.intl""]",,,
+e.07122025.sam.001,2025-12-07 14:22:30,can.1984.001,Statement-Inflected,s-as,1-C,"$ {ak} # (dig) @ isr.com.ind.50202010
+  ▪ [s-as] $ {ak} / irn.min.intl","[""isr.com.ind""]","[""irn.min.intl""]",,,
+e.25012026.oce.001,2026-01-26 19:39:53,can.min.forn.exc.01,Statement-Inflected,s-al,2-C,"$ {ak} # (dig) @ isr.com.ind.50202010
+  ▪ [s-as] $ {ak} / irn.min.intl","[""isr.com.ind""]","[""irn.min.intl""]",,,
+e.08012026.nea.001,2026-01-09 17:51:52,esp.min.hous.exc.01,Commercial-Operational,mg,6-A,"$ {ak} # (dig) @ isr.com.ind.50202010
+  ▪ [s-as] $ {ak} / irn.min.intl","[""isr.com.ind""]","[""irn.min.intl""]",,,
+e.28122025.caf.001,2025-12-29 18:38:31,can.min.spec.int.02.exc.01,Legal-Juridical,sz,1-C,"$ {ak} # (dig) @ isr.com.ind.50202010
+  ▪ [s-as] $ {ak} / irn.min.intl","[""isr.com.ind""]","[""irn.min.intl""]",,,
+e.12012026.nam.001,2026-01-12 22:22:58,deu.min.hlth.exc.01,Statement,s-st,6-D,"$ {ak} # (dig) @ isr.com.ind.50202010
+  ▪ [s-as] $ {ak} / irn.min.intl","[""isr.com.ind""]","[""irn.min.intl""]",,,
+e.30122025.caf.001,2025-12-31 02:48:05,ben.hos,Announcement,a-dt,5-F,"$ {ak} # (dig) @ isr.com.ind.50202010
+  ▪ [s-as] $ {ak} / irn.min.intl","[""isr.com.ind""]","[""irn.min.intl""]",,,
+e.18012026.caf.001,2026-01-19 12:36:04,jpn.1948.001,Political-Diplomatic,sn,2-F,"$ {ak} # (dig) @ isr.com.ind.50202010
+  ▪ [s-as] $ {ak} / irn.min.intl","[""isr.com.ind""]","[""irn.min.intl""]",,,
+e.24012026.sea.001,2026-01-24 22:43:23,esp.1971.002,Claim-Rumor,c-st,3-A,"$ {ak} # (dig) @ isr.com.ind.50202010
+  ▪ [s-as] $ {ak} / irn.min.intl","[""isr.com.ind""]","[""irn.min.intl""]",,,
+e.11112025.saf.001,2025-11-11 17:56:26,fra.1977.001,Miscellaneous-General,hi,2-E,"$ {ak} # (dig) @ isr.com.ind.50202010
+  ▪ [s-as] $ {ak} / irn.min.intl","[""isr.com.ind""]","[""irn.min.intl""]",,,
+e.27012026.caf.001,2026-01-27 02:33:15,sgp.min.labr.exc.01,Legal-Juridical,pl,4-F,"$ {ak} # (dig) @ isr.com.ind.50202010
+  ▪ [s-as] $ {ak} / irn.min.intl","[""isr.com.ind""]","[""irn.min.intl""]",,,
+e.08012026.sas.001,2026-01-09 02:39:46,can.min.agrc.pec.exc.01,Announcement,a-po,1-E,"$ {ak} # (dig) @ isr.com.ind.50202010
+  ▪ [s-as] $ {ak} / irn.min.intl","[""isr.com.ind""]","[""irn.min.intl""]",,,
+e.03122025.mea.001,2025-12-04 10:43:45,can.min.comc.exc.01,Political-Popular,hl,4-B,"$ {ak} # (dig) @ isr.com.ind.50202010
+  ▪ [s-as] $ {ak} / irn.min.intl","[""isr.com.ind""]","[""irn.min.intl""]",,,
+e.15122025.eaf.001,2025-12-16 02:12:29,can.1960.002,Announcement,a-in,6-A,"$ {ak} # (dig) @ isr.com.ind.50202010
+  ▪ [s-as] $ {ak} / irn.min.intl","[""isr.com.ind""]","[""irn.min.intl""]",,,
+e.18112025.mea.001,2025-11-19 05:20:57,usa.1965.001,Legal-Legislative,se,6-C,"$ {ak} # (dig) @ isr.com.ind.50202010
+  ▪ [s-as] $ {ak} / irn.min.intl","[""isr.com.ind""]","[""irn.min.intl""]",,,
+e.26122025.eaf.001,2025-12-27 01:57:02,usa.1966.001,Legal-Juridical,ar,3-F,"$ {ak} # (dig) @ isr.com.ind.50202010
+  ▪ [s-as] $ {ak} / irn.min.intl","[""isr.com.ind""]","[""irn.min.intl""]",,,
+e.04012026.waf.001,2026-01-04 02:45:06,aus.1973.001,Miscellaneous-General,gv,6-B,"$ rwa.hos <{mt}> cod.hos @ usa.cpl
+  ▪ {s-rp} rwa.hos [ag] cod.hos","[""rwa.hos""]","[""cod.hos"", ""usa.cpl""]",,,
+e.07112025.caf.001,2025-11-08 13:34:17,usa.sbs.geo.jstc.grtc.vrbn.60.mgs.12,Miscellaneous-General,go,6-A,"$ rwa.hos <{mt}> cod.hos @ usa.cpl
+  ▪ {s-rp} rwa.hos [ag] cod.hos","[""rwa.hos""]","[""cod.hos"", ""usa.cpl""]",,,
+e.28112025.weu.001,2025-11-28 14:22:16,deu.1970.001,Statement,s-pr,2-F,"$ rwa.hos <{mt}> cod.hos @ usa.cpl
+  ▪ {s-rp} rwa.hos [ag] cod.hos","[""rwa.hos""]","[""cod.hos"", ""usa.cpl""]",,,
+e.02112025.weu.001,2025-11-03 01:32:55,aus.1978.001,Legal-Legislative,nt,6-A,"$ rwa.hos <{mt}> cod.hos @ usa.cpl
+  ▪ {s-rp} rwa.hos [ag] cod.hos","[""rwa.hos""]","[""cod.hos"", ""usa.cpl""]",,,
+e.18112025.saf.001,2025-11-18 10:24:03,tur.min.jstc.exc.01,Political-Operational,ud,3-E,"$ rwa.hos <{mt}> cod.hos @ usa.cpl
+  ▪ {s-rp} rwa.hos [ag] cod.hos","[""rwa.hos""]","[""cod.hos"", ""usa.cpl""]",,,
+e.09112025.sea.001,2025-11-10 22:32:33,fra.min.dfns.exc.01,Miscellaneous-General,sd,1-D,"$ rwa.hos <{mt}> cod.hos @ usa.cpl
+  ▪ {s-rp} rwa.hos [ag] cod.hos","[""rwa.hos""]","[""cod.hos"", ""usa.cpl""]",,,
+e.29112025.nam.001,2025-11-29 22:38:08,deu.1968.001,Claim-Rumor,c-or,4-A,"$ rwa.hos <{mt}> cod.hos @ usa.cpl
+  ▪ {s-rp} rwa.hos [ag] cod.hos","[""rwa.hos""]","[""cod.hos"", ""usa.cpl""]",,,
+e.25012026.oce.002,2026-01-25 17:26:34,rus.min.jstc.dig.exc.01,Announcement,a-po,4-F,"$ rwa.hos <{mt}> cod.hos @ usa.cpl
+  ▪ {s-rp} rwa.hos [ag] cod.hos","[""rwa.hos""]","[""cod.hos"", ""usa.cpl""]",,,
+e.30112025.eaf.001,2025-12-01 01:46:59,gbr.min.spec.int.03.exc.01,Announcement,a-mt,1-D,"$ rwa.hos <{mt}> cod.hos @ usa.cpl
+  ▪ {s-rp} rwa.hos [ag] cod.hos","[""rwa.hos""]","[""cod.hos"", ""usa.cpl""]",,,
+e.31012026.weu.001,2026-02-01 03:10:12,deu.1987.001,Political-Diplomatic,rc,3-D,"$ rwa.hos <{mt}> cod.hos @ usa.cpl
+  ▪ {s-rp} rwa.hos [ag] cod.hos","[""rwa.hos""]","[""cod.hos"", ""usa.cpl""]",,,
+e.22112025.cas.001,2025-11-22 09:41:39,can.min.jstc.img.exc.01,Legal-Legislative,ts,5-E,"$ rwa.hos <{mt}> cod.hos @ usa.cpl
+  ▪ {s-rp} rwa.hos [ag] cod.hos","[""rwa.hos""]","[""cod.hos"", ""usa.cpl""]",,,
+e.22122025.weu.001,2025-12-23 04:08:51,can.min.comc.exc.01,Announcement,a-mt,5-A,"$ rwa.hos <{mt}> cod.hos @ usa.cpl
+  ▪ {s-rp} rwa.hos [ag] cod.hos","[""rwa.hos""]","[""cod.hos"", ""usa.cpl""]",,,
+e.27012026.cmb.001,2026-01-28 20:11:45,jpn.1964.001,Miscellaneous-General,dg,6-A,"$ rwa.hos <{mt}> cod.hos @ usa.cpl
+  ▪ {s-rp} rwa.hos [ag] cod.hos","[""rwa.hos""]","[""cod.hos"", ""usa.cpl""]",,,
+e.26122025.sam.001,2025-12-27 18:17:15,fra.1973.001,Miscellaneous-General,hi,4-D,"$ rwa.hos <{mt}> cod.hos @ usa.cpl
+  ▪ {s-rp} rwa.hos [ag] cod.hos","[""rwa.hos""]","[""cod.hos"", ""usa.cpl""]",,,
+e.16122025.nea.001,2025-12-16 23:10:56,deu.min.jstc.exc.01,Military-Kinetic,ch,2-E,"$ rwa.hos <{mt}> cod.hos @ usa.cpl
+  ▪ {s-rp} rwa.hos [ag] cod.hos","[""rwa.hos""]","[""cod.hos"", ""usa.cpl""]",,,
+e.20012026.sas.002,2026-01-21 21:34:58,chn.ccp.cme.exc.01,Political-Diplomatic,sp,3-D,"$ rwa.hos <{mt}> cod.hos @ usa.cpl
+  ▪ {s-rp} rwa.hos [ag] cod.hos","[""rwa.hos""]","[""cod.hos"", ""usa.cpl""]",,,
+e.08122025.eeu.001,2025-12-09 15:57:09,gbr.1970.002,Legal-Juridical,rt,5-E,"$ rwa.hos <{mt}> cod.hos @ usa.cpl
+  ▪ {s-rp} rwa.hos [ag] cod.hos","[""rwa.hos""]","[""cod.hos"", ""usa.cpl""]",,,
+e.09012026.eaf.001,2026-01-09 22:02:49,kor.jstc.grtc.vrbn.exc.01,Military-Kinetic,cp,2-E,"$ rwa.hos <{mt}> cod.hos @ usa.cpl
+  ▪ {s-rp} rwa.hos [ag] cod.hos","[""rwa.hos""]","[""cod.hos"", ""usa.cpl""]",,,
+e.21122025.eeu.001,2025-12-22 07:18:39,esp.1968.001,Legal-Juridical,jl,1-E,"$ rwa.hos <{mt}> cod.hos @ usa.cpl
+  ▪ {s-rp} rwa.hos [ag] cod.hos","[""rwa.hos""]","[""cod.hos"", ""usa.cpl""]",,,
+e.11012026.oce.001,2026-01-12 03:18:11,esp.1981.001,Miscellaneous-General,di,3-F,"$ rwa.hos <{mt}> cod.hos @ usa.cpl
+  ▪ {s-rp} rwa.hos [ag] cod.hos","[""rwa.hos""]","[""cod.hos"", ""usa.cpl""]",,,
+e.24122025.weu.001,2025-12-25 13:31:46,chn.sbs.hkg.ntfd.incd.exc.01,Claim-Rumor,c-uv,4-F,"$ gbr.cpl.exc.01 {ag} gbr.lh.318-2024-26.lex
+  ▪ {s-op} $ sbs.imp.lex","[""gbr.cpl.exc.01""]","[""sbs.imp.lex""]",,,
+e.16112025.sas.001,2025-11-17 09:25:39,esp.min.labr.soc.02.exc.01,Statement-Inflected,s-rb,2-C,"$ gbr.cpl.exc.01 {ag} gbr.lh.318-2024-26.lex
+  ▪ {s-op} $ sbs.imp.lex","[""gbr.cpl.exc.01""]","[""sbs.imp.lex""]",,,
+e.09012026.eaf.002,2026-01-10 00:45:16,can.min.cltr.exc.01,Announcement,a-in,6-F,"$ gbr.cpl.exc.01 {ag} gbr.lh.318-2024-26.lex
+  ▪ {s-op} $ sbs.imp.lex","[""gbr.cpl.exc.01""]","[""sbs.imp.lex""]",,,
+e.31012026.nea.001,2026-02-01 00:15:28,gbr.1972.001,Political-Popular,wn,6-B,"$ gbr.cpl.exc.01 {ag} gbr.lh.318-2024-26.lex
+  ▪ {s-op} $ sbs.imp.lex","[""gbr.cpl.exc.01""]","[""sbs.imp.lex""]",,,
+e.25112025.mea.001,2025-11-26 17:38:13,tur.min.fisc.exc.01,Miscellaneous-General,dt,3-E,"$ gbr.cpl.exc.01 {ag} gbr.lh.318-2024-26.lex
+  ▪ {s-op} $ sbs.imp.lex","[""gbr.cpl.exc.01""]","[""sbs.imp.lex""]",,,
+e.24122025.weu.002,2025-12-25 19:18:25,can.min.resr.eng.exc.01,Claim-Rumor,c-mc,1-F,"$ gbr.cpl.exc.01 {ag} gbr.lh.318-2024-26.lex
+  ▪ {s-op} $ sbs.imp.lex","[""gbr.cpl.exc.01""]","[""sbs.imp.lex""]",,,
+e.29012026.saf.001,2026-01-30 20:58:22,gbr.1963.001,Political-Operational,es,3-F,"$ gbr.cpl.exc.01 {ag} gbr.lh.318-2024-26.lex
+  ▪ {s-op} $ sbs.imp.lex","[""gbr.cpl.exc.01""]","[""sbs.imp.lex""]",,,
+e.15012026.cmb.001,2026-01-16 02:11:48,gbr.min.jst.exc.01.exc.01,Legal-Juridical,nv,1-A,"$ gbr.cpl.exc.01 {ag} gbr.lh.318-2024-26.lex
+  ▪ {s-op} $ sbs.imp.lex","[""gbr.cpl.exc.01""]","[""sbs.imp.lex""]",,,
+e.30122025.mea.001,2025-12-31 12:12:28,nga.1963.001,Legal-Juridical,sc,1-D,"$ gbr.cpl.exc.01 {ag} gbr.lh.318-2024-26.lex
+  ▪ {s-op} $ sbs.imp.lex","[""gbr.cpl.exc.01""]","[""sbs.imp.lex""]",,,
+e.07112025.eaf.001,2025-11-07 06:53:08,deu.1968.003,Military-Operational,xr,2-E,"$ gbr.cpl.exc.01 {ag} gbr.lh.318-2024-26.lex
+  ▪ {s-op} $ sbs.imp.lex","[""gbr.cpl.exc.01""]","[""sbs.imp.lex""]",,,
+e.18122025.nam.001,2025-12-19 22:28:40,jpn.1962.001,Statement,s-rs,1-B,"$ gbr.cpl.exc.01 {ag} gbr.lh.318-2024-26.lex
+  ▪ {s-op} $ sbs.imp.lex","[""gbr.cpl.exc.01""]","[""sbs.imp.lex""]",,,
+e.19112025.nea.001,2025-11-20 20:33:11,usa.1980.001,Legal-Juridical,sc,4-C,"$ gbr.cpl.exc.01 {ag} gbr.lh.318-2024-26.lex
+  ▪ {s-op} $ sbs.imp.lex","[""gbr.cpl.exc.01""]","[""sbs.imp.lex""]",,,
+e.27012026.caf.002,2026-01-27 09:34:56,esp.1966.002,Statement-Inflected,s-rb,4-A,"$ gbr.cpl.exc.01 {ag} gbr.lh.318-2024-26.lex
+  ▪ {s-op} $ sbs.imp.lex","[""gbr.cpl.exc.01""]","[""sbs.imp.lex""]",,,
+e.05112025.nea.001,2025-11-05 02:18:29,bra.1968.001,Claim-Rumor,c-or,3-A,"$ gbr.cpl.exc.01 {ag} gbr.lh.318-2024-26.lex
+  ▪ {s-op} $ sbs.imp.lex","[""gbr.cpl.exc.01""]","[""sbs.imp.lex""]",,,
+e.13122025.eeu.001,2025-12-14 11:54:04,aus.1954.001,Statement-Inflected,s-al,3-D,"$ gbr.cpl.exc.01 {ag} gbr.lh.318-2024-26.lex
+  ▪ {s-op} $ sbs.imp.lex","[""gbr.cpl.exc.01""]","[""sbs.imp.lex""]",,,
+e.19012026.nam.001,2026-01-20 22:24:25,aus.1968.001,Report Release,r-po,5-E,"$ gbr.cpl.exc.01 {ag} gbr.lh.318-2024-26.lex
+  ▪ {s-op} $ sbs.imp.lex","[""gbr.cpl.exc.01""]","[""sbs.imp.lex""]",,,
+e.08112025.sam.001,2025-11-08 02:26:05,aus.1971.001,Legal-Juridical,sc,3-F,"$ gbr.cpl.exc.01 {ag} gbr.lh.318-2024-26.lex
+  ▪ {s-op} $ sbs.imp.lex","[""gbr.cpl.exc.01""]","[""sbs.imp.lex""]",,,
+e.03122025.nam.001,2025-12-04 15:57:21,esp.1973.002,Report Release,r-po,2-D,"$ gbr.cpl.exc.01 {ag} gbr.lh.318-2024-26.lex
+  ▪ {s-op} $ sbs.imp.lex","[""gbr.cpl.exc.01""]","[""sbs.imp.lex""]",,,
+e.29112025.sea.001,2025-11-29 23:07:53,fra.min.resr.exc.01,Announcement,a-in,1-F,"$ gbr.cpl.exc.01 {ag} gbr.lh.318-2024-26.lex
+  ▪ {s-op} $ sbs.imp.lex","[""gbr.cpl.exc.01""]","[""sbs.imp.lex""]",,,
+e.24112025.nam.001,2025-11-24 05:28:18,can.1965.002,Legal-Juridical,fi,2-B,"$ gbr.cpl.exc.01 {ag} gbr.lh.318-2024-26.lex
+  ▪ {s-op} $ sbs.imp.lex","[""gbr.cpl.exc.01""]","[""sbs.imp.lex""]",,,

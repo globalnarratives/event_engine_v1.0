@@ -6,6 +6,7 @@ Creates 105 events (15 per CIE template) with randomized components
 import random
 from datetime import datetime, timedelta
 import csv
+import json
 from app import create_app, db
 from app.models import Position, Actor, ActionCode
 
@@ -150,13 +151,13 @@ def generate_events():
                 'event_code': event_code,
                 'rec_timestamp': rec_timestamp.strftime('%Y-%m-%d %H:%M:%S'),
                 'event_actor': event_actor,
-                'action_code': action_code,
-                'action_type': action_type, # You can randomize this too if needed
+                'action_type': action_type,
+                'action_code': action_code,  
                 'rel_cred': rel_cred,
                 'cie_body': cie_template,
-                'identified_subjects': ','.join(subjects),
-                'identified_objects': ','.join(objects),
-                'source_article_id': ''  # Empty for synthetic data
+                'identified_subjects': json.dumps(subjects), 
+                'identified_objects': json.dumps(objects),
+                'source_article_id': '' 
             }
             
             events.append(event)
