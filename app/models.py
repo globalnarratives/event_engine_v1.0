@@ -489,3 +489,75 @@ class TrackedInstitution(db.Model):
     tracked_at = db.Column(db.DateTime, default=datetime.utcnow)
     
     __table_args__ = (db.UniqueConstraint('user_id', 'institution_code', name='uq_user_institution'),)
+
+class Narrative(db.Model):
+    """High-level analytical framework grouping scenarios around a geopolitical thesis"""
+    __tablename__ = 'narratives'
+    
+    narrative_code = db.Column(db.String(50), primary_key=True)
+    title = db.Column(db.String(100), nullable=False)
+    res_horizon = db.Column(db.DateTime, nullable=False)
+    description = db.Column(db.Text, nullable=False)
+    
+    # Computed trend outputs (nullable - populated as scenarios accumulate)
+    short_trend = db.Column(db.Numeric)
+    long_trend = db.Column(db.Numeric)
+    pos_pressure = db.Column(db.Numeric)
+    neg_pressure = db.Column(db.Numeric)
+    
+    # Computed metadata (nullable)
+    event_count = db.Column(db.Integer)
+    min_mod_count = db.Column(db.Integer)
+    maj_crit_count = db.Column(db.Integer)
+    dom_action = db.Column(db.String(10))
+    dom_region = db.Column(db.String(10))
+    dom_entity = db.Column(db.String(10))
+    
+    # Relationships
+    narrative_scenarios = db.relationship('NarrativeScenario', back_populates='narrative', cascade='all, delete-orphan')
+    narrative_resolutions = db.relationship('NarrativeResolution', back_populates='narrative', cascade='all, delete-orphan')
+    
+    def __repr__(self):
+        return f'<Narrative {self.narrative_code}: {self.title}>'
+
+
+class NarrativeScenario(db.Model):
+    """Junction table: Links marked scenarios to narratives with relationship and potency"""
+    __tablename__ = 'narrative_scenarios'
+    
+    id = db.Column(db.Integer, primary_key=True)
+    marked_scenario_id = db.Column(db.Integer, db.ForeignKey('marked_scenarios.id', ondelete='CASCADE'), nullable=False)
+    narrative_code = db.Column(db.String(50), db.ForeignKey('narratives.narrative_code'), nullable=False)
+    relationship = db.Column(db.Boolean, nullable=False)  # True = direct, False = inverse
+    potency = db.Column(db.Numeric, nullable=False)
+    
+    # Relationships
+    narrative = db.relationship('Narrative', back_populates='narrative_scenarios')
+    marked_scenario = db.relationship('MarkedScenario', backref='narrative_links')
+    
+    __table_args__ = (
+        db.UniqueConstraint('marked_scenario_id', 'narrative_code', name='uq_narrative_scenario'),
+    )
+    
+    def __repr__(self):
+        return f'<NarrativeScenario {self.narrative_code}:{self.marked_scenario_id} rel={"direct" if self.relationship else "inverse"}>'
+
+
+class NarrativeResolution(db.Model):
+    """Resolution conditions for a narrative - positive and negative condition rows"""
+    __tablename__ = 'narrative_resolutions'
+    
+    id = db.Column(db.Integer, primary_key=True)
+    narrative_code = db.Column(db.String(50), db.ForeignKey('narratives.narrative_code'), nullable=False)
+    entity_code = db.Column(db.String(100), nullable=False)
+    entity_type = db.Column(db.String(100), nullable=False)  # 'actor', 'position', or 'institution'
+    action_code = db.Column(db.String(10), nullable=False)
+    polarity = db.Column(db.Boolean, nullable=False)  # True = positive condition, False = negative
+    weight = db.Column(db.Numeric, nullable=False)
+    
+    # Relationships
+    narrative = db.relationship('Narrative', back_populates='narrative_resolutions')
+    
+    def __repr__(self):
+        polarity_str = "positive" if self.polarity else "negative"
+        return f'<NarrativeResolution {self.narrative_code}: {self.entity_code} {self.action_code} ({polarity_str})>'
