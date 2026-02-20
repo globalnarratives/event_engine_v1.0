@@ -1,0 +1,340 @@
+{% extends "base.html" %}
+
+{% block title %}{{ narrative.narrative_code }}{% endblock %}
+
+{% block extra_css %}
+<style>
+    .metadata-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: var(--space-md);
+    }
+    .metadata-cell {
+        background: var(--color-bg-primary);
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-sm);
+        padding: var(--space-md);
+    }
+    .metadata-cell-label {
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--color-text-tertiary);
+        margin-bottom: var(--space-sm);
+    }
+    .metadata-cell-value {
+        font-family: var(--font-body);
+        font-size: 0.95rem;
+        color: var(--color-accent-primary);
+        word-break: break-all;
+    }
+    .trend-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--space-md);
+        margin-top: var(--space-md);
+    }
+    .trend-cell {
+        background: var(--color-bg-primary);
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-sm);
+        padding: var(--space-md);
+    }
+    .trend-label {
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--color-text-tertiary);
+        margin-bottom: var(--space-sm);
+    }
+    .trend-value {
+        font-family: var(--font-body);
+        font-size: 1.1rem;
+        color: var(--color-text-primary);
+    }
+    .info-grid {
+        display: grid;
+        grid-template-columns: 180px 1fr;
+        gap: 0.75rem;
+    }
+    .info-label {
+        color: var(--color-text-tertiary);
+        font-weight: 600;
+        text-transform: uppercase;
+        font-size: 0.8rem;
+        padding-top: 0.1rem;
+    }
+    .subsection-title {
+        font-family: var(--font-body);
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--color-text-secondary);
+        margin: var(--space-lg) 0 var(--space-md) 0;
+        padding-bottom: var(--space-sm);
+        border-bottom: 1px solid var(--color-border);
+    }
+    .occurred-yes { color: var(--color-accent-secondary); font-weight: 600; }
+    .occurred-no  { color: var(--color-accent-warning);   font-weight: 600; }
+    .group-subheader td {
+        background: var(--color-bg-elevated);
+        color: var(--color-text-tertiary);
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        padding: 0.4rem var(--space-md);
+        font-family: var(--font-body);
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+
+    <!-- Header Card -->
+    <div class="card mb-lg">
+        <div class="card-header">
+            <h2 class="card-title" style="font-family: var(--font-body); color: var(--color-accent-primary);">
+                {{ narrative.narrative_code }}
+            </h2>
+            <div style="display: flex; gap: var(--space-sm);">
+                <a href="{{ url_for('narratives.edit', narrative_code=narrative.narrative_code) }}" class="btn btn-primary">Edit</a>
+                <a href="{{ url_for('narratives.index') }}" class="btn btn-secondary">Back to Narratives</a>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="info-grid">
+                <div class="info-label">Title</div>
+                <div style="color: var(--color-text-primary);">{{ narrative.title }}</div>
+
+                <div class="info-label">Description</div>
+                <div style="color: var(--color-text-secondary);">{{ narrative.description }}</div>
+
+                <div class="info-label">Resolution Horizon</div>
+                <div style="color: var(--color-text-primary);">
+                    {{ narrative.res_horizon.strftime('%Y-%m-%d') if narrative.res_horizon else '—' }}
+                </div>
+
+                <div class="info-label">Initial Trend</div>
+                <div style="color: var(--color-text-primary); font-family: var(--font-body);">
+                    {% if narrative.initial_trend is not none %}
+                        {% set it = narrative.initial_trend | int %}
+                        {% if it == 2 %}Strongly Positive
+                        {% elif it == 1 %}Positive
+                        {% elif it == 0 %}Stable
+                        {% elif it == -1 %}Negative
+                        {% elif it == -2 %}Strongly Negative
+                        {% else %}{{ narrative.initial_trend }}{% endif %}
+                    {% else %}—{% endif %}
+                </div>
+            </div>
+
+            <div class="trend-grid">
+                <div class="trend-cell">
+                    <div class="trend-label">Short-Term Trend</div>
+                    <div class="trend-value">
+                        {% if narrative.short_trend is not none %}{{ narrative.short_trend }}{% else %}—{% endif %}
+                    </div>
+                </div>
+                <div class="trend-cell">
+                    <div class="trend-label">Long-Term Trend</div>
+                    <div class="trend-value">
+                        {% if narrative.long_trend is not none %}{{ narrative.long_trend }}{% else %}—{% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Resolution Progress Card -->
+    <div class="card mb-lg">
+        <div class="card-header">
+            <h2 class="card-title">Resolution Progress</h2>
+        </div>
+        <div class="card-body">
+
+            <!-- Resolution Conditions -->
+            <div class="subsection-title">Anticipated Events / Narrative Internal</div>
+            {% if resolution_data_positive or resolution_data_negative %}
+                <table class="table" style="table-layout: fixed; width: 100%;">
+                    <thead>
+                        <tr>
+                            <th style="width: 5%;"></th>
+                            <th style="width: 22%;">Actor / Institution</th>
+                            <th style="width: 22%;">Indicator Action</th>
+                            <th style="width: 20%;">Effect Directionality</th>
+                            <th style="width: 15%;">Influence</th>
+                            <th style="width: 16%;">Occurred?</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% if resolution_data_positive %}
+                        <tr class="group-subheader">
+                            <td colspan="6">Positive Resolution Pressures</td>
+                        </tr>
+                        {% for item in resolution_data_positive %}
+                        {% set res = item.resolution %}
+                        <tr>
+                            <td></td>
+                            <td style="font-family: var(--font-body); color: var(--color-accent-primary);">{{ res.entity_code }}</td>
+                            <td style="font-family: var(--font-body); color: var(--color-text-primary);">{{ res.action_code }}</td>
+                            <td style="color: var(--color-text-secondary);">Positive</td>
+                            <td style="color: var(--color-text-secondary);">
+                                {% if res.weight | float == 1.5 %}High{% elif res.weight | float == 1.0 %}Med{% else %}Low{% endif %}
+                            </td>
+                            <td>
+                                {% if item.occurred %}<span class="occurred-yes">Yes</span>{% else %}<span class="occurred-no">No</span>{% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        {% endif %}
+
+                        {% if resolution_data_negative %}
+                        <tr class="group-subheader">
+                            <td colspan="6">Negative Resolution Pressures</td>
+                        </tr>
+                        {% for item in resolution_data_negative %}
+                        {% set res = item.resolution %}
+                        <tr>
+                            <td></td>
+                            <td style="font-family: var(--font-body); color: var(--color-accent-primary);">{{ res.entity_code }}</td>
+                            <td style="font-family: var(--font-body); color: var(--color-text-primary);">{{ res.action_code }}</td>
+                            <td style="color: var(--color-text-secondary);">Negative</td>
+                            <td style="color: var(--color-text-secondary);">
+                                {% if res.weight | float == 1.5 %}High{% elif res.weight | float == 1.0 %}Med{% else %}Low{% endif %}
+                            </td>
+                            <td>
+                                {% if item.occurred %}<span class="occurred-yes">Yes</span>{% else %}<span class="occurred-no">No</span>{% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        {% endif %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p style="color: var(--color-text-dim); padding: 1rem 0;">No resolution conditions defined.</p>
+            {% endif %}
+
+            <!-- Linked Scenarios -->
+            <div class="subsection-title">Linked Scenarios</div>
+            {% if linkages_direct or linkages_inverse %}
+                <table class="table" style="table-layout: fixed; width: 100%;">
+                    <thead>
+                        <tr>
+                            <th style="width: 5%;"></th>
+                            <th style="width: 30%;">Scenario Code</th>
+                            <th style="width: 18%;">Relationship</th>
+                            <th style="width: 15%;">Potency</th>
+                            <th style="width: 11%;">PC (%)</th>
+                            <th style="width: 11%;">VOL</th>
+                            <th style="width: 10%;">VEL</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% if linkages_direct %}
+                        <tr class="group-subheader">
+                            <td colspan="7">Direct</td>
+                        </tr>
+                        {% for ns in linkages_direct %}
+                        {% set metrics = scenario_metrics[ns.marked_scenario_id] %}
+                        <tr>
+                            <td></td>
+                            <td style="font-family: var(--font-body);">
+                                <a href="{{ url_for('scenarios.marked_detail', marked_id=ns.marked_scenario_id) }}"
+                                   style="color: var(--color-accent-primary); text-decoration: none;">
+                                    {{ ns.marked_scenario.scenario.scenario_code }}
+                                </a>
+                            </td>
+                            <td style="color: var(--color-text-secondary);">Direct</td>
+                            <td style="color: var(--color-text-secondary);">
+                                {% if ns.potency | float == 1.5 %}High{% elif ns.potency | float == 1.0 %}Med{% else %}Low{% endif %}
+                            </td>
+                            <td style="color: var(--color-text-secondary); font-family: var(--font-body);">
+                                {% if metrics.current_probability is not none %}{{ '%.1f' | format(metrics.current_probability * 100) }}{% else %}—{% endif %}
+                            </td>
+                            <td style="color: var(--color-text-secondary); font-family: var(--font-body);">
+                                {% if metrics.volatility is not none %}{{ '%.2f' | format(metrics.volatility) }}{% else %}—{% endif %}
+                            </td>
+                            <td style="color: var(--color-text-secondary); font-family: var(--font-body);">
+                                {% if metrics.velocity is not none %}{{ '%.2f' | format(metrics.velocity) }}{% else %}—{% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        {% endif %}
+
+                        {% if linkages_inverse %}
+                        <tr class="group-subheader">
+                            <td colspan="7">Inverse</td>
+                        </tr>
+                        {% for ns in linkages_inverse %}
+                        {% set metrics = scenario_metrics[ns.marked_scenario_id] %}
+                        <tr>
+                            <td></td>
+                            <td style="font-family: var(--font-body);">
+                                <a href="{{ url_for('scenarios.marked_detail', marked_id=ns.marked_scenario_id) }}"
+                                   style="color: var(--color-accent-primary); text-decoration: none;">
+                                    {{ ns.marked_scenario.scenario.scenario_code }}
+                                </a>
+                            </td>
+                            <td style="color: var(--color-text-secondary);">Inverse</td>
+                            <td style="color: var(--color-text-secondary);">
+                                {% if ns.potency | float == 1.5 %}High{% elif ns.potency | float == 1.0 %}Med{% else %}Low{% endif %}
+                            </td>
+                            <td style="color: var(--color-text-secondary); font-family: var(--font-body);">
+                                {% if metrics.current_probability is not none %}{{ '%.1f' | format(metrics.current_probability * 100) }}{% else %}—{% endif %}
+                            </td>
+                            <td style="color: var(--color-text-secondary); font-family: var(--font-body);">
+                                {% if metrics.volatility is not none %}{{ '%.2f' | format(metrics.volatility) }}{% else %}—{% endif %}
+                            </td>
+                            <td style="color: var(--color-text-secondary); font-family: var(--font-body);">
+                                {% if metrics.velocity is not none %}{{ '%.2f' | format(metrics.velocity) }}{% else %}—{% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        {% endif %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p style="color: var(--color-text-dim); padding: 1rem 0;">No linked scenarios.</p>
+            {% endif %}
+
+        </div>
+    </div>
+
+    <!-- Metadata Card -->
+    <div class="card mb-lg">
+        <div class="card-header">
+            <h2 class="card-title">Event Metadata</h2>
+        </div>
+        <div class="card-body">
+            <div class="metadata-grid">
+                <div class="metadata-cell">
+                    <div class="metadata-cell-label">Total Events</div>
+                    <div class="metadata-cell-value">
+                        {{ total_event_count if total_event_count is not none else '—' }}
+                    </div>
+                </div>
+                <div class="metadata-cell">
+                    <div class="metadata-cell-label">Dominant Action</div>
+                    <div class="metadata-cell-value">
+                        {{ most_common_action if most_common_action else '—' }}
+                    </div>
+                </div>
+                <div class="metadata-cell">
+                    <div class="metadata-cell-label">Dominant Region</div>
+                    <div class="metadata-cell-value">
+                        {{ most_common_region if most_common_region else '—' }}
+                    </div>
+                </div>
+                <div class="metadata-cell">
+                    <div class="metadata-cell-label">Dominant Actor</div>
+                    <div class="metadata-cell-value">
+                        {{ most_common_actor if most_common_actor else '—' }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

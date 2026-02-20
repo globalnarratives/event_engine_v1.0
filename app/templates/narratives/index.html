@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}Narratives{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <h2 class="card-title">Narratives</h2>
+            <a href="{{ url_for('narratives.create') }}" class="btn btn-primary">Create New Narrative</a>
+        </div>
+        <div class="card-body">
+            {% if narratives %}
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Code</th>
+                            <th>Title</th>
+                            <th>Resolution Horizon</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for narrative in narratives %}
+                        <tr>
+                            <td>
+                                <a href="{{ url_for('narratives.detail', narrative_code=narrative.narrative_code) }}"
+                                   style="font-family: var(--font-body); color: var(--color-accent-primary); text-decoration: none;">
+                                    {{ narrative.narrative_code }}
+                                </a>
+                            </td>
+                            <td style="color: var(--color-text-primary);">{{ narrative.title }}</td>
+                            <td style="color: var(--color-text-secondary);">
+                                {{ narrative.res_horizon.strftime('%Y-%m-%d') if narrative.res_horizon else '—' }}
+                            </td>
+                            <td style="color: var(--color-text-secondary); max-width: 400px;">
+                                {{ narrative.description[:120] }}{% if narrative.description|length > 120 %}…{% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p style="color: var(--color-text-dim); text-align: center; padding: 2rem 0;">
+                    No narratives yet. Create the first narrative to begin tracking geopolitical frameworks.
+                </p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

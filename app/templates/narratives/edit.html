@@ -1,0 +1,320 @@
+{% extends "base.html" %}
+
+{% block title %}Edit — {{ narrative.narrative_code }}{% endblock %}
+
+{% block extra_css %}
+<style>
+    .dynamic-row {
+        display: grid;
+        gap: var(--space-sm);
+        align-items: end;
+        padding: var(--space-sm) 0;
+        border-bottom: 1px solid var(--color-border);
+    }
+    .dynamic-row:last-child {
+        border-bottom: none;
+    }
+    .resolution-row {
+        grid-template-columns: 1fr 130px 80px 120px 90px 36px;
+    }
+    .linkage-row {
+        grid-template-columns: 1fr 110px 90px 36px;
+    }
+    .dynamic-section-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: var(--space-md);
+    }
+    .dynamic-section-label {
+        font-family: var(--font-body);
+        font-size: 0.8rem;
+        color: var(--color-text-tertiary);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+    }
+    .col-label {
+        font-size: 0.7rem;
+        color: var(--color-text-dim);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        margin-bottom: 0.2rem;
+    }
+    .btn-remove {
+        background: transparent;
+        border: 1px solid var(--color-border);
+        color: var(--color-accent-warning);
+        border-radius: var(--radius-sm);
+        cursor: pointer;
+        font-size: 1rem;
+        line-height: 1;
+        padding: 0.3rem 0.5rem;
+        height: 100%;
+        align-self: end;
+    }
+    .btn-remove:hover {
+        background: rgba(235, 100, 51, 0.1);
+        border-color: var(--color-accent-warning);
+    }
+    .subsection-card {
+        background: var(--color-bg-primary);
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-md);
+        padding: var(--space-md);
+        margin-top: var(--space-md);
+    }
+    .readonly-section-label {
+        font-family: var(--font-body);
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--color-text-dim);
+        margin-bottom: var(--space-sm);
+    }
+    .new-rows-label {
+        font-family: var(--font-body);
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--color-text-tertiary);
+        margin: var(--space-md) 0 var(--space-sm) 0;
+        padding-top: var(--space-md);
+        border-top: 1px dashed var(--color-border);
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container" style="max-width: 960px;">
+    <h1>Edit Narrative — <span style="font-family: var(--font-body); color: var(--color-accent-primary);">{{ narrative.narrative_code }}</span></h1>
+
+    <div class="card">
+        <div class="card-body">
+            <form method="POST">
+
+                <!-- Core Fields -->
+                <div class="form-group">
+                    <label class="form-label" for="title">Title</label>
+                    <input type="text" id="title" name="title" class="form-input"
+                           value="{{ narrative.title }}" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="description">Description</label>
+                    <textarea id="description" name="description" class="form-textarea" rows="4" required>{{ narrative.description }}</textarea>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="initial_trend">Initial Trend</label>
+                    <select id="initial_trend" name="initial_trend" class="form-select" required>
+                        {% set it = narrative.initial_trend | int %}
+                        <option value="2"  {% if it == 2  %}selected{% endif %}>Strongly Positive</option>
+                        <option value="1"  {% if it == 1  %}selected{% endif %}>Positive</option>
+                        <option value="0"  {% if it == 0  %}selected{% endif %}>Stable</option>
+                        <option value="-1" {% if it == -1 %}selected{% endif %}>Negative</option>
+                        <option value="-2" {% if it == -2 %}selected{% endif %}>Strongly Negative</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="res_horizon">Resolution Horizon</label>
+                    <input type="date" id="res_horizon" name="res_horizon" class="form-input"
+                           value="{{ narrative.res_horizon.strftime('%Y-%m-%d') if narrative.res_horizon else '' }}" required>
+                </div>
+
+                <!-- Resolution Conditions -->
+                <div class="subsection-card">
+                    <div class="dynamic-section-label" style="margin-bottom: var(--space-md);">Resolution Conditions</div>
+
+                    <!-- Existing rows (read-only) -->
+                    {% if existing_resolutions %}
+                    <div class="readonly-section-label">Existing Conditions</div>
+                    <table class="table" style="margin-bottom: var(--space-md);">
+                        <thead>
+                            <tr>
+                                <th>Entity Code</th>
+                                <th>Entity Type</th>
+                                <th>Action Code</th>
+                                <th>Polarity</th>
+                                <th>Weight</th>
+                                <th>Added</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for res in existing_resolutions %}
+                            <tr>
+                                <td style="font-family: var(--font-body); color: var(--color-accent-primary);">{{ res.entity_code }}</td>
+                                <td style="color: var(--color-text-secondary);">{{ res.entity_type | capitalize }}</td>
+                                <td style="font-family: var(--font-body); color: var(--color-text-primary);">{{ res.action_code }}</td>
+                                <td style="color: var(--color-text-secondary);">{{ 'Positive' if res.polarity else 'Negative' }}</td>
+                                <td style="color: var(--color-text-secondary);">
+                                    {% if res.weight | float == 1.5 %}High{% elif res.weight | float == 1.0 %}Med{% else %}Low{% endif %}
+                                </td>
+                                <td style="color: var(--color-text-dim); font-size: 0.8rem;">{{ res.created_at.strftime('%Y-%m-%d') if res.created_at else '—' }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    {% else %}
+                    <p style="color: var(--color-text-dim); font-size: 0.85rem; margin-bottom: var(--space-md);">No existing conditions.</p>
+                    {% endif %}
+
+                    <!-- New rows -->
+                    <div class="new-rows-label">
+                        <span>Add New Conditions</span>
+                        <button type="button" class="btn btn-secondary" style="font-size: 0.75rem; padding: 0.25rem 0.75rem; margin-left: var(--space-md);"
+                                onclick="addResolutionRow()">+ Add Row</button>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 130px 80px 120px 90px 36px; gap: var(--space-sm); margin-bottom: 0.25rem;">
+                        <div class="col-label">Entity Code</div>
+                        <div class="col-label">Entity Type</div>
+                        <div class="col-label">Action Code</div>
+                        <div class="col-label">Polarity</div>
+                        <div class="col-label">Weight</div>
+                        <div></div>
+                    </div>
+
+                    <div id="resolution-rows">
+                        <!-- Rows appended by JS -->
+                    </div>
+                    <p id="resolution-empty-hint" style="color: var(--color-text-dim); font-size: 0.8rem; padding: 0.5rem 0;">
+                        Click "+ Add Row" to add a new resolution condition.
+                    </p>
+                </div>
+
+                <!-- Scenario Linkages -->
+                <div class="subsection-card">
+                    <div class="dynamic-section-label" style="margin-bottom: var(--space-md);">Scenario Linkages</div>
+
+                    <!-- Existing linkages (read-only) -->
+                    {% if existing_linkages %}
+                    <div class="readonly-section-label">Existing Linkages</div>
+                    <table class="table" style="margin-bottom: var(--space-md);">
+                        <thead>
+                            <tr>
+                                <th>Marked Scenario</th>
+                                <th>Relationship</th>
+                                <th>Potency</th>
+                                <th>Added</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for ns in existing_linkages %}
+                            <tr>
+                                <td style="font-family: var(--font-body); color: var(--color-accent-primary);">{{ ns.marked_scenario.display_name }}</td>
+                                <td style="color: var(--color-text-secondary);">{{ 'Direct' if ns.relationship else 'Inverse' }}</td>
+                                <td style="color: var(--color-text-secondary);">
+                                    {% if ns.potency | float == 1.5 %}High{% elif ns.potency | float == 1.0 %}Med{% else %}Low{% endif %}
+                                </td>
+                                <td style="color: var(--color-text-dim); font-size: 0.8rem;">{{ ns.created_at.strftime('%Y-%m-%d') if ns.created_at else '—' }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    {% else %}
+                    <p style="color: var(--color-text-dim); font-size: 0.85rem; margin-bottom: var(--space-md);">No existing linkages.</p>
+                    {% endif %}
+
+                    <!-- New linkage rows -->
+                    <div class="new-rows-label">
+                        <span>Add New Linkages</span>
+                        <button type="button" class="btn btn-secondary" style="font-size: 0.75rem; padding: 0.25rem 0.75rem; margin-left: var(--space-md);"
+                                onclick="addLinkageRow()">+ Add Row</button>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 110px 90px 36px; gap: var(--space-sm); margin-bottom: 0.25rem;">
+                        <div class="col-label">Marked Scenario</div>
+                        <div class="col-label">Relationship</div>
+                        <div class="col-label">Potency</div>
+                        <div></div>
+                    </div>
+
+                    <div id="linkage-rows">
+                        <!-- Rows appended by JS -->
+                    </div>
+                    <p id="linkage-empty-hint" style="color: var(--color-text-dim); font-size: 0.8rem; padding: 0.5rem 0;">
+                        Click "+ Add Row" to add a new scenario linkage.
+                    </p>
+                </div>
+
+                <div class="flex gap-md mt-lg">
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                    <a href="{{ url_for('narratives.detail', narrative_code=narrative.narrative_code) }}" class="btn btn-secondary">Cancel</a>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+const markedScenariosOptions = `{% for ms in all_marked_scenarios %}<option value="{{ ms.id }}">{{ ms.display_name }}</option>{% endfor %}`;
+
+function addResolutionRow() {
+    const container = document.getElementById('resolution-rows');
+    const hint = document.getElementById('resolution-empty-hint');
+    if (hint) hint.style.display = 'none';
+
+    const row = document.createElement('div');
+    row.className = 'dynamic-row resolution-row';
+    row.innerHTML = `
+        <input type="text" name="entity_code[]" class="form-input" placeholder="e.g. MAC.FRA">
+        <select name="entity_type[]" class="form-select">
+            <option value="actor">Actor</option>
+            <option value="position">Position</option>
+            <option value="institution">Institution</option>
+        </select>
+        <input type="text" name="action_code[]" class="form-input" placeholder="ACT01">
+        <select name="polarity[]" class="form-select">
+            <option value="true">Positive</option>
+            <option value="false">Negative</option>
+        </select>
+        <select name="weight[]" class="form-select">
+            <option value="1.5">High</option>
+            <option value="1.0" selected>Med</option>
+            <option value="0.5">Low</option>
+        </select>
+        <button type="button" class="btn-remove" onclick="removeRow(this, 'resolution-rows', 'resolution-empty-hint')" title="Remove row">×</button>
+    `;
+    container.appendChild(row);
+}
+
+function addLinkageRow() {
+    const container = document.getElementById('linkage-rows');
+    const hint = document.getElementById('linkage-empty-hint');
+    if (hint) hint.style.display = 'none';
+
+    const row = document.createElement('div');
+    row.className = 'dynamic-row linkage-row';
+    row.innerHTML = `
+        <select name="marked_scenario_id[]" class="form-select">
+            <option value="">— Select scenario —</option>
+            ${markedScenariosOptions}
+        </select>
+        <select name="relationship[]" class="form-select">
+            <option value="true">Direct</option>
+            <option value="false">Inverse</option>
+        </select>
+        <select name="potency[]" class="form-select">
+            <option value="1.5">High</option>
+            <option value="1.0" selected>Med</option>
+            <option value="0.5">Low</option>
+        </select>
+        <button type="button" class="btn-remove" onclick="removeRow(this, 'linkage-rows', 'linkage-empty-hint')" title="Remove row">×</button>
+    `;
+    container.appendChild(row);
+}
+
+function removeRow(btn, containerId, hintId) {
+    btn.closest('.dynamic-row').remove();
+    const container = document.getElementById(containerId);
+    const hint = document.getElementById(hintId);
+    if (hint && container.children.length === 0) {
+        hint.style.display = '';
+    }
+}
+</script>
+{% endblock %}

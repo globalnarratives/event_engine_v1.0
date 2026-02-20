@@ -496,8 +496,10 @@ class Narrative(db.Model):
     
     narrative_code = db.Column(db.String(50), primary_key=True)
     title = db.Column(db.String(100), nullable=False)
-    res_horizon = db.Column(db.DateTime, nullable=False)
+    res_horizon = db.Column(db.Date, nullable=False)
+    initial_trend = db.Column(db.Numeric, nullable=False)
     description = db.Column(db.Text, nullable=False)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
     
     # Computed trend outputs (nullable - populated as scenarios accumulate)
     short_trend = db.Column(db.Numeric)
@@ -530,6 +532,7 @@ class NarrativeScenario(db.Model):
     narrative_code = db.Column(db.String(50), db.ForeignKey('narratives.narrative_code'), nullable=False)
     relationship = db.Column(db.Boolean, nullable=False)  # True = direct, False = inverse
     potency = db.Column(db.Numeric, nullable=False)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
     
     # Relationships
     narrative = db.relationship('Narrative', back_populates='narrative_scenarios')
@@ -554,6 +557,7 @@ class NarrativeResolution(db.Model):
     action_code = db.Column(db.String(10), nullable=False)
     polarity = db.Column(db.Boolean, nullable=False)  # True = positive condition, False = negative
     weight = db.Column(db.Numeric, nullable=False)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
     
     # Relationships
     narrative = db.relationship('Narrative', back_populates='narrative_resolutions')
