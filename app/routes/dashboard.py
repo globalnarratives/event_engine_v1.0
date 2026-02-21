@@ -38,32 +38,30 @@ def home():
         events_by_region[region].append(event)
 
     # === LEFT COLUMN: Tracked Foundations ===
-    tracked_actors = []
-    for ta in TrackedActor.query.filter_by(user_id=current_user.id).all():
-        actor = Actor.query.filter_by(actor_id=ta.actor_id).first()
-        if actor:
-            tracked_actors.append({
-                'code': actor.actor_id,
-                'display_name': f"{actor.surname}, {actor.given_name or ''}"
-            })
+    # Single JOIN query per entity type instead of one lookup query per tracked item
+    actors = db.session.query(Actor).join(
+        TrackedActor, Actor.actor_id == TrackedActor.actor_id
+    ).filter(TrackedActor.user_id == current_user.id).all()
+    tracked_actors = [
+        {'code': a.actor_id, 'display_name': f"{a.surname}, {a.given_name or ''}"}
+        for a in actors
+    ]
 
-    tracked_institutions = []
-    for ti in TrackedInstitution.query.filter_by(user_id=current_user.id).all():
-        inst = Institution.query.filter_by(institution_code=ti.institution_code).first()
-        if inst:
-            tracked_institutions.append({
-                'code': inst.institution_code,
-                'display_name': inst.institution_name
-            })
+    institutions = db.session.query(Institution).join(
+        TrackedInstitution, Institution.institution_code == TrackedInstitution.institution_code
+    ).filter(TrackedInstitution.user_id == current_user.id).all()
+    tracked_institutions = [
+        {'code': i.institution_code, 'display_name': i.institution_name}
+        for i in institutions
+    ]
 
-    tracked_positions = []
-    for tp in TrackedPosition.query.filter_by(user_id=current_user.id).all():
-        pos = Position.query.filter_by(position_code=tp.position_code).first()
-        if pos:
-            tracked_positions.append({
-                'code': pos.position_code,
-                'display_name': pos.position_title
-            })
+    positions = db.session.query(Position).join(
+        TrackedPosition, Position.position_code == TrackedPosition.position_code
+    ).filter(TrackedPosition.user_id == current_user.id).all()
+    tracked_positions = [
+        {'code': p.position_code, 'display_name': p.position_title}
+        for p in positions
+    ]
 
     # Unprocessed articles count (for badge on Input Feed link)
     unprocessed_articles = Article.query.filter_by(
