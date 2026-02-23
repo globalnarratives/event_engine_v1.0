@@ -3,7 +3,8 @@
     "allow": [
       "Bash(python:*)",
       "Bash(set:*)",
-      "Bash(psql:*)"
+      "Bash(psql:*)",
+      "mcp__Claude_Preview__preview_start"
     ]
   }
 }

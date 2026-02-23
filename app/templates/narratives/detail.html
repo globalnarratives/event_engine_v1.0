@@ -133,13 +133,13 @@
                 <div class="trend-cell">
                     <div class="trend-label">Short-Term Trend</div>
                     <div class="trend-value">
-                        {% if narrative.short_trend is not none %}{{ narrative.short_trend }}{% else %}—{% endif %}
+                        {% if trend_data %}{{ trend_data.short_label }}{% else %}—{% endif %}
                     </div>
                 </div>
                 <div class="trend-cell">
                     <div class="trend-label">Long-Term Trend</div>
                     <div class="trend-value">
-                        {% if narrative.long_trend is not none %}{{ narrative.long_trend }}{% else %}—{% endif %}
+                        {% if trend_data %}{{ trend_data.long_label }}{% else %}—{% endif %}
                     </div>
                 </div>
             </div>

@@ -399,3 +399,109 @@ def calculate_all_metrics(events: List[Tuple[str, float, datetime]],
             'velocity': velocity,
             'event_count': prob_result['event_count']
         }
+
+
+class NarrativeCalculator:
+    """
+    Calculates short-term and long-term trend scores for a narrative.
+
+    Combines two channels:
+      Channel 1 — linked marked scenarios (volatility/velocity for short-term,
+                  net accumulated weight for long-term)
+      Channel 2 — fulfilled resolution conditions (fixed weight contribution)
+
+    Final scores map to five labels:
+      > 1.5  → Strongly Positive
+      > 0.5  → Positive
+      >= -0.5 → Stable
+      >= -1.5 → Negative
+      else   → Strongly Negative
+    """
+
+    @staticmethod
+    def get_trend_label(score: float) -> str:
+        if score > 1.5:
+            return 'Strongly Positive'
+        elif score > 0.5:
+            return 'Positive'
+        elif score >= -0.5:
+            return 'Stable'
+        elif score >= -1.5:
+            return 'Negative'
+        else:
+            return 'Strongly Negative'
+
+    @staticmethod
+    def calculate(narrative) -> dict:
+        from app.models import ControlFrame
+
+        scenario_short_total = 0.0
+        scenario_long_total = 0.0
+        scenario_count = 0
+
+        # Channel 1: Linked Marked Scenarios
+        for ns in narrative.narrative_scenarios:
+            direction = 1 if ns.relationship else -1
+            potency = float(ns.potency)
+
+            events = [
+                (link.event_code, float(link.weight), link.linked_at)
+                for link in ns.marked_scenario.event_links
+            ]
+            if not events:
+                continue  # no events → contribute 0
+
+            scenario_count += 1
+
+            # Short-term: 30-day window
+            filtered_30 = TimeWindowFilter.filter_30day(events)
+            vol_result = VolatilityCalculator.calculate(filtered_30)
+            volatility = vol_result['volatility_score']
+            velocity = VelocityCalculator.calculate(volatility, vol_result['event_count'])
+            short_contribution = (volatility + velocity) / 2 * potency * direction / 100
+
+            # Long-term: full lifetime net accumulated weight
+            all_events_batch = ProbabilityCalculator.calculate_batch(events)
+            net_weight = all_events_batch['adjusted_weight']
+            long_contribution = net_weight * potency * direction / 100
+
+            scenario_short_total += short_contribution
+            scenario_long_total += long_contribution
+
+        # Channel 2: Resolution Conditions (fulfilled only)
+        condition_short_total = 0.0
+        condition_long_total = 0.0
+        fulfilled_conditions = 0
+
+        weight_map = {1.5: 0.65, 1.0: 0.35, 0.5: 0.2}
+
+        for rc in narrative.narrative_resolutions:
+            fulfilled = ControlFrame.query.filter(
+                ControlFrame.event_actor.ilike(f'%{rc.entity_code}%'),
+                ControlFrame.action_code == rc.action_code,
+                ControlFrame.rec_timestamp <= narrative.res_horizon,
+            ).first() is not None
+
+            if not fulfilled:
+                continue
+
+            fulfilled_conditions += 1
+            condition_weight = weight_map.get(float(rc.weight), 0.2)
+            polarity_direction = 1 if rc.polarity else -1
+            short_contrib = condition_weight * polarity_direction
+            long_contrib = short_contrib * 0.25
+
+            condition_short_total += short_contrib
+            condition_long_total += long_contrib
+
+        short_trend = scenario_short_total + condition_short_total
+        long_trend = scenario_long_total + condition_long_total
+
+        return {
+            'short_trend': round(short_trend, 4),
+            'long_trend': round(long_trend, 4),
+            'short_label': NarrativeCalculator.get_trend_label(short_trend),
+            'long_label': NarrativeCalculator.get_trend_label(long_trend),
+            'scenario_count': scenario_count,
+            'fulfilled_conditions': fulfilled_conditions,
+        }

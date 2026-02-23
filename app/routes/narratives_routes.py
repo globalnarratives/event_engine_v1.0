@@ -4,7 +4,7 @@ from app.models import Narrative, NarrativeScenario, NarrativeResolution, Marked
 from app import db
 from datetime import datetime
 from collections import Counter
-from app.probability_algorithms import VolatilityCalculator, VelocityCalculator, TimeWindowFilter
+from app.probability_algorithms import VolatilityCalculator, VelocityCalculator, TimeWindowFilter, NarrativeCalculator
 
 bp = Blueprint('narratives', __name__, url_prefix='/narratives')
 
@@ -205,6 +205,11 @@ def detail(narrative_code):
             if actor_counter:
                 most_common_actor = actor_counter.most_common(1)[0][0]
 
+    try:
+        trend_data = NarrativeCalculator.calculate(narrative)
+    except Exception:
+        trend_data = None
+
     return render_template(
         'narratives/detail.html',
         narrative=narrative,
@@ -217,6 +222,7 @@ def detail(narrative_code):
         most_common_action=most_common_action,
         most_common_region=most_common_region,
         most_common_actor=most_common_actor,
+        trend_data=trend_data,
     )
 
 
