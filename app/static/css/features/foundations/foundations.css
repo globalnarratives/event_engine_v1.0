@@ -40,12 +40,12 @@
     padding: var(--space-sm) var(--space-md);
     font-family: var(--font-mono);
     font-size: 1.0rem;
-    font-weight: 600;
+    font-weight: 400;
     text-transform: uppercase;
     letter-spacing: 0.05em;
     color: var(--text-secondary);
     text-decoration: none;
-    border-bottom: 2px solid transparent;
+    border-bottom: 1px solid transparent;
     transition: all 0.2s ease;
 }
 
@@ -183,7 +183,7 @@
     font-family: var(--font-mono);
     font-size: 14px;
     color: var(--accent-primary);
-    font-weight: bold;
+    font-weight: 500;
     margin-bottom: 4px;
 }
 
@@ -248,7 +248,7 @@
     font-size: 13px;
     color: var(--text-primary);
     font-family: var(--font-mono);
-    font-weight: bold;
+    font-weight: 500;
 }
 
 
@@ -261,7 +261,7 @@
     color: var(--primary);
     font-family: var(--font-mono);
     font-size: 0.85rem;
-    font-weight: 600;
+    font-weight: 400;
     cursor: pointer;
     transition: all 0.2s ease;
 }
@@ -318,7 +318,7 @@
 .tracked-header a {
     font-family: var(--font-mono);
     font-size: 1.0rem;
-    font-weight: 600;
+    font-weight: 400;
     color: var(--primary);
     text-decoration: none;
 }
@@ -372,7 +372,7 @@
 
 .event-detail a {
     font-family: var(--font-mono);
-    font-weight: 600;
+    font-weight: 400;
     color: var(--primary);
     text-decoration: none;
 }
@@ -464,7 +464,7 @@
     background: var(--accent-primary);
     color: var(--bg-primary);
     border-color: var(--accent-primary);
-    font-weight: bold;
+    font-weight: 500;
 }
 
 .page-ellipsis {

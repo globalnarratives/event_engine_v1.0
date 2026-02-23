@@ -15,7 +15,7 @@
 .table th {
   font-family: var(--font-mono);
   font-size: 0.60rem;
-  font-weight: 600;
+  font-weight: 400;
   text-transform: uppercase;
   letter-spacing: 0.20em;
   color: var(--color-accent);
@@ -76,7 +76,7 @@
 
 .action-table .col-code {
   color: var(--color-accent);
-  font-weight: 500;
+  font-weight: 400;
   white-space: nowrap;
   min-width: 60px;
 }
@@ -91,7 +91,7 @@
 .action-table .col-name {
   color: var(--color-text);
   font-family: var(--font-sans);
-  font-weight: 500;
+  font-weight: 400;
   font-size: 0.82rem;
   min-width: 130px;
 }

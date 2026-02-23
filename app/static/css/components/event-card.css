@@ -40,7 +40,7 @@
 /* Event Code */
 .event-card-code {
     font-size: 0.9rem;
-    font-weight: 600;
+    font-weight: 400;
     color: var(--primary);
     font-family: var(--font-mono);
     margin-bottom: var(--spacing-sm);
@@ -48,7 +48,7 @@
 
 .event-code-link {
     font-family: var(--font-mono);
-    font-weight: 600;
+    font-weight: 400;
     color: var(--primary);
     text-decoration: none;
     transition: color 0.2s ease;
@@ -71,7 +71,7 @@
     border-radius: 3px;
     font-size: 0.95rem;
     font-family: var(--font-mono);
-    font-weight: 650;
+    font-weight: 400;
     line-height: 1.4;
 }
 

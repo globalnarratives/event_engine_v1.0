@@ -10,7 +10,7 @@
 }
 
 .cf-cie-section {
-  border-right: 2px solid var(--color-border);
+  border-right: 1px solid var(--color-border);
   min-height: 250px;
 }
 
@@ -26,7 +26,7 @@
 .cf-scenarios-header {
   font-family: var(--font-ui);
   font-size: 0.85rem;
-  font-weight: 600;
+  font-weight: 400;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   color: var(--color-text-tertiary);
@@ -51,8 +51,8 @@
 .cf-scenario-row-total {
   margin-top: var(--space-sm);
   padding-top: var(--space-md);
-  border-top: 2px solid var(--color-border);
-  font-weight: 600;
+  border-top: 1px solid var(--color-border);
+  font-weight: 500;
 }
 
 .cf-scenario-label {
@@ -61,6 +61,6 @@
 
 .cf-scenario-value {
   color: var(--color-accent-primary);
-  font-weight: 600;
+  font-weight: 400;
   font-family: var(--font-body);
 }

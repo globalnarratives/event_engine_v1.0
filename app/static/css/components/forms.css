@@ -9,7 +9,7 @@
   display: block;
   font-family: var(--font-ui);
   font-size: 0.75rem;
-  font-weight: 600;
+  font-weight: 400;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   color: var(--color-text-secondary);

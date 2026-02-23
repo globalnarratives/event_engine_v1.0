@@ -25,7 +25,7 @@
 .card-title {
   font-family: var(--font-mono);
   font-size: 1rem;
-  font-weight: 600;
+  font-weight: 400;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   color: var(--color-text);
@@ -52,5 +52,5 @@
 
 /* Accent variant — left border stripe */
 .card-accent {
-  border-left: 3px solid var(--color-accent);
+  border-left: 2px solid var(--color-accent);
 }
