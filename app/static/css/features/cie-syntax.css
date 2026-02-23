@@ -1,41 +1,60 @@
 /* ============================================
-   CIE SYNTAX HIGHLIGHTING - IDE STYLE
+   CIE SYNTAX HIGHLIGHTING
+   Token colors mapped to Mondium palette
    ============================================ */
+
+/* Symbols / structural operators → accent */
 .cf-symbol {
-  color: #5fafcf;
+  color: var(--color-accent);
   font-weight: bold;
 }
+
+/* Bullets → green (accent-secondary) */
 .cf-bullet {
-  color: #4a9e8e;
+  color: var(--color-accent-secondary);
   font-weight: bold;
 }
+
+/* Entities → bright text (#c8d8e8 per brief) */
 .cf-entity {
-  color: #df34c2;
+  color: #c8d8e8;
   font-weight: 500;
 }
+
+/* Actions → keep readable action green */
 .cf-action {
   color: #8fb870;
   font-weight: 600;
 }
+
+/* Brackets / refs → muted (#8899aa per brief) */
 .cf-bracket {
-  color: #2e78da;
+  color: var(--color-text-muted);
   font-weight: 600;
 }
+
+/* Operators → accent per brief */
 .cf-operator {
-  color: #c47a6a;
+  color: var(--color-accent);
   font-weight: bold;
   margin: 0 0.25rem;
 }
+
+/* Relation operators → accent per brief */
 .cf-relation-op {
-  color: #c47a6a;
+  color: var(--color-accent);
   font-weight: 600;
 }
+
+/* Location operators → orange (accent-warning) */
 .cf-location-op {
-  color: #e07537;
+  color: var(--color-accent-warning);
   font-weight: bold;
   margin: 0 0.25rem;
 }
+
+/* Country codes → gold (accent-tertiary) */
 .cf-country {
-  color: #f5dc50;  /* Same steel blue as entities */
-  font-weight: 500; /* Optional: distinguish from full entity codes */
+  color: var(--color-accent-tertiary);
+  font-weight: 500;
 }

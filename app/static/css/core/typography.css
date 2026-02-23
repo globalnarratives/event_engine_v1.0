@@ -2,10 +2,10 @@
    TYPOGRAPHY
    ============================================ */
 h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-header);
+  font-family: var(--font-sans);
   font-weight: 600;
   letter-spacing: -0.02em;
-  color: var(--color-text-primary);
+  color: var(--color-text);
 }
 
 h1 {
@@ -20,7 +20,7 @@ h1 {
 h2 {
   font-size: 1.5rem;
   margin-bottom: var(--space-md);
-  color: var(--color-accent-primary);
+  color: var(--color-accent);
 }
 
 h3 {
@@ -31,16 +31,38 @@ h3 {
 
 p {
   margin-bottom: var(--space-md);
-  color: var(--color-text-secondary);
+  color: var(--color-text-muted);
 }
 
 a {
-  color: var(--color-accent-primary);
+  color: var(--color-accent);
   text-decoration: none;
-  transition: color 0.2s ease;
+  transition: color var(--duration-fast) ease;
 }
 
 a:hover {
-  color: var(--color-accent-secondary);
+  color: var(--color-text-muted);
   text-decoration: underline;
+}
+
+/* Section label — Mondium pattern: mono, small-caps, letter-spaced, hr prefix */
+.section-label {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: var(--space-md);
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.section-label::before {
+  content: '';
+  display: block;
+  width: 24px;
+  height: 1px;
+  background: var(--color-accent);
+  flex-shrink: 0;
 }

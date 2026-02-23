@@ -33,7 +33,7 @@
     display: flex;
     gap: var(--space-sm);
     margin-bottom: var(--space-md);
-    border-bottom: 1px solid rgba(51, 245, 255, 0.2);
+    border-bottom: 1px solid rgba(0, 188, 212, 0.2);
 }
 
 .tab-selector a {
@@ -51,7 +51,7 @@
 
 .tab-selector a:hover {
     color: var(--text-primary);
-    border-bottom-color: rgba(51, 245, 255, 0.3);
+    border-bottom-color: rgba(0, 188, 212, 0.3);
 }
 
 .tab-selector a.active {
@@ -73,8 +73,8 @@
 .search-bar input[type="text"] {
     flex: 1;
     padding: var(--space-sm) var(--space-md);
-    background: rgba(51, 245, 255, 0.03);
-    border: 1px solid rgba(51, 245, 255, 0.2);
+    background: rgba(0, 188, 212, 0.03);
+    border: 1px solid rgba(0, 188, 212, 0.2);
     border-radius: 4px;
     color: var(--text-primary);
     font-family: var(--font-mono);
@@ -84,7 +84,7 @@
 .search-bar input:focus {
     outline: none;
     border-color: var(--primary);
-    background: rgba(51, 245, 255, 0.08);
+    background: rgba(0, 188, 212, 0.08);
 }
 
 /* Entity List (Left Column) */
@@ -255,8 +255,8 @@
 /* Track/Untrack Button */
 .entity-header button {
     padding: var(--space-xs) var(--space-sm);
-    background: rgba(51, 245, 255, 0.1);
-    border: 1px solid rgba(51, 245, 255, 0.3);
+    background: rgba(0, 188, 212, 0.1);
+    border: 1px solid rgba(0, 188, 212, 0.3);
     border-radius: 4px;
     color: var(--primary);
     font-family: var(--font-mono);
@@ -267,7 +267,7 @@
 }
 
 .entity-header button:hover {
-    background: rgba(51, 245, 255, 0.2);
+    background: rgba(0, 188, 212, 0.2);
     border-color: var(--primary);
 }
 
@@ -280,7 +280,7 @@
 .entity-metrics {
     margin-top: var(--space-sm);
     padding-top: var(--space-sm);
-    border-top: 1px solid rgba(51, 245, 255, 0.1);
+    border-top: 1px solid rgba(0, 188, 212, 0.1);
     display: flex;
     flex-direction: column;
     gap: var(--space-xs);
@@ -295,8 +295,8 @@
 
 /* Right Column: Tracked Entities */
 .tracked-entity {
-    background: rgba(51, 245, 255, 0.03);
-    border: 1px solid rgba(51, 245, 255, 0.1);
+    background: rgba(0, 188, 212, 0.03);
+    border: 1px solid rgba(0, 188, 212, 0.1);
     border-radius: 4px;
     padding: var(--space-md);
     margin-bottom: var(--space-sm);
@@ -304,8 +304,8 @@
 }
 
 .tracked-entity:hover {
-    background: rgba(51, 245, 255, 0.08);
-    border-color: rgba(51, 245, 255, 0.3);
+    background: rgba(0, 188, 212, 0.08);
+    border-color: rgba(0, 188, 212, 0.3);
 }
 
 .tracked-header {
@@ -341,7 +341,7 @@
     font-size: 0.9rem;
     color: var(--text-secondary);
     padding: var(--space-sm);
-    background: rgba(51, 245, 255, 0.03);
+    background: rgba(0, 188, 212, 0.03);
     border-radius: 4px;
 }
 
@@ -354,7 +354,7 @@
 .expanded-details {
     margin-top: var(--space-sm);
     padding-top: var(--space-sm);
-    border-top: 1px solid rgba(51, 245, 255, 0.1);
+    border-top: 1px solid rgba(0, 188, 212, 0.1);
     display: flex;
     flex-direction: column;
     gap: var(--space-sm);
@@ -365,7 +365,7 @@
     align-items: center;
     gap: var(--space-sm);
     padding: var(--space-sm);
-    background: rgba(51, 245, 255, 0.03);
+    background: rgba(0, 188, 212, 0.03);
     border-radius: 4px;
     font-size: 0.9rem;
 }
@@ -393,7 +393,7 @@
     color: var(--primary);
     margin-bottom: var(--space-md);
     padding-bottom: var(--space-sm);
-    border-bottom: 1px solid rgba(51, 245, 255, 0.2);
+    border-bottom: 1px solid rgba(0, 188, 212, 0.2);
 }
 
 /* Scrollable Areas */

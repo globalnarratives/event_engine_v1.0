@@ -38,16 +38,16 @@
 }
 
 .scenario-item {
-    background: rgba(51, 245, 255, 0.03);
-    border: 1px solid rgba(51, 245, 255, 0.1);
+    background: rgba(0, 188, 212, 0.03);
+    border: 1px solid rgba(0, 188, 212, 0.1);
     border-radius: 4px;
     padding: var(--space-md);
     transition: all 0.2s ease;
 }
 
 .scenario-item:hover {
-    background: rgba(51, 245, 255, 0.08);
-    border-color: rgba(51, 245, 255, 0.3);
+    background: rgba(0, 188, 212, 0.08);
+    border-color: rgba(0, 188, 212, 0.3);
 }
 
 .scenario-item-content {
@@ -109,7 +109,7 @@
 }
 
 .marked-table thead {
-    background: rgba(51, 245, 255, 0.05);
+    background: rgba(0, 188, 212, 0.05);
 }
 
 .marked-table th {
@@ -119,7 +119,7 @@
     text-transform: uppercase;
     letter-spacing: 0.05em;
     color: var(--text-secondary);
-    border-bottom: 1px solid rgba(51, 245, 255, 0.2);
+    border-bottom: 1px solid rgba(0, 188, 212, 0.2);
     font-weight: 600;
 }
 
@@ -130,11 +130,11 @@
 
 .marked-table td {
     padding: var(--space-sm) var(--space-md);
-    border-bottom: 1px solid rgba(51, 245, 255, 0.1);
+    border-bottom: 1px solid rgba(0, 188, 212, 0.1);
 }
 
 .marked-table tbody tr:hover {
-    background: rgba(51, 245, 255, 0.05);
+    background: rgba(0, 188, 212, 0.05);
 }
 
 .marked-table tbody tr:last-child td {
@@ -183,7 +183,7 @@
     color: var(--text-secondary);
     padding: var(--space-sm) 0;
     margin-top: var(--space-md);
-    border-bottom: 1px solid rgba(51, 245, 255, 0.2);
+    border-bottom: 1px solid rgba(0, 188, 212, 0.2);
 }
 
 .event-region-header:first-child {
@@ -301,15 +301,15 @@
     height: 120px;
     border-radius: 50%;
     object-fit: cover;
-    border: 2px solid rgba(51, 245, 255, 0.3);
+    border: 2px solid rgba(0, 188, 212, 0.3);
 }
 
 .photo-circle {
     width: 120px;
     height: 120px;
     border-radius: 50%;
-    background: rgba(51, 245, 255, 0.1);
-    border: 2px solid rgba(51, 245, 255, 0.3);
+    background: rgba(0, 188, 212, 0.1);
+    border: 2px solid rgba(0, 188, 212, 0.3);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -382,7 +382,7 @@
 }
 
 .tenure-table thead {
-    background: rgba(51, 245, 255, 0.05);
+    background: rgba(0, 188, 212, 0.05);
 }
 
 .tenure-table th {
@@ -392,18 +392,18 @@
     text-transform: uppercase;
     letter-spacing: 0.05em;
     color: var(--text-secondary);
-    border-bottom: 1px solid rgba(51, 245, 255, 0.2);
+    border-bottom: 1px solid rgba(0, 188, 212, 0.2);
     font-weight: 600;
 }
 
 .tenure-table td {
     padding: var(--space-sm) var(--space-md);
-    border-bottom: 1px solid rgba(51, 245, 255, 0.1);
+    border-bottom: 1px solid rgba(0, 188, 212, 0.1);
     vertical-align: top;
 }
 
 .tenure-table tbody tr:hover {
-    background: rgba(51, 245, 255, 0.05);
+    background: rgba(0, 188, 212, 0.05);
 }
 
 .tenure-table tbody tr:last-child td {
@@ -438,8 +438,8 @@
 .hierarchy-placeholder,
 .metrics-placeholder {
     padding: var(--space-xl);
-    background: rgba(51, 245, 255, 0.03);
-    border: 1px dashed rgba(51, 245, 255, 0.2);
+    background: rgba(0, 188, 212, 0.03);
+    border: 1px dashed rgba(0, 188, 212, 0.2);
     border-radius: 4px;
     text-align: center;
 }
@@ -496,7 +496,7 @@
     top: 0;
     width: 2px;
     height: 20px;
-    background: rgba(51, 245, 255, 0.3);
+    background: rgba(0, 188, 212, 0.3);
 }
 
 /* Horizontal connector bar between siblings */
@@ -506,7 +506,7 @@
     top: 0;
     width: 100%;
     height: 2px;
-    background: rgba(51, 245, 255, 0.3);
+    background: rgba(0, 188, 212, 0.3);
 }
 
 /* Remove left half of bar for first child */
@@ -541,7 +541,7 @@
     left: 50%;
     width: 2px;
     height: 20px;
-    background: rgba(51, 245, 255, 0.3);
+    background: rgba(0, 188, 212, 0.3);
     transform: translateX(-50%);
 }
 
@@ -565,8 +565,8 @@
 }
 
 .orgchart-node-link:hover {
-    border-color: rgba(51, 245, 255, 0.5);
-    box-shadow: 0 0 12px rgba(51, 245, 255, 0.1);
+    border-color: rgba(0, 188, 212, 0.5);
+    box-shadow: 0 0 12px rgba(0, 188, 212, 0.1);
 }
 
 .orgchart-node-title {
@@ -587,13 +587,13 @@
 
 /* Current position highlight */
 .orgchart-node--current .orgchart-node-link {
-    border: 2px solid #33f5ff;
-    background: rgba(51, 245, 255, 0.08);
-    box-shadow: 0 0 16px rgba(51, 245, 255, 0.15);
+    border: 2px solid #00bcd4;
+    background: rgba(0, 188, 212, 0.08);
+    box-shadow: 0 0 16px rgba(0, 188, 212, 0.15);
 }
 
 .orgchart-node--current .orgchart-node-title {
-    color: #33f5ff;
+    color: #00bcd4;
 }
 
 .orgchart-node--current .orgchart-node-holder {
@@ -603,23 +603,23 @@
 /* Placeholder node (collapsed direct reports) */
 .orgchart-node--placeholder .orgchart-placeholder-btn {
     cursor: pointer;
-    border: 1px dashed rgba(51, 245, 255, 0.4);
-    background: rgba(51, 245, 255, 0.04);
+    border: 1px dashed rgba(0, 188, 212, 0.4);
+    background: rgba(0, 188, 212, 0.04);
 }
 
 .orgchart-node--placeholder .orgchart-placeholder-btn:hover {
-    border-color: #33f5ff;
-    background: rgba(51, 245, 255, 0.10);
-    box-shadow: 0 0 14px rgba(51, 245, 255, 0.15);
+    border-color: #00bcd4;
+    background: rgba(0, 188, 212, 0.10);
+    box-shadow: 0 0 14px rgba(0, 188, 212, 0.15);
 }
 
 .orgchart-node--placeholder .orgchart-node-title {
-    color: #33f5ff;
+    color: #00bcd4;
     font-weight: 600;
 }
 
 .orgchart-node--placeholder .orgchart-node-holder {
-    color: rgba(51, 245, 255, 0.6);
+    color: rgba(0, 188, 212, 0.6);
     font-style: italic;
 }
 
@@ -644,7 +644,7 @@
     max-height: 70vh;
     display: flex;
     flex-direction: column;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), 0 0 20px rgba(51, 245, 255, 0.08);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 188, 212, 0.08);
 }
 
 .hierarchy-modal-header {
@@ -660,7 +660,7 @@
     font-family: var(--font-ui, 'Inter', sans-serif);
     font-size: 1rem;
     font-weight: 600;
-    color: #33f5ff;
+    color: #00bcd4;
 }
 
 .hierarchy-modal-close {
@@ -674,7 +674,7 @@
 }
 
 .hierarchy-modal-close:hover {
-    color: #33f5ff;
+    color: #00bcd4;
 }
 
 .hierarchy-modal-body {
@@ -708,11 +708,11 @@
 }
 
 .hierarchy-modal-table tbody tr:hover {
-    background: rgba(51, 245, 255, 0.04);
+    background: rgba(0, 188, 212, 0.04);
 }
 
 .hierarchy-modal-link {
-    color: #33f5ff;
+    color: #00bcd4;
     text-decoration: none;
     font-family: var(--font-mono, 'Courier New', monospace);
     font-size: 0.78rem;
@@ -739,7 +739,7 @@
     letter-spacing: 0.05em;
     margin: 0 0 var(--space-md) 0;
     padding-bottom: var(--space-xs);
-    border-bottom: 1px solid rgba(51, 245, 255, 0.2);
+    border-bottom: 1px solid rgba(0, 188, 212, 0.2);
 }
 
 .relationship-list {
@@ -753,13 +753,13 @@
     align-items: baseline;
     gap: var(--space-sm);
     padding: var(--space-sm);
-    background: rgba(51, 245, 255, 0.03);
+    background: rgba(0, 188, 212, 0.03);
     border-radius: 4px;
     transition: background 0.2s ease;
 }
 
 .relationship-item:hover {
-    background: rgba(51, 245, 255, 0.08);
+    background: rgba(0, 188, 212, 0.08);
 }
 
 .relationship-label {
@@ -804,7 +804,7 @@
     letter-spacing: 0.05em;
     margin: 0 0 var(--space-sm) 0;
     padding-bottom: var(--space-xs);
-    border-bottom: 1px solid rgba(51, 245, 255, 0.2);
+    border-bottom: 1px solid rgba(0, 188, 212, 0.2);
 }
 
 .event-list {
@@ -815,15 +815,15 @@
 
 .event-item {
     padding: var(--space-sm);
-    background: rgba(51, 245, 255, 0.03);
-    border: 1px solid rgba(51, 245, 255, 0.1);
+    background: rgba(0, 188, 212, 0.03);
+    border: 1px solid rgba(0, 188, 212, 0.1);
     border-radius: 4px;
     transition: all 0.2s ease;
 }
 
 .event-item:hover {
-    background: rgba(51, 245, 255, 0.08);
-    border-color: rgba(51, 245, 255, 0.3);
+    background: rgba(0, 188, 212, 0.08);
+    border-color: rgba(0, 188, 212, 0.3);
 }
 
 .event-item a {

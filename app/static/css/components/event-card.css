@@ -1,7 +1,7 @@
 /* Event Card Component */
 .event-card {
-    background: rgba(51, 245, 255, 0.03);
-    border: 1px solid rgba(51, 245, 255, 0.1);
+    background: rgba(0, 188, 212, 0.03);
+    border: 1px solid rgba(0, 188, 212, 0.1);
     border-radius: 4px;
     padding: var(--spacing-md);
     margin-bottom: var(--spacing-sm);
@@ -14,12 +14,12 @@
 }
 
 .event-card-selectable:hover {
-    background: rgba(51, 245, 255, 0.08);
-    border-color: rgba(51, 245, 255, 0.3);
+    background: rgba(0, 188, 212, 0.08);
+    border-color: rgba(0, 188, 212, 0.3);
 }
 
 .event-card-selected {
-    background: rgba(51, 245, 255, 0.15);
+    background: rgba(0, 188, 212, 0.15);
     border-color: var(--primary);
 }
 
@@ -31,7 +31,7 @@
 .event-card-header {
     font-size: 0.85rem;
     text-transform: uppercase;
-    color: #3bcaf5;
+    color: var(--color-accent);
     letter-spacing: 0.05em;
     margin-bottom: var(--spacing-xs);
     font-family: var(--font-mono);

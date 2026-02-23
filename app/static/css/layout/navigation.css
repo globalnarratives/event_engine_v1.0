@@ -2,7 +2,7 @@
    HEADER / NAVIGATION
    ============================================ */
 .site-header {
-  background-color: var(--color-bg-secondary);
+  background-color: rgba(10, 14, 19, 0.88);
   border-bottom: 1px solid var(--color-border);
   padding: var(--space-md) var(--space-xl);
   position: sticky;
@@ -12,12 +12,12 @@
 }
 
 .site-title {
-  font-family: var(--font-header);
+  font-family: var(--font-sans);
   font-size: 1.25rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.15em;
-  color: var(--color-accent-primary);
+  color: var(--color-accent);
   margin: 0;
 }
 
@@ -25,39 +25,39 @@
   display: flex;
   gap: var(--space-lg);
   align-items: center;
-  font-family: var(--font-ui);
+  font-family: var(--font-mono);
 }
 
 .nav-link {
-  color: var(--color-text-secondary);
+  color: var(--color-text-muted);
   font-size: 0.875rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   padding: var(--space-sm) var(--space-md);
   border: 1px solid transparent;
   border-radius: var(--radius-sm);
-  transition: all 0.2s ease;
+  transition: all var(--duration-fast) ease;
 }
 
 .nav-link:hover {
-  color: var(--color-accent-primary);
+  color: var(--color-accent);
   border-color: var(--color-border);
   text-decoration: none;
   background-color: var(--color-bg-elevated);
 }
 
 .nav-link.active {
-  color: var(--color-accent-primary);
-  border-color: var(--color-accent-primary);
-  background-color: rgba(51, 245, 255, 0.05);
+  color: var(--color-accent);
+  border-color: var(--color-accent);
+  background-color: var(--color-accent-dim);
 }
 
 .testing-banner {
   background: var(--color-accent-warning);
-  color: var(--color-bg-primary);
+  color: var(--color-bg);
   padding: 0.75rem;
   text-align: center;
-  font-family: var(--font-ui);
+  font-family: var(--font-sans);
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.1em;

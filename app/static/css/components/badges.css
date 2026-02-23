@@ -16,7 +16,7 @@
 }
 
 .badge-active {
-  background-color: rgba(0, 255, 159, 0.1);
+  background-color: rgba(66, 196, 146, 0.1);
   border-color: var(--color-accent-secondary);
   color: var(--color-accent-secondary);
 }

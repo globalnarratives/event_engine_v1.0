@@ -11,7 +11,7 @@
 }
 
 #parseStatus.success {
-  background-color: rgba(0, 255, 159, 0.1);
+  background-color: rgba(66, 196, 146, 0.1);
   border: 1px solid var(--color-accent-secondary);
   color: var(--color-accent-secondary);
   display: block;

@@ -63,7 +63,7 @@
 .dashboard-action-link:hover {
     border-color: var(--color-accent-primary);
     color: var(--color-accent-primary);
-    background: rgba(51, 245, 255, 0.05);
+    background: rgba(0, 188, 212, 0.05);
     box-shadow: var(--shadow-glow);
 }
 
@@ -100,7 +100,7 @@
     justify-content: space-between;
     padding-bottom: var(--space-sm);
     margin-bottom: var(--space-sm);
-    border-bottom: 1px solid rgba(51, 245, 255, 0.2);
+    border-bottom: 1px solid rgba(0, 188, 212, 0.2);
 }
 
 .foundations-cycle-label {
@@ -125,7 +125,7 @@
 
 .foundations-cycle-btn:hover {
     border-color: var(--color-accent-primary);
-    background: rgba(51, 245, 255, 0.1);
+    background: rgba(0, 188, 212, 0.1);
     box-shadow: var(--shadow-glow);
 }
 
@@ -150,7 +150,7 @@
 }
 
 .tracked-entity-compact:hover {
-    background: rgba(51, 245, 255, 0.05);
+    background: rgba(0, 188, 212, 0.05);
 }
 
 .entity-name-compact {
@@ -164,8 +164,8 @@
 
 .dashboard-placeholder {
     padding: var(--space-xl);
-    background: rgba(51, 245, 255, 0.03);
-    border: 1px dashed rgba(51, 245, 255, 0.2);
+    background: rgba(0, 188, 212, 0.03);
+    border: 1px dashed rgba(0, 188, 212, 0.2);
     border-radius: 4px;
     text-align: center;
 }

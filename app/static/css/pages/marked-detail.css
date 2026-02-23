@@ -325,8 +325,8 @@
     grid-template-columns: repeat(4, 1fr);
     gap: 0;
     margin-bottom: var(--spacing-md);  /* Changed from lg to md */
-    background: rgba(51, 245, 255, 0.03);
-    border: 1px solid rgba(51, 245, 255, 0.2);
+    background: rgba(0, 188, 212, 0.03);
+    border: 1px solid rgba(0, 188, 212, 0.2);
     border-radius: 4px;
     overflow: hidden;
 }
@@ -337,7 +337,7 @@
     align-items: center;
     justify-content: center;
     padding: var(--spacing-sm);  /* Changed from md to sm */
-    border: 1px solid rgba(51, 245, 255, 0.1);
+    border: 1px solid rgba(0, 188, 212, 0.1);
 }
 
 /* Column spanning */
@@ -356,7 +356,7 @@
     letter-spacing: 0.1em;
     color: var(--text-secondary);
     font-weight: 600;
-    background: rgba(51, 245, 255, 0.05);
+    background: rgba(0, 188, 212, 0.05);
 }
 
 /* Value cells */
@@ -417,8 +417,8 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(51, 245, 255, 0.1); /* Subtle dark cyan */
-  border: 1px solid rgba(51, 245, 255, 0.3);
+  background-color: rgba(0, 188, 212, 0.1); /* Subtle dark cyan */
+  border: 1px solid rgba(0, 188, 212, 0.3);
   transition: .4s;
   border-radius: 4px; /* Squared-off "tech" look */
 }
@@ -431,25 +431,25 @@
   width: 12px;
   left: 3px;
   bottom: 3px;
-  background-color: rgba(51, 245, 255, 0.6);
+  background-color: rgba(0, 188, 212, 0.6);
   transition: .4s;
   border-radius: 2px;
 }
 
 /* When checked: track glows */
 input:checked + .slider {
-  background-color: rgba(51, 245, 255, 0.2);
-  border-color: rgba(51, 245, 255, 0.8);
-  box-shadow: 0 0 8px rgba(51, 245, 255, 0.4); /* Neon glow effect */
+  background-color: rgba(0, 188, 212, 0.2);
+  border-color: rgba(0, 188, 212, 0.8);
+  box-shadow: 0 0 8px rgba(0, 188, 212, 0.4); /* Neon glow effect */
 }
 
 /* When checked: knob moves and brightens */
 input:checked + .slider:before {
   transform: translateX(20px);
-  background-color: #33f5ff;
+  background-color: #00bcd4;
 }
 
 /* Focus outline for accessibility */
 input:focus + .slider {
-  box-shadow: 0 0 1px #33f5ff;
+  box-shadow: 0 0 1px #00bcd4;
 }
