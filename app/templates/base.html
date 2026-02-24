@@ -11,29 +11,40 @@
     {% block extra_css %}{% endblock %}
 </head>
 <body>
-    <header class="site-header">
-        <div style="display: flex; justify-content: space-between; align-items: center;">
-            <h1 class="site-title">Global Narratives v1.0</h1>
-            <div style="display: flex; gap: 2rem; align-items: center;">
-                <nav class="nav-primary">
-                    <a href="{{ url_for('dashboard.home') }}" class="nav-link {% if request.endpoint == 'dashboard.home' %}active{% endif %}">Dashboard</a>
-                    <a href="{{ url_for('events.index') }}" class="nav-link {% if request.endpoint and 'events' in request.endpoint %}active{% endif %}">Events</a>
-                    <a href="{{ url_for('articles.dashboard') }}" class="nav-link {% if request.endpoint and 'articles' in request.endpoint %}active{% endif %}">Articles</a>
-                    <a href="{{ url_for('foundations.index') }}" class="nav-link {% if request.endpoint and 'foundations' in request.endpoint %}active{% endif %}"> Foundations</a>
-                    <a href="{{ url_for('scenarios.index') }}" class="nav-link">Scenarios</a>
-                    <a href="{{ url_for('narratives.index') }}" class="nav-link {% if request.endpoint and 'narratives' in request.endpoint %}active{% endif %}">Narratives</a>
-                </nav>
-                {% if current_user.is_authenticated %}
-                <div style="display: flex; gap: 1rem; align-items: center;">
-                    <a href="{{ url_for('auth.account') }}" class="nav-link">{{ current_user.username }}</a>
-                    <a href="{{ url_for('auth.logout') }}" class="nav-link">Logout</a>
-                </div>
-                {% endif %}
-                {% if current_user.is_authenticated and current_user.role == 'admin' %}
-                <a href="{{ url_for('admin.users') }}" class="nav-link">User Management</a>
-                {% endif %}
-            </div>
+    <!-- Sidebar Overlay -->
+    <div class="nav-overlay" id="navOverlay" onclick="toggleNav()"></div>
+
+    <!-- Slide-in Sidebar -->
+    <nav class="nav-sidebar" id="navSidebar">
+        <div class="nav-sidebar-header">
+            <span class="site-title">Global Narratives</span>
+            <button class="nav-close-btn" onclick="toggleNav()" aria-label="Close menu">&#x2715;</button>
         </div>
+        <div class="nav-sidebar-links">
+            <a href="{{ url_for('dashboard.home') }}" class="nav-link {% if request.endpoint == 'dashboard.home' %}active{% endif %}">Dashboard</a>
+            <a href="{{ url_for('events.index') }}" class="nav-link {% if request.endpoint and 'events' in request.endpoint %}active{% endif %}">Events</a>
+            <a href="{{ url_for('articles.dashboard') }}" class="nav-link {% if request.endpoint and 'articles' in request.endpoint %}active{% endif %}">Articles</a>
+            <a href="{{ url_for('foundations.index') }}" class="nav-link {% if request.endpoint and 'foundations' in request.endpoint %}active{% endif %}">Foundations</a>
+            <a href="{{ url_for('scenarios.index') }}" class="nav-link {% if request.endpoint and 'scenarios' in request.endpoint %}active{% endif %}">Scenarios</a>
+            <a href="{{ url_for('narratives.index') }}" class="nav-link {% if request.endpoint and 'narratives' in request.endpoint %}active{% endif %}">Narratives</a>
+        </div>
+        {% if current_user.is_authenticated %}
+        <div class="nav-sidebar-footer">
+            <a href="{{ url_for('auth.account') }}" class="nav-link">{{ current_user.username }}</a>
+            {% if current_user.role == 'admin' %}
+            <a href="{{ url_for('admin.users') }}" class="nav-link">User Management</a>
+            {% endif %}
+            <a href="{{ url_for('auth.logout') }}" class="nav-link">Logout</a>
+        </div>
+        {% endif %}
+    </nav>
+
+    <!-- Top Bar (just title + hamburger) -->
+    <header class="site-header">
+        <button class="hamburger-btn" onclick="toggleNav()" aria-label="Open menu">
+            <span></span><span></span><span></span>
+        </button>
+        <h1 class="site-title">Global Narratives v1.0</h1>
     </header>
 
     <!-- Flash Messages -->
@@ -65,5 +76,20 @@
     </main>
 
     {% block extra_js %}{% endblock %}
+
+<script>
+    function toggleNav() {
+        document.getElementById('navSidebar').classList.toggle('active');
+        document.getElementById('navOverlay').classList.toggle('active');
+    }
+    // Close on Escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            document.getElementById('navSidebar').classList.remove('active');
+            document.getElementById('navOverlay').classList.remove('active');
+        }
+    });
+</script>
+
 </body>
 </html>
