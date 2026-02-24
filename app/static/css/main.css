@@ -36,6 +36,7 @@
 @import url('features/scenarios/scenarios.css');
 @import url('features/foundations/foundations.css');
 @import url('features/dashboard/dashboard.css');
+@import url('features/auth/auth.css');
 
 /* Utility Classes */
 @import url('utilities/colors.css');

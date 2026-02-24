@@ -1,101 +1,104 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Global Narratives</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
-    <style>
-        .password-field-wrapper {
-            position: relative;
-        }
-        
-        .toggle-password {
-            position: absolute;
-            right: 10px;
-            top: 50%;
-            transform: translateY(-50%);
-            background: none;
-            border: none;
-            cursor: pointer;
-            font-size: 1.2rem;
-            color: var(--color-text-secondary);
-            padding: 0.5rem;
-            line-height: 1;
-        }
-        
-        .toggle-password:hover {
-            color: var(--color-accent-primary);
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login — Global Narratives</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
 </head>
 <body>
-    <div class="testing-banner">⚠️ TESTING ENVIRONMENT - Alpha Build</div>
-    <div class="container">
-        <div class="login-wrapper">
-            <div class="card" style="max-width: 500px; margin: 100px auto;">
-                <div class="card-header">
-                    <h1 class="card-title">Global Narratives V1.0</h1>
-                </div>
-                
-                <div class="card-body">
-                    <p style="text-align: center; margin-bottom: 1.5rem;">Please log in to access this page.</p>
-                    
-                    {% with messages = get_flashed_messages(with_categories=true) %}
-                        {% if messages %}
-                            {% for category, message in messages %}
-                                <div class="badge badge-{{ 'critical' if category == 'error' else 'active' }}" style="display: block; margin-bottom: 1rem; padding: 1rem;">
-                                    {{ message }}
-                                </div>
-                            {% endfor %}
-                        {% endif %}
-                    {% endwith %}
-                    
-                    <form method="POST">
-                        <div class="form-group">
-                            <label class="form-label" for="email">Email</label>
-                            <input type="email" id="email" name="email" class="form-input" required autofocus>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label class="form-label" for="password">Password</label>
-                            <div class="password-field-wrapper">
-                                <input type="password" id="password" name="password" class="form-input" required>
-                                <button type="button" class="toggle-password" onclick="togglePassword()" aria-label="Toggle password visibility">
-                                    <span class="show-icon">👁️</span>
-                                    <span class="hide-icon" style="display: none;">👁️‍🗨️</span>
-                                </button>
-                            </div>
-                        </div>
-                        
-                        <div class="form-group" style="display: flex; align-items: center; gap: 0.5rem;">
-                            <input type="checkbox" id="remember" name="remember">
-                            <label for="remember" style="margin: 0;">Remember me</label>
-                        </div>
-                        
-                        <button type="submit" class="btn btn-primary btn-block">Login</button>
-                    </form>
-                </div>
-            </div>
-        </div>
+
+<div class="testing-banner">⚠️ TESTING ENVIRONMENT - Alpha Build</div>
+
+<div class="login-shell">
+
+  <!-- ── Left: Branding ── -->
+  <div class="login-left">
+    <div class="login-left__inner">
+
+      <div class="login-eyebrow">Global Narratives · by Mondium</div>
+
+      <h1 class="login-tagline">The world, <strong>encoded.</strong></h1>
+
+      <p class="login-attribution">
+        Information for the Intelligent Age &nbsp;·&nbsp; <span>Alpha</span>
+      </p>
+
     </div>
-    
-    <script>
-        function togglePassword() {
-            const passwordInput = document.getElementById('password');
-            const showIcon = document.querySelector('.show-icon');
-            const hideIcon = document.querySelector('.hide-icon');
-            
-            if (passwordInput.type === 'password') {
-                passwordInput.type = 'text';
-                showIcon.style.display = 'none';
-                hideIcon.style.display = 'inline';
-            } else {
-                passwordInput.type = 'password';
-                showIcon.style.display = 'inline';
-                hideIcon.style.display = 'none';
-            }
-        }
-    </script>
+  </div>
+
+  <!-- ── Right: Login form ── -->
+  <div class="login-right">
+    <div class="login-form-wrap">
+
+      <div class="login-form-title">Analyst Access</div>
+
+      <!-- Flash messages -->
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          {% for category, message in messages %}
+            <div class="login-flash login-flash--{{ category }}">
+              {{ message }}
+            </div>
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
+
+      <form method="POST">
+
+        <div class="field">
+          <label class="field__label" for="email">Email</label>
+          <div class="field__input-wrap">
+            <input type="email" id="email" name="email" class="field__input" required autofocus autocomplete="email">
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="field__label" for="password">Password</label>
+          <div class="field__input-wrap">
+            <input type="password" id="password" name="password" class="field__input field__input--pw" required autocomplete="current-password">
+            <button type="button" class="field__pw-toggle" id="pwToggle" aria-label="Toggle password visibility">
+              <svg id="eyeIcon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                <circle cx="12" cy="12" r="3"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="field field--check">
+          <input type="checkbox" id="remember" name="remember">
+          <label for="remember">Remember me</label>
+        </div>
+
+        <button type="submit" class="btn-login">Login</button>
+
+      </form>
+
+      <div class="login-form-footer">
+        Restricted access · Authorized users only
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<script>
+  // Password visibility toggle
+  const toggle = document.getElementById('pwToggle');
+  const pwInput = document.getElementById('password');
+  if (toggle && pwInput) {
+    toggle.addEventListener('click', () => {
+      const isText = pwInput.type === 'text';
+      pwInput.type = isText ? 'password' : 'text';
+      toggle.style.color = isText ? '' : 'var(--color-accent)';
+    });
+  }
+</script>
+
 </body>
 </html>
