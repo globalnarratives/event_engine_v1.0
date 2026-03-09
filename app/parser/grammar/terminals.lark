@@ -155,14 +155,11 @@ MIN_FACET_01: "forn" | "fisc" | "dfns" | "jstc" | "resr" | "agrc" | "comc" | "la
 MIN_FACET_02: "vet" | "env" | "eng" | "trt" | "ext" | "int" | "soc" | "ath" | "exc" | "pec" | "dig" | "ops" | "img" | "kns" | "psn" | "exi" | "chm" | "enf" | "eco" | "cms" | "psc" | "grtc" | "vrbn" | "ntfd" | "cme"
             | "resr" | "stwl" | "ary" | "mteo" | "grd" | "imp" | "angf" | "flny" | "incd" | "hyc" | "nuc" | "amb" 
 
-            // There is a subset of the Min Facets that should independently operate as functional subjects or objects on their own: incd, vrbn, etc. We kind of addressed this with axn.vrbn etc in Phase I, but more
-            // work is needed
-
 ORG_FACET_01: "rlg" | "pvt" | "pub" | "soe" | "akd" | "ind"
 
 ORG_FACET_02: "xtn" | "mmb" | "pvt"
 
-RANK: "exc" | "spx" | "spec"
+RANK: "exc" | "spx" | "spec" | "cos" | "sav" | "adv" | "ast"
 
 // General Purpose TEMPORARY
 

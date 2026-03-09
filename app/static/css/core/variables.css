@@ -64,3 +64,29 @@
   --font-body:            var(--font-mono);
   --font-ui:              var(--font-sans);
 }
+
+/* ============================================
+   LIGHT THEME OVERRIDES
+   Applied via html[data-theme="light"]
+   Color variables only — no layout or typography
+   ============================================ */
+html[data-theme="light"] {
+  --color-bg:          #f0f2f5;
+  --color-surface:     #ffffff;
+  --color-border:      #d0d4db;
+  --color-text:        #1a1f2e;
+  --color-text-muted:  #5a6070;
+  --color-accent:      #0097a7;
+  --color-accent-dim:  #e0f4f6;
+  --color-bg-elevated: #e8eaed;
+
+  /* Legacy standalone vars (not aliases — must be overridden directly) */
+  --color-border-hover:   #a0afc0;
+  --color-text-tertiary:  #4a5568;
+  --color-text-dim:       #718096;
+
+  /* Softer shadows on light background */
+  --shadow-sm:   0 1px 2px rgba(0, 0, 0, 0.10);
+  --shadow-md:   0 2px 8px rgba(0, 0, 0, 0.15);
+  --shadow-glow: 0 0 20px rgba(0, 151, 167, 0.12);
+}

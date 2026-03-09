@@ -12,6 +12,16 @@
       --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
     }
 
+    html[data-theme="light"] {
+      --color-bg:         #f0f2f5;
+      --color-surface:    #ffffff;
+      --color-border:     #d0d4db;
+      --color-text:       #1a1f2e;
+      --color-text-muted: #5a6070;
+      --color-accent:     #0097a7;
+      --color-accent-dim: #e0f4f6;
+    }
+
     *, *::before, *::after {
       box-sizing: border-box;
       margin: 0;
