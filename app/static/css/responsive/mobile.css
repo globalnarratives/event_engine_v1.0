@@ -244,4 +244,37 @@
     gap: var(--space-xs);
   }
 
+  /* ------------------------------------------
+     ENTITY DETAIL PAGE FIXES
+  ------------------------------------------ */
+
+  /* Fix 1 — Org chart alignment
+     The orgchart-wrapper has overflow-x: auto but no explicit width,
+     so its min-content can exceed the grid column and cause offset.
+     Bind it strictly to the column's available width.
+  ------------------------------------------ */
+  .orgchart-wrapper {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* Fix 2 — Hide left and right columns on entity detail page.
+     Center column (.center-column) expands automatically to 1fr
+     once the fixed-width flanking columns are removed from the flow.
+     Explicitly set width: 100% as a safety net.
+  ------------------------------------------ */
+  .actor-detail-container {
+    grid-template-columns: 1fr;
+  }
+
+  .left-sidebar,
+  .right-sidebar {
+    display: none;
+  }
+
+  .center-column {
+    width: 100%;
+  }
+
 }
