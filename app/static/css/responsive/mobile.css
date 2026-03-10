@@ -1,0 +1,247 @@
+/* ============================================
+   MOBILE RESPONSIVE - GALAXY TAB A7
+   Single breakpoint: max-width: 860px
+   Covers landscape (810px) and portrait (600px)
+   All desktop layout is unchanged above 860px.
+   ============================================ */
+
+@media (max-width: 860px) {
+
+  /* ------------------------------------------
+     GLOBAL: Prevent horizontal overflow
+  ------------------------------------------ */
+  body {
+    overflow-x: hidden;
+  }
+
+  .container,
+  .container-fluid,
+  .cf-container,
+  .cf-form-container {
+    padding: var(--space-md);
+    max-width: 100%;
+  }
+
+  /* ------------------------------------------
+     STEP 2: DASHBOARD — three columns → single
+     Stack order:
+       1. Left column  (Build & Create, Tracked Elements)
+       2. Right column (Events Feed)
+       3. Center column (Tracked Narratives, Tracked Scenarios)
+  ------------------------------------------ */
+  .dashboard-container {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+
+  .dashboard-left-column   { order: 1; }
+  .dashboard-right-column  { order: 2; }
+  .dashboard-center-column { order: 3; }
+
+  /* ------------------------------------------
+     STEP 3: SCENARIOS INDEX — three columns → single
+     Stack order:
+       1. Center column (My Marked + Public Marked)
+       2. Left column   (Available Scenarios)
+       3. Right column  (Events List)
+  ------------------------------------------ */
+  .scenarios-index-container {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+
+  .scenarios-middle-column { order: 1; }
+  .scenarios-left-column   { order: 2; }
+  .scenarios-right-column  { order: 3; }
+
+  /* Header spans full single column - already grid-column: 1/-1 */
+  .scenarios-header {
+    order: 0;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-sm);
+  }
+
+  /* ------------------------------------------
+     STEP 4: CONTROL FRAME — detail view
+     cf-table rows: force cells to block so
+     each label/value pair stacks vertically.
+  ------------------------------------------ */
+
+  /* Stack the main metadata table rows */
+  .cf-table,
+  .cf-table tbody,
+  .cf-table tr {
+    display: block;
+    width: 100%;
+  }
+
+  .cf-table td {
+    display: block;
+    width: 100% !important; /* override inline colspan widths */
+    box-sizing: border-box;
+  }
+
+  /* Label cell: remove bottom border so it reads as a header for the value below */
+  .cf-label-cell {
+    border-bottom: none !important;
+    padding-bottom: 0 !important;
+  }
+
+  /* Add visible row separation after each value cell */
+  .cf-input-cell {
+    padding-top: var(--space-xs) !important;
+    padding-bottom: var(--space-md) !important;
+  }
+
+  /* CIE expression display grid: stack CIE body on top, Linked Scenarios below */
+  .cf-cie-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cf-cie-section {
+    border-right: none;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  /* Critical: monospace CIE text must scroll horizontally, not force overflow */
+  .cf-cie-display {
+    overflow-x: auto;
+    white-space: pre;
+    max-width: 100%;
+  }
+
+  /* Identified Subjects / Identified Objects: stacks naturally via block cells above.
+     The colspan="2" cells become full-width blocks — no extra rules needed. */
+
+  /* ------------------------------------------
+     STEP 5: CONTROL FRAME — create event view
+     Same table stacking. Extra rules for form elements.
+  ------------------------------------------ */
+
+  /* cf-label (create form uses .cf-label, not .cf-label-cell) */
+  .cf-label {
+    display: block;
+    width: 100% !important;
+    border-bottom: none !important;
+    padding-bottom: 0 !important;
+  }
+
+  /* CIE body textarea: full width */
+  .cf-body-textarea {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* Entity display textareas: full width */
+  .cf-entity-display {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* SAVE + CANCEL buttons: keep side by side, do not stack */
+  .cf-form-container .flex,
+  .cf-container .flex {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: var(--space-sm);
+  }
+
+  /* ------------------------------------------
+     STEP 6: SCENARIO DETAIL (MARKED DETAIL)
+     Two columns → single column
+     Stack order:
+       1. Left column  (Assessment Details, Probability History)
+       2. Middle column (Scenario Metrics, chart, Linked Events)
+  ------------------------------------------ */
+  .marked-detail-container {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+
+  /* Header already spans via grid-column: 1/-1; no order needed */
+  .marked-left-column   { order: 1; }
+  .marked-middle-column { order: 2; }
+
+  /* Link-mode: sidebar becomes full-width third block */
+  .marked-detail-container.link-mode {
+    grid-template-columns: 1fr;
+  }
+
+  /* Chart wrapper: give the canvas a fixed height so it renders
+     correctly with maintainAspectRatio: false (already set in JS) */
+  .prob-chart {
+    height: 300px !important;
+    max-width: 100%;
+  }
+
+  /* Prevent prob-metrics-grid from overflowing */
+  .prob-metrics-grid {
+    max-width: 100%;
+  }
+
+  /* ------------------------------------------
+     STEP 7: GLOBAL TOUCH TARGETS
+     Minimum 44px tap target for all interactive elements.
+  ------------------------------------------ */
+
+  /* Buttons */
+  .btn,
+  button:not(.hamburger-btn):not(.nav-close-btn):not(.theme-toggle-btn) {
+    min-height: 44px;
+    padding-top: var(--space-sm);
+    padding-bottom: var(--space-sm);
+  }
+
+  /* Form inputs, selects, textareas */
+  input:not([type="checkbox"]):not([type="radio"]):not([type="hidden"]),
+  select,
+  textarea {
+    min-height: 44px;
+  }
+
+  /* Table rows: increase padding ~25-30% for tap comfort */
+  td,
+  th {
+    padding: calc(var(--space-sm) * 1.5);
+  }
+
+  /* Nav links in sidebar: taller tap targets */
+  .nav-link {
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+  }
+
+  /* Event cards and list items: more breathing room */
+  .event-card,
+  .scenario-item {
+    padding: var(--space-md);
+  }
+
+  /* History entries in marked detail */
+  .history-entry {
+    padding: var(--space-md) 0;
+  }
+
+  /* ------------------------------------------
+     MISC: Ensure header doesn't overflow
+  ------------------------------------------ */
+  .site-header {
+    max-width: 100%;
+    overflow: hidden;
+  }
+
+  .site-header .site-title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  /* Source display in CF detail: stack URL and meta vertically */
+  .cf-source-display {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-xs);
+  }
+
+}

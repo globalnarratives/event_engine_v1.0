@@ -45,3 +45,6 @@
 
 /* Responsive Breakpoints */
 @import url('responsive/breakpoints.css');
+
+/* Mobile - Galaxy Tab A7 (max-width: 860px) */
+@import url('responsive/mobile.css');
